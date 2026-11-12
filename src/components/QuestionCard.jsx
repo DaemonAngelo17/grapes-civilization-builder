@@ -5,7 +5,8 @@ import {
   Edit3, 
   Lock, 
   Lightbulb, 
-  ZoomIn
+  ZoomIn,
+  Sparkles
 } from 'lucide-react';
 import { checkOptionDisallowed } from '../utils/logicRules';
 import { getOptionVisual } from '../data/optionImages';
@@ -21,7 +22,8 @@ export default function QuestionCard({
   logicGuardEnabled = true,
   currentEra = 'early_bronze',
   currentScale = 'regional_kingdom',
-  onEnlargeImage
+  onEnlargeImage,
+  synergyRecommendations
 }) {
   // All questions are multi-choice (limited only by contradiction, land size, and date)
   const selectedList = Array.isArray(value) ? value : value ? [value] : [];
@@ -137,6 +139,9 @@ export default function QuestionCard({
           const visual = getOptionVisual(option);
           const hasImage = visual && visual.url && !imageErrors[idx];
 
+          const recommendation = synergyRecommendations ? synergyRecommendations.get(option) : null;
+          const isRecommended = !!recommendation && !active && !isDisallowed;
+
           return (
             <div
               key={idx}
@@ -146,6 +151,8 @@ export default function QuestionCard({
                   ? 'bg-[#eae3d5]/70 border-[#d0c2ab] opacity-65 cursor-not-allowed'
                   : active
                   ? 'bg-[#f4ebe0] border-[#935923] shadow-sm text-[#1e1511] ring-1 ring-[#935923]/30 cursor-pointer'
+                  : isRecommended
+                  ? 'bg-[#fcf8f0] hover:bg-[#f6eee0] border-[#d8be92] shadow-xs text-[#2b211a] ring-1 ring-[#cfae70]/50 cursor-pointer'
                   : 'bg-[#faf6ee] hover:bg-[#f5ede0] border-[#ded3be] text-[#3e3229] cursor-pointer'
               }`}
             >
@@ -205,9 +212,33 @@ export default function QuestionCard({
 
                 {/* Text Content */}
                 <div className="text-sm md:text-[14.5px] leading-snug flex-1">
-                  <span className={`block font-medium ${isDisallowed ? 'line-through text-[#7f6c5b]' : ''}`}>
-                    {option}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-1.5 justify-between">
+                    <span className={`font-medium ${isDisallowed ? 'line-through text-[#7f6c5b]' : ''}`}>
+                      {option}
+                    </span>
+                    {isRecommended && (
+                      <div className="flex items-center gap-1.5 shrink-0 my-0.5">
+                        <span
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-900 border border-amber-300 shadow-xs animate-pulse font-sans-ui"
+                          title={`Historical synergy linked to: ${recommendation.title || recommendation.sourceOption}`}
+                        >
+                          <Sparkles size={11} className="text-amber-600" />
+                          ✨ Historical Synergy
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOptionClick(option);
+                          }}
+                          className="text-[10px] px-2 py-0.5 rounded bg-[#935923] hover:bg-[#7a481b] text-white font-medium shadow-xs transition-colors cursor-pointer"
+                          title="Click to add this recommended synergy"
+                        >
+                          + Add
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 

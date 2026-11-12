@@ -19,7 +19,7 @@ import Sidebar from './components/Sidebar';
 import QuestionCard from './components/QuestionCard';
 import DossierView from './components/DossierView';
 import ImageModal from './components/ImageModal';
-import { applyLogicalSynergies } from './utils/synergyRules';
+import { applyLogicalSynergies, getSynergyRecommendations } from './utils/synergyRules';
 import { 
   GRAPES_CATEGORIES, 
   GRAPES_QUESTIONS, 
@@ -74,6 +74,12 @@ export default function App() {
     return grapesKeys.map((key) => GRAPES_CATEGORIES.find((c) => c.key === key));
   }, [orderMode]);
 
+  // Active synergy recommendations for UI badges & quick-add pills
+  const synergyRecommendations = useMemo(() => {
+    if (!autoSynergiesEnabled || !logicGuardEnabled) return new Map();
+    return getSynergyRecommendations(answers, logicGuardEnabled, currentEra, currentScale);
+  }, [answers, logicGuardEnabled, autoSynergiesEnabled, currentEra, currentScale]);
+
   // Handle question answer change with optional auto-select synergies
   const handleAnswerChange = (questionId, value) => {
     const list = Array.isArray(value) ? value : value ? [value] : [];
@@ -92,7 +98,8 @@ export default function App() {
         const top = autoSelected[0];
         const srcTitle = top.sourceOption.length > 25 ? top.sourceOption.slice(0, 25) + '...' : top.sourceOption;
         const tgtTitle = top.targetOption.length > 30 ? top.targetOption.slice(0, 30) + '...' : top.targetOption;
-        showToast(`✨ Auto-Linked: Chose "${srcTitle}" ➔ Added "${tgtTitle}"`);
+        const prefix = top.type === 'recommended' ? '✨ Historical Synergy' : '✨ Auto-Linked Prerequisite';
+        showToast(`${prefix}: Chose "${srcTitle}" ➔ Added "${tgtTitle}"`);
       }
     } else {
       setAnswers((prev) => ({
@@ -351,6 +358,7 @@ export default function App() {
                         currentEra={currentEra}
                         currentScale={currentScale}
                         onEnlargeImage={(visual, opt) => setEnlargedImage({ visual, optionText: opt })}
+                        synergyRecommendations={synergyRecommendations}
                       />
                     ))}
                   </div>

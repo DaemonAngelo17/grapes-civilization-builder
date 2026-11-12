@@ -736,64 +736,125 @@ Mutual exclusivity is strictly enforced between abundant deposits and critical s
 
 ## 5. Intelligent Auto-Select Synergy Engine (Prerequisite Cascades)
 
-| Trigger Option Selected | Companion Option Auto-Selected | Target Question ID |
-| :--- | :--- | :--- |
-| "Predictable annual flooding river (like the Nile — l..." | "Basin irrigation, dikes, and shadufs (counterweight ..." | `a4_hydraulic` |
-| "Predictable annual flooding river (like the Nile — l..." | "Rich alluvial clay and mud (for bricks, pottery, and..." | `g4_resources` |
-| "Underground limestone sinkholes and aquifers (like M..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
-| "High-altitude glacial mountain meltwater (like the A..." | "Steep, jagged mountain ranges (requires terrace farm..." | `g2_terrain` |
-| "High-altitude glacial mountain meltwater (like the A..." | "Mountain terrace farming (carving flat steps into st..." | `a4_hydraulic` |
-| "Seasonal monsoon rains and rainwater harvesting rese..." | "Stepwells and Massive Sunken Reservoirs (Vavs / Baol..." | `a4_hydraulic` |
-| "Desert flash-flood wadis managed through dry-river c..." | "Check-dams and rock terracing designed to trap flash..." | `a4_hydraulic` |
-| "Steep, jagged mountain ranges (requires terrace farm..." | "Mountain terrace farming (carving flat steps into st..." | `a4_hydraulic` |
-| "Steep, jagged mountain ranges (requires terrace farm..." | "Impassable, freezing mountain ranges blocking the bo..." | `g3_barriers` |
-| "Rocky peninsula with jagged coastlines and hundreds ..." | "Maritime Trade Empire (merchant fleets sailing acros..." | `e5_trade` |
-| "Rocky peninsula with jagged coastlines and hundreds ..." | "Treacherous rocky coastlines, reefs, and stormy seas" | `g3_barriers` |
-| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Baked or sun-dried clay tablets (heavy, but fireproo..." | `a2_medium` |
-| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Rich alluvial clay and mud (for bricks, pottery, and..." | `g4_resources` |
-| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Scribes and Record-Keepers (highly respected because..." | `s2_middle` |
-| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Papyrus scrolls made from pressed river reeds (light..." | `a2_medium` |
-| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Papyrus reeds, bamboo, or marsh plants (for paper, b..." | `g4_resources` |
-| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Scribes and Record-Keepers (highly respected because..." | `s2_middle` |
-| "Quipu / Knotted Cords (no written words; complex mat..." | "Llamas and Alpacas (light pack animals and source of..." | `e2_animals` |
-| "Quipu / Knotted Cords (no written words; complex mat..." | "Freeze-dried Potatoes (Chuño) and Quinoa (high-altit..." | `e1_crops` |
-| "Pictographs & Ideograms carved into stone stelae and..." | "Accordion-folded bark paper (amatl) coated with fine..." | `a2_medium` |
-| "Elite Chariot Corps (two-wheeled horse-drawn platfor..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` |
-| "Horse Archer Light Cavalry (highly mobile skirmisher..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` |
-| "Armored War Elephant Corps (massive beasts bred for ..." | "Asian War Elephants & Work Elephants (trained for he..." | `e2_animals` |
-| "Naval Supremacy (trireme warships with bronze batter..." | "Dense cedar, oak, or mahogany forests (for shipbuild..." | `g4_resources` |
-| "Naval Supremacy (trireme warships with bronze batter..." | "Maritime Trade Empire (merchant fleets sailing acros..." | `e5_trade` |
-| "Disciplined Crossbow Phalanxes & Volley Formations (..." | "Mechanical Triggered Crossbows and Standardized Inte..." | `a5_science` |
-| "Siege Warfare Specialists (battering rams, siege tow..." | "Dense cedar, oak, or mahogany forests (for shipbuild..." | `g4_resources` |
-| "Chinampas ("floating gardens" built on shallow lake ..." | "Tropical crater caldera lakes and seasonal interconn..." | `g1_freshwater` |
-| "Chinampas ("floating gardens" built on shallow lake ..." | "Maize (Corn), Beans, and Squash ("Three Sisters" gro..." | `e1_crops` |
-| "Qanats (underground channels that carry mountain gro..." | "Arid desert expanses surrounded by narrow fertile ri..." | `g2_terrain` |
-| "Suspension Rope Bridges and Paved Mountain Stairways..." | "Deep river chasms and impassable canyon gorges cross..." | `g3_barriers` |
-| "Suspension Rope Bridges and Paved Mountain Stairways..." | "Steep, jagged mountain ranges (requires terrace farm..." | `g2_terrain` |
-| "Artificial Enclosed Naval Harbors (Cothons) with cov..." | "Naval Supremacy (trireme warships with bronze batter..." | `p4_military` |
-| "Artificial Enclosed Naval Harbors (Cothons) with cov..." | "Rocky peninsula with jagged coastlines and hundreds ..." | `g2_terrain` |
-| "Written Public Law Pillars (like Hammurabi's Code — ..." | "Lex Talionis ("Eye for an Eye" — literal physical re..." | `p3_law_system` |
-| "Written Public Law Pillars (like Hammurabi's Code — ..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
-| "Direct Democracy (all free adult male citizens vote ..." | "Election by Citizen Assembly or Noble Council (term ..." | `p2_succession` |
-| "Direct Democracy (all free adult male citizens vote ..." | "Jury Trials & Restorative Justice (large citizen jur..." | `p3_law_system` |
-| "Meritocratic Civil Service Exams (officials are chos..." | "Scribal / Exam Mobility (anyone who manages to learn..." | `s3_mobility` |
-| "Meritocratic Civil Service Exams (officials are chos..." | "Philosopher-Bureaucrats / Mandarins (scholars who pa..." | `s1_apex` |
-| "Theocratic God-King Worship (the living ruler is lit..." | "The God-King and Royal Dynasty (untouchable divine b..." | `s1_apex` |
-| "Theocratic God-King Worship (the living ruler is lit..." | "Divine Right Monarchy (the King rules, but claims th..." | `r5_gov_relation` |
-| "Mummification & Tomb Provisioning (body must be pres..." | "Natural bitumen and surface asphalt seeps (for caulk..." | `g4_resources` |
-| "Mummification & Tomb Provisioning (body must be pres..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
-| "Standardized Stamped Coins (electrum, gold, silver, ..." | "Gold, silver, jade, or lapis lazuli (for luxury good..." | `g4_resources` |
-| "Marine murex sea snail beds (for extracting prized r..." | "Silk cultivation, glassblowing, or rare purple dye e..." | `a5_science` |
-| "Wild silk cocoons and fine white mulberry groves (fo..." | "Master Weavers, Silk Cultivators, and Textile Guild ..." | `s2_middle` |
-| "Wild silk cocoons and fine white mulberry groves (fo..." | "Bolts of Woven Silk and Standardized Spun Yarn Skein..." | `e3_currency` |
-| "Volcanic oceanic high islands and coral ring atolls ..." | "Basalt island freshwater lenses, volcanic crater spr..." | `g1_freshwater` |
-| "Outrigger War Canoes & Amphibious Shock Warriors (fa..." | "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | `a5_science` |
-| "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | "Marshallese Stick Charts, Wampum Memory Belts, and O..." | `a1_writing` |
-| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` |
-| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Pastoral Transhumance & Herd Grazing (minimal grain ..." | `e1_crops` |
-| "Cattle & Livestock Wealth Standard (fines, taxes, ro..." | "Vast Herds of Sanga & Zebu Cattle (walking banks of ..." | `e2_animals` |
-| "Mortarless Granite Enclosures (Dzimbahwe) & Towering..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
-| "Megalithic Volcanic Tuff Statues (Moai) & Open-Air S..." | "Basalt, andesite, and diorite volcanic stones (for m..." | `g4_resources` |
+The Intelligent Auto-Select Synergy Engine operates with a two-tier architecture:
+1. **`mandatory` (Hard Prerequisite Cascade):** Automatically selects the companion option(s) immediately as long as `checkOptionDisallowed` returns false and scale caps are not exceeded.
+2. **`recommended` (Soft Historical Synergy):** Does NOT force-check options in `city_state` scale or if another option is already chosen in the target question. Instead, highlights the companion option with a glowing `"✨ Historical Synergy"` badge and a quick `+ Add` pill in the UI, and auto-selects if the target question currently has 0 selections in larger scales.
+
+### 5.1 Single-Trigger Pair Synergies
+
+| Trigger Option Selected | Companion Option Auto-Selected / Recommended | Target Question ID | Synergy Tier |
+| :--- | :--- | :--- | :--- |
+| "Predictable annual flooding river (like the Nile — l..." | "Basin irrigation, dikes, and shadufs (counterweight ..." | `a4_hydraulic` | `mandatory` |
+| "Predictable annual flooding river (like the Nile — l..." | "Rich alluvial clay and mud (for bricks, pottery, and..." | `g4_resources` | `mandatory` |
+| "Underground limestone sinkholes and aquifers (like M..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` | `mandatory` |
+| "High-altitude glacial mountain meltwater (like the A..." | "Steep, jagged mountain ranges (requires terrace farm..." | `g2_terrain` | `mandatory` |
+| "High-altitude glacial mountain meltwater (like the A..." | "Mountain terrace farming (carving flat steps into st..." | `a4_hydraulic` | `mandatory` |
+| "Seasonal monsoon rains and rainwater harvesting rese..." | "Stepwells and Massive Sunken Reservoirs (Vavs / Baol..." | `a4_hydraulic` | `mandatory` |
+| "Desert flash-flood wadis managed through dry-river c..." | "Check-dams and rock terracing designed to trap flash..." | `a4_hydraulic` | `mandatory` |
+| "Braided loess river basin prone to massive silt accu..." | "Rapid silting of canal choke points and violent shif..." | `g6_disasters` | `recommended` |
+| "Braided loess river basin prone to massive silt accu..." | "Mandate of Heaven / Dynastic Cycle (ruling family st..." | `p2_succession` | `recommended` |
+| "Steep, jagged mountain ranges (requires terrace farm..." | "Mountain terrace farming (carving flat steps into st..." | `a4_hydraulic` | `mandatory` |
+| "Steep, jagged mountain ranges (requires terrace farm..." | "Impassable, freezing mountain ranges blocking the bo..." | `g3_barriers` | `mandatory` |
+| "Rocky peninsula with jagged coastlines and hundreds ..." | "Maritime Trade Empire (merchant fleets sailing acros..." | `e5_trade` | `mandatory` |
+| "Rocky peninsula with jagged coastlines and hundreds ..." | "Treacherous rocky coastlines, reefs, and stormy seas" | `g3_barriers` | `mandatory` |
+| "Coastal fog oasis and hyper-arid desert scrub border..." | "Sudden El Niño Southern Oscillation (ENSO) ocean tem..." | `g6_disasters` | `recommended` |
+| "Coastal fog oasis and hyper-arid desert scrub border..." | "Cotton and Flax / Linseed (fibers for high-volume te..." | `e1_crops` | `recommended` |
+| "Volcanic oceanic high islands and coral ring atolls ..." | "Basalt island freshwater lenses, volcanic crater spr..." | `g1_freshwater` | `mandatory` |
+| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Baked or sun-dried clay tablets (heavy, but fireproo..." | `a2_medium` | `mandatory` |
+| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Rich alluvial clay and mud (for bricks, pottery, and..." | `g4_resources` | `mandatory` |
+| "Cuneiform (wedge-shaped marks pressed into wet clay ..." | "Scribes and Record-Keepers (highly respected because..." | `s2_middle` | `mandatory` |
+| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Papyrus scrolls made from pressed river reeds (light..." | `a2_medium` | `recommended` |
+| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Papyrus reeds, bamboo, or marsh plants (for paper, b..." | `g4_resources` | `recommended` |
+| "Hieroglyphs (elaborate carved and painted sacred sym..." | "Scribes and Record-Keepers (highly respected because..." | `s2_middle` | `mandatory` |
+| "Quipu / Knotted Cords (no written words; complex mat..." | "Llamas and Alpacas (light pack animals and source of..." | `e2_animals` | `mandatory` |
+| "Quipu / Knotted Cords (no written words; complex mat..." | "Freeze-dried Potatoes (Chuño) and Quinoa (high-altit..." | `e1_crops` | `mandatory` |
+| "Pictographs & Ideograms carved into stone stelae and..." | "Accordion-folded bark paper (amatl) coated with fine..." | `a2_medium` | `mandatory` |
+| "Cast Bronze Vessels with Long Ritual Inscriptions (S..." | "Copper and tin deposits (for smelting bronze weapons..." | `g4_resources` | `mandatory` |
+| "Cast Bronze Vessels with Long Ritual Inscriptions (S..." | "Ancestor Veneration & Philosophical Harmony (focus o..." | `r1_structure` | `recommended` |
+| "Elite Chariot Corps (two-wheeled horse-drawn platfor..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` | `mandatory` |
+| "Horse Archer Light Cavalry (highly mobile skirmisher..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` | `mandatory` |
+| "Armored War Elephant Corps (massive beasts bred for ..." | "Asian War Elephants & Work Elephants (trained for he..." | `e2_animals` | `mandatory` |
+| "Naval Supremacy (trireme warships with bronze batter..." | "Dense cedar, oak, or mahogany forests (for shipbuild..." | `g4_resources` | `mandatory` |
+| "Naval Supremacy (trireme warships with bronze batter..." | "Maritime Trade Empire (merchant fleets sailing acros..." | `e5_trade` | `mandatory` |
+| "Disciplined Crossbow Phalanxes & Volley Formations (..." | "Mechanical Triggered Crossbows and Standardized Inte..." | `a5_science` | `mandatory` |
+| "Siege Warfare Specialists (battering rams, siege tow..." | "Dense cedar, oak, or mahogany forests (for shipbuild..." | `g4_resources` | `mandatory` |
+| "Outrigger War Canoes & Amphibious Shock Warriors (fa..." | "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | `a5_science` | `mandatory` |
+| "Outrigger War Canoes & Amphibious Shock Warriors (fa..." | "Sacred Kapu / Tapu Ecological & Social Taboo Code (s..." | `p3_law_system` | `recommended` |
+| "Chinampas ("floating gardens" built on shallow lake ..." | "Tropical crater caldera lakes and seasonal interconn..." | `g1_freshwater` | `mandatory` |
+| "Chinampas ("floating gardens" built on shallow lake ..." | "Maize (Corn), Beans, and Squash ("Three Sisters" gro..." | `e1_crops` | `mandatory` |
+| "Qanats (underground channels that carry mountain gro..." | "Arid desert expanses surrounded by narrow fertile ri..." | `g2_terrain` | `mandatory` |
+| "Heavy iron-tipped plows pulled by oxen and crop rota..." | "High-grade iron ore (for superior armor and agricult..." | `g4_resources` | `mandatory` |
+| "Heavy iron-tipped plows pulled by oxen and crop rota..." | "Oxen and Water Buffalo (heavy draft animals for pull..." | `e2_animals` | `mandatory` |
+| "Suspension Rope Bridges and Paved Mountain Stairways..." | "Deep river chasms and impassable canyon gorges cross..." | `g3_barriers` | `mandatory` |
+| "Suspension Rope Bridges and Paved Mountain Stairways..." | "Steep, jagged mountain ranges (requires terrace farm..." | `g2_terrain` | `mandatory` |
+| "Artificial Enclosed Naval Harbors (Cothons) with cov..." | "Naval Supremacy (trireme warships with bronze batter..." | `p4_military` | `mandatory` |
+| "Artificial Enclosed Naval Harbors (Cothons) with cov..." | "Rocky peninsula with jagged coastlines and hundreds ..." | `g2_terrain` | `mandatory` |
+| "Thousands of miles of frontier defensive walls and w..." | "Penal Convict Labor Crews (criminals and political d..." | `s5_unfree_labor` | `recommended` |
+| "Thousands of miles of frontier defensive walls and w..." | "Corvée Labor System (every peasant family owes 2 mon..." | `e4_taxation` | `mandatory` |
+| "Gravity-fed stone aqueducts, subterranean sewers, an..." | "Civil Engineers, Hydraulic Architects, and Quarry Ma..." | `s2_middle` | `mandatory` |
+| "Gravity-fed stone aqueducts, subterranean sewers, an..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` | `mandatory` |
+| "Mortarless Granite Enclosures (Dzimbahwe) & Towering..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` | `mandatory` |
+| "Mortarless Granite Enclosures (Dzimbahwe) & Towering..." | "Vast Herds of Sanga & Zebu Cattle (walking banks of ..." | `e2_animals` | `recommended` |
+| "Megalithic Volcanic Tuff Statues (Moai) & Open-Air S..." | "Basalt, andesite, and diorite volcanic stones (for m..." | `g4_resources` | `mandatory` |
+| "Trans-Saharan Gold-Salt Trade (caravans crossing vas..." | "Domesticated Dromedary & Bactrian Camels (enduring d..." | `e2_animals` | `mandatory` |
+| "Trans-Saharan Gold-Salt Trade (caravans crossing vas..." | "Vast rock salt domes and coastal evaporation saltern..." | `g4_resources` | `mandatory` |
+| "Vertical Archipelago Exchange (highland and lowland ..." | "Steep, jagged mountain ranges (requires terrace farm..." | `g2_terrain` | `mandatory` |
+| "Vertical Archipelago Exchange (highland and lowland ..." | "Reciprocal Mit'a Labor Service (rotational community..." | `e4_taxation` | `recommended` |
+| "Cattle & Livestock Wealth Standard (fines, taxes, ro..." | "Vast Herds of Sanga & Zebu Cattle (walking banks of ..." | `e2_animals` | `mandatory` |
+| "Standardized Stamped Coins (electrum, gold, silver, ..." | "Gold, silver, jade, or lapis lazuli (for luxury good..." | `g4_resources` | `mandatory` |
+| "Marine murex sea snail beds (for extracting prized r..." | "Silk cultivation, glassblowing, or rare purple dye e..." | `a5_science` | `mandatory` |
+| "Wild silk cocoons and fine white mulberry groves (fo..." | "Master Weavers, Silk Cultivators, and Textile Guild ..." | `s2_middle` | `mandatory` |
+| "Wild silk cocoons and fine white mulberry groves (fo..." | "Bolts of Woven Silk and Standardized Spun Yarn Skein..." | `e3_currency` | `mandatory` |
+| "Deep Underground Salt-Drilling Derricks using bamboo..." | "Vast rock salt domes and coastal evaporation saltern..." | `g4_resources` | `mandatory` |
+| "Deep Underground Salt-Drilling Derricks using bamboo..." | "State Monopolies (the government owns all salt, iron..." | `e4_taxation` | `recommended` |
+| "Written Public Law Pillars (like Hammurabi's Code — ..." | "Lex Talionis ("Eye for an Eye" — literal physical re..." | `p3_law_system` | `mandatory` |
+| "Written Public Law Pillars (like Hammurabi's Code — ..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` | `mandatory` |
+| "Direct Democracy (all free adult male citizens vote ..." | "Election by Citizen Assembly or Noble Council (term ..." | `p2_succession` | `mandatory` |
+| "Direct Democracy (all free adult male citizens vote ..." | "Jury Trials & Restorative Justice (large citizen jur..." | `p3_law_system` | `mandatory` |
+| "Meritocratic Civil Service Exams (officials are chos..." | "Scribal / Exam Mobility (anyone who manages to learn..." | `s3_mobility` | `mandatory` |
+| "Meritocratic Civil Service Exams (officials are chos..." | "Philosopher-Bureaucrats / Mandarins (scholars who pa..." | `s1_apex` | `mandatory` |
+| "Theocratic God-King Worship (the living ruler is lit..." | "The God-King and Royal Dynasty (untouchable divine b..." | `s1_apex` | `mandatory` |
+| "Theocratic God-King Worship (the living ruler is lit..." | "Divine Right Monarchy (the King rules, but claims th..." | `r5_gov_relation` | `mandatory` |
+| "Mummification & Tomb Provisioning (body must be pres..." | "Natural bitumen and surface asphalt seeps (for caulk..." | `g4_resources` | `recommended` |
+| "Mummification & Tomb Provisioning (body must be pres..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` | `recommended` |
+| "Militarized Matriarchal Autonomy (like Sparta — whil..." | "State Serfs / Helots (conquered locals tied permanen..." | `s5_unfree_labor` | `recommended` |
+| "Militarized Matriarchal Autonomy (like Sparta — whil..." | "Diarchy (two co-equal hereditary kings balancing civ..." | `p1_gov_system` | `recommended` |
+| "Maritime Thalassocracy (naval confederation where au..." | "Naval Supremacy (trireme warships with bronze batter..." | `p4_military` | `mandatory` |
+| "Maritime Thalassocracy (naval confederation where au..." | "Naval Navigators and Master Shipwrights (commanding ..." | `s2_middle` | `mandatory` |
+| "Egalitarian Civic Council of Merchant-Artisan Guilds..." | "Planned grid-layout cities with standardized baked-b..." | `a3_monuments` | `recommended` |
+| "Egalitarian Civic Council of Merchant-Artisan Guilds..." | "Steatite Inscribed Merchant Seals and Clay Envelope ..." | `e3_currency` | `recommended` |
+| "Vast subterranean necropolises guarded by terracotta..." | "Rich alluvial clay and mud (for bricks, pottery, and..." | `g4_resources` | `mandatory` |
+| "Vast subterranean necropolises guarded by terracotta..." | "Centralized Absolute Monarchy (one King/Emperor hold..." | `p1_gov_system` | `recommended` |
+| "Oracle divination (reading cracks in burned turtle s..." | "Logographic Script (thousands of complex characters ..." | `a1_writing` | `recommended` |
+| "Oracle divination (reading cracks in burned turtle s..." | "Sacred Shaman-Kings and Oracle Astrologers (rulers w..." | `s1_apex` | `recommended` |
+| "Matrilineal Royal Succession (throne passes to the s..." | "Dual-Sex Governance with Female Co-Rulers (independe..." | `s4_gender` | `recommended` |
+| "Matrilineal Royal Succession (throne passes to the s..." | "Matriarchal Clan Mothers & Queen Mothers (venerable ..." | `s1_apex` | `recommended` |
+| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Pastoral Transhumance & Herd Grazing (minimal grain ..." | `e1_crops` | `mandatory` |
+| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Horse Archer Light Cavalry (highly mobile skirmisher..." | `p4_military` | `mandatory` |
+| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Royal Kurgan Burial Mounds (timber-lined underground..." | `r4_afterlife` | `recommended` |
+| "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | "Marshallese Stick Charts, Wampum Memory Belts, and O..." | `a1_writing` | `mandatory` |
+
+### 5.2 Multi-Trigger (Compound) Synergies
+
+Compound synergies evaluate multiple concurrent selections across questions and civilization attributes:
+
+1. **Mesoamerican Sacrificial & Obsidian Complex:**
+   - **Triggers:** BOTH *"Bloodletting or human sacrifice..."* (`r3_rituals`) AND *"Obsidian (volcanic glass...)"* (`g4_resources`).
+   - **Companions:**
+     - `s5_unfree_labor`: *"Ritual War Captives (captives reserved exclusively for temple construction, ritual ballgames, and seasonal blood sacrifices)"* (`recommended`)
+     - `s3_mobility`: *"Ritual Athletic & Sacrificial Prowess (exceptional champions in sacred ballgames, wrestling games, or gladiator arenas granted noble honors)"* (`recommended`)
+
+2. **Continental Imperial Satrapy Administration:**
+   - **Triggers:** BOTH *"Satrapy Provincial Administration..."* (`p5_foreign_policy`) AND scale `continental_empire` in Iron Age or later (`currentEra !== 'early_bronze' && currentEra !== 'late_bronze'`).
+   - **Companions:**
+     - `a1_writing`: *"Kharosthi and Aramaic Administrative Cursive..."* (`recommended`)
+     - `e4_taxation`: *"Tribute from Conquered Provinces..."* (`recommended`)
+
+3. **Oceanic Wayfinding & High Island Agriculture:**
+   - **Triggers:** BOTH *"Uncharted offshore open ocean expanses..."* (`g3_barriers`) AND *"Taro, Yams, and Breadfruit..."* (`e1_crops`).
+   - **Companions:**
+     - `a5_science`: *"Celestial navigation (sailing out of sight of land at night using the North Star)"* (`mandatory`)
+     - `s2_middle`: *"Naval Navigators and Master Shipwrights (commanding extraordinary maritime prestige and guild privileges)"* (`mandatory`)
 
 ---
 
