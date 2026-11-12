@@ -94,23 +94,23 @@ export default function Header({
 
       {/* Grade 7 Logic Guard & Ordering Control Bar */}
       <div className="py-3 px-4 my-4 rounded-xl bg-[#f0e4d2] border border-[#dfd0ba] flex flex-wrap items-center justify-between gap-3 text-xs font-sans-ui">
-        <div className="flex items-center gap-2">
-          <Brain size={16} className="text-[#935923]" />
-          <span className="font-bold text-[#3d2e23]">Grade 7 Logic Guard:</span>
-          <button
-            onClick={() => setLogicGuardEnabled(!logicGuardEnabled)}
-            className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer border text-xs flex items-center gap-1 ${
-              logicGuardEnabled
-                ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs'
-                : 'bg-[#d8c7b0] text-[#5c4a3b] border-[#baaa94]'
-            }`}
-          >
-            {logicGuardEnabled ? '✓ Active (No Illogical Contradictions)' : '✕ Disabled (Fantasy Mode)'}
-          </button>
-          <span className="text-[#705e4f] text-[11px] hidden md:inline italic">
-            {logicGuardEnabled
-              ? 'Locks choices that make no historical sense (e.g. no horse chariots without horses!)'
-              : 'Warning: Choices may contradict each other! Your teacher will grill you on them!'}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            <Brain size={16} className="text-[#935923]" />
+            <span className="font-bold text-[#3d2e23]">Grade 7 Logic Guard:</span>
+            <button
+              onClick={() => setLogicGuardEnabled(!logicGuardEnabled)}
+              className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer border text-xs flex items-center gap-1 ${
+                logicGuardEnabled
+                  ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs'
+                  : 'bg-[#d8c7b0] text-[#5c4a3b] border-[#baaa94]'
+              }`}
+            >
+              {logicGuardEnabled ? '✓ Active (Logical Contradictions Locked)' : '✕ Disabled (Fantasy Mode)'}
+            </button>
+          </div>
+          <span className="text-[#68491c] bg-[#faecd6] px-2.5 py-0.5 rounded-full border border-[#e6ceae] font-semibold text-[11px]">
+            ⚡ No Choice Caps: Select as many as you want unless contradictory!
           </span>
         </div>
 

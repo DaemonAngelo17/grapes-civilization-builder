@@ -95,7 +95,7 @@ export const GRAPES_QUESTIONS = {
       number: 'G1',
       title: 'Dominant Terrain & Topography (Where do your people live?)',
       type: 'checkbox',
-      maxSelect: 2,
+      
       category: 'G',
       guidance: 'Choose up to 2 land types. Your landscape decides where you can build towns, how easy it is to travel, and whether farming is easy or backbreaking.',
       grade7Tip: 'Think about real history: Greece had rocky peninsulas and mountains (so they became sailors!), while Mesopotamia had flat river valleys (so they built huge mud-brick cities).',
@@ -153,8 +153,8 @@ export const GRAPES_QUESTIONS = {
       number: 'G4',
       title: 'Abundant Natural Resources (What useful materials does nature give you?)',
       type: 'checkbox',
-      minSelect: 2,
-      maxSelect: 4,
+      
+      
       category: 'G',
       guidance: 'Select 2 to 4 raw materials that are everywhere in your land. These materials decide what your tools, weapons, houses, and art are made from.',
       grade7Tip: 'The Sumerians had almost no stone or wood, so they made everything—even their school tablets and houses—out of river mud and clay! The Maya had sharp black volcanic glass (obsidian) for swords.',
@@ -215,8 +215,8 @@ export const GRAPES_QUESTIONS = {
       number: 'E1',
       title: 'Staple Agricultural Crops (What food feeds your growing cities?)',
       type: 'checkbox',
-      minSelect: 2,
-      maxSelect: 3,
+      
+      
       category: 'E',
       guidance: 'Pick 2 to 3 main crops. In ancient history, an empire is only as strong as its farmers. If crops fail, cities starve and empires collapse.',
       grade7Tip: 'Mesopotamia and Egypt grew wheat and barley for bread and beer. Ancient China relied on rice and millet. In the Americas, indigenous farmers grew the "Three Sisters" (corn, beans, and squash together!).',
@@ -360,7 +360,7 @@ export const GRAPES_QUESTIONS = {
       number: 'P4',
       title: 'Military Organization & Doctrines (How does your army fight?)',
       type: 'checkbox',
-      maxSelect: 3,
+      
       category: 'P',
       guidance: 'Select up to 3 core military branches and fighting tactics. How does your army protect borders or defeat attacking invaders?',
       grade7Tip: 'Greek hoplites locked their shields together into an unbreakable human tank called a "phalanx". The Assyrians were masters of siege warfare with giant battering rams.',
@@ -631,7 +631,7 @@ export const GRAPES_QUESTIONS = {
       number: 'A4',
       title: 'Monumental Architecture (What giant structures will your people be remembered for?)',
       type: 'checkbox',
-      maxSelect: 3,
+      
       category: 'A',
       guidance: 'Select up to 3 colossal construction projects that show off your empire’s wealth, engineering power, and devotion to the gods.',
       grade7Tip: 'The Great Pyramid of Giza was the tallest man-made structure on Earth for over 3,800 years! Roman aqueducts carried millions of gallons of mountain water into cities using gravity alone.',

@@ -1,6 +1,27 @@
-import React from 'react';
-import { CheckCircle2, AlertCircle, Edit3, Lock, Lightbulb, HelpCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  CheckCircle2, 
+  AlertCircle, 
+  Edit3, 
+  Lock, 
+  Lightbulb, 
+  Image as ImageIcon,
+  Droplets,
+  Mountain,
+  Flame,
+  Shield,
+  Coins
+} from 'lucide-react';
 import { checkOptionDisallowed } from '../utils/logicRules';
+import { getOptionVisual } from '../data/optionImages';
+
+const FALLBACK_ICONS = {
+  Droplets,
+  Mountain,
+  Flame,
+  Shield,
+  Coins
+};
 
 export default function QuestionCard({
   question,
@@ -16,6 +37,12 @@ export default function QuestionCard({
   const selectedList = Array.isArray(value) ? value : value ? [value] : [];
   const selectedCount = selectedList.length;
 
+  const [imageErrors, setImageErrors] = useState({});
+
+  const handleImageError = (optIdx) => {
+    setImageErrors((prev) => ({ ...prev, [optIdx]: true }));
+  };
+
   const handleOptionClick = (option) => {
     // Check if disallowed by logic
     const { isDisallowed } = checkOptionDisallowed(question.id, option, allAnswers, logicGuardEnabled);
@@ -29,10 +56,7 @@ export default function QuestionCard({
         const next = selectedList.filter((item) => item !== option);
         onChange(question.id, next);
       } else {
-        // Check max selection
-        if (question.maxSelect && selectedCount >= question.maxSelect) {
-          return; // Max reached
-        }
+        // No arbitrary max limit! Allowed as long as it does not contradict!
         const next = [...selectedList, option];
         onChange(question.id, next);
       }
@@ -44,19 +68,10 @@ export default function QuestionCard({
 
   const isSelected = (option) => selectedList.includes(option);
 
-  // Check selection limit alerts
-  let limitBadge = null;
-  if (isCheckbox) {
-    if (question.minSelect && question.maxSelect) {
-      limitBadge = `Select ${question.minSelect} to ${question.maxSelect} (Selected: ${selectedCount})`;
-    } else if (question.maxSelect) {
-      limitBadge = `Select up to ${question.maxSelect} (Selected: ${selectedCount}/${question.maxSelect})`;
-    } else {
-      limitBadge = `Select all that apply (Selected: ${selectedCount})`;
-    }
-  } else {
-    limitBadge = selectedCount > 0 ? 'Single Choice (Answered)' : 'Single Choice';
-  }
+  // Limit badge: explicitly state that choices have NO limit unless logically contradictory
+  let limitBadge = isCheckbox
+    ? `Multi-Select: No Limit (Selected: ${selectedCount})`
+    : (selectedCount > 0 ? 'Single Choice (Answered)' : 'Single Choice');
 
   const isComplete = isCheckbox ? selectedCount > 0 : Boolean(value);
 
@@ -114,8 +129,8 @@ export default function QuestionCard({
         </p>
       )}
 
-      {/* Options List */}
-      <div className="space-y-2 mb-4">
+      {/* Options Grid / List with Visual Images */}
+      <div className="space-y-2.5 mb-4">
         {question.options.map((option, idx) => {
           const active = isSelected(option);
           const { isDisallowed, reason } = checkOptionDisallowed(
@@ -124,21 +139,24 @@ export default function QuestionCard({
             allAnswers,
             logicGuardEnabled
           );
+          const visual = getOptionVisual(option);
+          const hasImage = visual && visual.url && !imageErrors[idx];
 
           return (
             <div
               key={idx}
               onClick={() => handleOptionClick(option)}
-              className={`group flex flex-col p-3 rounded-lg border transition-all ${
+              className={`group flex flex-col p-3 rounded-xl border transition-all ${
                 isDisallowed
                   ? 'bg-[#eae3d5]/70 border-[#d0c2ab] opacity-65 cursor-not-allowed'
                   : active
-                  ? 'bg-[#f4ebe0] border-[#935923] shadow-sm text-[#1e1511] cursor-pointer'
+                  ? 'bg-[#f4ebe0] border-[#935923] shadow-sm text-[#1e1511] ring-1 ring-[#935923]/30 cursor-pointer'
                   : 'bg-[#faf6ee] hover:bg-[#f5ede0] border-[#ded3be] text-[#3e3229] cursor-pointer'
               }`}
             >
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 shrink-0">
+              <div className="flex items-start gap-3.5">
+                {/* Radio or Checkbox circle/square */}
+                <div className="mt-1 shrink-0">
                   {isDisallowed ? (
                     <div className="w-4 h-4 rounded border border-[#a89680] bg-[#e2d6c3] flex items-center justify-center text-[#7a644f]">
                       <Lock size={10} />
@@ -166,8 +184,29 @@ export default function QuestionCard({
                   )}
                 </div>
 
+                {/* Option Historical Visual Image Thumbnail */}
+                {hasImage && (
+                  <div className="relative shrink-0 overflow-hidden rounded-lg border border-[#cfbfa8] bg-[#e9decb] shadow-xs">
+                    <img
+                      src={visual.url}
+                      alt={visual.alt || option}
+                      onError={() => handleImageError(idx)}
+                      loading="lazy"
+                      className={`w-16 h-16 sm:w-20 sm:h-16 object-cover transition-transform duration-300 group-hover:scale-105 ${
+                        isDisallowed ? 'grayscale contrast-75' : ''
+                      }`}
+                    />
+                    {visual.caption && (
+                      <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[9px] px-1 py-0.5 text-center truncate font-sans-ui">
+                        {visual.caption}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Text Content */}
                 <div className="text-sm md:text-[14.5px] leading-snug flex-1">
-                  <span className={isDisallowed ? 'line-through text-[#7f6c5b]' : ''}>
+                  <span className={`block font-medium ${isDisallowed ? 'line-through text-[#7f6c5b]' : ''}`}>
                     {option}
                   </span>
                 </div>
@@ -175,9 +214,9 @@ export default function QuestionCard({
 
               {/* Show Logic Disallow Reason if locked */}
               {isDisallowed && reason && (
-                <div className="mt-2 text-[11px] font-sans-ui text-[#8a3324] bg-[#f7e6e3] px-2.5 py-1 rounded border border-[#e4b5ac] flex items-center gap-1.5 ml-7">
-                  <AlertCircle size={12} className="shrink-0 text-[#983726]" />
-                  <span>{reason}</span>
+                <div className="mt-2 text-[11px] font-sans-ui text-[#8a3324] bg-[#f7e6e3] px-2.5 py-1.5 rounded-lg border border-[#e4b5ac] flex items-center gap-1.5 sm:ml-7">
+                  <AlertCircle size={13} className="shrink-0 text-[#983726]" />
+                  <span className="font-medium">{reason}</span>
                 </div>
               )}
             </div>
