@@ -131,15 +131,10 @@ export default function App() {
     for (const cat of GRAPES_CATEGORIES) {
       const qList = GRAPES_QUESTIONS[cat.key] || [];
       for (const q of qList) {
-        if (q.type === 'radio') {
-          const randOption = q.options[Math.floor(Math.random() * q.options.length)];
-          newAnswers[q.id] = randOption;
-        } else {
-          // Checkbox: pick 1 or 2 options
-          const numPicks = Math.floor(Math.random() * 2) + 1;
-          const shuffled = [...q.options].sort(() => 0.5 - Math.random());
-          newAnswers[q.id] = shuffled.slice(0, numPicks);
-        }
+        // Multi-choice for all questions: pick 1 or 2 options
+        const numPicks = Math.floor(Math.random() * 2) + 1;
+        const shuffled = [...q.options].sort(() => 0.5 - Math.random());
+        newAnswers[q.id] = shuffled.slice(0, numPicks);
       }
     }
 

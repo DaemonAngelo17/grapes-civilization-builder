@@ -23,7 +23,7 @@ export default function QuestionCard({
   currentScale = 'regional_kingdom',
   onEnlargeImage
 }) {
-  const isCheckbox = question.type === 'checkbox';
+  // All questions are multi-choice (limited only by contradiction, land size, and date)
   const selectedList = Array.isArray(value) ? value : value ? [value] : [];
   const selectedCount = selectedList.length;
 
@@ -34,7 +34,14 @@ export default function QuestionCard({
   };
 
   const handleOptionClick = (option) => {
-    // Check if disallowed by logic
+    // If already selected, clicking it always deselects it
+    if (selectedList.includes(option)) {
+      const next = selectedList.filter((item) => item !== option);
+      onChange(question.id, next);
+      return;
+    }
+
+    // Check if disallowed by contradictions, land size, or chronological date
     const { isDisallowed } = checkOptionDisallowed(
       question.id, 
       option, 
@@ -44,33 +51,22 @@ export default function QuestionCard({
       currentScale
     );
     if (isDisallowed) {
-      return; // Option is locked by logic
+      return; // Locked by historical logic
     }
 
-    if (isCheckbox) {
-      if (selectedList.includes(option)) {
-        // Deselect
-        const next = selectedList.filter((item) => item !== option);
-        onChange(question.id, next);
-      } else {
-        // No arbitrary max limit! Allowed as long as it does not contradict!
-        const next = [...selectedList, option];
-        onChange(question.id, next);
-      }
-    } else {
-      // Radio
-      onChange(question.id, option);
-    }
+    // Add option to multi-choice selection
+    const next = [...selectedList, option];
+    onChange(question.id, next);
   };
 
   const isSelected = (option) => selectedList.includes(option);
 
-  // Limit badge: explicitly state that choices have NO limit unless logically contradictory
-  let limitBadge = isCheckbox
-    ? `Multi-Select: Unlimited unless contradictory (Selected: ${selectedCount})`
-    : (selectedCount > 0 ? 'Single Choice (Answered)' : 'Single Choice');
+  // Multi-choice status badge
+  const limitBadge = selectedCount === 0
+    ? 'Multi-Choice: Select Any'
+    : `Multi-Choice (${selectedCount} Selected)`;
 
-  const isComplete = isCheckbox ? selectedCount > 0 : Boolean(value);
+  const isComplete = selectedCount > 0;
 
   return (
     <div
@@ -154,31 +150,24 @@ export default function QuestionCard({
               }`}
             >
               <div className="flex items-start gap-3.5">
-                {/* Radio or Checkbox circle/square */}
+                {/* Multi-choice Checkbox Square */}
                 <div className="mt-1 shrink-0">
                   {isDisallowed ? (
-                    <div className="w-4 h-4 rounded border border-[#a89680] bg-[#e2d6c3] flex items-center justify-center text-[#7a644f]">
+                    <div 
+                      className="w-4 h-4 rounded border border-[#a89680] bg-[#e2d6c3] flex items-center justify-center text-[#7a644f]"
+                      title="Locked by contradiction, land size, or era date"
+                    >
                       <Lock size={10} />
                     </div>
-                  ) : isCheckbox ? (
+                  ) : (
                     <div
                       className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                         active
-                          ? 'bg-[#935923] border-[#935923] text-white'
+                          ? 'bg-[#935923] border-[#935923] text-white shadow-xs'
                           : 'border-[#9e8b74] bg-[#f8f2e6] group-hover:border-[#7d481b]'
                       }`}
                     >
                       {active && <CheckCircle2 size={12} strokeWidth={3} />}
-                    </div>
-                  ) : (
-                    <div
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
-                        active
-                          ? 'border-[#935923] bg-white'
-                          : 'border-[#9e8b74] bg-[#f8f2e6] group-hover:border-[#7d481b]'
-                      }`}
-                    >
-                      {active && <div className="w-2 h-2 rounded-full bg-[#935923]" />}
                     </div>
                   )}
                 </div>

@@ -209,7 +209,7 @@ export const GRAPES_QUESTIONS = {
       id: 'g1_freshwater',
       number: 'G2',
       title: 'Primary Freshwater Source (How do your people get drinking & farm water?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'G',
       guidance: 'Every ancient civilization needed fresh water. Without water, crops wither and everyone dies of thirst. How does your civilization get its water?',
       grade7Tip: 'In Egypt, the Nile flooded gently at the exact same time every year, so farmers knew when to plant. In Mesopotamia, the Tigris and Euphrates flooded violently with no warning!',
@@ -343,7 +343,7 @@ export const GRAPES_QUESTIONS = {
       id: 'e5_trade',
       number: 'E3',
       title: 'Trade Networks & Exports (How do your merchants trade with foreign nations?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'E',
       guidance: 'No ancient society could survive alone. How did your merchants move goods to trade for resources your land was missing?',
       grade7Tip: 'The Phoenicians built famous merchant ships that sailed all across the Mediterranean Sea. The Chinese traveled the famous overland Silk Road across deserts and mountains.',
@@ -359,7 +359,7 @@ export const GRAPES_QUESTIONS = {
       id: 'e3_currency',
       number: 'E4',
       title: 'Medium of Exchange / Currency (How do people pay for goods?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'E',
       guidance: 'Stamped coins were not invented until around 600 BCE in Lydia! In the Bronze Age, ancient people used barter, weighed silver bullion, or state grain rations.',
       grade7Tip: 'In ancient Egypt, workers building the pyramids were paid in daily rations of bread, beer, and onions from the pharaoh’s royal granary! The Maya used cacao beans (chocolate!) like dollar bills.',
@@ -395,7 +395,7 @@ export const GRAPES_QUESTIONS = {
       id: 'p1_gov_system',
       number: 'P1',
       title: 'System of Government (Who holds supreme political power?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'P',
       guidance: 'Who makes the ultimate decisions in your society? Note: Direct democracy only works on small city-state scales, while continental empires require provincial administration.',
       grade7Tip: 'In Athens, free male citizens voted on every single law in a direct democracy. In Sparta, a military council and two kings ruled. In Egypt, the Pharaoh held total absolute power.',
@@ -414,7 +414,7 @@ export const GRAPES_QUESTIONS = {
       id: 'p2_succession',
       number: 'P2',
       title: 'Succession & Transfer of Power (When the ruler dies, who takes over?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'P',
       guidance: 'The most dangerous time in an ancient kingdom was when the king died! If rules were not clear, brothers and generals fought bloody civil wars.',
       grade7Tip: 'China developed the "Mandate of Heaven": if an emperor became corrupt, the gods allowed people to rebel and start a new dynasty. Rome had adopted succession during its golden era.',
@@ -432,7 +432,7 @@ export const GRAPES_QUESTIONS = {
       id: 'p3_law_system',
       number: 'P3',
       title: 'Legal Code & Justice System (How are laws enforced and crimes punished?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'P',
       guidance: 'How does your society keep people from taking revenge into their own hands? Are punishments equal for everyone, or do nobles get treated better than peasants?',
       grade7Tip: 'Hammurabi’s Code was carved onto an 8-foot black stone pillar so everyone could see it. It introduced "an eye for an eye," but nobles paid smaller fines if they harmed a poor slave!',
@@ -470,7 +470,7 @@ export const GRAPES_QUESTIONS = {
       id: 'p5_foreign_policy',
       number: 'P5',
       title: 'Foreign Policy & How Conquered Peoples Are Treated (How do you rule subjects?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'P',
       guidance: 'After you win a war, how do you treat the conquered people? Do you let them keep their religion, make them citizens, or enslave them all?',
       grade7Tip: 'Persia’s Cyrus the Great let conquered people keep their own languages and religions. The Assyrians, on the other hand, forced entire conquered populations to march across the empire so they couldn’t revolt!',
@@ -489,7 +489,7 @@ export const GRAPES_QUESTIONS = {
       id: 's1_apex',
       number: 'S1',
       title: 'The Ruling Apex (Who sits at the very top of the social pyramid?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'S',
       guidance: 'In 7th grade history social pyramids, one small group always stood at the very peak. Who wields the greatest wealth and power in your civilization?',
       grade7Tip: 'In Egypt, the Pharaoh was seen as a living god. In Mesopotamia, Priest-Kings ruled from giant ziggurat temples. In Rome, wealthy patrician landowners controlled the Senate.',
@@ -506,7 +506,7 @@ export const GRAPES_QUESTIONS = {
       id: 's2_middle',
       number: 'S2',
       title: 'The Middle Class & Specialized Artisans (Who is the most respected middle tier?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'S',
       guidance: 'Civilizations need educated and skilled specialists between the rulers and the peasant farmers. Who is most respected in your society’s middle tier?',
       grade7Tip: 'In ancient Egypt and Sumer, scribes were treated like celebrities because less than 2% of people could read or write! In China, hardworking peasant farmers were respected, while merchants were looked down on as greedy.',
@@ -523,7 +523,7 @@ export const GRAPES_QUESTIONS = {
       id: 's3_mobility',
       number: 'S3',
       title: 'Social Mobility (Can a poor kid work hard and move up in class?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'S',
       guidance: 'In some ancient lands, you were stuck in the exact job and caste your parents were born into. In others, you could climb the ladder through school or bravery.',
       grade7Tip: 'Ancient India had a strict Caste System where you could not change your social class during your lifetime. In Imperial China, any boy who studied hard and passed the imperial exam could become a powerful government official!',
@@ -540,7 +540,7 @@ export const GRAPES_QUESTIONS = {
       id: 's4_gender',
       number: 'S4',
       title: 'Gender Roles & Legal Status of Women (What rights and jobs do women have?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'S',
       guidance: 'How were women treated under the law? Could women own property, run businesses, become rulers, or were they legally controlled by male relatives?',
       grade7Tip: 'Egyptian women enjoyed huge legal rights—they could buy land, run businesses, divorce bad husbands, and even rule as Pharaoh (like Hatshepsut and Cleopatra!). In Athens, women were kept indoors and could not own property.',
@@ -556,7 +556,7 @@ export const GRAPES_QUESTIONS = {
       id: 's5_unfree_labor',
       number: 'S5',
       title: 'The Bottom Tier & Unfree Labor (Who does the hardest, unpaid labor?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'S',
       guidance: 'At the bottom of ancient social pyramids were unfree workers. How did your civilization extract the dangerous labor needed for mines and heavy construction?',
       grade7Tip: 'Popular movies show slaves building the Egyptian pyramids, but archaeologists discovered the builders were actually proud, well-fed free Egyptian workers who ate meat and drank beer! In Sparta, enslaved locals called "Helots" farmed for the Spartans.',
@@ -575,7 +575,7 @@ export const GRAPES_QUESTIONS = {
       id: 'r1_structure',
       number: 'R1',
       title: 'Structure of the Divine (What kind of gods do your people worship?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'R',
       guidance: 'Ancient people looked at the sky, the sun, and the mountains to imagine gods. Does your religion believe in many human-like gods, nature spirits, or one supreme creator?',
       grade7Tip: 'Polytheism means believing in MANY gods (like Zeus, Poseidon, and Hades in Greece). Monotheism means worshipping ONE supreme creator (like the ancient Hebrews).',
@@ -593,7 +593,7 @@ export const GRAPES_QUESTIONS = {
       id: 'r2_demeanor',
       number: 'R2',
       title: 'Demeanor of the Gods (How do the gods treat human beings?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'R',
       guidance: 'Do your gods love people, or are they angry and mean? In ancient history, societies living with scary disasters believed the gods were angry!',
       grade7Tip: 'Because Mesopotamian floods were violent and destroyed cities, their myths said gods created humans just to do their chores! In Egypt, the river was gentle, so gods were seen as loving and fair.',
@@ -629,7 +629,7 @@ export const GRAPES_QUESTIONS = {
       id: 'r4_afterlife',
       number: 'R4',
       title: 'Death, Burial, and the Afterlife (What happens after you die?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'R',
       guidance: 'Where does the human soul go after physical death? Note: Cremation on funeral pyres directly contradicts physical mummification!',
       grade7Tip: 'Egyptians believed the god Anubis weighed your heart against the feather of truth—if your heart was light, you entered a beautiful paradise of reed fields! The Mesopotamians believed everyone went to a dusty, dark underworld where souls ate dirt.',
@@ -647,7 +647,7 @@ export const GRAPES_QUESTIONS = {
       id: 'r5_gov_relation',
       number: 'R5',
       title: 'Relationship Between Religion and Government (Who is in charge: king or priest?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'R',
       guidance: 'In the ancient world, church and state were almost never separate! Did the King listen to the High Priest, or was the King himself considered a god?',
       grade7Tip: 'In ancient theocracies, breaking a religious rule was treated as breaking the law. If a ruler claimed divine favor, disobeying the king meant disobeying God itself!',
@@ -683,7 +683,7 @@ export const GRAPES_QUESTIONS = {
       id: 'a1_writing',
       number: 'A2',
       title: 'Writing System & Script (How do your people write and keep records?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'A',
       guidance: 'Writing was invented to count grain and record taxes! Note: Phonetic alphabets were not invented until around 1100 BCE by the Phoenicians.',
       grade7Tip: 'The Sumerians pressed wedge-shaped sticks into wet clay (cuneiform). The Egyptians drew sacred pictures (hieroglyphs). The Phoenicians invented a simple 22-letter alphabet where each letter was a sound—the ancestor of our English alphabet today!',
@@ -702,7 +702,7 @@ export const GRAPES_QUESTIONS = {
       id: 'a2_medium',
       number: 'A3',
       title: 'Primary Writing Medium (What physical material do you write on?)',
-      type: 'radio',
+      type: 'checkbox',
       category: 'A',
       guidance: 'Paper was not invented until Han Dynasty China! Before modern paper, what physical material carried your books and tax records?',
       grade7Tip: 'Clay tablets were heavy, but when a library burned down, the clay tablets were baked like ceramic bricks and survived 4,000 years for archaeologists to read!',
@@ -770,7 +770,9 @@ export const HISTORICAL_PRESETS = {
         'Arid desert expanses surrounded by narrow fertile river strips',
         'Vast river delta marshlands and bayous intersected by tidal estuaries'
       ],
-      g1_freshwater: 'Predictable annual flooding river (like the Nile — leaves rich black silt, easy to plan around)',
+      g1_freshwater: [
+        'Predictable annual flooding river (like the Nile — leaves rich black silt, easy to plan around)'
+      ],
       g3_barriers: [
         'Vast, waterless deserts that starve invading armies before they arrive',
         'Cataracts (shallow, boulder-filled river rapids that stop enemy boats)'
@@ -797,37 +799,71 @@ export const HISTORICAL_PRESETS = {
         'Oxen and Water Buffalo (heavy draft animals for pulling plows and wagons)',
         'Sheep and Goats (for wool, milk, cheese, and leather in rocky terrain)'
       ],
-      e5_trade: 'Riverine Network (barges floating downriver with stone/grain and sailing back upriver using wind)',
-      e3_currency: 'State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)',
+      e5_trade: [
+        'Riverine Network (barges floating downriver with stone/grain and sailing back upriver using wind)'
+      ],
+      e3_currency: [
+        'State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)'
+      ],
       e4_taxation: [
         'Agricultural Tithe (tax collectors measure field sizes after floods and take 10% to 30% of the harvest)',
         'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
       ],
-      p1_gov_system: 'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)',
-      p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
-      p3_law_system: 'Social-Class Tiered Punishments (a noble who injures a peasant pays a small silver fine; a peasant who injures a noble is executed)',
+      p1_gov_system: [
+        'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)'
+      ],
+      p2_succession: [
+        'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)'
+      ],
+      p3_law_system: [
+        'Social-Class Tiered Punishments (a noble who injures a peasant pays a small silver fine; a peasant who injures a noble is executed)'
+      ],
       p4_military: [
         'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)'
       ],
-      p5_foreign_policy: 'Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)',
-      s1_apex: 'The God-King and Royal Dynasty (untouchable divine bloodline)',
-      s2_middle: 'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)',
-      s3_mobility: 'Scribal / Exam Mobility (anyone who manages to learn to read/write or pass state exams can become a rich official)',
-      s4_gender: 'High Legal Autonomy (like Ancient Egypt — women can own property, initiate divorce, sign contracts, run businesses, and even rule as Pharaoh)',
-      s5_unfree_labor: 'Paid Free Laborers Only (monuments are built by proud, well-fed peasant crews paid in meat, beer, grain, and tax exemptions)',
-      r1_structure: 'Theocratic God-King Worship (the living ruler is literally a god on Earth, like the Pharaoh)',
-      r2_demeanor: 'Benevolent and predictable (because the environment is stable, gods are seen as loving protectors)',
+      p5_foreign_policy: [
+        'Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)'
+      ],
+      s1_apex: [
+        'The God-King and Royal Dynasty (untouchable divine bloodline)'
+      ],
+      s2_middle: [
+        'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)'
+      ],
+      s3_mobility: [
+        'Scribal / Exam Mobility (anyone who manages to learn to read/write or pass state exams can become a rich official)'
+      ],
+      s4_gender: [
+        'High Legal Autonomy (like Ancient Egypt — women can own property, initiate divorce, sign contracts, run businesses, and even rule as Pharaoh)'
+      ],
+      s5_unfree_labor: [
+        'Paid Free Laborers Only (monuments are built by proud, well-fed peasant crews paid in meat, beer, grain, and tax exemptions)'
+      ],
+      r1_structure: [
+        'Theocratic God-King Worship (the living ruler is literally a god on Earth, like the Pharaoh)'
+      ],
+      r2_demeanor: [
+        'Benevolent and predictable (because the environment is stable, gods are seen as loving protectors)'
+      ],
       r3_rituals: [
         'Daily food, wine, and incense offerings placed in front of temple statues',
         'Astrological tracking of stars and planets to predict the gods\' moods'
       ],
-      r4_afterlife: 'Moral Judgment & Paradise (heart/soul is weighed; good people go to a fertile paradise, bad are devoured)',
-      r5_gov_relation: 'Divine Right Monarchy (the King rules, but claims the gods chose him — Mandate of Heaven)',
+      r4_afterlife: [
+        'Moral Judgment & Paradise (heart/soul is weighed; good people go to a fertile paradise, bad are devoured)'
+      ],
+      r5_gov_relation: [
+        'Divine Right Monarchy (the King rules, but claims the gods chose him — Mandate of Heaven)'
+      ],
       a4_hydraulic: [
         'Basin irrigation, dikes, and shadufs (counterweight buckets to lift river water)'
       ],
-      a1_writing: 'Hieroglyphs (elaborate carved and painted sacred symbols representing sounds and ideas)',
-      a2_medium: 'Papyrus scrolls made from pressed river reeds (lightweight, but rots in humid climates)',
+      a1_writing: [
+        'Hieroglyphs (elaborate carved and painted sacred symbols representing sounds and ideas)'
+      ],
+      a2_medium: [
+        'Papyrus scrolls made from pressed river reeds (lightweight, but rots in humid climates)'
+      ],
       a3_monuments: [
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape',
         'Rock-cut cliffside temples and royal mausoleums carved directly into towering sandstone canyons'
@@ -847,7 +883,9 @@ export const HISTORICAL_PRESETS = {
       g2_terrain: [
         'Flat, featureless alluvial floodplains (great for farming, terrible for defense)'
       ],
-      g1_freshwater: 'Violent, unpredictable twin rivers (like the Tigris/Euphrates — requires heavy levee and canal work)',
+      g1_freshwater: [
+        'Violent, unpredictable twin rivers (like the Tigris/Euphrates — requires heavy levee and canal work)'
+      ],
       g3_barriers: [
         'None — completely open flat plains requiring man-made walls and constant military vigilance'
       ],
@@ -872,39 +910,73 @@ export const HISTORICAL_PRESETS = {
         'Oxen and Water Buffalo (heavy draft animals for pulling plows and wagons)',
         'Sheep and Goats (for wool, milk, cheese, and leather in rocky terrain)'
       ],
-      e5_trade: 'Riverine Network (barges floating downriver with stone/grain and sailing back upriver using wind)',
-      e3_currency: 'Weighed Metal Bullion (chopping silver rings or copper ingots and weighing them on scales for every purchase)',
+      e5_trade: [
+        'Riverine Network (barges floating downriver with stone/grain and sailing back upriver using wind)'
+      ],
+      e3_currency: [
+        'Weighed Metal Bullion (chopping silver rings or copper ingots and weighing them on scales for every purchase)'
+      ],
       e4_taxation: [
         'Agricultural Tithe (tax collectors measure field sizes after floods and take 10% to 30% of the harvest)',
         'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
       ],
-      p1_gov_system: 'Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)',
-      p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
-      p3_law_system: 'Written Public Law Pillars (like Hammurabi\'s Code — carved in stone in the town square so no judge can make up rules)',
+      p1_gov_system: [
+        'Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)'
+      ],
+      p2_succession: [
+        'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)'
+      ],
+      p3_law_system: [
+        'Written Public Law Pillars (like Hammurabi\'s Code — carved in stone in the town square so no judge can make up rules)'
+      ],
       p4_military: [
         'Permanent Professional Standing Army (full-time paid soldiers who train year-round)',
         'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)'
       ],
-      p5_foreign_policy: 'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)',
-      s1_apex: 'Priest-Kings and Temple High Priests (mediators between gods and humans)',
-      s2_middle: 'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)',
-      s3_mobility: 'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)',
-      s4_gender: 'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)',
-      s5_unfree_labor: 'Temporary Debt Bondage (citizens who can\'t pay taxes work as servants for 3 to 7 years, then must legally be freed)',
-      r1_structure: 'Anthropomorphic Polytheism (dozens of gods with human personalities, jealousy, and family drama)',
-      r2_demeanor: 'Cruel, capricious, and angry (because floods/disasters are random, gods must be constantly appeased)',
+      p5_foreign_policy: [
+        'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)'
+      ],
+      s1_apex: [
+        'Priest-Kings and Temple High Priests (mediators between gods and humans)'
+      ],
+      s2_middle: [
+        'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)'
+      ],
+      s3_mobility: [
+        'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)'
+      ],
+      s4_gender: [
+        'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)'
+      ],
+      s5_unfree_labor: [
+        'Temporary Debt Bondage (citizens who can\'t pay taxes work as servants for 3 to 7 years, then must legally be freed)'
+      ],
+      r1_structure: [
+        'Anthropomorphic Polytheism (dozens of gods with human personalities, jealousy, and family drama)'
+      ],
+      r2_demeanor: [
+        'Cruel, capricious, and angry (because floods/disasters are random, gods must be constantly appeased)'
+      ],
       r3_rituals: [
         'Daily food, wine, and incense offerings placed in front of temple statues',
         'Oracle divination (reading cracks in burned turtle shells/ox bones, or inspecting animal livers)',
         'Astrological tracking of stars and planets to predict the gods\' moods'
       ],
-      r4_afterlife: 'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)',
-      r5_gov_relation: 'Power Struggle (the King and the Temple Priests constantly compete for wealth, land, and influence)',
+      r4_afterlife: [
+        'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)'
+      ],
+      r5_gov_relation: [
+        'Power Struggle (the King and the Temple Priests constantly compete for wealth, land, and influence)'
+      ],
       a4_hydraulic: [
         'Basin irrigation, dikes, and shadufs (counterweight buckets to lift river water)'
       ],
-      a1_writing: 'Cuneiform (wedge-shaped marks pressed into wet clay with a reed stylus)',
-      a2_medium: 'Baked or sun-dried clay tablets (heavy, but fireproof and lasts thousands of years)',
+      a1_writing: [
+        'Cuneiform (wedge-shaped marks pressed into wet clay with a reed stylus)'
+      ],
+      a2_medium: [
+        'Baked or sun-dried clay tablets (heavy, but fireproof and lasts thousands of years)'
+      ],
       a3_monuments: [
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape'
       ],
@@ -922,7 +994,9 @@ export const HISTORICAL_PRESETS = {
       g2_terrain: [
         'Dense, humid tropical rainforest with thick canopy'
       ],
-      g1_freshwater: 'Underground limestone sinkholes and aquifers (like Mayan cenotes — no surface rivers)',
+      g1_freshwater: [
+        'Underground limestone sinkholes and aquifers (like Mayan cenotes — no surface rivers)'
+      ],
       g3_barriers: [
         'Dense, disease-ridden jungles (malaria/venomous wildlife)'
       ],
@@ -945,37 +1019,71 @@ export const HISTORICAL_PRESETS = {
       e2_animals: [
         'None — all goods are carried on the backs of human porters and canoes (like the Maya/Aztec)'
       ],
-      e5_trade: 'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)',
-      e3_currency: 'Commodity Money (cacao beans, cowrie shells, salt blocks, or bolts of silk used as cash)',
+      e5_trade: [
+        'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)'
+      ],
+      e3_currency: [
+        'Commodity Money (cacao beans, cowrie shells, salt blocks, or bolts of silk used as cash)'
+      ],
       e4_taxation: [
         'Agricultural Tithe (tax collectors measure field sizes after floods and take 10% to 30% of the harvest)'
       ],
-      p1_gov_system: 'Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)',
-      p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
-      p3_law_system: 'Lex Talionis ("Eye for an Eye" — literal physical retaliation for crimes among equals)',
+      p1_gov_system: [
+        'Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)'
+      ],
+      p2_succession: [
+        'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)'
+      ],
+      p3_law_system: [
+        'Lex Talionis ("Eye for an Eye" — literal physical retaliation for crimes among equals)'
+      ],
       p4_military: [
         'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)',
         'Psychological Terror (flaying rebel leaders and building pyramids of skulls so cities surrender without fighting)'
       ],
-      p5_foreign_policy: 'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)',
-      s1_apex: 'The God-King and Royal Dynasty (untouchable divine bloodline)',
-      s2_middle: 'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)',
-      s3_mobility: 'Rigid Hereditary Caste System (zero mobility; you must marry and work in the exact caste your parents were born into)',
-      s4_gender: 'Religious & Economic Influence (men hold political office, but women serve as powerful High Priestesses, healers, and market textile merchants)',
-      s5_unfree_labor: 'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)',
-      r1_structure: 'Animism & Nature Spirits (every river, mountain, tree, and thunderstorm has a living spirit)',
-      r2_demeanor: 'Transactional ("Do ut des" — "I give so that you might give"; strict business-like sacrifices for favors)',
+      p5_foreign_policy: [
+        'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)'
+      ],
+      s1_apex: [
+        'The God-King and Royal Dynasty (untouchable divine bloodline)'
+      ],
+      s2_middle: [
+        'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)'
+      ],
+      s3_mobility: [
+        'Rigid Hereditary Caste System (zero mobility; you must marry and work in the exact caste your parents were born into)'
+      ],
+      s4_gender: [
+        'Religious & Economic Influence (men hold political office, but women serve as powerful High Priestesses, healers, and market textile merchants)'
+      ],
+      s5_unfree_labor: [
+        'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)'
+      ],
+      r1_structure: [
+        'Animism & Nature Spirits (every river, mountain, tree, and thunderstorm has a living spirit)'
+      ],
+      r2_demeanor: [
+        'Transactional ("Do ut des" — "I give so that you might give"; strict business-like sacrifices for favors)'
+      ],
       r3_rituals: [
         'Bloodletting or human sacrifice (captives or volunteers offered to keep the sun moving/rain falling)',
         'Astrological tracking of stars and planets to predict the gods\' moods'
       ],
-      r4_afterlife: 'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)',
-      r5_gov_relation: 'Pure Theocracy (the High Priest IS the ruler; religious law and state law are identical)',
+      r4_afterlife: [
+        'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)'
+      ],
+      r5_gov_relation: [
+        'Pure Theocracy (the High Priest IS the ruler; religious law and state law are identical)'
+      ],
       a4_hydraulic: [
         'Chinampas ("floating gardens" built on shallow lake beds using woven reeds and fertile mud)'
       ],
-      a1_writing: 'Pictographs & Ideograms carved into stone stelae and folding bark-paper books (codices)',
-      a2_medium: 'Accordion-folded bark paper (amatl) coated with fine lime plaster and painted in mineral pigments',
+      a1_writing: [
+        'Pictographs & Ideograms carved into stone stelae and folding bark-paper books (codices)'
+      ],
+      a2_medium: [
+        'Accordion-folded bark paper (amatl) coated with fine lime plaster and painted in mineral pigments'
+      ],
       a3_monuments: [
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape'
       ],
@@ -995,7 +1103,9 @@ export const HISTORICAL_PRESETS = {
         'Rocky peninsula with jagged coastlines and hundreds of small islands (like Greece)',
         'Steep, jagged mountain ranges (requires terrace farming, provides natural fortresses)'
       ],
-      g1_freshwater: 'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)',
+      g1_freshwater: [
+        'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)'
+      ],
       g3_barriers: [
         'Treacherous rocky coastlines, reefs, and stormy seas',
         'Impassable, freezing mountain ranges blocking the border'
@@ -1019,37 +1129,71 @@ export const HISTORICAL_PRESETS = {
         'Sheep and Goats (for wool, milk, cheese, and leather in rocky terrain)',
         'Horses and Camels (for aristocratic cavalry, messengers, and desert caravan trade)'
       ],
-      e5_trade: 'Maritime Trade Empire (merchant fleets sailing across seas to establish trading colonies)',
-      e3_currency: 'Standardized Stamped Coins (electrum, gold, silver, or bronze coins guaranteed by the state)',
+      e5_trade: [
+        'Maritime Trade Empire (merchant fleets sailing across seas to establish trading colonies)'
+      ],
+      e3_currency: [
+        'Standardized Stamped Coins (electrum, gold, silver, or bronze coins guaranteed by the state)'
+      ],
       e4_taxation: [
         'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
       ],
-      p1_gov_system: 'Aristocratic Oligarchy / Republic (ruled by a Senate or Council of wealthy landowning families)',
-      p2_succession: 'Election by Citizen Assembly or Noble Council (term limits or life appointments via vote)',
-      p3_law_system: 'Jury Trials & Restorative Justice (large citizen juries vote on guilt; focus on fines, debt forgiveness, or ostracism/exile)',
+      p1_gov_system: [
+        'Aristocratic Oligarchy / Republic (ruled by a Senate or Council of wealthy landowning families)'
+      ],
+      p2_succession: [
+        'Election by Citizen Assembly or Noble Council (term limits or life appointments via vote)'
+      ],
+      p3_law_system: [
+        'Jury Trials & Restorative Justice (large citizen juries vote on guilt; focus on fines, debt forgiveness, or ostracism/exile)'
+      ],
       p4_military: [
         'Heavy Infantry Phalanx (wall of overlapping bronze shields and 18-foot pikes)',
         'Naval Supremacy (trireme warships with bronze battering rams dominating sea lanes)'
       ],
-      p5_foreign_policy: 'Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)',
-      s1_apex: 'Landowning Warrior Aristocracy / Patricians (noble families who control the cavalry and estates)',
-      s2_middle: 'Master Craftsmen & Metallurgists (stonemasons, bronze-smiths, jewelers)',
-      s3_mobility: 'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)',
-      s4_gender: 'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)',
-      s5_unfree_labor: 'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)',
-      r1_structure: 'Anthropomorphic Polytheism (dozens of gods with human personalities, jealousy, and family drama)',
-      r2_demeanor: 'Transactional ("Do ut des" — "I give so that you might give"; strict business-like sacrifices for favors)',
+      p5_foreign_policy: [
+        'Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)'
+      ],
+      s1_apex: [
+        'Landowning Warrior Aristocracy / Patricians (noble families who control the cavalry and estates)'
+      ],
+      s2_middle: [
+        'Master Craftsmen & Metallurgists (stonemasons, bronze-smiths, jewelers)'
+      ],
+      s3_mobility: [
+        'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)'
+      ],
+      s4_gender: [
+        'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)'
+      ],
+      s5_unfree_labor: [
+        'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)'
+      ],
+      r1_structure: [
+        'Anthropomorphic Polytheism (dozens of gods with human personalities, jealousy, and family drama)'
+      ],
+      r2_demeanor: [
+        'Transactional ("Do ut des" — "I give so that you might give"; strict business-like sacrifices for favors)'
+      ],
       r3_rituals: [
         'Ecstatic festivals, theatrical drama, and athletic games held in honor of patron deities',
         'Animal sacrifices (bulls, goats, sheep) burned on outdoor altars'
       ],
-      r4_afterlife: 'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)',
-      r5_gov_relation: 'Civic Religion (priests are just regular government officials elected to run public festivals)',
+      r4_afterlife: [
+        'Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, dusty land of shadows)'
+      ],
+      r5_gov_relation: [
+        'Civic Religion (priests are just regular government officials elected to run public festivals)'
+      ],
       a4_hydraulic: [
         'Mountain terrace farming (carving flat steps into steep cliffs with retaining walls)'
       ],
-      a1_writing: 'Phonetic Alphabet (20-30 simple letters representing spoken sounds — easy for merchants to learn)',
-      a2_medium: 'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets',
+      a1_writing: [
+        'Phonetic Alphabet (20-30 simple letters representing spoken sounds — easy for merchants to learn)'
+      ],
+      a2_medium: [
+        'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets'
+      ],
       a3_monuments: [
         'Grand colonnaded temples with marble statues and open-air amphitheaters',
         'Gravity-fed stone aqueducts, subterranean sewers, and public bathhouses'

@@ -22,11 +22,15 @@ export function checkOptionDisallowed(
   };
 
   const hasText = (id, str) => {
-    const val = answers[id];
+    const list = selectedList(id);
     const s = str.toLowerCase();
-    if (Array.isArray(val)) return val.some((item) => item.toLowerCase().includes(s));
-    if (typeof val === 'string') return val.toLowerCase().includes(s);
-    return false;
+    return list.some((item) => {
+      // When checking inside the same question being evaluated, ignore the option itself
+      if (id === questionId && item.trim().toLowerCase() === optionText.trim().toLowerCase()) {
+        return false;
+      }
+      return item.toLowerCase().includes(s);
+    });
   };
 
   const optLower = optionText.toLowerCase();
@@ -125,24 +129,88 @@ export function checkOptionDisallowed(
       if (currentTerrains.length >= 1 && !currentTerrains.includes(optionText)) {
         return {
           isDisallowed: true,
-          reason: '🔒 Scale-Locked (City-State Limit): A local City-State occupies a single river valley or coastal bay! It cannot span multiple unrelated climates (e.g. rainforest AND desert). Upgrade to a Continental Empire to span multiple biomes.'
+          reason: '🔒 Land Size Limit (City-State): A local City-State occupies 1 single river valley, bay, or oasis! Upgrade to Regional Kingdom or Continental Empire to span across multiple biomes.'
         };
       }
     }
 
-    // City-States cannot build thousands of miles of Great Walls
-    if (questionId === 'a3_monuments' && optLower.includes('thousands of miles of frontier defensive walls')) {
-      return {
-        isDisallowed: true,
-        reason: '🔒 Scale-Locked (City-State): A single city-state does not have thousands of miles of borders or millions of laborers to build a Great Wall! This wonder requires a Grand Continental Empire.'
-      };
+    // City-States are situated on 1 primary freshwater source
+    if (questionId === 'g1_freshwater') {
+      const currentWaters = selectedList('g1_freshwater');
+      if (currentWaters.length >= 1 && !currentWaters.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A single city-state is situated on 1 primary freshwater source (e.g. one river, cenote, or spring). Upgrade land size to control multiple water basins.'
+        };
+      }
+    }
+
+    // City-States possess up to 4 abundant resources
+    if (questionId === 'g4_resources') {
+      const currentRes = selectedList('g4_resources');
+      if (currentRes.length >= 4 && !currentRes.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A single city-state territory cannot encompass more than 4 geological resource deposits simultaneously.'
+        };
+      }
+    }
+
+    // City-States cultivate up to 2 staple crops
+    if (questionId === 'e1_crops') {
+      const currentCrops = selectedList('e1_crops');
+      if (currentCrops.length >= 2 && !currentCrops.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A small city-state agricultural belt focuses on up to 2 staple crops.'
+        };
+      }
+    }
+
+    // City-States pasture up to 2 animal groups
+    if (questionId === 'e2_animals') {
+      const currentAnimals = selectedList('e2_animals');
+      if (currentAnimals.length >= 2 && !currentAnimals.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A local city-state pastureland supports up to 2 primary domesticated livestock types.'
+        };
+      }
+    }
+
+    // City-States can fund up to 2 monuments (and cannot build Great Walls)
+    if (questionId === 'a3_monuments') {
+      if (optLower.includes('thousands of miles of frontier defensive walls')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Lock (City-State): A single city-state does not have thousands of miles of borders or millions of laborers to build a Great Wall! This wonder requires a Grand Continental Empire.'
+        };
+      }
+      const currentMons = selectedList('a3_monuments');
+      if (currentMons.length >= 2 && !currentMons.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A single city-state possesses the quarry stone and civic budget to erect up to 2 monumental marvels.'
+        };
+      }
+    }
+
+    // City-States military doctrine limit: up to 3 specialized branches
+    if (questionId === 'p4_military') {
+      const currentMils = selectedList('p4_military');
+      if (currentMils.length >= 3 && !currentMils.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A single city-state military budget can field up to 3 specialized military arms simultaneously.'
+        };
+      }
     }
 
     // City-States cannot run multi-province Feudal Bureaucracies
-    if (questionId === 'p1_gov_system' && optLower.includes('feudal bureaucracy (emperor rules through appointed governors')) {
+    if (questionId === 'p1_gov_system' && (optLower.includes('feudal bureaucracy') || optLower.includes('satrapy provincial administration'))) {
       return {
         isDisallowed: true,
-        reason: '🔒 Scale-Locked: A single city-state has no far-off foreign provinces to appoint imperial governors over!'
+        reason: '🔒 Land Size Lock: A single city-state has no far-off foreign provinces to appoint imperial governors or satraps over!'
       };
     }
 
@@ -150,15 +218,97 @@ export function checkOptionDisallowed(
     if (questionId === 'p5_foreign_policy' && optLower.includes('mass deportation & assimilation')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Scale-Locked: Relocating hundreds of thousands of conquered people across an empire requires massive imperial armies and distant provinces!'
+        reason: '🔒 Land Size Lock: Relocating hundreds of thousands of conquered people across an empire requires massive imperial armies and distant provinces!'
       };
     }
 
     // City-States cannot rely on tribute from conquered foreign provinces
-    if (questionId === 'e4_taxation' && optLower.includes('tribute from conquered provinces')) {
+    if ((questionId === 'p5_foreign_policy' || questionId === 'e4_taxation') && optLower.includes('tribute from conquered provinces')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Scale-Locked: A local city-state has no far-flung imperial provinces to extract foreign tribute from!'
+        reason: '🔒 Land Size Lock: A local city-state has no far-flung imperial provinces to extract foreign tribute from!'
+      };
+    }
+  }
+
+  if (currentScale === 'regional_kingdom') {
+    // Regional Kingdoms can span up to 2 neighboring terrain zones
+    if (questionId === 'g2_terrain') {
+      const currentTerrains = selectedList('g2_terrain');
+      if (currentTerrains.length >= 2 && !currentTerrains.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom spans up to 2 neighboring terrain zones (e.g. river valley + delta). Upgrade to Continental Empire to control unlimited biomes.'
+        };
+      }
+    }
+
+    // Regional Kingdoms can integrate up to 2 freshwater sources
+    if (questionId === 'g1_freshwater') {
+      const currentWaters = selectedList('g1_freshwater');
+      if (currentWaters.length >= 2 && !currentWaters.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom can integrate up to 2 water sources (e.g. river + coastal aquifer). Upgrade to Continental Empire to encompass 3+ water systems.'
+        };
+      }
+    }
+
+    // Regional Kingdoms control up to 5 major resource zones
+    if (questionId === 'g4_resources') {
+      const currentRes = selectedList('g4_resources');
+      if (currentRes.length >= 5 && !currentRes.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom controls up to 5 major resource deposits.'
+        };
+      }
+    }
+
+    // Regional Kingdoms cultivate up to 4 staple crops
+    if (questionId === 'e1_crops') {
+      const currentCrops = selectedList('e1_crops');
+      if (currentCrops.length >= 4 && !currentCrops.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom territory cultivates up to 4 staple agricultural crops.'
+        };
+      }
+    }
+
+    // Regional Kingdoms sustain up to 4 livestock types
+    if (questionId === 'e2_animals') {
+      const currentAnimals = selectedList('e2_animals');
+      if (currentAnimals.length >= 4 && !currentAnimals.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom sustains up to 4 major domesticated livestock types.'
+        };
+      }
+    }
+
+    // Regional Kingdoms cannot build thousands of miles of Great Walls
+    if (questionId === 'a3_monuments') {
+      if (optLower.includes('thousands of miles of frontier defensive walls')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Lock: Thousands of miles of frontier walls require a Grand Continental Empire with millions of workers and continental frontiers.'
+        };
+      }
+      const currentMons = selectedList('a3_monuments');
+      if (currentMons.length >= 4 && !currentMons.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom can fund up to 4 monumental architecture projects.'
+        };
+      }
+    }
+
+    // Direct Democracy cannot function across a whole regional kingdom
+    if (questionId === 'p1_gov_system' && optLower.includes('direct democracy (all free adult male citizens vote directly')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Land Size Lock: Direct citizen democracy requires all voting citizens to assemble physically in one town square; a regional kingdom with hundreds of thousands of citizens spread over hundreds of miles cannot assemble in person.'
       };
     }
   }
@@ -168,14 +318,14 @@ export function checkOptionDisallowed(
     if (questionId === 'p1_gov_system' && optLower.includes('direct democracy (all free adult male citizens vote directly')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Scale-Locked (Empire Scale): In a continental empire spanning thousands of miles, millions of citizens cannot travel on foot to meet in one town square assembly! Continental empires require representative governors, satraps, or an emperor.'
+        reason: '🔒 Land Size Lock (Empire Scale): In a continental empire spanning thousands of miles, millions of citizens cannot travel on foot to meet in one town square assembly! Continental empires require representative governors, satraps, or an emperor.'
       };
     }
     // Continental Empires are not decentralized warring city-states
     if (questionId === 'p1_gov_system' && optLower.includes('decentralized city-states')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Scale-Locked: A Grand Continental Empire is a unified superstate, not a fractured network of warring independent city-states!'
+        reason: '🔒 Land Size Lock: A Grand Continental Empire is a unified superstate, not a fractured network of warring independent city-states!'
       };
     }
   }
@@ -279,10 +429,10 @@ export function checkOptionDisallowed(
   // --- G2: TERRAIN ---
   if (questionId === 'g2_terrain') {
     if (optLower.includes('flat, featureless alluvial floodplains')) {
-      if (hasText('g2_terrain', 'steep, jagged mountain ranges')) {
+      if (hasText('g2_terrain', 'steep, jagged mountain ranges') && currentScale !== 'continental_empire') {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: A territory cannot be both flat alluvial plains and steep jagged mountain peaks at once!'
+          reason: '🔒 Contradiction: A local territory cannot be both flat alluvial plains and steep jagged mountain peaks at once! (Continental Empires can span both).'
         };
       }
       if (hasText('a4_hydraulic', 'mountain terrace farming')) {
@@ -300,10 +450,10 @@ export function checkOptionDisallowed(
     }
 
     if (optLower.includes('steep, jagged mountain ranges')) {
-      if (hasText('g2_terrain', 'flat, featureless alluvial floodplains')) {
+      if (hasText('g2_terrain', 'flat, featureless alluvial floodplains') && currentScale !== 'continental_empire') {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: You already selected flat alluvial plains; steep jagged cliffs are the exact opposite!'
+          reason: '🔒 Contradiction: A local territory cannot be both flat alluvial plains and steep jagged cliffs at once! (Continental Empires can span both).'
         };
       }
       if (hasText('p4_military', 'elite war chariot corps')) {
@@ -671,16 +821,25 @@ export function checkOptionDisallowed(
   // --- E3: CURRENCY ---
   if (questionId === 'e3_currency') {
     if (optLower.includes('pure barter & credit tallies')) {
-      if (hasText('e3_currency', 'standardized stamped coins')) {
+      if (hasText('e3_currency', 'standardized stamped coins') || hasText('e3_currency', 'weighed metal bullion') || hasText('e3_currency', 'cast bronze tool money')) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: Pure barter means exchanging goods without coined money!'
+          reason: '🔒 Contradiction: Pure barter means exchanging goods directly without coined money or metal bullion!'
         };
       }
       if (hasText('s3_mobility', 'wealth-based mobility')) {
         return {
           isDisallowed: true,
           reason: '🔒 Contradiction: Wealth-based class climbing requires liquid money/coins to buy rank, which cannot exist in a pure barter economy!'
+        };
+      }
+    }
+
+    if (optLower.includes('standardized stamped coins') || optLower.includes('weighed metal bullion') || optLower.includes('cast bronze tool money')) {
+      if (hasText('e3_currency', 'pure barter')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Using minted coins or metal currency directly contradicts a pure non-monetary barter economy!'
         };
       }
     }
@@ -794,6 +953,36 @@ export function checkOptionDisallowed(
   // --- P1: GOV SYSTEM ---
   if (questionId === 'p1_gov_system') {
     if (optLower.includes('direct democracy')) {
+      if (hasText('p1_gov_system', 'centralized absolute monarchy') || hasText('p1_gov_system', 'military junta')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Direct citizen democracy directly contradicts centralized absolute monarchy or military junta rule!'
+        };
+      }
+    }
+    if (optLower.includes('centralized absolute monarchy')) {
+      if (hasText('p1_gov_system', 'direct democracy')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Centralized absolute monarchy contradicts direct citizen democracy!'
+        };
+      }
+      if (hasText('p1_gov_system', 'decentralized city-states')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Centralized absolute monarchy contradicts fractured, independent warring city-states!'
+        };
+      }
+    }
+    if (optLower.includes('decentralized city-states')) {
+      if (hasText('p1_gov_system', 'centralized absolute monarchy')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Independent warring city-states contradict a single centralized absolute monarchy!'
+        };
+      }
+    }
+    if (optLower.includes('direct democracy')) {
       if (hasText('p2_succession', 'hereditary primogeniture')) {
         return {
           isDisallowed: true,
@@ -849,6 +1038,28 @@ export function checkOptionDisallowed(
   // --- P2: SUCCESSION ---
   if (questionId === 'p2_succession') {
     if (optLower.includes('hereditary primogeniture')) {
+      if (hasText('p2_succession', 'election by citizen assembly')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Hereditary primogeniture (passes strictly to eldest son) contradicts open election by citizen assembly!'
+        };
+      }
+      if (hasText('p2_succession', 'trial by strength')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict primogeniture succession contradicts bloody trial by strength civil wars!'
+        };
+      }
+    }
+    if (optLower.includes('election by citizen assembly')) {
+      if (hasText('p2_succession', 'hereditary primogeniture')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Citizen assembly elections contradict strict eldest-son hereditary primogeniture!'
+        };
+      }
+    }
+    if (optLower.includes('hereditary primogeniture')) {
       if (hasText('p1_gov_system', 'direct democracy')) {
         return {
           isDisallowed: true,
@@ -893,6 +1104,22 @@ export function checkOptionDisallowed(
 
   // --- P3: LAW SYSTEM ---
   if (questionId === 'p3_law_system') {
+    if (optLower.includes('legalism')) {
+      if (hasText('p3_law_system', 'jury trials & restorative justice')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict Legalism (collective punishment of whole families) directly opposes citizen jury trials and restorative justice!'
+        };
+      }
+    }
+    if (optLower.includes('jury trials & restorative justice')) {
+      if (hasText('p3_law_system', 'legalism')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Citizen jury trials contradict authoritarian collective Legalism!'
+        };
+      }
+    }
     if (optLower.includes('jury trials & restorative justice')) {
       if (hasText('p3_law_system', 'lex talionis ("eye for an eye")')) {
         return {
@@ -1028,6 +1255,22 @@ export function checkOptionDisallowed(
 
   // --- P5: FOREIGN POLICY ---
   if (questionId === 'p5_foreign_policy') {
+    if (optLower.includes('isolationism')) {
+      if (hasText('p5_foreign_policy', 'cultural integration & citizenship') || hasText('e5_trade', 'maritime trade empire')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict isolationism (closed borders and banning foreigners) contradicts granting open citizenship or operating global maritime trade fleets!'
+        };
+      }
+    }
+    if (optLower.includes('cultural integration & citizenship')) {
+      if (hasText('p5_foreign_policy', 'isolationism')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Open cultural integration and foreign citizenship directly contradict strict closed-border isolationism!'
+        };
+      }
+    }
     if (optLower.includes('isolationist / non-interventionist')) {
       if (hasText('e5_trade', 'maritime trade empire')) {
         return {
@@ -1160,6 +1403,21 @@ export function checkOptionDisallowed(
   // --- S3: MOBILITY ---
   if (questionId === 's3_mobility') {
     if (optLower.includes('rigid hereditary caste system')) {
+      if (hasText('s3_mobility', 'scribal / exam mobility') || hasText('s3_mobility', 'wealth-based mobility') || hasText('s3_mobility', 'military valor')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: A rigid caste system permits ZERO social mobility; you cannot change your social rank through exams, money, or bravery!'
+        };
+      }
+    }
+    if ((optLower.includes('scribal / exam mobility') || optLower.includes('wealth-based mobility') || optLower.includes('military valor')) &&
+        hasText('s3_mobility', 'rigid hereditary caste system')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Meritocratic or wealth-based social climbing contradicts a rigid zero-mobility hereditary caste system!'
+      };
+    }
+    if (optLower.includes('rigid hereditary caste system')) {
       if (hasText('s3_mobility', 'wealth-based mobility') || hasText('s3_mobility', 'scribal / exam mobility') || hasText('s3_mobility', 'military meritocracy')) {
         return {
           isDisallowed: true,
@@ -1202,6 +1460,20 @@ export function checkOptionDisallowed(
   // --- S4: GENDER ---
   if (questionId === 's4_gender') {
     if (optLower.includes('strict patriarchal seclusion')) {
+      if (hasText('s4_gender', 'high legal autonomy') || hasText('s4_gender', 'militarized matriarchal autonomy')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict patriarchal seclusion (women locked indoors as legal property) is the exact opposite of high legal autonomy!'
+        };
+      }
+    }
+    if (optLower.includes('high legal autonomy') && hasText('s4_gender', 'strict patriarchal seclusion')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: High legal autonomy contradicts strict patriarchal seclusion!'
+      };
+    }
+    if (optLower.includes('strict patriarchal seclusion')) {
       if (hasText('s4_gender', 'high legal autonomy') || hasText('s4_gender', 'matrilineal clan authority')) {
         return {
           isDisallowed: true,
@@ -1232,6 +1504,21 @@ export function checkOptionDisallowed(
   // --- S5: UNFREE LABOR ---
   if (questionId === 's5_unfree_labor') {
     if (optLower.includes('paid free laborers only')) {
+      if (hasText('s5_unfree_labor', 'prisoners of war & chattel slavery') || hasText('s5_unfree_labor', 'state serfs / helots')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Relying exclusively on paid, well-fed free workers directly contradicts holding enslaved chattel captives or state serfs!'
+        };
+      }
+    }
+    if ((optLower.includes('prisoners of war & chattel slavery') || optLower.includes('state serfs / helots')) &&
+        hasText('s5_unfree_labor', 'paid free laborers only')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Chattel slavery and state serfdom directly contradict relying exclusively on paid free laborers!'
+      };
+    }
+    if (optLower.includes('paid free laborers only')) {
       if (hasText('s5_unfree_labor', 'prisoners of war & chattel slavery') || hasText('s5_unfree_labor', 'temporary debt bondage') || hasText('s5_unfree_labor', 'helot / serf') || hasText('s5_unfree_labor', 'corvée labor levy')) {
         return {
           isDisallowed: true,
@@ -1260,6 +1547,20 @@ export function checkOptionDisallowed(
 
   // --- R1: STRUCTURE ---
   if (questionId === 'r1_structure') {
+    if (optLower.includes('monolatry / early monotheism')) {
+      if (hasText('r1_structure', 'anthropomorphic polytheism')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict monotheism (worship of only ONE creator god) rejects worshipping a polytheistic pantheon of dozens of competing gods!'
+        };
+      }
+    }
+    if (optLower.includes('anthropomorphic polytheism') && hasText('r1_structure', 'monolatry / early monotheism')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Polytheistic pantheons contradict strict monotheism!'
+      };
+    }
     if (optLower.includes('theocratic god-king worship')) {
       if (hasText('r2_demeanor', 'distant and indifferent')) {
         return {
@@ -1309,6 +1610,20 @@ export function checkOptionDisallowed(
 
   // --- R2: DEMEANOR ---
   if (questionId === 'r2_demeanor') {
+    if (optLower.includes('benevolent and predictable')) {
+      if (hasText('r2_demeanor', 'cruel, capricious, and angry')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Benevolent loving gods directly contradict cruel, capricious gods who torment humans with unprovoked disasters!'
+        };
+      }
+    }
+    if (optLower.includes('cruel, capricious, and angry') && hasText('r2_demeanor', 'benevolent and predictable')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Cruel, capricious gods contradict benevolent loving gods!'
+      };
+    }
     if (optLower.includes('benevolent and predictable')) {
       if (hasText('g1_freshwater', 'violent, unpredictable twin rivers') || hasText('g6_disasters', 'catastrophic, unannounced river floods')) {
         return {
@@ -1388,6 +1703,44 @@ export function checkOptionDisallowed(
       if (hasText('r4_afterlife', 'cremation on funeral pyres')) {
         return {
           isDisallowed: true,
+          reason: '🔒 Contradiction: Mummification requires preserving the physical body intact forever, directly contradicting burning the corpse to ashes on a funeral pyre!'
+        };
+      }
+      if (hasText('r4_afterlife', 'sky burial or ossuary caves')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Mummification preserves the corpse with resins and bandages, directly opposing leaving the body out for vultures to devour in a sky burial!'
+        };
+      }
+    }
+    if (optLower.includes('cremation on funeral pyres') && hasText('r4_afterlife', 'mummification')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Burning corpses to ashes directly contradicts physical mummification!'
+      };
+    }
+    if (optLower.includes('sky burial or ossuary caves') && hasText('r4_afterlife', 'mummification')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Sky burial contradicts physical mummification!'
+      };
+    }
+    if (optLower.includes('grim underworld') && hasText('r4_afterlife', 'moral judgment & paradise')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: A bleak underworld where everyone eats dirt in shadows contradicts a moral paradise of fertile reed fields!'
+      };
+    }
+    if (optLower.includes('moral judgment & paradise') && hasText('r4_afterlife', 'grim underworld')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Moral paradise contradicts a bleak dust underworld for all souls!'
+      };
+    }
+    if (optLower.includes('mummification & tomb provisioning')) {
+      if (hasText('r4_afterlife', 'cremation on funeral pyres')) {
+        return {
+          isDisallowed: true,
           reason: '🔒 Contradiction: Cremation burns the body into ashes, destroying the physical vessel needed for mummification and tomb eternity!'
         };
       }
@@ -1426,6 +1779,18 @@ export function checkOptionDisallowed(
 
   // --- R5: GOV RELATION ---
   if (questionId === 'r5_gov_relation') {
+    if (optLower.includes('pure theocracy') && hasText('r5_gov_relation', 'civic religion')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: A pure theocracy (where the High Priest holds supreme absolute rule) contradicts a secular civic religion where priests are just minor elected city clerks!'
+      };
+    }
+    if (optLower.includes('civic religion') && hasText('r5_gov_relation', 'pure theocracy')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Civic religion contradicts pure theocracy!'
+      };
+    }
     if (optLower.includes('pure theocracy')) {
       if (hasText('p1_gov_system', 'direct democracy') || hasText('p1_gov_system', 'aristocratic oligarchy / republic')) {
         return {
