@@ -39,6 +39,8 @@ export default function Header({
   onToggleMobileSidebar,
   logicGuardEnabled,
   setLogicGuardEnabled,
+  autoSynergiesEnabled,
+  setAutoSynergiesEnabled,
   orderMode,
   setOrderMode
 }) {
@@ -108,7 +110,7 @@ export default function Header({
 
       {/* Grade 7 Logic Guard & Ordering Control Bar */}
       <div className="py-3 px-4 my-4 rounded-xl bg-[#f0e4d2] border border-[#dfd0ba] flex flex-wrap items-center justify-between gap-3 text-xs font-sans-ui">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-1.5">
             <Brain size={16} className="text-[#935923]" />
             <span className="font-bold text-[#3d2e23]">Grade 7 Logic Guard:</span>
@@ -123,6 +125,22 @@ export default function Header({
               {logicGuardEnabled ? '✓ Active (Logical Contradictions Locked)' : '✕ Disabled (Fantasy Mode)'}
             </button>
           </div>
+
+          <div className="flex items-center gap-1.5">
+            <Sparkles size={16} className="text-[#b8860b]" />
+            <span className="font-bold text-[#3d2e23]">Auto-Synergies:</span>
+            <button
+              onClick={() => setAutoSynergiesEnabled(!autoSynergiesEnabled)}
+              className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer border text-xs flex items-center gap-1 ${
+                autoSynergiesEnabled
+                  ? 'bg-amber-700 text-white border-amber-800 shadow-xs'
+                  : 'bg-[#d8c7b0] text-[#5c4a3b] border-[#baaa94]'
+              }`}
+            >
+              {autoSynergiesEnabled ? '✨ Auto-Link Active' : '✕ Manual Only'}
+            </button>
+          </div>
+
           <span className="text-[#68491c] bg-[#faecd6] px-2.5 py-0.5 rounded-full border border-[#e6ceae] font-semibold text-[11px]">
             ⚡ No Choice Caps: Select as many as you want unless contradictory!
           </span>

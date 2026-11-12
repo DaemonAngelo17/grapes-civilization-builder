@@ -19,6 +19,7 @@ import Sidebar from './components/Sidebar';
 import QuestionCard from './components/QuestionCard';
 import DossierView from './components/DossierView';
 import ImageModal from './components/ImageModal';
+import { applyLogicalSynergies } from './utils/synergyRules';
 import { 
   GRAPES_CATEGORIES, 
   GRAPES_QUESTIONS, 
@@ -50,6 +51,7 @@ export default function App() {
   const [isDossierOpen, setIsDossierOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [logicGuardEnabled, setLogicGuardEnabled] = useState(true);
+  const [autoSynergiesEnabled, setAutoSynergiesEnabled] = useState(true);
   const [orderMode, setOrderMode] = useState('logical'); // 'logical' (build-up) or 'grapes'
   const [enlargedImage, setEnlargedImage] = useState(null); // { visual, optionText }
   const [toastMessage, setToastMessage] = useState(null);
@@ -72,12 +74,32 @@ export default function App() {
     return grapesKeys.map((key) => GRAPES_CATEGORIES.find((c) => c.key === key));
   }, [orderMode]);
 
-  // Handle question answer change
+  // Handle question answer change with optional auto-select synergies
   const handleAnswerChange = (questionId, value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: value
-    }));
+    const list = Array.isArray(value) ? value : value ? [value] : [];
+
+    if (autoSynergiesEnabled && logicGuardEnabled) {
+      const { answers: newAnswers, autoSelected } = applyLogicalSynergies(
+        questionId,
+        list,
+        answers,
+        logicGuardEnabled,
+        currentEra,
+        currentScale
+      );
+      setAnswers(newAnswers);
+      if (autoSelected.length > 0) {
+        const top = autoSelected[0];
+        const srcTitle = top.sourceOption.length > 25 ? top.sourceOption.slice(0, 25) + '...' : top.sourceOption;
+        const tgtTitle = top.targetOption.length > 30 ? top.targetOption.slice(0, 30) + '...' : top.targetOption;
+        showToast(`✨ Auto-Linked: Chose "${srcTitle}" ➔ Added "${tgtTitle}"`);
+      }
+    } else {
+      setAnswers((prev) => ({
+        ...prev,
+        [questionId]: list
+      }));
+    }
   };
 
   // Handle custom "Other / Write Your Own" note change
@@ -210,6 +232,8 @@ export default function App() {
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
           logicGuardEnabled={logicGuardEnabled}
           setLogicGuardEnabled={setLogicGuardEnabled}
+          autoSynergiesEnabled={autoSynergiesEnabled}
+          setAutoSynergiesEnabled={setAutoSynergiesEnabled}
           orderMode={orderMode}
           setOrderMode={setOrderMode}
         />

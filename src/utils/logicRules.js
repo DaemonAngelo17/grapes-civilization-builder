@@ -2245,5 +2245,128 @@ export function checkOptionDisallowed(
       }
     }
 
+
+    // --- COMPREHENSIVE MUTUAL EXCLUSIVITY CHECKS ---
+    // Shortage Timber vs Naval / Siege / Wood medium
+    if (optLower.includes('naval supremacy (trireme warships') && hasText('g5_shortages', 'lack of tall timber')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Building war triremes requires thousands of tall cedar or oak logs, which your land critically lacks!'
+      };
+    }
+
+    if (optLower.includes('bamboo or wooden slips') && hasText('g5_shortages', 'lack of tall timber')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Bamboo and wooden slip codices require abundant forest timber, which your land lacks!'
+      };
+    }
+
+    if (optLower.includes('siege warfare specialists') && hasText('g5_shortages', 'lack of tall timber')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Giant battering rams and multi-story siege towers require dense hardwood timber, which your land lacks!'
+      };
+    }
+
+    // Shortage Stone/Metal vs Monumental Stone Architecture
+    if ((optLower.includes('cyclopean stone fortresses') || optLower.includes('grand colonnaded temples with marble') || optLower.includes('rock-cut cliffside temples')) &&
+        hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Monumental stone fortresses and marble temples require quarried stone, which your land critically lacks!'
+      };
+    }
+
+    // Shortage Horses vs Chariots / Cavalry
+    if ((optLower.includes('elite chariot corps') || optLower.includes('horse archer light cavalry')) &&
+        (hasText('g5_shortages', 'lack of horses or pack animals') || hasText('e2_animals', 'none — all goods are carried on the backs of human porters'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: War chariots and cavalry require domesticated horses, which your land completely lacks!'
+      };
+    }
+
+    if (optLower.includes('armored war elephant corps') && hasText('e2_animals', 'none — all goods are carried on the backs of human porters')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: War elephant corps require trained heavy beasts, contradicting a society that relies exclusively on human porters!'
+      };
+    }
+
+    // Shortage Salt vs Salt Domes / Salt Trade / Salt Drilling
+    if ((optLower.includes('vast rock salt domes') || optLower.includes('trans-saharan gold-salt trade') || optLower.includes('deep underground salt-drilling')) &&
+        hasText('g5_shortages', 'lack of salt')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: In Critical Shortages, you stated your people lack salt; you cannot operate salt mines, salt drilling, or salt trade!'
+      };
+    }
+
+    // Shortage Tin vs Bronze Casting & Tool Money
+    if ((optLower.includes('cast bronze vessels with long ritual inscriptions') || optLower.includes('cast bronze tool money')) &&
+        hasText('g5_shortages', 'lack of tin or alloy fluxes')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Casting ritual bronze vessels and bronze tool money requires tin alloy fluxes, which your land lacks!'
+      };
+    }
+
+    // Quipu vs Inscribed Stone Pillars and Clay Tablets
+    if (optLower.includes('quipu / knotted cords')) {
+      if (hasText('p3_law_system', 'written public law pillars') || hasText('a2_medium', 'baked or sun-dried clay tablets') || hasText('a2_medium', 'papyrus scrolls')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Andean Quipu records information entirely through colored knots without written words, contradicting written stone law pillars or clay cuneiform tablets!'
+        };
+      }
+    }
+    if ((optLower.includes('written public law pillars') || optLower.includes('baked or sun-dried clay tablets')) && hasText('a1_writing', 'quipu / knotted cords')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Carved stone law pillars and clay tablets require written symbols, contradicting an indigenous recording system based exclusively on knotted strings (Quipu)!'
+      };
+    }
+
+    // Chinampas vs Violent Floods or Deserts
+    if (optLower.includes('chinampas ("floating gardens")')) {
+      if (hasText('g1_freshwater', 'violent, unpredictable twin rivers')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Violent river flash-floods wash away delicate woven floating gardens (Chinampas); they require calm, shallow crater lakes!'
+        };
+      }
+      if (hasText('g2_terrain', 'arid desert expanses') && !hasText('g1_freshwater', 'lake') && !hasText('g1_freshwater', 'lagoon')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Floating chinampa gardens require shallow lake beds; they cannot float in waterless desert sand!'
+        };
+      }
+    }
+
+    // Qanats vs Waterlogged Rainforest
+    if (optLower.includes('qanats (underground channels')) {
+      if (hasText('g2_terrain', 'dense, humid tropical rainforest') || hasText('g3_barriers', 'swamps')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Qanats are deep underground tunnels built to prevent water evaporation in hot arid deserts; they are useless in soggy, waterlogged rainforests!'
+        };
+      }
+    }
+
+    // Ship Burial vs Landlocked Desert / Mountain
+    if (optLower.includes('ship burial and aquatic voyages')) {
+      const terrain = selectedList('g2_terrain');
+      const isLandlocked = terrain.length > 0 && terrain.every((t) =>
+        t.toLowerCase().includes('mountain') || t.toLowerCase().includes('steppe') || t.toLowerCase().includes('plateau')
+      ) && !hasText('g3_barriers', 'coastlines');
+      if (isLandlocked) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Ship burials require maritime naval longships and coastal traditions; landlocked mountain plateaus lack sea-going ships!'
+        };
+      }
+    }
+
   return { isDisallowed: false, reason: null };
 }
