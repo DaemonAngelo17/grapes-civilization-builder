@@ -5,23 +5,10 @@ import {
   Edit3, 
   Lock, 
   Lightbulb, 
-  Image as ImageIcon,
-  Droplets,
-  Mountain,
-  Flame,
-  Shield,
-  Coins
+  ZoomIn
 } from 'lucide-react';
 import { checkOptionDisallowed } from '../utils/logicRules';
 import { getOptionVisual } from '../data/optionImages';
-
-const FALLBACK_ICONS = {
-  Droplets,
-  Mountain,
-  Flame,
-  Shield,
-  Coins
-};
 
 export default function QuestionCard({
   question,
@@ -31,7 +18,8 @@ export default function QuestionCard({
   onChange,
   onCustomChange,
   allAnswers,
-  logicGuardEnabled = true
+  logicGuardEnabled = true,
+  onEnlargeImage
 }) {
   const isCheckbox = question.type === 'checkbox';
   const selectedList = Array.isArray(value) ? value : value ? [value] : [];
@@ -70,7 +58,7 @@ export default function QuestionCard({
 
   // Limit badge: explicitly state that choices have NO limit unless logically contradictory
   let limitBadge = isCheckbox
-    ? `Multi-Select: No Limit (Selected: ${selectedCount})`
+    ? `Multi-Select: Unlimited unless contradictory (Selected: ${selectedCount})`
     : (selectedCount > 0 ? 'Single Choice (Answered)' : 'Single Choice');
 
   const isComplete = isCheckbox ? selectedCount > 0 : Boolean(value);
@@ -129,7 +117,7 @@ export default function QuestionCard({
         </p>
       )}
 
-      {/* Options Grid / List with Visual Images */}
+      {/* Options Grid / List with Visual Images & Click-to-Enlarge */}
       <div className="space-y-2.5 mb-4">
         {question.options.map((option, idx) => {
           const active = isSelected(option);
@@ -184,20 +172,31 @@ export default function QuestionCard({
                   )}
                 </div>
 
-                {/* Option Historical Visual Image Thumbnail */}
+                {/* Option Historical Visual Image Thumbnail (Clickable to Enlarge) */}
                 {hasImage && (
-                  <div className="relative shrink-0 overflow-hidden rounded-lg border border-[#cfbfa8] bg-[#e9decb] shadow-xs">
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (onEnlargeImage) onEnlargeImage(visual, option);
+                    }}
+                    title="Click to enlarge image and read archaeological notes"
+                    className="relative shrink-0 overflow-hidden rounded-lg border border-[#cfbfa8] bg-[#e9decb] shadow-xs cursor-zoom-in group/img"
+                  >
                     <img
                       src={visual.url}
                       alt={visual.alt || option}
                       onError={() => handleImageError(idx)}
                       loading="lazy"
-                      className={`w-16 h-16 sm:w-20 sm:h-16 object-cover transition-transform duration-300 group-hover:scale-105 ${
+                      className={`w-16 h-16 sm:w-24 sm:h-16 object-cover transition-transform duration-300 group-hover/img:scale-110 ${
                         isDisallowed ? 'grayscale contrast-75' : ''
                       }`}
                     />
+                    {/* Hover Enlarge Badge Overlay */}
+                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/img:opacity-100 flex items-center justify-center transition-opacity text-white">
+                      <ZoomIn size={16} />
+                    </div>
                     {visual.caption && (
-                      <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[9px] px-1 py-0.5 text-center truncate font-sans-ui">
+                      <span className="absolute bottom-0 inset-x-0 bg-black/65 text-white text-[9px] px-1 py-0.5 text-center truncate font-sans-ui">
                         {visual.caption}
                       </span>
                     )}

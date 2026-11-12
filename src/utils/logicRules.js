@@ -1,5 +1,5 @@
 // Grade 7 Historical Logic Connection & Conflict Rules
-// Exhaustive contradiction matrix that logically limits choices based on all other selections.
+// Exhaustive cross-category contradiction matrix that links geography, economy, politics, social structure, religion, and achievements.
 
 export function checkOptionDisallowed(questionId, optionText, answers, logicGuardEnabled = true) {
   if (!logicGuardEnabled) {
@@ -27,20 +27,18 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   // 1. TERRAIN & WATER CONTRADICTIONS
   // =========================================================================
   if (questionId === 'g2_terrain') {
-    // If you picked flat plains, you can't also pick steep jagged mountains as the SAME dominant terrain
     if (optLower.includes('flat, featureless alluvial floodplains') && hasText('g2_terrain', 'steep, jagged mountain ranges')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: A land cannot be both a completely flat alluvial floodplain and steep jagged mountain peaks at the same time!'
+        reason: '🔒 Contradiction: A territory cannot be both a completely flat alluvial floodplain and steep jagged mountain peaks at the same time!'
       };
     }
     if (optLower.includes('steep, jagged mountain ranges') && hasText('g2_terrain', 'flat, featureless alluvial floodplains')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: You already selected flat alluvial floodplains. A terrain cannot be flat plains and steep cliffs simultaneously!'
+        reason: '🔒 Contradiction: You already selected flat alluvial floodplains. A single terrain cannot be flat plains and steep cliffs simultaneously!'
       };
     }
-    // High steppe vs tropical rainforest
     if (optLower.includes('dense, humid tropical rainforest') && hasText('g2_terrain', 'high-altitude flat plateau (steppe)')) {
       return {
         isDisallowed: true,
@@ -49,7 +47,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     }
   }
 
-  // Freshwater source vs Terrain
   if (questionId === 'g1_freshwater') {
     if (optLower.includes('high-altitude glacial mountain meltwater') &&
         hasText('g2_terrain', 'flat, featureless alluvial floodplains') &&
@@ -85,7 +82,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
           reason: '🔒 Contradiction: You cannot lack firewood and fuel if your land is covered in dense cedar and oak forests!'
         };
       }
-      // Desert check
       const terrain = selectedList('g2_terrain');
       const isPureDesert = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('arid desert') || t.toLowerCase().includes('steppe'));
       if (isPureDesert) {
@@ -121,7 +117,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     }
   }
 
-  // Shortages vs Resources
   if (questionId === 'g5_shortages') {
     if (optLower.includes('lack of tall timber') && hasText('g4_resources', 'dense cedar, oak, or mahogany forests')) {
       return {
@@ -160,7 +155,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   // 3. BARRIERS & DISASTERS CONTRADICTIONS
   // =========================================================================
   if (questionId === 'g3_barriers') {
-    // Open plains barrier vs Mountain barriers
     if (optLower.includes('none — completely open flat plains') &&
         (hasText('g3_barriers', 'mountain ranges') || hasText('g3_barriers', 'deserts') || hasText('g3_barriers', 'rocky coastlines'))) {
       return {
@@ -175,7 +169,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
         reason: '🔒 Contradiction: You previously selected "None — completely open flat plains", which means you have no natural barriers!'
       };
     }
-    // Cataracts require rivers
     if (optLower.includes('cataracts') && hasText('g1_freshwater', 'limestone sinkholes')) {
       return {
         isDisallowed: true,
@@ -188,7 +181,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   // 4. CROPS & AGRICULTURE vs TERRAIN & WATER
   // =========================================================================
   if (questionId === 'e1_crops') {
-    // Wet-paddy rice requires abundant wetlands, standing water, and monsoons
     if (optLower.includes('wet-paddy rice and millet')) {
       const terrain = selectedList('g2_terrain');
       const isPureDesert = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('arid desert') || t.toLowerCase().includes('steppe'));
@@ -200,7 +192,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Olives and grapes require Mediterranean rocky hills; frost kills them
     if (optLower.includes('olives and grapes')) {
       const terrain = selectedList('g2_terrain');
       const isColdSteppe = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('steppe') || t.toLowerCase().includes('plateau'));
@@ -212,7 +203,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Freeze-dried potatoes (chuño) require freezing high mountains
     if (optLower.includes('freeze-dried potatoes (chuño) and quinoa')) {
       const terrain = selectedList('g2_terrain');
       const hasHighlands = terrain.some((t) => t.toLowerCase().includes('mountain') || t.toLowerCase().includes('plateau') || t.toLowerCase().includes('steppe'));
@@ -229,7 +219,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   // 5. DOMESTICATED ANIMALS vs MILITARY, CARAVANS & PLOWS
   // =========================================================================
   if (questionId === 'e2_animals') {
-    // If you pick "None", you cannot also pick Oxen, Horses, or Sheep
     if (optLower.includes('none — all goods are carried on the backs of human porters') &&
         (hasText('e2_animals', 'oxen') || hasText('e2_animals', 'sheep') || hasText('e2_animals', 'horses') || hasText('e2_animals', 'llamas'))) {
       return {
@@ -244,7 +233,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
         reason: '🔒 Contradiction: You already selected "None — all goods carried by human porters", meaning your people have no domestic pack animals!'
       };
     }
-    // If you chose "Lack of horses or pack animals" in G5
     if ((optLower.includes('horses and camels') || optLower.includes('oxen and water buffalo')) &&
         hasText('g5_shortages', 'lack of horses or pack animals')) {
       return {
@@ -254,7 +242,7 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     }
   }
 
-  // Military vs Animals & Resources
+  // Military vs Animals, Terrain & Resources
   if (questionId === 'p4_military') {
     const lacksHorses = hasText('g5_shortages', 'lack of horses or pack animals') ||
                         hasText('e2_animals', 'none — all goods are carried on the backs of human porters');
@@ -288,9 +276,24 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
           reason: '🔒 Contradiction: Soldiers cannot ride llamas into combat; llamas cannot carry an adult human warrior!'
         };
       }
+      if (hasText('g2_terrain', 'dense, humid tropical rainforest')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Fast cavalry cannot gallop or shoot bows inside dense tropical rainforest canopies full of tangled vines!'
+        };
+      }
     }
 
-    // War elephants need warm climate with water
+    // Heavy infantry phalanx cannot fight in dense jungle or jagged rocky cliffs
+    if (optLower.includes('heavy infantry phalanx')) {
+      if (hasText('g2_terrain', 'dense, humid tropical rainforest')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: An 18-foot pike phalanx requires wide, open, flat battlefields; thick jungle vines and dense tree trunks break the locked shield wall immediately!'
+        };
+      }
+    }
+
     if (optLower.includes('armored war elephant') && (hasText('g2_terrain', 'steppe') || hasText('g1_freshwater', 'glacial mountain meltwater'))) {
       const terrain = selectedList('g2_terrain');
       if (terrain.every((t) => t.toLowerCase().includes('steppe') || t.toLowerCase().includes('mountain'))) {
@@ -316,10 +319,37 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   }
 
   // =========================================================================
-  // 6. ACHIEVEMENTS & HYDRAULIC TECH vs GEOGRAPHY
+  // 6. ACHIEVEMENTS & MONUMENTS vs RESOURCES
   // =========================================================================
+  if (questionId === 'a3_monuments') {
+    if (optLower.includes('cyclopean stone fortresses')) {
+      if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Cyclopean stone fortresses require massive quarried boulders fitted together without mortar; you have no hard stone!'
+        };
+      }
+    }
+    if (optLower.includes('grand colonnaded temples with marble statues')) {
+      if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Colonnaded temples and marble statues require quarried limestone and marble, which your land lacks!'
+        };
+      }
+    }
+    if (optLower.includes('gravity-fed stone aqueducts')) {
+      if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Stone gravity aqueducts require immense quarried ashlar masonry blocks!'
+        };
+      }
+    }
+  }
+
+  // Hydraulic tech
   if (questionId === 'a4_hydraulic') {
-    // Mountain terrace farming
     if (optLower.includes('mountain terrace farming')) {
       const terrain = selectedList('g2_terrain');
       const hasMountains = terrain.some((t) => t.toLowerCase().includes('mountain') || t.toLowerCase().includes('plateau'));
@@ -331,7 +361,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Basin irrigation & shadufs
     if (optLower.includes('basin irrigation, dikes, and shadufs')) {
       if (hasText('g1_freshwater', 'limestone sinkholes')) {
         return {
@@ -341,7 +370,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Chinampas floating gardens
     if (optLower.includes('chinampas ("floating gardens")')) {
       const terrain = selectedList('g2_terrain');
       const isPureDesert = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('desert') || t.toLowerCase().includes('steppe'));
@@ -353,12 +381,17 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Heavy plows with oxen
     if (optLower.includes('heavy iron-tipped plows pulled by oxen')) {
       if (hasText('e2_animals', 'none — all goods are carried on the backs of human porters') || hasText('g5_shortages', 'lack of horses or pack animals')) {
         return {
           isDisallowed: true,
           reason: '🔒 Contradiction: You have no oxen or heavy draft animals to pull heavy iron plows!'
+        };
+      }
+      if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You selected that you lack metal ores, so you cannot forge heavy iron plow tips!'
         };
       }
     }
@@ -380,10 +413,61 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
         reason: '🔒 Contradiction: Papyrus is made from tall wetland reeds that only grow in warm river deltas and swamps (like the Nile), not cold mountain glaciers!'
       };
     }
+    if (optLower.includes('bamboo or wooden slips') && hasText('g5_shortages', 'lack of tall timber')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Bamboo or wooden slip books require forests or bamboo groves, but you have a critical timber shortage!'
+      };
+    }
   }
 
   // =========================================================================
-  // 7. GOVERNMENT vs SOCIAL STRUCTURE & SUCCESSION
+  // 7. RELIGION & AFTERLIFE CONTRADICTIONS
+  // =========================================================================
+  if (questionId === 'r4_afterlife') {
+    if (optLower.includes('cremation on funeral pyres') && hasText('r4_afterlife', 'mummification & tomb provisioning')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Cremation burns the dead body into ash, which destroys the physical mummified vessel needed for eternal tomb provisioning!'
+      };
+    }
+    if (optLower.includes('mummification & tomb provisioning') && hasText('r4_afterlife', 'cremation on funeral pyres')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: You cannot mummify a body if it is cremated into ashes on a funeral pyre!'
+      };
+    }
+    if (optLower.includes('sky burial') && hasText('r4_afterlife', 'mummification & tomb provisioning')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Sky burial exposes the body to birds and scavengers to strip the flesh, whereas mummification preserves the flesh forever!'
+      };
+    }
+  }
+
+  if (questionId === 'r2_demeanor') {
+    if (optLower.includes('benevolent and predictable (loving protectors)') &&
+        hasText('g6_disasters', 'catastrophic, unannounced river floods') &&
+        hasText('g6_disasters', 'multi-year severe droughts')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: In ancient history (like Mesopotamia), when unannounced floods drown whole cities and droughts cause mass starvation, people never viewed the gods as predictable loving protectors!'
+      };
+    }
+  }
+
+  if (questionId === 'r5_gov_relation') {
+    if (optLower.includes('civic religion (priests are just regular government officials)') &&
+        (hasText('r1_structure', 'theocratic god-king worship') || hasText('p1_gov_system', 'pure theocracy'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: In a God-King theocracy, priests are not secular city clerks; they are sacred ministers to a living divine deity!'
+      };
+    }
+  }
+
+  // =========================================================================
+  // 8. GOVERNMENT, LAW & SUCCESSION
   // =========================================================================
   if (questionId === 's1_apex') {
     if (hasText('p1_gov_system', 'direct democracy')) {
@@ -418,16 +502,48 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     if ((hasText('p1_gov_system', 'centralized absolute monarchy') || hasText('s1_apex', 'god-king')) && optLower.includes('election by citizen assembly')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: Absolute monarchies and divine god-kings do not put the throne up for a popular citizen election vote!'
+        reason: '🔒 Contradiction: Absolute monarchies and divine god-kings do not put the supreme crown up for a popular citizen election vote!'
+      };
+    }
+  }
+
+  if (questionId === 'p3_law_system') {
+    if (optLower.includes('trial by ordeal') && optLower.includes('codified civil jurisprudence')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Trial by ordeal leaves guilt to river magic and superstition, whereas Roman civil jurisprudence relies on written contracts, precedents, and evidence!'
+      };
+    }
+    if (optLower.includes('legalism (strict, harsh collective punishment') && hasText('p3_law_system', 'jury trials & restorative justice')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Legalism punishes entire families without mercy, directly contradicting restorative jury justice and debt forgiveness!'
       };
     }
   }
 
   // =========================================================================
-  // 8. SOCIAL MOBILITY & SLAVERY
+  // 9. FOREIGN POLICY, TRADE & MOBILITY
   // =========================================================================
+  if (questionId === 'p5_foreign_policy') {
+    if (optLower.includes('isolationism (building walls and closing borders') && hasText('e5_trade', 'maritime trade empire')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Isolationism closes all borders and bans foreign contact; you cannot simultaneously run an international maritime trade empire!'
+      };
+    }
+    if (optLower.includes('cultural integration & citizenship') && hasText('p5_foreign_policy', 'total enslavement & extraction')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Total enslavement razes cities and turns all people into slaves; you cannot also offer them equal citizenship!'
+      };
+    }
+  }
+
+  // Social mobility vs Caste
   if (questionId === 's3_mobility') {
-    if (optLower.includes('rigid hereditary caste system') && (hasText('s3_mobility', 'scribal / exam mobility') || hasText('s3_mobility', 'wealth-based mobility'))) {
+    if (optLower.includes('rigid hereditary caste system') &&
+        (hasText('s3_mobility', 'scribal / exam mobility') || hasText('s3_mobility', 'wealth-based mobility') || hasText('s3_mobility', 'military valor'))) {
       return {
         isDisallowed: true,
         reason: '🔒 Contradiction: A rigid caste system means zero mobility. It cannot coexist with exam or wealth-based social climbing!'
@@ -435,6 +551,18 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     }
   }
 
+  // Women's legal status
+  if (questionId === 's4_gender') {
+    if (optLower.includes('strict patriarchal seclusion') &&
+        (hasText('s4_gender', 'high legal autonomy') || hasText('s4_gender', 'militarized matriarchal autonomy'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Strict patriarchal seclusion treats women as legal minors with zero property rights; it cannot coexist with high legal autonomy!'
+      };
+    }
+  }
+
+  // Slavery vs Paid Labor
   if (questionId === 's5_unfree_labor') {
     if (optLower.includes('paid free laborers only') &&
         (hasText('s5_unfree_labor', 'chattel slavery') || hasText('s5_unfree_labor', 'state serfs') || hasText('s5_unfree_labor', 'debt bondage'))) {
@@ -445,9 +573,7 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
     }
   }
 
-  // =========================================================================
-  // 9. TRADE & CURRENCY
-  // =========================================================================
+  // Trade networks vs Geography & Animals
   if (questionId === 'e5_trade') {
     if (optLower.includes('maritime trade empire')) {
       const terrain = selectedList('g2_terrain');
@@ -467,6 +593,14 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
         isDisallowed: true,
         reason: '🔒 Contradiction: You rely on underground limestone sinkholes (cenotes) and have no navigable surface rivers for freight barges!'
       };
+    }
+    if (optLower.includes('overland silk/incense caravan routes')) {
+      if (hasText('e2_animals', 'none — all goods are carried on the backs of human porters') && hasText('g5_shortages', 'lack of horses or pack animals')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Long-distance desert caravan routes require pack animals (camels, horses, or mules) to survive desert journeys!'
+        };
+      }
     }
   }
 

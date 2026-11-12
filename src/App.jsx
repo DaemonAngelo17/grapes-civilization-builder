@@ -18,6 +18,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import QuestionCard from './components/QuestionCard';
 import DossierView from './components/DossierView';
+import ImageModal from './components/ImageModal';
 import { 
   GRAPES_CATEGORIES, 
   GRAPES_QUESTIONS, 
@@ -45,7 +46,8 @@ export default function App() {
   const [isDossierOpen, setIsDossierOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [logicGuardEnabled, setLogicGuardEnabled] = useState(true);
-  const [orderMode, setOrderMode] = useState('logical'); // 'logical' (build-up: G, E, P, S, R, A) or 'grapes' (G, R, A, P, E, S)
+  const [orderMode, setOrderMode] = useState('logical'); // 'logical' (build-up) or 'grapes'
+  const [enlargedImage, setEnlargedImage] = useState(null); // { visual, optionText }
   const [toastMessage, setToastMessage] = useState(null);
 
   // Show temporary toast message
@@ -126,7 +128,7 @@ export default function App() {
           newAnswers[q.id] = randOption;
         } else {
           // Checkbox: pick 1 or 2 options
-          const numPicks = q.maxSelect ? Math.min(q.maxSelect, Math.floor(Math.random() * 2) + 1) : 2;
+          const numPicks = Math.floor(Math.random() * 2) + 1;
           const shuffled = [...q.options].sort(() => 0.5 - Math.random());
           newAnswers[q.id] = shuffled.slice(0, numPicks);
         }
@@ -311,6 +313,7 @@ export default function App() {
                         onCustomChange={handleCustomChange}
                         allAnswers={answers}
                         logicGuardEnabled={logicGuardEnabled}
+                        onEnlargeImage={(visual, opt) => setEnlargedImage({ visual, optionText: opt })}
                       />
                     ))}
                   </div>
@@ -350,6 +353,15 @@ export default function App() {
       >
         <ArrowUp size={16} />
       </button>
+
+      {/* Image Enlargement Modal / Lightbox */}
+      {enlargedImage && (
+        <ImageModal
+          visual={enlargedImage.visual}
+          optionText={enlargedImage.optionText}
+          onClose={() => setEnlargedImage(null)}
+        />
+      )}
 
       {/* Dossier Output Modal */}
       {isDossierOpen && (
