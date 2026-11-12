@@ -734,6 +734,40 @@ Mutual exclusivity is strictly enforced between abundant deposits and critical s
 
 ---
 
+
+### 4.6 Scale Limits on Natural Defensive Barriers (`g3_barriers`)
+To ensure historical and geographical accuracy, the number of distinct natural defensive barrier systems a civilization can claim is governed by its geographic scale:
+- **City-State (`city_state`):** Maximum of **2** natural defensive barriers (e.g., mountains on one side and a rocky coast on the other, or desert sandstone cliffs). A single local city-state cannot be enclosed by 4-5 disparate planetary biomes simultaneously.
+- **Regional Kingdom (`regional_kingdom`):** Maximum of **3** natural defensive barriers (e.g., Ancient Egypt bounded by the Sahara desert, river cataracts, and the Mediterranean Sea).
+- **Continental Empire (`continental_empire`):** Maximum of **5** natural defensive barriers across continental frontiers.
+- **"None — completely open flat plains..." (`g3_barriers`):** Strictly limited to **1** selection (itself), and is completely mutually exclusive with all 9 other natural defensive barrier options as well as rugged, mountainous, archipelago, or rainforest terrains.
+
+### 4.7 Deep Geographic Contradictions (Terrain, Barriers & Resources)
+1. **Open Ocean Expanses (`g3_barriers`) vs. Landlocked Terrains (`g2_terrain`):**
+   - Selecting *"Uncharted offshore open ocean expanses..."* is strictly blocked if the civilization's terrain is entirely landlocked (*"Dry, windswept temperate steppe grasslands"*, *"High-altitude arid mountain plateau"*, or landlocked alluvial river basins without coastal access).
+2. **Dense Tropical Jungles (`g3_barriers`) vs. Arid Deserts & Windswept Steppe (`g2_terrain`):**
+   - Selecting *"Dense, disease-ridden jungles..."* is blocked if terrain consists solely of hyper-arid deserts or freezing windy steppes.
+3. **Expansive Swamps & Mangrove Flats (`g3_barriers`) vs. High Mountains & Steppes (`g2_terrain`):**
+   - Mangrove flats and tropical tidal swamps only form along warm lowland coastlines and tropical river deltas, not on freezing alpine mountains or dry steppe grasslands.
+4. **Towering Sandstone Slot Canyons (`g3_barriers`) vs. Coral Atolls & Flat Mud Plains (`g2_terrain`):**
+   - Towering vertical sandstone slot canyons (like Petra's Siq) require deep continental sandstone bedrock and are blocked on low-lying coral atolls or on flat alluvial silt plains at city-state scale.
+5. **Freezing Alpine Mountain Ranges (`g3_barriers`) vs. Oceanic Coral Atolls (`g2_terrain`):**
+   - Isolated oceanic coral atolls and volcanic seamounts are surrounded by open Pacific waters, not continental alpine freezing mountain chains.
+6. **Dense Hardwood Forests (`g4_resources`) vs. Deserts & Steppe (`g2_terrain` / `g3_barriers`):**
+   - Selecting *"Dense cedar, oak, or mahogany forests..."* is blocked if the terrain is exclusively arid desert or windswept steppe, or if a city-state is bounded by vast waterless deserts.
+7. **Marine Murex Sea Snail Beds (`g4_resources`) vs. Landlocked Civilizations (`g2_terrain` / `g3_barriers`):**
+   - Marine murex snails live exclusively on marine reefs and coastlines; landlocked inland civilizations with no coastal terrain and no marine barriers cannot harvest royal purple dye snails.
+8. **Rich Alluvial Clay (`g4_resources`) vs. Non-River Waters (`g1_freshwater`):**
+   - Civilizations relying exclusively on rushing glacial mountain torrents, underground cenotes, or desert oasis springs without river floodplains cannot claim rich river alluvial clay.
+9. **Natural Bitumen & Asphalt Seeps (`g4_resources`) vs. Oceanic Coral Atolls (`g2_terrain`):**
+   - Bitumen originates from continental sedimentary petroleum basins, which do not exist on volcanic coral atolls.
+10. **Mountain Barriers (`g3_barriers`) vs. Hard Stone Shortage (`g5_shortages`):**
+    - Civilizations bordered by giant freezing mountain ranges cannot claim a *"Lack of hard stone or metal ores (only have mud and clay)"*.
+11. **Jungle Barriers (`g3_barriers`) vs. Tall Timber Shortage (`g5_shortages`):**
+    - Civilizations surrounded by dense tropical jungle canopies cannot claim a *"Lack of tall timber for shipbuilding and large roofs"*.
+
+---
+
 ## 5. Intelligent Auto-Select Synergy Engine (Prerequisite Cascades)
 
 The Intelligent Auto-Select Synergy Engine operates with a two-tier architecture:

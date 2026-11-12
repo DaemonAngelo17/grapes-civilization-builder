@@ -217,6 +217,17 @@ export function checkOptionDisallowed(
       }
     }
 
+    // City-States can encompass at most 2 natural defensive barriers
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 2 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (City-State): A single city-state territory is too small to be enclosed by more than 2 distinct natural defensive barriers! Upgrade to Regional Kingdom or Continental Empire to span across multiple frontier borders.'
+        };
+      }
+    }
+
     // City-States cultivate up to 2 staple crops
     if (questionId === 'e1_crops') {
       const currentCrops = selectedList('e1_crops');
@@ -342,6 +353,17 @@ export function checkOptionDisallowed(
       }
     }
 
+    // Regional Kingdoms can span up to 3 natural defensive barriers
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 3 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Regional Kingdom): A regional kingdom typically spans up to 3 natural frontier barriers (e.g. desert, cataracts, and seas). Upgrade to Continental Empire to span across additional natural frontiers.'
+        };
+      }
+    }
+
     // Regional Kingdoms cultivate up to 4 staple crops
     if (questionId === 'e1_crops') {
       const currentCrops = selectedList('e1_crops');
@@ -404,6 +426,17 @@ export function checkOptionDisallowed(
         isDisallowed: true,
         reason: '🔒 Land Size Lock: A Grand Continental Empire is a unified superstate, not a fractured network of warring independent city-states!'
       };
+    }
+
+    // Continental Empires span up to 5 natural defensive barriers
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 5 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Continental Empire): Even a vast continental empire cannot be bounded by more than 5 distinct natural frontier barrier systems!'
+        };
+      }
     }
   }
 
@@ -624,23 +657,56 @@ export function checkOptionDisallowed(
         };
       }
     }
+
+    // Rugged terrains contradict "None — completely open flat plains" barrier
+    if (optLower.includes('steep, jagged mountain ranges') ||
+        optLower.includes('rocky peninsula with jagged coastlines') ||
+        optLower.includes('volcanic oceanic high islands and coral ring atolls') ||
+        optLower.includes('dense, humid tropical rainforest')) {
+      if (hasText('g3_barriers', 'none — completely open flat plains')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You selected "None — completely open flat plains" in Natural Barriers. Steep mountains, rocky archipelagos, oceanic islands, and dense rainforests provide rugged natural defenses and cannot exist on featureless open plains!'
+        };
+      }
+    }
+
+    // Landlocked steppes/plateaus contradict open ocean expanses barrier
+    if (optLower.includes('dry, windswept temperate steppe') || optLower.includes('high-altitude flat plateau')) {
+      if (hasText('g3_barriers', 'uncharted offshore open ocean expanses')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Landlocked interior steppes and high mountain plateaus have no open ocean borders to provide island sanctuary isolation!'
+        };
+      }
+    }
   }
 
   // --- G3: BARRIERS ---
   if (questionId === 'g3_barriers') {
     if (optLower.includes('none — completely open flat plains')) {
-      if (hasText('g3_barriers', 'mountain ranges') || hasText('g3_barriers', 'deserts') || hasText('g3_barriers', 'rocky coastlines') || hasText('g3_barriers', 'dense, disease-ridden jungles') || hasText('g3_barriers', 'cataracts')) {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.some(b => !b.toLowerCase().includes('none'))) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: "None — completely open flat plains" means zero natural barriers. You already selected natural barriers!'
+          reason: '🔒 Contradiction: "None — completely open flat plains" means zero natural barriers. You already selected natural defensive barriers!'
+        };
+      }
+      if (hasText('g2_terrain', 'steep, jagged mountain ranges') ||
+          hasText('g2_terrain', 'rocky peninsula with jagged coastlines') ||
+          hasText('g2_terrain', 'volcanic oceanic high islands') ||
+          hasText('g2_terrain', 'dense, humid tropical rainforest')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You cannot claim "None — completely open flat plains" when your terrain consists of steep mountain cliffs, oceanic archipelagos, or dense tropical rainforests! These rugged features provide natural geographic defenses.'
         };
       }
     }
-    if ((optLower.includes('mountain ranges') || optLower.includes('deserts') || optLower.includes('rocky coastlines') || optLower.includes('jungles') || optLower.includes('cataracts')) &&
+    if (!optLower.includes('none — completely open flat plains') &&
         hasText('g3_barriers', 'none — completely open flat plains')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: You previously selected "None — completely open flat plains", meaning you have no natural barriers!'
+        reason: '🔒 Contradiction: You previously selected "None — completely open flat plains", meaning you have zero natural barriers!'
       };
     }
     // Relaxed rule: Only block mountain barriers on alluvial plains if city_state scale
@@ -651,11 +717,24 @@ export function checkOptionDisallowed(
           reason: '🔒 Land Scale Limit (City-State): A single local city-state on flat floodplains is too small to reach distant border mountain ranges! (Upgrade to Regional Kingdom or Continental Empire).'
         };
       }
+      const allTerrains = selectedList('g2_terrain');
+      if (allTerrains.length === 1 && allTerrains[0].toLowerCase().includes('volcanic oceanic high islands')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Isolated oceanic islands and coral atolls are surrounded by vast open ocean, not continental freezing alpine mountain ranges!'
+        };
+      }
+      if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: In Critical Shortages, you stated your land lacks hard stone! Freezing alpine mountain ranges are massive formations of hard rock and stone.'
+        };
+      }
     }
-    if (optLower.includes('cataracts') && (hasText('g1_freshwater', 'limestone sinkholes') || hasText('g1_freshwater', 'oasis springs'))) {
+    if (optLower.includes('cataracts') && (hasText('g1_freshwater', 'limestone sinkholes') || hasText('g1_freshwater', 'oasis springs') || hasText('g1_freshwater', 'basalt island freshwater lenses'))) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: River cataracts are rocky rapids on flowing surface rivers! Your freshwater comes from sinkholes or springs.'
+        reason: '🔒 Contradiction: River cataracts are rocky rapids on flowing surface rivers! Your freshwater comes from subterranean sinkholes, lenses, or springs.'
       };
     }
     if (optLower.includes('treacherous rocky coastlines') && hasText('g2_terrain', 'high-altitude flat plateau (steppe)') && !hasText('g2_terrain', 'peninsula')) {
@@ -663,6 +742,69 @@ export function checkOptionDisallowed(
         isDisallowed: true,
         reason: '🔒 Contradiction: Landlocked mountain steppes do not have rocky marine coastlines!'
       };
+    }
+
+    if (optLower.includes('uncharted offshore open ocean expanses')) {
+      const allTerrains = selectedList('g2_terrain');
+      const isLandlocked = allTerrains.length > 0 && allTerrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('dry, windswept temperate steppe') ||
+               tl.includes('elevated temperate highland savanna') ||
+               tl.includes('flat, featureless alluvial floodplains');
+      });
+      if (isLandlocked && !hasText('g3_barriers', 'rocky coastlines')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Landlocked interior steppes, high plateaus, and inland river basins have no open ocean expanses on their borders to provide island sanctuary isolation!'
+        };
+      }
+    }
+
+    if (optLower.includes('dense, disease-ridden jungles')) {
+      const allTerrains = selectedList('g2_terrain');
+      const isAridOrSteppe = allTerrains.length > 0 && allTerrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('arid desert expanses') ||
+               tl.includes('steppe grasslands') ||
+               tl.includes('hyper-arid desert');
+      });
+      if (isAridOrSteppe) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Hyper-arid deserts and windswept steppe plains do not have tropical rainforest foliage or malaria-infested jungles on their borders!'
+        };
+      }
+    }
+
+    if (optLower.includes('expansive swamps and treacherous mangrove flats')) {
+      const allTerrains = selectedList('g2_terrain');
+      const isHighOrSteppe = allTerrains.length > 0 && allTerrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('steep, jagged mountain ranges') ||
+               tl.includes('high-altitude flat plateau') ||
+               tl.includes('steppe grasslands');
+      });
+      if (isHighOrSteppe) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Mangrove flats and tidal swamps only form along warm lowland coastlines and tropical river deltas, not on freezing alpine mountains or dry steppe grasslands!'
+        };
+      }
+    }
+
+    if (optLower.includes('towering vertical sandstone cliffs and slot canyon gorges')) {
+      const allTerrains = selectedList('g2_terrain');
+      const isAtollOrFlatSilt = allTerrains.length > 0 && allTerrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('volcanic oceanic high islands and coral ring atolls') ||
+               (currentScale === 'city_state' && tl.includes('alluvial floodplains'));
+      });
+      if (isAtollOrFlatSilt) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Towering sandstone slot canyons (like Petra\'s Siq) are carved through deep continental sandstone bedrock, which does not exist in flat river mud plains or coral atolls!'
+        };
+      }
     }
   }
 
@@ -682,11 +824,77 @@ export function checkOptionDisallowed(
         };
       }
       const terrain = selectedList('g2_terrain');
-      const isPureDesert = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('arid desert') || t.toLowerCase().includes('steppe'));
+      const isPureDesert = terrain.length > 0 && terrain.every((t) => {
+        const tl = t.toLowerCase();
+        return tl.includes('arid desert') || tl.includes('steppe') || tl.includes('hyper-arid desert');
+      });
       if (isPureDesert) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: Giant oak, cedar, or mahogany forests cannot naturally grow in dry arid desert sands or windy steppes!'
+          reason: '🔒 Contradiction: Giant oak, cedar, or mahogany forests cannot naturally grow in dry arid desert sands or windswept steppes—ancient civilizations had to import timber from distant mountains!'
+        };
+      }
+      if (currentScale === 'city_state' && hasText('g3_barriers', 'vast, waterless deserts')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: A local city-state enclosed by vast waterless sand deserts does not contain dense old-growth hardwood forests inside its small territory!'
+        };
+      }
+    }
+
+    if (optLower.includes('marine murex sea snail beds')) {
+      const allTerrains = selectedList('g2_terrain');
+      const hasCoastalTerrain = allTerrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('rocky peninsula') || tl.includes('volcanic oceanic high islands') || tl.includes('coastal fog oasis');
+      });
+      const hasCoastalBarrier = hasText('g3_barriers', 'coastlines') || hasText('g3_barriers', 'ocean');
+      if (allTerrains.length > 0 && !hasCoastalTerrain && !hasCoastalBarrier) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Marine murex sea snails live exclusively on saltwater ocean coasts and reefs; a landlocked inland civilization cannot harvest royal sea snails!'
+        };
+      }
+    }
+
+    if (optLower.includes('rich alluvial clay and mud')) {
+      const waters = selectedList('g1_freshwater');
+      const isNonRiverWater = waters.length > 0 && waters.every(w => {
+        const wl = w.toLowerCase();
+        return wl.includes('high-altitude glacial mountain meltwater') ||
+               wl.includes('underground limestone sinkholes') ||
+               wl.includes('oasis springs scattered across');
+      });
+      const hasAlluvialTerrain = hasText('g2_terrain', 'alluvial floodplains') || hasText('g2_terrain', 'marshland');
+      if (isNonRiverWater && !hasAlluvialTerrain) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Rich alluvial clay deposits are created by the silt of large, slow-moving flood rivers, not rushing alpine torrents, desert springs, or underground limestone sinkholes!'
+        };
+      }
+    }
+
+    if (optLower.includes('natural bitumen and surface asphalt seeps')) {
+      const allTerrains = selectedList('g2_terrain');
+      if (allTerrains.length === 1 && allTerrains[0].toLowerCase().includes('volcanic oceanic high islands')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Bitumen and asphalt seeps originate from ancient continental sedimentary petroleum basins, which do not exist on volcanic oceanic coral atolls!'
+        };
+      }
+    }
+
+    if (optLower.includes('papyrus reeds, bamboo, or marsh plants')) {
+      const allTerrains = selectedList('g2_terrain');
+      const isDrySteppeOrMountain = allTerrains.length > 0 && allTerrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('dry, windswept temperate steppe') || tl.includes('high-altitude flat plateau');
+      });
+      const hasWetlands = hasText('g1_freshwater', 'river') || hasText('g1_freshwater', 'lake') || hasText('g1_freshwater', 'lagoon') || hasText('g1_freshwater', 'monsoon');
+      if (isDrySteppeOrMountain && !hasWetlands) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Papyrus reeds and marsh plants require warm lowland wetland marshes or riverbanks, not freezing windswept steppes or arid mountaintops!'
         };
       }
     }
@@ -736,18 +944,33 @@ export function checkOptionDisallowed(
 
   // --- G5: SHORTAGES ---
   if (questionId === 'g5_shortages') {
-    if (optLower.includes('lack of tall timber') && hasText('g4_resources', 'dense cedar, oak, or mahogany forests')) {
-      return {
-        isDisallowed: true,
-        reason: '🔒 Contradiction: You already selected abundant dense cedar and oak forests in your natural resources!'
-      };
+    if (optLower.includes('lack of tall timber')) {
+      if (hasText('g4_resources', 'dense cedar, oak, or mahogany forests')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You already selected abundant dense cedar and oak forests in your natural resources!'
+        };
+      }
+      if (hasText('g3_barriers', 'dense, disease-ridden jungles')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Your borders are surrounded by dense tropical jungle canopies with towering trees, directly contradicting a critical shortage of tall timber!'
+        };
+      }
     }
-    if (optLower.includes('lack of hard stone or metal ores') &&
-        (hasText('g4_resources', 'copper and tin') || hasText('g4_resources', 'high-grade iron') || hasText('g4_resources', 'limestone, granite'))) {
-      return {
-        isDisallowed: true,
-        reason: '🔒 Contradiction: You already selected abundant metal ores or quarried stone in your natural resources!'
-      };
+    if (optLower.includes('lack of hard stone or metal ores')) {
+      if (hasText('g4_resources', 'copper and tin') || hasText('g4_resources', 'high-grade iron') || hasText('g4_resources', 'limestone, granite') || hasText('g4_resources', 'basalt, andesite')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You already selected abundant metal ores or quarried stone in your natural resources!'
+        };
+      }
+      if (hasText('g3_barriers', 'mountain ranges')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Your border is enclosed by giant freezing mountain ranges! Mountains are composed of quarried rock and stone, so your civilization does not suffer from a lack of hard stone!'
+        };
+      }
     }
     if (optLower.includes('lack of tin or alloy fluxes') && hasText('g4_resources', 'copper and tin deposits')) {
       return {
