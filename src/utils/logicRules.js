@@ -149,6 +149,37 @@ export function checkOptionDisallowed(
     }
   }
 
+  // New Chronological Era Locks
+  if (isBronzeAge) {
+    if (optLower.includes('kharosthi and aramaic administrative cursive')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Bronze Age): Aramaic and Kharosthi administrative cursive scripts were not invented until the Iron Age (after 1000 BCE)!'
+      };
+    }
+    if (optLower.includes('palm-leaf manuscripts etched with iron styluses')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Bronze Age): Etching palm-leaf manuscripts with iron styluses requires Iron Age metallurgy (after 1100 BCE)!'
+      };
+    }
+    if (optLower.includes("ge'ez / meroitic abugida script")) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Bronze Age): The Meroitic and Ge\'ez syllabic scripts developed during the Iron Age and Classical eras!'
+      };
+    }
+  }
+
+  if (currentEra === 'early_bronze') {
+    if (optLower.includes('horse archer light cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Early Bronze Age): In the Early Bronze Age, horses pulled wheeled war chariots; mounted horse archery on horseback did not emerge until the Late Bronze and Iron Ages!'
+      };
+    }
+  }
+
   // =========================================================================
   // 0.5. CIVILIZATION SCALE CONSTRAINTS (City-State vs Kingdom vs Empire)
   // =========================================================================
@@ -241,6 +272,22 @@ export function checkOptionDisallowed(
       return {
         isDisallowed: true,
         reason: '🔒 Land Size Lock: A single city-state has no far-off foreign provinces to appoint imperial governors or satraps over!'
+      };
+    }
+
+    // City-States cannot run Nomadic Steppe Imperial Confederacies
+    if (questionId === 'p1_gov_system' && optLower.includes('nomadic steppe imperial confederacy')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Land Scale Lock (City-State): A nomadic steppe confederacy moves massive herds across vast grasslands and cannot be confined to a single small city-state!'
+      };
+    }
+
+    // Isolated City-State vs. Imperial Tribute
+    if (hasText('p5_foreign_policy', 'isolationism') && (questionId === 'e4_taxation' || questionId === 'p5_foreign_policy') && optLower.includes('tribute from conquered provinces')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: An isolated single city-state has no conquered foreign provinces to fund its government—your own citizens must pay taxes or perform labor!'
       };
     }
 
@@ -357,6 +404,39 @@ export function checkOptionDisallowed(
         isDisallowed: true,
         reason: '🔒 Land Size Lock: A Grand Continental Empire is a unified superstate, not a fractured network of warring independent city-states!'
       };
+    }
+  }
+
+  // Polynesian Oceanic High Island / Atoll Exclusive Biome Constraint
+  const allTerrains = selectedList('g2_terrain');
+  const isOnlyPolynesianIslands = allTerrains.length === 1 && allTerrains[0].toLowerCase().includes('volcanic oceanic high islands');
+  if (isOnlyPolynesianIslands) {
+    if (questionId === 'g4_resources' && (optLower.includes('high-grade iron ore') || optLower.includes('copper and tin deposits'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Island Biome Constraint: Volcanic coral atolls and oceanic islands lack continental metal ore veins for smelting bronze or iron!'
+      };
+    }
+    if (questionId === 'a5_science' && optLower.includes('advanced metallurgy (smelting bronze alloys, cast iron')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Island Biome Constraint: Volcanic coral atolls and oceanic islands lack continental metal ore veins for smelting bronze or iron!'
+      };
+    }
+    if (questionId === 'e2_animals') {
+      const heavyAnimals = [
+        'oxen and water buffalo',
+        'horses and camels',
+        'llamas and alpacas',
+        'domesticated dromedary & bactrian camels',
+        'asian war elephants'
+      ];
+      if (heavyAnimals.some(ha => optLower.includes(ha))) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Island Biome Constraint: Large continental draft beasts and elephants could not be transported across the open Pacific on outrigger canoes!'
+        };
+      }
     }
   }
 
@@ -562,6 +642,15 @@ export function checkOptionDisallowed(
         isDisallowed: true,
         reason: '🔒 Contradiction: You previously selected "None — completely open flat plains", meaning you have no natural barriers!'
       };
+    }
+    // Relaxed rule: Only block mountain barriers on alluvial plains if city_state scale
+    if (optLower.includes('impassable, freezing mountain ranges blocking the border')) {
+      if (currentScale === 'city_state' && hasText('g2_terrain', 'flat, featureless alluvial floodplains') && !hasText('g2_terrain', 'steep, jagged mountain ranges')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Scale Limit (City-State): A single local city-state on flat floodplains is too small to reach distant border mountain ranges! (Upgrade to Regional Kingdom or Continental Empire).'
+        };
+      }
     }
     if (optLower.includes('cataracts') && (hasText('g1_freshwater', 'limestone sinkholes') || hasText('g1_freshwater', 'oasis springs'))) {
       return {
@@ -839,10 +928,11 @@ export function checkOptionDisallowed(
 
     if (optLower.includes('llamas and alpacas')) {
       const terrain = selectedList('g2_terrain');
-      if (terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('desert') || t.toLowerCase().includes('rainforest'))) {
+      const isPeruvianCoast = hasText('g2_terrain', 'coastal fog oasis');
+      if (!isPeruvianCoast && terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('desert') || t.toLowerCase().includes('rainforest'))) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: Llamas and alpacas are Andean high-altitude animals with thick wool; they overheat and die in humid tropical jungles or scorching desert lowlands!'
+          reason: '🔒 Contradiction: Llamas and alpacas are Andean high-altitude animals with thick wool; they overheat and die in humid tropical jungles or scorching inland desert lowlands! (They are permitted in coastal fog oases for trade).'
         };
       }
     }
@@ -1670,10 +1760,11 @@ export function checkOptionDisallowed(
     }
 
     if (optLower.includes('cruel, capricious, and angry')) {
-      if (hasText('g1_freshwater', 'predictable annual flooding river') && !hasText('g6_disasters', 'floods')) {
+      const disasters = selectedList('g6_disasters');
+      if (hasText('g1_freshwater', 'predictable annual flooding river') && disasters.length === 0) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: When the environment is gentle, fertile, and predictable (like Egypt\'s Nile), priests view the gods as generous guardians, not cruel monsters!'
+          reason: '🔒 Contradiction: When the environment is gentle, fertile, and predictable (like Egypt\'s Nile) with zero recurring natural disasters, priests view the gods as generous guardians, not cruel monsters!'
         };
       }
     }
@@ -2415,6 +2506,367 @@ export function checkOptionDisallowed(
         reason: '🔒 Contradiction: Building massive mortarless granite enclosures or carving 14-ton Moai statues requires quarrying hard stone!'
       };
     }
+
+
+  // =========================================================================
+  // UPGRADED CROSS-CATEGORY & INTRA-QUESTION MUTUAL EXCLUSIVITY RULES
+  // =========================================================================
+
+  // 1. Direct Resource Abundance vs. Shortage Conflict (g4_resources vs. g5_shortages)
+  const g4_vs_g5_pairs = [
+    {
+      g4_terms: ['dense cedar, oak, or mahogany forests'],
+      g5_terms: ['lack of tall timber for shipbuilding and large roofs']
+    },
+    {
+      g4_terms: [
+        'quarried limestone, granite, or marble',
+        'basalt, andesite, and diorite volcanic stones',
+        'copper and tin deposits',
+        'high-grade iron ore'
+      ],
+      g5_terms: ['lack of hard stone or metal ores']
+    },
+    {
+      g4_terms: ['copper and tin deposits'],
+      g5_terms: ['lack of tin or alloy fluxes']
+    },
+    {
+      g4_terms: ['vast rock salt domes'],
+      g5_terms: ['lack of salt for preserving meat and fish']
+    },
+    {
+      g4_terms: ['rich alluvial clay and mud'],
+      g5_terms: ['lack of domestic clay deposits for pottery']
+    }
+  ];
+
+  if (questionId === 'g4_resources') {
+    for (const pair of g4_vs_g5_pairs) {
+      if (pair.g4_terms.some(t => optLower.includes(t.toLowerCase()))) {
+        if (pair.g5_terms.some(t => hasText('g5_shortages', t))) {
+          return {
+            isDisallowed: true,
+            reason: '🔒 Contradiction: You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!'
+          };
+        }
+      }
+    }
+  }
+
+  if (questionId === 'g5_shortages') {
+    for (const pair of g4_vs_g5_pairs) {
+      if (pair.g5_terms.some(t => optLower.includes(t.toLowerCase()))) {
+        if (pair.g4_terms.some(t => hasText('g4_resources', t))) {
+          return {
+            isDisallowed: true,
+            reason: '🔒 Contradiction: You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!'
+          };
+        }
+      }
+    }
+
+    // Textile fiber / wool vs. Shortage of fibers/wool
+    if (optLower.includes('lack of textile plant fibers or sheep wool')) {
+      if (hasText('e1_crops', 'cotton and flax / linseed') || hasText('e2_animals', 'sheep and goats')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!'
+        };
+      }
+    }
+  }
+
+  if (questionId === 'e1_crops' && optLower.includes('cotton and flax / linseed')) {
+    if (hasText('g5_shortages', 'lack of textile plant fibers or sheep wool')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!'
+      };
+    }
+  }
+
+  if (questionId === 'e2_animals' && optLower.includes('sheep and goats')) {
+    if (hasText('g5_shortages', 'lack of textile plant fibers or sheep wool')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!'
+      };
+    }
+  }
+
+  // 2. Paid Free Laborers Exclusivity (s5_unfree_labor)
+  if (questionId === 's5_unfree_labor') {
+    if (optLower.includes('paid free laborers only')) {
+      const unfreeList = selectedList('s5_unfree_labor');
+      if (unfreeList.some(item => !item.toLowerCase().includes('paid free laborers only'))) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Contradiction: Selecting 'Paid Free Laborers Only' means your society builds monuments without slavery or forced bondage—you cannot combine this with enslaved prisoners or serfs!"
+        };
+      }
+    } else {
+      if (hasText('s5_unfree_labor', 'paid free laborers only')) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Contradiction: Selecting 'Paid Free Laborers Only' means your society builds monuments without slavery or forced bondage—you cannot combine this with enslaved prisoners or serfs!"
+        };
+      }
+    }
+  }
+
+  // 3. Heavy Draft Plows Prerequisite (a4_hydraulic vs. e2_animals)
+  if (questionId === 'a4_hydraulic' && optLower.includes('heavy iron-tipped plows pulled by oxen')) {
+    const animals = selectedList('e2_animals');
+    if (animals.some(a => a.toLowerCase().includes('none — all goods are carried on the backs of human porters')) ||
+        (animals.length > 0 && !animals.some(a => a.toLowerCase().includes('oxen and water buffalo')))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Heavy iron plows are far too heavy for humans or light pack animals to pull through dense soil—they require strong draft animals like oxen or water buffalo!'
+      };
+    }
+  }
+  if (questionId === 'e2_animals' && optLower.includes('none — all goods are carried on the backs of human porters')) {
+    if (hasText('a4_hydraulic', 'heavy iron-tipped plows pulled by oxen')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Heavy iron plows are far too heavy for humans or light pack animals to pull through dense soil—they require strong draft animals like oxen or water buffalo!'
+      };
+    }
+  }
+
+  // 4. Fuel Shortage vs. Metal Smelting (g5_shortages vs. a5_science)
+  if (questionId === 'a5_science' && optLower.includes('advanced metallurgy (smelting bronze alloys, cast iron')) {
+    if (hasText('g5_shortages', 'lack of fuel firewood and charcoal')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Smelting metal ores requires blast furnaces burning tons of wood charcoal at over 2,000°F. Without fuel wood or charcoal, you cannot smelt metals locally!'
+      };
+    }
+  }
+  if (questionId === 'g5_shortages' && optLower.includes('lack of fuel firewood and charcoal')) {
+    if (hasText('a5_science', 'advanced metallurgy (smelting bronze alloys, cast iron')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Smelting metal ores requires blast furnaces burning tons of wood charcoal at over 2,000°F. Without fuel wood or charcoal, you cannot smelt metals locally!'
+      };
+    }
+  }
+
+  // 5. Isolationism / Command Economy vs. Foreign Trade & Tariffs
+  const isIsolatedPolicy = hasText('p5_foreign_policy', 'isolationism (building walls and closing borders') ||
+                           hasText('e5_trade', 'self-sufficient command economy (foreign trade is banned');
+
+  if (questionId === 'e5_trade') {
+    const internationalTrades = [
+      'maritime trade empire',
+      'overland silk/incense caravan',
+      'monsoon indian ocean coastal & open-sea dhow trade',
+      'trans-saharan gold-salt trade'
+    ];
+    if (isIsolatedPolicy && internationalTrades.some(t => optLower.includes(t))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: If your government closes its borders and bans foreign trade, you cannot simultaneously run an international merchant trade network or tax foreign caravans!'
+      };
+    }
+    if (optLower.includes('self-sufficient command economy (foreign trade is banned')) {
+      const activeTrades = selectedList('e5_trade');
+      if (internationalTrades.some(t => activeTrades.some(at => at.toLowerCase().includes(t))) ||
+          hasText('e4_taxation', 'customs duties & trade tariffs') ||
+          hasText('e4_taxation', 'transit tolls and mountain pass')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: If your government closes its borders and bans foreign trade, you cannot simultaneously run an international merchant trade network or tax foreign caravans!'
+        };
+      }
+    }
+  }
+
+  if (questionId === 'e4_taxation') {
+    if (isIsolatedPolicy && (optLower.includes('customs duties & trade tariffs') || optLower.includes('transit tolls and mountain pass / bridge fees'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: If your government closes its borders and bans foreign trade, you cannot simultaneously run an international merchant trade network or tax foreign caravans!'
+      };
+    }
+  }
+
+  if (questionId === 'p5_foreign_policy') {
+    if (optLower.includes('isolationism (building walls and closing borders')) {
+      const activeTrades = selectedList('e5_trade');
+      const internationalTrades = [
+        'maritime trade empire',
+        'overland silk/incense caravan',
+        'monsoon indian ocean coastal & open-sea dhow trade',
+        'trans-saharan gold-salt trade'
+      ];
+      if (internationalTrades.some(t => activeTrades.some(at => at.toLowerCase().includes(t))) ||
+          hasText('e4_taxation', 'customs duties & trade tariffs') ||
+          hasText('e4_taxation', 'transit tolls and mountain pass')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: If your government closes its borders and bans foreign trade, you cannot simultaneously run an international merchant trade network or tax foreign caravans!'
+        };
+      }
+    }
+  }
+
+  // 6. Isolated City-State vs. Imperial Tribute (Scale + p5_foreign_policy vs. e4_taxation)
+  if (currentScale === 'city_state' && hasText('p5_foreign_policy', 'isolationism')) {
+    if (questionId === 'e4_taxation' && optLower.includes('tribute from conquered provinces')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: An isolated single city-state has no conquered foreign provinces to fund its government—your own citizens must pay taxes or perform labor!'
+      };
+    }
+  }
+
+  // 7. Non-Written Record Systems vs. Written Civil Service Exams (a1_writing vs. p2_succession & s3_mobility)
+  const activeWritings = selectedList('a1_writing');
+  const isOnlyNonWrittenScripts = activeWritings.length > 0 && activeWritings.every(w => {
+    const wl = w.toLowerCase();
+    return wl.includes('quipu / knotted cords') || wl.includes('marshallese stick charts');
+  });
+
+  if (questionId === 'p2_succession' && optLower.includes('meritocratic civil service exams')) {
+    if (isOnlyNonWrittenScripts) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Knotted cords and memory belts do not use written words. You need a written script to hold written philosophy and law exams!'
+      };
+    }
+  }
+
+  if (questionId === 's3_mobility' && optLower.includes('scribal / exam mobility')) {
+    if (isOnlyNonWrittenScripts) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Knotted cords and memory belts do not use written words. You need a written script to hold written philosophy and law exams!'
+      };
+    }
+  }
+
+  if (questionId === 'a1_writing') {
+    if (optLower.includes('quipu / knotted cords') || optLower.includes('marshallese stick charts')) {
+      if (hasText('p2_succession', 'meritocratic civil service exams') || hasText('s3_mobility', 'scribal / exam mobility')) {
+        if (activeWritings.length === 0 || activeWritings.every(w => w.toLowerCase().includes('quipu') || w.toLowerCase().includes('marshallese'))) {
+          return {
+            isDisallowed: true,
+            reason: '🔒 Contradiction: Knotted cords and memory belts do not use written words. You need a written script to hold written philosophy and law exams!'
+          };
+        }
+      }
+    }
+  }
+
+  // 8. Monotheism vs. Polytheistic Pantheons & Fertility Goddess Rites (r1_structure & r3_rituals)
+  if (questionId === 'r1_structure') {
+    if (optLower.includes('monolatry / early monotheism')) {
+      if (hasText('r1_structure', 'anthropomorphic polytheism') ||
+          hasText('r1_structure', 'sacred triads and divine families') ||
+          hasText('r1_structure', 'zoomorphic shamanic pantheon') ||
+          hasText('r3_rituals', 'ritual temple prostitution and sacred marriage rites')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Monotheism centers on worshipping a single creator god, which conflicts with worshipping dozens of human-like or animal gods and performing sacred marriages to fertility goddesses!'
+        };
+      }
+    }
+    if (optLower.includes('anthropomorphic polytheism') ||
+        optLower.includes('sacred triads and divine families') ||
+        optLower.includes('zoomorphic shamanic pantheon')) {
+      if (hasText('r1_structure', 'monolatry / early monotheism')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Monotheism centers on worshipping a single creator god, which conflicts with worshipping dozens of human-like or animal gods and performing sacred marriages to fertility goddesses!'
+        };
+      }
+    }
+  }
+
+  if (questionId === 'r3_rituals' && optLower.includes('ritual temple prostitution and sacred marriage rites')) {
+    if (hasText('r1_structure', 'monolatry / early monotheism')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Monotheism centers on worshipping a single creator god, which conflicts with worshipping dozens of human-like or animal gods and performing sacred marriages to fertility goddesses!'
+      };
+    }
+  }
+
+  // 9. Rigid Hereditary Caste System vs. Upward Social Mobility (s3_mobility)
+  if (questionId === 's3_mobility') {
+    const upwardMobilityOptions = [
+      'scribal / exam mobility',
+      'military valor',
+      'wealth-based mobility',
+      'imperial manumission & patronage'
+    ];
+    if (optLower.includes('rigid hereditary caste system')) {
+      const currentMobilities = selectedList('s3_mobility');
+      if (upwardMobilityOptions.some(opt => currentMobilities.some(cm => cm.toLowerCase().includes(opt)))) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: In a strict hereditary caste system with zero mobility, you must stay in the exact class your parents were born into—people cannot climb into the nobility through exams or money!'
+        };
+      }
+    } else if (upwardMobilityOptions.some(opt => optLower.includes(opt))) {
+      if (hasText('s3_mobility', 'rigid hereditary caste system')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: In a strict hereditary caste system with zero mobility, you must stay in the exact class your parents were born into—people cannot climb into the nobility through exams or money!'
+        };
+      }
+    }
+  }
+
+  // 10. Cashless Economy vs. Silver Poll Taxes (e3_currency vs. e4_taxation)
+  const activeCurrencies = selectedList('e3_currency');
+  const isOnlyCashlessEconomy = activeCurrencies.length > 0 && activeCurrencies.every(c => {
+    const cl = c.toLowerCase();
+    return cl.includes('state grain redistribution (no money') || cl.includes('pure barter & credit tallies');
+  });
+
+  if (questionId === 'e4_taxation' && optLower.includes('head tax / poll tax (mandatory annual flat tax levied in silver')) {
+    if (isOnlyCashlessEconomy) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: If your economy operates without money or silver currency, the government cannot force peasants to pay an annual flat tax in silver!'
+      };
+    }
+  }
+
+  if (questionId === 'e3_currency') {
+    if (optLower.includes('state grain redistribution (no money') || optLower.includes('pure barter & credit tallies')) {
+      if (hasText('e4_taxation', 'head tax / poll tax (mandatory annual flat tax levied in silver')) {
+        if (activeCurrencies.length === 0 || activeCurrencies.every(c => c.toLowerCase().includes('grain redistribution') || c.toLowerCase().includes('pure barter'))) {
+          return {
+            isDisallowed: true,
+            reason: '🔒 Contradiction: If your economy operates without money or silver currency, the government cannot force peasants to pay an annual flat tax in silver!'
+          };
+        }
+      }
+    }
+  }
+
+  // 11. Human Sacrifice vs. Paid Free Laborers Only (r3_rituals vs. s5_unfree_labor)
+  if (questionId === 's5_unfree_labor' && optLower.includes('paid free laborers only')) {
+    if (hasText('r3_rituals', 'bloodletting or human sacrifice')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Ancient societies practicing large-scale temple human sacrifice relied on capturing enemy war prisoners rather than using purely volunteer paid labor!'
+      };
+    }
+  }
+
+  if (questionId === 'r3_rituals' && optLower.includes('bloodletting or human sacrifice')) {
+    if (hasText('s5_unfree_labor', 'paid free laborers only')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Ancient societies practicing large-scale temple human sacrifice relied on capturing enemy war prisoners rather than using purely volunteer paid labor!'
+      };
+    }
+  }
 
   return { isDisallowed: false, reason: null };
 }

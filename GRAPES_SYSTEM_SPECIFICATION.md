@@ -1,7 +1,7 @@
 # G.R.A.P.E.S. Civilization Builder & Defense Simulator
 ## Complete Architecture, Taxonomy, Contradiction Engine & Synergy Specification
 
-> **Document Version:** 3.0 (Expanded Global Taxonomy — 300 Options Edition)
+> **Document Version:** 3.1 (Advanced Mutual Exclusivity & 300-Option Balanced Edition)
 > **Target Audience:** Digital Humanities Researchers, AI System Evaluators, History Educators (Grade 7 Curriculum)
 > **Live Application URL:** [https://grapes-civilization-builder.vercel.app](https://grapes-civilization-builder.vercel.app)
 > **Source Repository:** [https://github.com/DaemonAngelo17/grapes-civilization-builder](https://github.com/DaemonAngelo17/grapes-civilization-builder)
@@ -22,6 +22,12 @@
    - [Religion (R1–R5)](#religion-r1r5)
    - [Achievements & Engineering (A1–A5)](#achievements--engineering-a1a5)
 4. [The Complete Contradiction & Mutual Exclusivity Matrix](#4-the-complete-contradiction--mutual-exclusivity-matrix)
+   - [4.1 Chronological Era Prohibitions](#41-chronological-era-prohibitions)
+   - [4.2 Civilization Scale Constraints](#42-civilization-scale-constraints)
+   - [4.3 Island & Biome Exclusive Constraints](#43-island--biome-exclusive-constraints)
+   - [4.4 Environmental & Terrain Mutual Exclusions (Relaxed Rules)](#44-environmental--terrain-mutual-exclusions-relaxed-rules)
+   - [4.5 Resource Abundance vs. Shortage Exclusions](#45-resource-abundance-vs-shortage-exclusions)
+   - [4.6 Cross-Category & Intra-Question Logic Rules](#46-cross-category--intra-question-logic-rules)
 5. [Intelligent Auto-Select Synergy Engine (Prerequisite Cascades)](#5-intelligent-auto-select-synergy-engine-prerequisite-cascades)
 6. [Cross-Category Teacher Stress-Test Defense Generator](#6-cross-category-teacher-stress-test-defense-generator)
 7. [Archaeological Benchmark Presets](#7-archaeological-benchmark-presets)
@@ -36,8 +42,8 @@ The **G.R.A.P.E.S. Civilization Builder & Defense Simulator** models ancient civ
 ### Core Subsystems:
 1. **Expanded Global Taxonomy:** 31 historical questions organized into the 6 G.R.A.P.E.S. domains containing **300 deeply researched options** drawn from ancient archaeological records across Africa, Eurasia, the Americas, and Oceania.
 2. **Universal Multi-Choice Architecture:** Every question uses multi-choice checkboxes, removing arbitrary selection limits while strictly bounding valid combinations via historical logic.
-3. **Grade 7 Logic Guard:** An active validation layer enforcing **over 260 mutual exclusivity rules**, preventing anachronisms and geographic impossibilities.
-4. **Intelligent Auto-Select Synergy Engine:** Automatically links historical prerequisites when foundational choices are made (e.g. selecting Outrigger War Canoes auto-adds Catamaran Engineering).
+3. **Grade 7 Logic Guard:** An active validation layer enforcing **over 275 mutual exclusivity rules**, preventing anachronisms and geographic impossibilities.
+4. **Intelligent Auto-Select Synergy Engine:** Automatically links historical prerequisites when foundational choices are made.
 5. **Synthesis Engine:** Compiles user choices into a 6-paragraph historical narrative, a quick-reference oral defense fact sheet, and 5 customized teacher cross-examination defense questions.
 
 ---
@@ -132,7 +138,6 @@ The **G.R.A.P.E.S. Civilization Builder & Defense Simulator** models ancient civ
 
 ### 2.3 Real-World Historical Inspirations (13 Spheres)
 
-The simulation references thirteen core archaeological and cultural zones:
 - **Mesopotamia (Sumer, Akkad, Babylon, Assyria)** (Fertile Crescent) — ID: `mesopotamia`
 - **Ancient Egypt (Old, Middle, New Kingdom)** (Nile River Valley) — ID: `egypt`
 - **Indus Valley Civilization (Harappa & Mohenjo-Daro)** (South Asia) — ID: `indus`
@@ -661,14 +666,16 @@ The simulation references thirteen core archaeological and cultural zones:
 
 ## 4. The Complete Contradiction & Mutual Exclusivity Matrix
 
-The simulator evaluates every click against `src/utils/logicRules.js`. If a choice is disallowed, a padlock badge appears on the card with an educational Grade 7 explanation.
-
 ### 4.1 Chronological Era Prohibitions
 | Era Constraint | Restricted Option | Grade 7 Historical Reason |
 | :--- | :--- | :--- |
 | Bronze Age (<1200 BCE) | High-grade iron ore extraction | Iron ore smelting did not exist yet; Bronze Age civilizations worked copper and bronze. |
 | Bronze Age (<1200 BCE) | Heavy iron-tipped plows | Heavy iron plows belong to the Iron Age (post-1000 BCE); early plows were stone or wood. |
 | Bronze Age (<1200 BCE) | Cast iron & steel blast furnaces | High-heat blast furnaces for liquid cast iron emerged in China around 500 BCE. |
+| Bronze Age (<1000 BCE) | Kharosthi & Aramaic cursive | Aramaic and Kharosthi administrative cursive scripts were not invented until the Iron Age (after 1000 BCE)! |
+| Bronze Age (<1100 BCE) | Palm-leaf iron stylus manuscripts | Etching palm-leaf manuscripts with iron styluses requires Iron Age metallurgy (after 1100 BCE)! |
+| Bronze Age (<1000 BCE) | Ge'ez / Meroitic Abugida script | The Meroitic and Ge'ez syllabic scripts developed during the Iron Age and Classical eras! |
+| Early Bronze Age (<2000 BCE) | Horse Archer Light Cavalry | In the Early Bronze Age, horses pulled war chariots; mounted horse archery emerged in the Late Bronze/Iron Ages! |
 | Pre-Classical (<600 BCE) | Standardized stamped coins | State-stamped coins were invented in Lydia (~600 BCE); earlier eras used weighed bullion or grain. |
 | Pre-Classical (<200 BCE) | Pozzolanic underwater concrete | Volcanic underwater concrete was invented by Roman engineers in the late Republic (~200 BCE). |
 | Pre-Classical (<200 BCE) | Magnetic lodestone compass | Lodestone compass orientation was developed in Han Dynasty China (~200 BCE). |
@@ -680,42 +687,54 @@ The simulator evaluates every click against `src/utils/logicRules.js`. If a choi
 
 ### 4.2 Civilization Scale Constraints
 1. **City-State (`city_state`):**
-   - Max **1 terrain** zone (confined to a single valley, delta, or bay).
-   - Max **1 primary freshwater** basin.
-   - Max **4 abundant resources**.
-   - Max **2 staple crops**.
-   - Max **2 domesticated animal groups**.
-   - Max **2 monuments** (Prohibited from building thousands of miles of Great Walls).
-   - Max **3 specialized military doctrines**.
+   - Max **1 terrain** zone; Max **1 primary freshwater** basin; Max **4 abundant resources**; Max **2 staple crops**; Max **2 livestock groups**; Max **2 monuments**; Max **3 military arms**.
+   - **Prohibited:** Nomadic Steppe Imperial Confederacy (moves vast herds across open grasslands).
    - **Prohibited:** Satrapy Provincial Administration & Feudal Bureaucracy (no distant foreign provinces).
    - **Prohibited:** Mass Deportations & Imperial Tribute extraction (lacks imperial military logistics).
+   - **Prohibited:** Tribute from Conquered Provinces when Isolationist (cannot extract foreign tribute without foreign subjects).
+   - **Prohibited:** Impassable mountain barriers when situated on flat alluvial floodplains.
 2. **Regional Kingdom (`regional_kingdom`):**
-   - Max **2 neighboring terrain** biomes.
-   - Max **2 freshwater** basins.
-   - Max **5 abundant resources**.
-   - Max **4 staple crops**.
-   - Max **4 livestock groups**.
-   - Max **4 monuments** (Prohibited from continental Great Walls).
+   - Max **2 neighboring terrain** biomes; Max **2 freshwater** basins; Max **5 abundant resources**; Max **4 staple crops**; Max **4 livestock groups**; Max **4 monuments**.
    - **Prohibited:** Direct Citizen Democracy (citizens cannot assemble in person across an entire kingdom).
+   - **Permitted:** Alluvial floodplains bordered by mountain ranges (e.g. Mesopotamia/Zagros, Indus/Himalayas).
 3. **Continental Empire (`continental_empire`):**
-   - Multi-biome permitted.
+   - Multi-biome permitted; can build Great Walls.
    - **Prohibited:** Direct Citizen Democracy (citizens cannot walk 2,000 miles to a single town square vote).
 
-### 4.3 Key Environmental & Technological Contradictions
-- **Outrigger War Canoes & Catamarans vs Landlocked Mountains:** Outrigger voyaging canoes require open ocean or coastal waterways; locked in purely landlocked mountain plateaus.
-- **Outrigger War Canoes vs Timber Shortage:** Large double-hulled catamarans require tall tree trunks for hulls and masts; locked if suffering a tall timber shortage.
-- **Nomadic Steppe Confederacy vs Horse Shortages:** Steppe horse confederacies and kurgan burials require horse pastoralism; locked if suffering a horse shortage or relying only on human porters.
-- **Cattle Wealth Standard vs Human Porters:** Measuring wealth in live cattle herds contradicts a society that uses zero domesticated animals.
-- **Granite Enclosures (Dzimbahwe) & Moai Statues vs Stone Shortage:** Fitting mortarless granite enclosures or carving 14-ton Moai statues requires quarrying hard stone.
-- **Chinampas ("Floating Gardens"):** Requires shallow volcanic caldera lakes; locked in waterless deserts and violent river flash-floods.
-- **Qanats (Underground Aqueducts):** Built to prevent water evaporation in scorching deserts; useless in soggy tropical rainforests.
-- **Quipu Knotted Recording:** Indigenous Andean record-keeping without written words; locks carved stone law pillars, clay cuneiform tablets, and papyrus scrolls (and vice versa).
+### 4.3 Island & Biome Exclusive Constraints
+When **Volcanic oceanic high islands and coral ring atolls** is the *only* terrain selected:
+- 🔒 **Locks Iron Ore and Copper/Tin Deposits** (`g4_resources`) and **Advanced Metallurgy Smelting** (`a5_science`): Oceanic islands lack continental bedrock ore veins.
+- 🔒 **Locks Heavy Continental Beasts** (`e2_animals`): Oxen, horses, camels, llamas, and war elephants could not be transported across the open Pacific in outrigger canoes.
+
+### 4.4 Environmental & Terrain Mutual Exclusions (Relaxed Rules)
+- **Alluvial Plains vs. Mountain Barriers (Relaxed):** Permitted at Regional Kingdom and Continental Empire scales (e.g. Egypt/Red Sea Hills, Mesopotamia/Zagros, Indus/Himalayas). Only locked at City-State scale or when 'None — completely open flat plains' is selected.
+- **Cruel Gods vs. Predictable Rivers (Relaxed):** Permitted with predictable flooding rivers IF the civilization experiences recurring severe disasters (such as tectonic earthquakes, volcanic eruptions, or multi-year droughts).
+- **Llamas in Coastal Deserts (Relaxed):** Explicitly permitted in coastal fog oases (representing pre-Columbian Peruvian maritime-highland exchange like Caral and Paracas).
+
+### 4.5 Resource Abundance vs. Shortage Exclusions
+Mutual exclusivity is strictly enforced between abundant deposits and critical shortages:
+- Dense cedar/oak forests <-> Lack of tall timber.
+- Quarried stone / volcanic basalt / copper / iron ore <-> Lack of hard stone or metal ores.
+- Copper and tin deposits <-> Lack of tin or alloy fluxes.
+- Vast rock salt domes <-> Lack of salt for preserving food.
+- Rich alluvial clay <-> Lack of domestic clay for pottery.
+- Cotton / flax crops OR sheep / goats livestock <-> Lack of textile plant fibers or sheep wool.
+*Reason:* You cannot have an abundance of a raw material and a critical shortage of that exact same material at the same time!
+
+### 4.6 Cross-Category & Intra-Question Logic Rules
+1. **Paid Free Laborers Exclusivity (`s5_unfree_labor`):** Selecting 'Paid Free Laborers Only' locks all forms of unfree labor (Chattel slavery, debt bondage, serfs/helots, convict labor, ritual captives, temple oblates), and vice versa.
+2. **Heavy Draft Plows Prerequisite (`a4_hydraulic` vs. `e2_animals`):** Heavy iron plows pulled by oxen require 'Oxen and Water Buffalo'. Locked if relying exclusively on human porters or non-draft animals.
+3. **Fuel Shortage vs. Metal Smelting (`g5_shortages` vs. `a5_science`):** Lack of fuel firewood and charcoal locks advanced metallurgy smelting (requires tons of charcoal fuel).
+4. **Isolationism / Command Economy vs. Foreign Trade & Tariffs:** Closing borders and banning foreign trade locks international trade routes (Maritime, Silk Road, Monsoon Dhow, Trans-Saharan) and customs/transit tariffs.
+5. **Non-Written Scripts vs. Civil Service Exams:** If only non-script recording systems (Quipu, Marshallese stick charts) are selected, written civil service exams and scribal mobility are locked.
+6. **Monotheism vs. Polytheism & Sacred Prostitution:** Monolatry/Monotheism locks anthropomorphic polytheism, divine triads, zoomorphic pantheons, and temple fertility rites (Hieros Gamos).
+7. **Rigid Hereditary Caste System vs. Upward Mobility:** A rigid caste system with zero mobility locks all upward mobility avenues (exams, military valor, wealth mobility, manumission).
+8. **Cashless Economy vs. Silver Poll Taxes:** Operating purely on grain redistribution or barter locks flat annual head taxes levied in silver.
+9. **Human Sacrifice vs. Paid Free Laborers Only:** Practicing temple human sacrifice locks 'Paid Free Laborers Only' (societies with massive state human sacrifice extracted captives through war).
 
 ---
 
 ## 5. Intelligent Auto-Select Synergy Engine (Prerequisite Cascades)
-
-The simulator maps foundational choices to their required historical prerequisites in `src/utils/synergyRules.js`:
 
 | Trigger Option Selected | Companion Option Auto-Selected | Target Question ID |
 | :--- | :--- | :--- |
@@ -776,13 +795,9 @@ The simulator maps foundational choices to their required historical prerequisit
 | "Mortarless Granite Enclosures (Dzimbahwe) & Towering..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
 | "Megalithic Volcanic Tuff Statues (Moai) & Open-Air S..." | "Basalt, andesite, and diorite volcanic stones (for m..." | `g4_resources` |
 
-> **Safety Check:** The auto-link engine checks `checkOptionDisallowed` before adding companions. If an option is restricted by an active era, scale cap, or shortage, it will **not** be forced.
-
 ---
 
 ## 6. Cross-Category Teacher Stress-Test Defense Generator
-
-When students generate their civilization dossier, the engine evaluates cross-category vulnerabilities and produces 5 challenging defense dilemmas:
 
 | Stress-Test Dilemma | Categories | Cross-Category Friction Trigger | Student Defense Strategy |
 | :--- | :--- | :--- | :--- |
@@ -796,8 +811,6 @@ When students generate their civilization dossier, the engine evaluates cross-ca
 ---
 
 ## 7. Archaeological Benchmark Presets
-
-Four verified historical archetypes are built into the app to demonstrate balanced, contradiction-free civilizations:
 
 ### Preset: Kemet (The Black Land of the Nile) (`egypt`)
 - **Inspiration:** Ancient Egypt (Old, Middle, New Kingdom)
@@ -947,8 +960,6 @@ Four verified historical archetypes are built into the app to demonstrate balanc
 
 ## 8. AI Evaluation Guide & Review Prompts
 
-To obtain deep architectural recommendations from another AI, provide this document alongside one or more of the following structured prompt templates:
-
 ### Prompt Template A: Comprehensive Edge-Case & Contradiction Audit
 ```text
 You are an expert historian, geographer, and educational game systems architect reviewing the G.R.A.P.E.S. Civilization Builder specification.
@@ -964,13 +975,6 @@ Analyze Section 5 (Intelligent Auto-Select Synergy Engine) in the G.R.A.P.E.S. C
 1. Are the current auto-select linkages historically grounded and intuitive for middle school students?
 2. What obvious technological, environmental, or social dependencies are missing?
 3. Propose 15 additional logical synergies formatted as: Trigger Option -> Target Question -> Companion Option.
-```
-
-### Prompt Template C: Civilization Diversity & Missing Historical Archetypes
-```text
-Review the 300 options in Section 3 and the 13 Inspirations in Section 2.
-1. Assess geographic and cultural representation across ancient Sub-Saharan Africa, Oceania / Polynesia, Pre-Columbian North America, and Steppe / Nomadic Eurasian pastoralists.
-2. What additional distinctive historical options could be added to further enrich these regions within G.R.A.P.E.S.?
 ```
 
 ---
