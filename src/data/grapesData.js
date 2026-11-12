@@ -202,7 +202,9 @@ export const GRAPES_QUESTIONS = {
         'Rocky peninsula with jagged coastlines and hundreds of small islands (like Greece)',
         'High-altitude flat plateau (steppe) swept by strong winds',
         'Fertile volcanic caldera valleys with nutrient-rich soils and crater lakes (like the Valley of Mexico)',
-        'Vast river delta marshlands and bayous intersected by tidal estuaries'
+        'Vast river delta marshlands and bayous intersected by tidal estuaries',
+        "Elevated temperate highland savanna with fertile volcanic basalt plateaus and acacia woodlands (like the Ethiopian highlands / Kingdom of Aksum)",
+        "Coastal fog oasis and hyper-arid desert scrub bordered by rich cold-water ocean upwelling currents (like the Peruvian coast / Caral & Paracas)"
       ]
     },
     {
@@ -221,7 +223,9 @@ export const GRAPES_QUESTIONS = {
         'Seasonal monsoon rains and rainwater harvesting reservoirs (like the Indus/Khmer)',
         'Oasis springs scattered across an arid desert plateau',
         'Braided loess river basin prone to massive silt accumulation and devastating course shifts (like the Yellow River / Huang He)',
-        'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)'
+        'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)',
+        "Tropical crater caldera lakes and seasonal interconnected marshland lagoons (like Lake Texcoco and the Valley of Oaxaca)",
+        "Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)"
       ]
     },
     {
@@ -240,7 +244,9 @@ export const GRAPES_QUESTIONS = {
         'Cataracts (shallow, boulder-filled river rapids that stop enemy boats)',
         'None — completely open flat plains requiring man-made walls and constant military vigilance',
         'Deep river chasms and impassable canyon gorges crossed only by suspension bridges',
-        'Expansive swamps and treacherous mangrove flats that swallow heavy supply wagons and cavalry'
+        'Expansive swamps and treacherous mangrove flats that swallow heavy supply wagons and cavalry',
+        "Uncharted offshore open ocean expanses requiring advanced celestial wayfinding to cross (island sanctuary isolation)",
+        "Towering vertical sandstone cliffs and slot canyon gorges with hidden bottleneck canyon entrances (the Siq of Petra)"
       ]
     },
     {
@@ -261,7 +267,10 @@ export const GRAPES_QUESTIONS = {
         'Gold, silver, jade, or lapis lazuli (for luxury goods and religious idols)',
         'Obsidian (volcanic glass for razor-sharp blades and surgical tools)',
         'Natural bitumen and surface asphalt seeps (for caulking boats, water-sealing bricks, and embalming)',
-        'Vast rock salt domes and coastal evaporation salterns (for meat/fish preservation and vital trade leverage)'
+        'Vast rock salt domes and coastal evaporation salterns (for meat/fish preservation and vital trade leverage)',
+        "Wild silk cocoons and fine white mulberry groves (for imperial silk weaving and thread)",
+        "Marine murex sea snail beds (for extracting prized royal Tyrian purple dye)",
+        "Basalt, andesite, and diorite volcanic stones (for monumental carving and hard stone grinding tools)"
       ]
     },
     {
@@ -279,7 +288,9 @@ export const GRAPES_QUESTIONS = {
         'Lack of horses or pack animals for transport and cavalry',
         'Lack of salt for preserving meat and fish',
         'Lack of tin or alloy fluxes (crippling bronze tool and weapon manufacture unless sustained by maritime trade)',
-        'Lack of fuel firewood and charcoal (forcing reliance on dried animal dung or severely limiting metal smelting)'
+        'Lack of fuel firewood and charcoal (forcing reliance on dried animal dung or severely limiting metal smelting)',
+        "Lack of textile plant fibers or sheep wool (forcing reliance on animal skins, bark cloth, or expensive imports)",
+        "Lack of domestic clay deposits for pottery (requiring carving wooden vessels, stone gourds, or importing ceramic ware)"
       ]
     },
     {
@@ -298,7 +309,9 @@ export const GRAPES_QUESTIONS = {
         'Monsoons, typhoons, or coastal tsunamis',
         'Soil salinization (over-irrigation making the soil too salty to grow crops)',
         'Encroaching desert sand dunes and hyper-arid dust storms suffocating frontier farmland',
-        'Rapid silting of canal choke points and violent shifting of navigable river channels'
+        'Rapid silting of canal choke points and violent shifting of navigable river channels',
+        "Sudden El Ni\u00f1o Southern Oscillation (ENSO) ocean temperature spikes triggering torrential desert deluge rains and collapsing marine fisheries",
+        "Severe winter blizzards and permafrost frosts (dzud) freezing pasture grasslands and devastating herds of livestock"
       ]
     }
   ],
@@ -318,7 +331,9 @@ export const GRAPES_QUESTIONS = {
         'Freeze-dried Potatoes (Chuño) and Quinoa (high-altitude mountain crops)',
         'Olives and Grapes (grown in rocky soil to press into high-value olive oil and wine for export)',
         'Date Palms and Figs (drought-resistant sweet staples producing timber, fibers, and wine in desert oases)',
-        'Sorghum, Yams, and Teff (heat-tolerant grains cultivated along tropical and savannah river courses)'
+        'Sorghum, Yams, and Teff (heat-tolerant grains cultivated along tropical and savannah river courses)',
+        "Cotton and Flax / Linseed (fibers for high-volume textile industries, sails, and oil presses)",
+        "Taro, Yams, and Breadfruit (starchy root and tree staples cultivated on volcanic terraces and wetland ponds)"
       ]
     },
     {
@@ -336,7 +351,9 @@ export const GRAPES_QUESTIONS = {
         'Llamas and Alpacas (light pack animals and source of warm mountain wool; no heavy wheeled carts)',
         'None — all goods are carried on the backs of human porters and canoes (like the Maya/Aztec)',
         'Donkeys and Mules (sure-footed pack equines carrying bulky freight through mountain passes)',
-        'War Hounds and Herding Dogs (bred for guarding storehouses, palace security, and battlefield support)'
+        'War Hounds and Herding Dogs (bred for guarding storehouses, palace security, and battlefield support)',
+        "Domesticated Dromedary & Bactrian Camels (enduring desert caravanners able to carry 400 lbs across waterless sand for a week)",
+        "Asian War Elephants & Work Elephants (trained for heavy logging, clearing jungle tracks, and terrifying battlefield shock)"
       ]
     },
     {
@@ -352,7 +369,9 @@ export const GRAPES_QUESTIONS = {
         'Overland Silk/Incense Caravan Routes (long-distance relay trade across deserts and mountains)',
         'Riverine Network (barges floating downriver with stone/grain and sailing back upriver using wind)',
         'Self-Sufficient Command Economy (foreign trade is banned or strictly controlled by royal agents; everything needed is produced internally)',
-        'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)'
+        'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)',
+        "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)",
+        "Trans-Saharan Gold-Salt Trade (caravans crossing vast sand seas connecting savannah goldfields with coastal salt domes)"
       ]
     },
     {
@@ -369,7 +388,9 @@ export const GRAPES_QUESTIONS = {
         'Commodity Money (cacao beans, cowrie shells, salt blocks, or bolts of silk used as cash)',
         'State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)',
         'Pure Barter & Credit Tallies (trading goods directly or keeping tabs on clay tablets)',
-        'Cast Bronze Tool Money (currency cast in the shape of miniature spade blades, knives, or rings)'
+        'Cast Bronze Tool Money (currency cast in the shape of miniature spade blades, knives, or rings)',
+        "Bolts of Woven Silk and Standardized Spun Yarn Skeins (used alongside copper cash for official payments and international tribute)",
+        "Steatite Inscribed Merchant Seals and Clay Envelope Bullae (merchant authentication counters certifying token transactions)"
       ]
     },
     {
@@ -386,7 +407,9 @@ export const GRAPES_QUESTIONS = {
         'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)',
         'State Monopolies (the government owns all salt, iron, and mines; citizens must buy from the state)',
         'Tribute from Conquered Provinces (citizens pay zero taxes because conquered neighbors fund the empire)',
-        'Head Tax / Poll Tax (mandatory annual flat tax levied in silver or cloth upon every adult citizen)'
+        'Head Tax / Poll Tax (mandatory annual flat tax levied in silver or cloth upon every adult citizen)',
+        "Reciprocal Mit'a Labor Service (rotational community work quotas on royal terraces and storehouses in exchange for state festival feasts)",
+        "Transit Tolls and Mountain Pass / Bridge Fees (extracting silver and goods from foreign caravans traversing strategic choke points)"
       ]
     }
   ],
@@ -407,7 +430,9 @@ export const GRAPES_QUESTIONS = {
         'Military Junta / Stratocracy (ruled by warrior-kings and a council of top generals)',
         'Feudal Bureaucracy (Emperor rules through appointed governors or regional lords who collect taxes)',
         'Maritime Thalassocracy (naval confederation where autonomous coastal port cities contribute galleys and maritime tribute)',
-        'Diarchy (two co-equal hereditary kings balancing civil domestic duties and active wartime command)'
+        'Diarchy (two co-equal hereditary kings balancing civil domestic duties and active wartime command)',
+        "Confederated Tribal League / Amphictyony (council of autonomous clans or regional delegates united around a shared religious sanctuary)",
+        "Egalitarian Civic Council of Merchant-Artisan Guilds (collective urban governance with no grand royal palaces, like the Indus cities)"
       ]
     },
     {
@@ -425,7 +450,9 @@ export const GRAPES_QUESTIONS = {
         'Meritocratic Civil Service Exams (officials are chosen by passing brutal written tests on law and philosophy)',
         'Trial by Strength / Palace Intrigue (when the king dies, royal brothers fight a civil war until one survives)',
         'Adoption of the Best Man (ruler selects and adopts the most competent commander or statesman as rightful imperial heir)',
-        'Tanistry / Kurultai Council (hereditary noble tribal assembly choosing the most battle-tested prince from the royal clan)'
+        'Tanistry / Kurultai Council (hereditary noble tribal assembly choosing the most battle-tested prince from the royal clan)',
+        "Matrilineal Royal Succession (throne passes to the son of the king's sister, or is shared by the queen mother / Kandake)",
+        "Oracular Divination and Clerical Lot Casting (high priests consult temple lot urns or divine omens to confirm the god's chosen monarch)"
       ]
     },
     {
@@ -443,7 +470,9 @@ export const GRAPES_QUESTIONS = {
         'Legalism (strict, harsh collective punishment — if one person breaks the law, their whole family or neighborhood is punished)',
         'Jury Trials & Restorative Justice (large citizen juries vote on guilt; focus on fines, debt forgiveness, or ostracism/exile)',
         'Trial by Ordeal (accused is thrown into a sacred river; if they sink, the river god rejects them as guilty)',
-        'Codified Civil Jurisprudence with written contracts, professional advocates, and legal precedents (Roman civil law tradition)'
+        'Codified Civil Jurisprudence with written contracts, professional advocates, and legal precedents (Roman civil law tradition)',
+        "Elders' Oral Customary Law (unwritten ancestral precedents, kinship compensation wergild fines, and sacred taboo prohibitions)",
+        "Sumptuary Regulations and Ritual Propriety (Confucian Li \u2014 enforcing social order through strict codes of clothing, ceremonial deference, and moral education)"
       ]
     },
     {
@@ -463,7 +492,9 @@ export const GRAPES_QUESTIONS = {
         'Naval Supremacy (trireme warships with bronze battering rams dominating sea lanes)',
         'Psychological Terror (flaying rebel leaders and building pyramids of skulls so cities surrender without fighting)',
         'Horse Archer Light Cavalry (highly mobile skirmishers employing the feigned retreat and Parthian shot)',
-        'Armored War Elephant Corps (massive beasts bred for battlefield shock, breaking enemy infantry lines and terrifying cavalry)'
+        'Armored War Elephant Corps (massive beasts bred for battlefield shock, breaking enemy infantry lines and terrifying cavalry)',
+        "Disciplined Crossbow Phalanxes & Volley Formations (massed rank-and-file archers firing mechanical bronze-triggered crossbows)",
+        "Guerilla Mountain Skirmishers & Slinger Corps (highly mobile highland troops using lead slingshots, darts, and ambush tactics)"
       ]
     },
     {
@@ -480,7 +511,9 @@ export const GRAPES_QUESTIONS = {
         'Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)',
         'Isolationism (building walls and closing borders; viewing all outsiders as uncivilized barbarians)',
         'Total Enslavement & Extraction (razing enemy cities and turning the entire population into state laborers)',
-        'Satrapy Provincial Administration (regional autonomy, local religious tolerance, and royal governors connected by imperial post roads)'
+        'Satrapy Provincial Administration (regional autonomy, local religious tolerance, and royal governors connected by imperial post roads)',
+        "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)",
+        "Establishment of Armed Commercial Enclaves & Frontier Garrison Colonies (planting veteran soldier-colonists to guard borders and extract raw materials)"
       ]
     }
   ],
@@ -499,7 +532,9 @@ export const GRAPES_QUESTIONS = {
         'Landowning Warrior Aristocracy / Patricians (noble families who control the cavalry and estates)',
         'Philosopher-Bureaucrats / Mandarins (scholars who passed the imperial exams)',
         'Plutocratic Merchant Oligarchy (hereditary merchant dynasties controlling shipping guilds and private banks)',
-        'Dual Monarchs (co-ruling royal lineages balancing judicial administration and martial command)'
+        'Dual Monarchs (co-ruling royal lineages balancing judicial administration and martial command)',
+        "Matriarchal Clan Mothers & Queen Mothers (venerable matriarchs who control land titles, confirm monarch selection, and oversee ancestral rites)",
+        "Sacred Shaman-Kings and Oracle Astrologers (rulers whose supreme authority derives from trance communication with supernatural cosmic realms)"
       ]
     },
     {
@@ -516,7 +551,9 @@ export const GRAPES_QUESTIONS = {
         'Long-Distance Merchants (wealthy traders who risk their lives on caravans and ships)',
         'Free Smallholder Farmers (seen as the virtuous backbone of society and the military, while merchants are looked down on as greedy parasites)',
         'Astronomer-Physicians and Master Herbalists (keepers of sacred calendars, medicine, and temple engineering)',
-        'Naval Navigators and Master Shipwrights (commanding extraordinary maritime prestige and guild privileges)'
+        'Naval Navigators and Master Shipwrights (commanding extraordinary maritime prestige and guild privileges)',
+        "Civil Engineers, Hydraulic Architects, and Quarry Masters (highly privileged master builders who design aqueducts, walls, and canals)",
+        "Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)"
       ]
     },
     {
@@ -533,7 +570,9 @@ export const GRAPES_QUESTIONS = {
         'Military Valor (a peasant who captures an enemy commander or shows bravery in battle is rewarded with land and noble status)',
         'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)',
         'Temple Priesthood Ordination (any free citizen initiated into the mystery rites or temple orders can elevate their family\'s rank)',
-        'Imperial Manumission & Patronage (freed former slaves and devoted clients rising through imperial administrative favor)'
+        'Imperial Manumission & Patronage (freed former slaves and devoted clients rising through imperial administrative favor)',
+        "Ritual Athletic & Sacrificial Prowess (exceptional champions in sacred ballgames, wrestling games, or gladiator arenas granted noble honors)",
+        "Craft Guild Mastery & Secret Technical Apprenticeship (initiates who master closely guarded metallurgical or architectural secrets)"
       ]
     },
     {
@@ -549,7 +588,9 @@ export const GRAPES_QUESTIONS = {
         'High Legal Autonomy (like Ancient Egypt — women can own property, initiate divorce, sign contracts, run businesses, and even rule as Pharaoh)',
         'Militarized Matriarchal Autonomy (like Sparta — while men live in barracks, women manage all estates, inherit wealth, and train physically)',
         'Religious & Economic Influence (men hold political office, but women serve as powerful High Priestesses, healers, and market textile merchants)',
-        'Gender Parallelism & Complementary Authority (distinct but equal civic, agricultural, and spiritual spheres of authority for women and men)'
+        'Gender Parallelism & Complementary Authority (distinct but equal civic, agricultural, and spiritual spheres of authority for women and men)',
+        "Matrilineal Clan Inheritance & Economic Primacy (lineage, house ownership, and farmland pass through mothers; husbands move into wife's clan)",
+        "Dual-Sex Governance with Female Co-Rulers (independent women's assemblies and warrior queens holding constitutional veto power alongside kings)"
       ]
     },
     {
@@ -566,7 +607,9 @@ export const GRAPES_QUESTIONS = {
         'State Serfs / Helots (conquered locals tied permanently to the land who farm for the ruling warrior class and frequently revolt)',
         'Paid Free Laborers Only (monuments are built by proud, well-fed peasant crews paid in meat, beer, grain, and tax exemptions)',
         'Imperial State Slaves & Palace Bureaucrats (unfree royal servants who nonetheless wield immense administrative power over free subjects)',
-        'Ritual War Captives (captives reserved exclusively for temple construction, ritual ballgames, and seasonal blood sacrifices)'
+        'Ritual War Captives (captives reserved exclusively for temple construction, ritual ballgames, and seasonal blood sacrifices)',
+        "Penal Convict Labor Crews (criminals and political dissidents sentenced to brutal hard labor in state iron mines and remote frontier wall construction)",
+        "Temple Oblates and Sacred Dedicatees (families pledged to perpetual temple service as brewers, weavers, and agricultural tenders for the gods)"
       ]
     }
   ],
@@ -586,7 +629,9 @@ export const GRAPES_QUESTIONS = {
         'Cosmic Dualism (two equal opposing gods of Light/Order and Darkness/Chaos in eternal war)',
         'Ancestor Veneration & Philosophical Harmony (focus on honoring dead family members and cosmic balance, like Confucianism/Shang China)',
         'Monolatry / Early Monotheism (worship of one supreme creator god above all others)',
-        'Henotheistic Celestial Pantheism (veneration of a supreme solar or sky sovereign while acknowledging regional planetary deities)'
+        'Henotheistic Celestial Pantheism (veneration of a supreme solar or sky sovereign while acknowledging regional planetary deities)',
+        "Sacred Triads and Divine Families (trinities of Father/Creator, Mother/Protector, and Son/Sovereign governing celestial harmony)",
+        "Zoomorphic Shamanic Pantheon (gods manifested as powerful predator beasts: jaguars, feathered serpents, raptor eagles, and horned vipers)"
       ]
     },
     {
@@ -603,7 +648,9 @@ export const GRAPES_QUESTIONS = {
         'Transactional ("Do ut des" — "I give so that you might give"; strict business-like sacrifices for favors)',
         'Distant and indifferent (the gods created the world and now ignore human affairs)',
         'Demanding of moral righteousness and cosmic order (Ma\'at / Dharma — rewarding cosmic justice, punishing hubris)',
-        'Fatalistic and unyielding (human destinies are woven into immutable celestial tapestries)'
+        'Fatalistic and unyielding (human destinies are woven into immutable celestial tapestries)',
+        "Vulnerable and Dependent on Human Energy (gods grow weak, hungry, or age without daily human prayers, blood offerings, and rituals)",
+        "Playful, Enigmatic, and Testing (trickster deities who test mortal hospitality, humility, and cleverness through disguised visitations)"
       ]
     },
     {
@@ -622,7 +669,9 @@ export const GRAPES_QUESTIONS = {
         'Ecstatic festivals, theatrical drama, and athletic games held in honor of patron deities',
         'Astrological tracking of stars and planets to predict the gods\' moods',
         'Sacred ritual purification baths and communal ablutions in consecrated temple tanks or rivers',
-        'Pilgrimages to sacred mountain peaks, oracle grottos, or ancestral burial sanctuaries'
+        'Pilgrimages to sacred mountain peaks, oracle grottos, or ancestral burial sanctuaries',
+        "Sacred Masked Dances and Trance Dramas (initiates embody spirits through elaborate costumes, drumming, and psychotropic herbs)",
+        "Ritual Temple Prostitution and Sacred Marriage Rites (Hieros Gamos uniting the monarch with the fertility goddess to guarantee crop harvests)"
       ]
     },
     {
@@ -640,7 +689,9 @@ export const GRAPES_QUESTIONS = {
         'Reincarnation Cycle (soul is reborn into a higher or lower social class based on karma/duty)',
         'Cremation on funeral pyres (releasing the spirit into the sky or sacred river)',
         'Sky Burial or Ossuary Caves (returning the physical body to nature/ancestral bone pits)',
-        'Vast subterranean necropolises guarded by terracotta armies and sealed with celestial constellation vaults'
+        'Vast subterranean necropolises guarded by terracotta armies and sealed with celestial constellation vaults',
+        "Ancestor Mountain Abodes (spirits become guardian ancestral spirits dwelling in high mountain peaks, watching over village crops)",
+        "Ship Burial and Aquatic Voyages (deceased royalty are placed in sea-going ships with weapons and treasure, launched to sea or buried under earthen barrows)"
       ]
     },
     {
@@ -656,7 +707,9 @@ export const GRAPES_QUESTIONS = {
         'Divine Right Monarchy (the King rules, but claims the gods chose him — Mandate of Heaven)',
         'Power Struggle (the King and the Temple Priests constantly compete for wealth, land, and influence)',
         'Civic Religion (priests are just regular government officials elected to run public festivals)',
-        'Imperial Pontificate (the secular Emperor acts as supreme high priest to subordinate the priesthood to imperial policy)'
+        'Imperial Pontificate (the secular Emperor acts as supreme high priest to subordinate the priesthood to imperial policy)',
+        "Dual-Crown Diarchy of Sacred King and Secular War Chief (a ritual taboo monarch manages spiritual harmony while a secular commander runs warfare and taxes)",
+        "Universal Messianic Imperialism (the Emperor acts as the cosmic axis and universal savior destined to bring all known nations under divine law)"
       ]
     }
   ],
@@ -676,7 +729,9 @@ export const GRAPES_QUESTIONS = {
         'Qanats (underground channels that carry mountain groundwater across hot deserts without evaporating)',
         'Heavy iron-tipped plows pulled by oxen and crop rotation systems',
         'Intricate canal locks, sluice gates, and water-powered grain mills',
-        'Check-dams and rock terracing designed to trap flash-flood desert runoff and fertile silt'
+        'Check-dams and rock terracing designed to trap flash-flood desert runoff and fertile silt',
+        "Suspension Rope Bridges and Paved Mountain Stairways (spanning sheer Andean canyons with braided ichu grass ropes to connect valleys)",
+        "Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved deep into bedrock to access deep aquifers and cool communal gathering)"
       ]
     },
     {
@@ -695,7 +750,9 @@ export const GRAPES_QUESTIONS = {
         'Quipu / Knotted Cords (no written words; complex math, census, and history recorded via colored knots)',
         'Pictographs & Ideograms carved into stone stelae and folding bark-paper books (codices)',
         'Syllabary script where characters represent phonetic consonant-vowel combinations (like Linear B)',
-        'Undeciphered glyph seals stamped into steatite and terracotta for merchant cargo attribution'
+        'Undeciphered glyph seals stamped into steatite and terracotta for merchant cargo attribution',
+        "Monumental Boustrophedon Script ('as the ox plows' \u2014 alternating left-to-right and right-to-left lines carved on temple stone)",
+        "Kharosthi and Aramaic Administrative Cursive (rapid ink-on-parchment script designed for imperial courier decrees across multi-lingual empires)"
       ]
     },
     {
@@ -713,7 +770,9 @@ export const GRAPES_QUESTIONS = {
         'Parchment or vellum made from scraped, dried animal skins',
         'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets',
         'Accordion-folded bark paper (amatl) coated with fine lime plaster and painted in mineral pigments',
-        'Dried and smoothed palm-leaf manuscripts etched with iron styluses and rubbed with soot ink'
+        'Dried and smoothed palm-leaf manuscripts etched with iron styluses and rubbed with soot ink',
+        "Cast Bronze Vessels with Long Ritual Inscriptions (Shang/Zhou bronze bells and cauldrons cast with legal deeds and ancestral prayers)",
+        "Polished Ostraca (recycled smooth pottery shards used by scribes and commoners for receipts, letters, and voting ballots)"
       ]
     },
     {
@@ -732,7 +791,9 @@ export const GRAPES_QUESTIONS = {
         'Thousands of miles of frontier defensive walls and watchtowers (like the Great Wall)',
         'Planned grid-layout cities with standardized baked-brick houses and indoor drainage (like Indus Valley)',
         'Rock-cut cliffside temples and royal mausoleums carved directly into towering sandstone canyons',
-        'Vast hypostyle reception halls with soaring stone column forests and glazed ceramic brick friezes'
+        'Vast hypostyle reception halls with soaring stone column forests and glazed ceramic brick friezes',
+        "Artificial Enclosed Naval Harbors (Cothons) with covered drydocks and slipways for 200+ warships (like Carthage)",
+        "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)"
       ]
     },
     {
@@ -752,7 +813,10 @@ export const GRAPES_QUESTIONS = {
         'Herbal medicine, cranial surgery (trepanation), and setting broken bones',
         'Silk cultivation, glassblowing, or rare purple dye extracted from sea snails',
         'Magnetic compass lodestone orientation and early earthquake seismoscopes',
-        'Distillation of essential oils, chemical mordants, and medicinal antiseptic extracts'
+        'Distillation of essential oils, chemical mordants, and medicinal antiseptic extracts',
+        "Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)",
+        "Advanced Antikythera-Style Geared Astronomical Calculators (bronze differential gear trains tracking planetary orbits and eclipse cycles)",
+        "Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)"
       ]
     }
   ]

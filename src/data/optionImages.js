@@ -1342,6 +1342,392 @@ export function getOptionVisual(optionText) {
     url: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80',
     alt: 'Ancient archaeological stone relic artifact',
     caption: 'Historical Civilization Feature',
-    history: 'A foundational component of the ancient world that shaped daily life, government, and cultural survival.'
-  };
+    history: 'A foundational component of the ancient world that shaped daily life, government, and cultural survival.',
+
+  // === RESEARCH EXPANSIONS (ANCIENT HISTORY & GEOGRAPHY) ===
+  "Elevated temperate highland savanna with fertile volcanic basalt plateaus and acacia woodlands (like the Ethiopian highlands / Kingdom of Aksum)": {
+    url: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80",
+    alt: "Lush volcanic Ethiopian highland plateau with acacia trees under blue sky",
+    caption: "Aksumite Highland Savanna",
+    history: "The Kingdom of Aksum flourished on fertile volcanic highlands 7,000 feet above sea level, enjoying temperate rains, rich basalt soils, and cool climates."
+  },
+  "Coastal fog oasis and hyper-arid desert scrub bordered by rich cold-water ocean upwelling currents (like the Peruvian coast / Caral & Paracas)": {
+    url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Coastal sand dunes meeting the cold Pacific ocean surf in Peru",
+    caption: "Peruvian Coastal Desert Lomas",
+    history: "At Caral (the oldest city in the Americas, 3000 BCE), people lived in hyper-arid coastal river strips fed by melting Andes snow, harvesting anchovies from the cold Humboldt Current."
+  },
+  "Tropical crater caldera lakes and seasonal interconnected marshland lagoons (like Lake Texcoco and the Valley of Oaxaca)": {
+    url: "https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=600&q=80",
+    alt: "Tranquil highland crater lake surrounded by volcanic mountain ridges",
+    caption: "Valley of Mexico Caldera Lake",
+    history: "In the Valley of Mexico, civilizations like Teotihuacan and the Aztecs built colossal cities around five shallow, interconnected crater lakes, harvesting fish, reeds, and salt."
+  },
+  "Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)": {
+    url: "https://images.unsplash.com/photo-1579606032822-1f3ef423db38?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Nabataean stone channel carved into the sandstone cliff of Petra",
+    caption: "Petra Wadi Flash-Flood Dam",
+    history: "The Nabataeans mastered desert hydraulics by carving dams, cisterns, and ceramic pipes into canyon cliffs, capturing seasonal flash floods that could support 30,000 people in hyper-arid Petra."
+  },
+  "Uncharted offshore open ocean expanses requiring advanced celestial wayfinding to cross (island sanctuary isolation)": {
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    alt: "Vast open blue ocean with rolling Pacific waves",
+    caption: "Polynesian Open Sea Horizon",
+    history: "Pacific islanders were protected by thousands of miles of open ocean. No hostile army could invade without mastered knowledge of stars, wave swells, and bird migration patterns."
+  },
+  "Towering vertical sandstone cliffs and slot canyon gorges with hidden bottleneck canyon entrances (the Siq of Petra)": {
+    url: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
+    alt: "The narrow Siq gorge leading to the Treasury at Petra Jordan",
+    caption: "The Narrow Siq Canyon at Petra",
+    history: "The Siq was a mile-long natural gorge barely 10 feet wide with sheer 250-foot cliffs on both sides, allowing a tiny guard detachment to hold off an invading army."
+  },
+  "Wild silk cocoons and fine white mulberry groves (for imperial silk weaving and thread)": {
+    url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+    alt: "Lustrous woven gold and red Chinese silk fabric with imperial dragon patterns",
+    caption: "Imperial Mulberry Silk Brocade",
+    history: "For centuries, ancient China kept the secret of sericulture (boiling silkworm cocoons to harvest mile-long silk threads) under pain of death, creating the world's most valuable trade commodity."
+  },
+  "Marine murex sea snail beds (for extracting prized royal Tyrian purple dye)": {
+    url: "https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=600&q=80",
+    alt: "Deep royal purple dyed Mediterranean wool fabric on display",
+    caption: "Tyrian Royal Purple Murex Dye",
+    history: "The Phoenicians crushed millions of spiny murex sea snails to produce Tyrian purple dye\u2014it required 10,000 snails to dye one toga, making purple the exclusive color of emperors."
+  },
+  "Basalt, andesite, and diorite volcanic stones (for monumental carving and hard stone grinding tools)": {
+    url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+    alt: "Massive Olmec colossal stone head carved from volcanic basalt",
+    caption: "Olmec Colossal Basalt Head",
+    history: "The Olmecs quarried multi-ton volcanic basalt boulders from the Tuxtla mountains and floated them on river rafts over 60 miles to carve majestic ruler portraits."
+  },
+  "Lack of textile plant fibers or sheep wool (forcing reliance on animal skins, bark cloth, or expensive imports)": {
+    url: "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?auto=format&fit=crop&w=600&q=80",
+    alt: "Cured animal hides and beaters for making Polynesian tapa bark cloth",
+    caption: "Tapa Bark Cloth & Cured Pelts",
+    history: "Civilizations without flax, cotton, or sheep wool relied on soaking and pounding the inner bark of mulberry trees into 'tapa' cloth or scraping animal hides."
+  },
+  "Lack of domestic clay deposits for pottery (requiring carving wooden vessels, stone gourds, or importing ceramic ware)": {
+    url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80",
+    alt: "Pre-ceramic polished stone bowl and dried bottle gourds",
+    caption: "Pre-Ceramic Stone & Gourd Vessels",
+    history: "In the Pre-Ceramic Americas (like Caral-Supe), ancient people had no clay pottery; they boiled food by dropping red-hot volcanic rocks directly into dried bottle gourds."
+  },
+  "Sudden El Ni\u00f1o Southern Oscillation (ENSO) ocean temperature spikes triggering torrential desert deluge rains and collapsing marine fisheries": {
+    url: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=600&q=80",
+    alt: "Severe oceanic storm waves crashing against desert shores",
+    caption: "El Ni\u00f1o Torrential Deluge",
+    history: "Periodic El Ni\u00f1o events warmed coastal waters, wiping out anchovy schools and unleashing sudden biblical floods across hyper-arid Peruvian coastal cities like the Moche."
+  },
+  "Severe winter blizzards and permafrost frosts (dzud) freezing pasture grasslands and devastating herds of livestock": {
+    url: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=600&q=80",
+    alt: "Frozen snowy steppe landscape with howling icy winds",
+    caption: "Steppe Dzud Winter Freeze",
+    history: "A 'dzud' is a catastrophic steppe winter disaster where impenetrable ice crusts seal the grass, preventing horses and sheep from grazing and wiping out millions of animals."
+  },
+  "Cotton and Flax / Linseed (fibers for high-volume textile industries, sails, and oil presses)": {
+    url: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=600&q=80",
+    alt: "Fluffy white cotton bolls ready for harvest in a sunny field",
+    caption: "Ancient Gossypium Cotton Plant",
+    history: "Indus Valley and Mesoamerican farmers were the first to domesticate cotton. Spun on ceramic spindle whorls, cotton cloth became the primary textile for sails and everyday tunics."
+  },
+  "Taro, Yams, and Breadfruit (starchy root and tree staples cultivated on volcanic terraces and wetland ponds)": {
+    url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=600&q=80",
+    alt: "Lush tropical taro leaf pond with wetland irrigation channels",
+    caption: "Pacific Wetland Taro Lo'i",
+    history: "Pacific navigators carried 'canoe plants' (taro, yams, and breadfruit) across thousands of miles of ocean, planting pondfields that yielded immense calories per acre."
+  },
+  "Domesticated Dromedary & Bactrian Camels (enduring desert caravanners able to carry 400 lbs across waterless sand for a week)": {
+    url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+    alt: "Caravan of camels walking across golden desert dunes",
+    caption: "Silk Road Bactrian Camels",
+    history: "Camels revolutionized ancient trade: two-humped Bactrian camels conquered the freezing Silk Road, while one-humped Dromedaries unlocked the fiery Sahara and Arabian incense routes."
+  },
+  "Asian War Elephants & Work Elephants (trained for heavy logging, clearing jungle tracks, and terrifying battlefield shock)": {
+    url: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=600&q=80",
+    alt: "Regal Asian elephant with ornate ceremonial temple headpiece",
+    caption: "Royal Indian War Elephant",
+    history: "Ancient Indian and Hellenistic armies used armored war elephants as living tanks. Carrying archer towers, they terrified enemy horses and trampled infantry formations."
+  },
+  "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)": {
+    url: "https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&w=600&q=80",
+    alt: "Traditional lateen-rigged dhow sailing along the Indian Ocean coast",
+    caption: "Monsoon Dhow Trade Route",
+    history: "Ancient sailors harnessed the predictable monsoon winds\u2014blowing east in summer and west in winter\u2014to trade Roman glassware and Arabian frankincense for Indian spices and silk."
+  },
+  "Trans-Saharan Gold-Salt Trade (caravans crossing vast sand seas connecting savannah goldfields with coastal salt domes)": {
+    url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Vast endless Sahara sand sea with golden rippling dunes",
+    caption: "Trans-Saharan Caravan Track",
+    history: "In ancient North Africa, salt was so scarce in the south and gold so abundant that merchants traded one pound of Sahara rock salt for one pound of pure gold!"
+  },
+  "Bolts of Woven Silk and Standardized Spun Yarn Skeins (used alongside copper cash for official payments and international tribute)": {
+    url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+    alt: "Standardized imperial bolts of dyed silk fabric with stamped seals",
+    caption: "Standardized Silk Currency Bolts",
+    history: "In Han and Tang Dynasty China, bolts of silk had legally standardized lengths and widths. Taxes, soldier salaries, and foreign bribes were paid in bolts of fine silk."
+  },
+  "Steatite Inscribed Merchant Seals and Clay Envelope Bullae (merchant authentication counters certifying token transactions)": {
+    url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80",
+    alt: "Square Indus Valley steatite seal with unicorn glyphs and script",
+    caption: "Indus Valley Steatite Seal",
+    history: "Harappan merchants pressed carved soapstone (steatite) seals into wet clay tags on cargo bales, certifying ownership and preventing tampering along trade routes."
+  },
+  "Reciprocal Mit'a Labor Service (rotational community work quotas on royal terraces and storehouses in exchange for state festival feasts)": {
+    url: "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80",
+    alt: "Highland agricultural stone terraces of Machu Picchu in Peru",
+    caption: "Andean Mit'a Terrace Labor",
+    history: "The Inca did not collect money or grain taxes. Instead, every family owed rotational labor ('mit'a') building stone roads, bridges, and terraces in exchange for state beer feasts."
+  },
+  "Transit Tolls and Mountain Pass / Bridge Fees (extracting silver and goods from foreign caravans traversing strategic choke points)": {
+    url: "https://images.unsplash.com/photo-1508873696983-2df5703bc398?auto=format&fit=crop&w=600&q=80",
+    alt: "Mountain pass fortress guarding a narrow stone road between peaks",
+    caption: "Khyber Pass Toll Fortress",
+    history: "Kingdoms controlling narrow mountain passes (like the Khyber Pass or Cilician Gates) grew fabulously wealthy by demanding tolls and tariffs on every passing cargo camel."
+  },
+  "Confederated Tribal League / Amphictyony (council of autonomous clans or regional delegates united around a shared religious sanctuary)": {
+    url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    alt: "Ruins of the sacred Delphi sanctuary temple on Mount Parnassus",
+    caption: "Delphic Amphictyonic League",
+    history: "In Greece and early Italy, independent city-states formed sacred leagues around holy sanctuaries (like the Oracle of Delphi) to prevent unholy wars and protect pilgrims."
+  },
+  "Egalitarian Civic Council of Merchant-Artisan Guilds (collective urban governance with no grand royal palaces, like the Indus cities)": {
+    url: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=600&q=80",
+    alt: "Brick excavated ruins of Mohenjo-Daro street and public bath",
+    caption: "Harappan Civic Council Assembly",
+    history: "In Mohenjo-Daro and Harappa, archaeologists found giant brick granaries and public baths, but ZERO royal palaces or royal burial tombs, pointing to collective merchant rule."
+  },
+  "Matrilineal Royal Succession (throne passes to the son of the king's sister, or is shared by the queen mother / Kandake)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Carved relief of Kushite warrior Queen Kandake Amanirenas",
+    caption: "Kushite Queen Mother Kandake",
+    history: "In the Kingdom of Kush (Nubia), the royal line passed through female lineage. The Queen Mother (Kandake) commanded armies into battle and co-ruled alongside the monarch."
+  },
+  "Oracular Divination and Clerical Lot Casting (high priests consult temple lot urns or divine omens to confirm the god's chosen monarch)": {
+    url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    alt: "The Pythia priestess seated over the prophetic chasm at Delphi",
+    caption: "Temple Oracle Lot Casting",
+    history: "When Spartan kings or Hebrew judges died, leaders gathered at sacred sanctuaries to cast inscribed stones (cleromancy) or consult oracles so that the gods chose the ruler."
+  },
+  "Elders' Oral Customary Law (unwritten ancestral precedents, kinship compensation wergild fines, and sacred taboo prohibitions)": {
+    url: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80",
+    alt: "Council of tribal elders gathered under a sacred baobab tree",
+    caption: "Ancestral Elders' Court of Custom",
+    history: "Before written law codes, disputes were resolved by village elders reciting ancestral memories. Murders were settled by paying 'wergild' (blood money in cattle) to prevent vendettas."
+  },
+  "Sumptuary Regulations and Ritual Propriety (Confucian Li \u2014 enforcing social order through strict codes of clothing, ceremonial deference, and moral education)": {
+    url: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80",
+    alt: "Confucian scholar ceremony in classical courtyard in Qufu",
+    caption: "Confucian Codes of Propriety (Li)",
+    history: "Confucian state law prioritized moral education and ritual etiquette ('Li') over harsh jail sentences. Laws strictly dictated what color robe and how many horses each rank could own."
+  },
+  "Disciplined Crossbow Phalanxes & Volley Formations (massed rank-and-file archers firing mechanical bronze-triggered crossbows)": {
+    url: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=600&q=80",
+    alt: "Terracotta Army kneeling archers from the tomb of Emperor Qin",
+    caption: "Qin Dynasty Bronze Trigger Crossbows",
+    history: "Qin armies mastered massed crossbow warfare with standardized bronze triggers. Rotating ranks fired continuous volleys of armor-piercing bronze bolts that shredded cavalry charges."
+  },
+  "Guerilla Mountain Skirmishers & Slinger Corps (highly mobile highland troops using lead slingshots, darts, and ambush tactics)": {
+    url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80",
+    alt: "Balearic lead sling bullets and ancient woven leather slings",
+    caption: "Balearic & Rhodian Lead Slingers",
+    history: "Balearic slingers hurled lead bullets the size of plums at over 100 mph, outranging ancient composite bows and crushing enemy skulls through bronze helmets."
+  },
+  "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Persian relief of royal court reception and diplomacy",
+    caption: "Imperial Royal Hostage Diplomacy",
+    history: "Emperors demanded conquered vassal kings send their eldest princes to live as 'honored hostages' in the capital, educating them in imperial culture while guaranteeing obedience."
+  },
+  "Establishment of Armed Commercial Enclaves & Frontier Garrison Colonies (planting veteran soldier-colonists to guard borders and extract raw materials)": {
+    url: "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?auto=format&fit=crop&w=600&q=80",
+    alt: "Fortified Roman colonia legionary outpost ruins along the Danube",
+    caption: "Frontier Military Veteran Colonia",
+    history: "Rome and Phoenicia secured hostile frontiers by granting retired veteran soldiers free farmland in frontier colonies (coloniae), creating permanent self-defending buffer outposts."
+  },
+  "Matriarchal Clan Mothers & Queen Mothers (venerable matriarchs who control land titles, confirm monarch selection, and oversee ancestral rites)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "African carved wooden ivory pendant mask of the Queen Mother Idia",
+    caption: "Ancestral Queen Mother of the Realm",
+    history: "In West African and Haudenosaunee traditions, clan mothers held title to all agricultural land and held the constitutional authority to appoint or depose the king."
+  },
+  "Sacred Shaman-Kings and Oracle Astrologers (rulers whose supreme authority derives from trance communication with supernatural cosmic realms)": {
+    url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+    alt: "Chavin stone carved tenon head in trance transformation",
+    caption: "Chav\u00edn Shaman-King in Trance",
+    history: "At Chav\u00edn de Hu\u00e1ntar (Peru, 900 BCE), priest-kings ingested psychoactive San Pedro cactus juice, speaking through acoustic temple tunnels as the human incarnation of the Jaguar God."
+  },
+  "Civil Engineers, Hydraulic Architects, and Quarry Masters (highly privileged master builders who design aqueducts, walls, and canals)": {
+    url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+    alt: "Roman aqueduct arches of Pont du Gard spanning the river",
+    caption: "Imperial Hydraulic Architects",
+    history: "Roman master architects and Sumerian ditch-surveyors enjoyed royal salaries and tax-exempt status because the survival of the empire depended on their surveying precision."
+  },
+  "Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)": {
+    url: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=600&q=80",
+    alt: "Intricate Paracas pre-Inca embroidered funeral textile mantle",
+    caption: "Paracas Master Textile Guild",
+    history: "In ancient Peru, master weavers commanded higher social rank than goldsmiths. High-status textiles took years to weave and served as the supreme diplomatic gift."
+  },
+  "Ritual Athletic & Sacrificial Prowess (exceptional champions in sacred ballgames, wrestling games, or gladiator arenas granted noble honors)": {
+    url: "https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=600&q=80",
+    alt: "Mayan stone ballcourt ring carved with serpent motifs at Chichen Itza",
+    caption: "Mesoamerican Sacred Ballcourt Champion",
+    history: "In Mesoamerica and Classical Rome, legendary athletes who won sacred ballgames or gladiator spectacles were showered with gold, civic statues, and freedom from humble castes."
+  },
+  "Craft Guild Mastery & Secret Technical Apprenticeship (initiates who master closely guarded metallurgical or architectural secrets)": {
+    url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient blacksmith forge with bronze anvil and glowing coals",
+    caption: "Secret Metallurgical Guild Hall",
+    history: "Ancient blacksmiths, glassmakers, and Greek fire alchemists belonged to secret sworn guilds. Passing brutal tests of craftsmanship was the only way a poor apprentice could enter the guild."
+  },
+  "Matrilineal Clan Inheritance & Economic Primacy (lineage, house ownership, and farmland pass through mothers; husbands move into wife's clan)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Minoan fresco of women in vibrant royal dresses chatting",
+    caption: "Minoan Matrilineal Society",
+    history: "In Minoan Crete and ancient Nubia, women owned the houses and passed land to their daughters. Frescoes at Knossos depict women dancing and bull-leaping alongside men."
+  },
+  "Dual-Sex Governance with Female Co-Rulers (independent women's assemblies and warrior queens holding constitutional veto power alongside kings)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Relief of Kushite Queen Amanitore smiting enemies on temple wall",
+    caption: "Kushite Female Co-Regent",
+    history: "In Meroitic Kush, Queen Amanitore was depicted on temple pylons holding swords and smiting foreign invaders as an equal co-regent with King Natakamani."
+  },
+  "Penal Convict Labor Crews (criminals and political dissidents sentenced to brutal hard labor in state iron mines and remote frontier wall construction)": {
+    url: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=600&q=80",
+    alt: "Stone watchtowers of the Great Wall stretching over rocky mountain ridges",
+    caption: "Qin Dynasty Penal Wall Laborers",
+    history: "Under Qin Legalist law, petty criminals, corrupt officials, and tax evaders were shaved of hair, chained by iron neck collars, and sentenced to 5 years building the Great Wall."
+  },
+  "Temple Oblates and Sacred Dedicatees (families pledged to perpetual temple service as brewers, weavers, and agricultural tenders for the gods)": {
+    url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient temple storehouse chambers and oil jar cellars",
+    caption: "Mesopotamian Temple Oblates",
+    history: "In Mesopotamia, poor parents pledged children as 'shirku' (temple oblates). Branded with the mark of the goddess Ishtar, they worked temple bakeries and breweries for life."
+  },
+  "Sacred Triads and Divine Families (trinities of Father/Creator, Mother/Protector, and Son/Sovereign governing celestial harmony)": {
+    url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
+    alt: "Statues of Egyptian triad: Osiris, Isis, and child Horus in stone",
+    caption: "Sacred Triad of Osiris, Isis & Horus",
+    history: "Ancient Egyptian and Roman polytheism frequently venerated holy triads\u2014such as Osiris, Isis, and Horus in Abydos, or Jupiter, Juno, and Minerva on Rome's Capitoline Hill."
+  },
+  "Zoomorphic Shamanic Pantheon (gods manifested as powerful predator beasts: jaguars, feathered serpents, raptor eagles, and horned vipers)": {
+    url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+    alt: "Carved stone feathered serpent Quetzalcoatl head at Teotihuacan",
+    caption: "Mesoamerican Feathered Serpent God",
+    history: "In Olmec and Andean religion, deities were fearsome apex predators: the Jaguar represented subterranean earth power, while the Harpy Eagle and Feathered Serpent ruled the heavens."
+  },
+  "Vulnerable and Dependent on Human Energy (gods grow weak, hungry, or age without daily human prayers, blood offerings, and rituals)": {
+    url: "https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=600&q=80",
+    alt: "Aztec Sun Stone calendar disk depicting the hungry solar deity",
+    caption: "Aztec Solar Deity Sustenance",
+    history: "In Aztec cosmology, the Fifth Sun (Tonatiuh) grew weary every night traveling the underworld and required human hearts and blood ('chalchihuitl') at dawn to muster the strength to rise."
+  },
+  "Playful, Enigmatic, and Testing (trickster deities who test mortal hospitality, humility, and cleverness through disguised visitations)": {
+    url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Greek amphora painting of Hermes the winged messenger trickster",
+    caption: "The Trickster God in Disguise",
+    history: "In Greek myth (Hermes/Dionysus) and Norse lore, gods wandered the earth dressed as poor beggars. Mortals who showed generous hospitality (xenia) were blessed; proud kings were punished."
+  },
+  "Sacred Masked Dances and Trance Dramas (initiates embody spirits through elaborate costumes, drumming, and psychotropic herbs)": {
+    url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+    alt: "Carved ritual wooden mask used in sacred ancestral trance ceremonies",
+    caption: "Sacred Masked Spirit Dance",
+    history: "In Chav\u00edn de Hu\u00e1ntar and West Africa, initiates donned heavy wooden animal masks, dancing to rhythmic drumming and flute music to channel the living spirits of ancestors."
+  },
+  "Ritual Temple Prostitution and Sacred Marriage Rites (Hieros Gamos uniting the monarch with the fertility goddess to guarantee crop harvests)": {
+    url: "https://images.unsplash.com/photo-1594897030560-8877563c1cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient relief depicting sacred marriage ceremony of king and high priestess",
+    caption: "Sumerian Sacred Marriage (Hieros Gamos)",
+    history: "Every New Year at the temple of Inanna in Uruk, the Sumerian king reenacted the divine marriage with the High Priestess to ensure fertility for fields, animals, and women."
+  },
+  "Ancestor Mountain Abodes (spirits become guardian ancestral spirits dwelling in high mountain peaks, watching over village crops)": {
+    url: "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80",
+    alt: "Towering snow-capped Andes peak glowing at sunrise",
+    caption: "Andean Mountain Apu Ancestor",
+    history: "In the Andes, the dead did not go to an underworld; their spirits dwelt in sacred snow-capped mountain peaks called 'Apus', protecting local villages in exchange for annual corn-beer toasts."
+  },
+  "Ship Burial and Aquatic Voyages (deceased royalty are placed in sea-going ships with weapons and treasure, launched to sea or buried under earthen barrows)": {
+    url: "https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&w=600&q=80",
+    alt: "Excavated Viking/Anglo-Saxon Sutton Hoo ship burial outline in earth",
+    caption: "Royal Maritime Ship Burial",
+    history: "At Sutton Hoo (England) and ancient Scandinavian barrows, chieftains were buried inside 90-foot longships equipped with helmets, swords, and silver bowls for their voyage across cosmic seas."
+  },
+  "Dual-Crown Diarchy of Sacred King and Secular War Chief (a ritual taboo monarch manages spiritual harmony while a secular commander runs warfare and taxes)": {
+    url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    alt: "Two carved royal thrones in ancient temple palace courtyard",
+    caption: "Sacred King & Secular War Chief Diarchy",
+    history: "In early Japan (Emperor vs Shogun) and Polynesian realms (Tui Tonga vs Tui Kanokupolu), a sacred divine monarch handled religious taboos while a secular commander led the army."
+  },
+  "Universal Messianic Imperialism (the Emperor acts as the cosmic axis and universal savior destined to bring all known nations under divine law)": {
+    url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80",
+    alt: "Colossal marble statue of Augustus Caesar as divine peacemaker of the world",
+    caption: "Augustus & Universal Pax Imperium",
+    history: "Roman imperial propaganda proclaimed Augustus the bringer of the Golden Age ('Pax Romana') and universal peace, decreeing that Rome's divine mission was to tame and govern the nations."
+  },
+  "Suspension Rope Bridges and Paved Mountain Stairways (spanning sheer Andean canyons with braided ichu grass ropes to connect valleys)": {
+    url: "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80",
+    alt: "Inca Q'eswachaka woven rope bridge hanging over steep river gorge",
+    caption: "Inca Q'eswachaka Grass Rope Bridge",
+    history: "The Inca engineered 150-foot suspension bridges woven entirely from braided wild grass ropes (ichu) anchored to massive cliffside masonry, easily supporting armies and pack llamas."
+  },
+  "Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved deep into bedrock to access deep aquifers and cool communal gathering)": {
+    url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+    alt: "Intricate subterranean geometric steps of Chand Baori stepwell in India",
+    caption: "Subterranean Stepwell (Baoli)",
+    history: "In ancient and medieval western India, architects dug 10 stories deep into bedrock, lining stepwells with carved stone stairs that collected seasonal monsoon rainwater and provided cool social sanctuaries."
+  },
+  "Monumental Boustrophedon Script ('as the ox plows' \u2014 alternating left-to-right and right-to-left lines carved on temple stone)": {
+    url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80",
+    alt: "Archaic Greek stone inscription carved in alternating boustrophedon lines",
+    caption: "Archaic Boustrophedon Stone Stela",
+    history: "In early archaic Greece and Etruria, texts were carved like an ox plowing a field: the first line read left-to-right, and the next line reversed right-to-left with mirrored letters."
+  },
+  "Kharosthi and Aramaic Administrative Cursive (rapid ink-on-parchment script designed for imperial courier decrees across multi-lingual empires)": {
+    url: "https://images.unsplash.com/photo-1533158307587-828f0a76ef46?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient cursive Aramaic parchment document written in brown ink",
+    caption: "Imperial Aramaic Courier Chancery Script",
+    history: "The Achaemenid Persian Empire adopted simple cursive Aramaic as its imperial language, allowing royal couriers to carry written dispatches from Egypt to India with lightning speed."
+  },
+  "Cast Bronze Vessels with Long Ritual Inscriptions (Shang/Zhou bronze bells and cauldrons cast with legal deeds and ancestral prayers)": {
+    url: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Chinese Shang Dynasty ritual bronze ding tripod cauldron",
+    caption: "Zhou Dynasty Inscribed Ritual Bronze Ding",
+    history: "In Shang and Zhou China, royal deeds, land gifts, and peace treaties were cast in molten bronze inside ritual three-legged cauldrons (ding) so the decrees would last forever."
+  },
+  "Polished Ostraca (recycled smooth pottery shards used by scribes and commoners for receipts, letters, and voting ballots)": {
+    url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80",
+    alt: "Broken ceramic pottery shard with ancient black ink writing",
+    caption: "Athenian Ostracism Pottery Shard (Ostracon)",
+    history: "Ancient people couldn't afford expensive papyrus, so they wrote everyday notes on broken pottery pieces (ostraca). In Athens, citizens scratched the names of corrupt politicians on ostraca to exile them."
+  },
+  "Artificial Enclosed Naval Harbors (Cothons) with covered drydocks and slipways for 200+ warships (like Carthage)": {
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    alt: "Aerial view of the circular lagoon of the ancient Carthaginian naval cothon",
+    caption: "Carthaginian Circular Naval Cothon",
+    history: "Carthage engineered an artificial circular naval fortress harbor with an island admiral palace in the center and roofed slipways that could conceal and launch 220 war triremes."
+  },
+  "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)": {
+    url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+    alt: "Towering grassy platform Monks Mound at Cahokia Mounds state historic site",
+    caption: "Cahokia Monks Mound Platform",
+    history: "At Cahokia (near modern St. Louis, 1050 CE), Indigenous Americans hand-carried 55 million cubic feet of soil in woven baskets to build a 100-foot earthen pyramid larger at its base than Giza!"
+  },
+  "Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)": {
+    url: "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=600&q=80",
+    alt: "Precision bronze cast crossbow trigger mechanism with notches and pins",
+    caption: "Qin Precision Bronze Crossbow Trigger",
+    history: "In 300 BCE, Chinese weaponsmiths cast identical bronze trigger parts with such tight tolerances that damaged triggers on the battlefield could be replaced instantly with spare parts."
+  },
+  "Advanced Antikythera-Style Geared Astronomical Calculators (bronze differential gear trains tracking planetary orbits and eclipse cycles)": {
+    url: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80",
+    alt: "Intricate bronze clockwork gear mechanisms and dials",
+    caption: "The Antikythera Astronomical Computer",
+    history: "Discovered in an ancient shipwreck, the Antikythera Mechanism (c. 150 BCE) contained 30 interlocking bronze gears that precisely calculated lunar eclipses and planetary positions 1,500 years before Swiss clocks!"
+  },
+  "Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)": {
+    url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+    alt: "Ancient Chinese bamboo derricks and brine well extraction equipment in Sichuan",
+    caption: "Sichuan Bamboo Salt-Drilling Well",
+    history: "In Sichuan (Han Dynasty), engineers drilled 3,000 feet into the earth using heavy iron bits on bamboo cables to tap subterranean brine, piping natural gas through bamboo tubes to boil the salt."
+  }
+};
 }

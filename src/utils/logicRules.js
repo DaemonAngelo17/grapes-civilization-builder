@@ -119,6 +119,36 @@ export function checkOptionDisallowed(
     }
   }
 
+  // Mechanical Crossbows (invented ~400 BCE in Warring States China)
+  if (isBronzeAge) {
+    if (optLower.includes('mechanical triggered crossbows') || optLower.includes('disciplined crossbow phalanxes')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Pre-400 BCE): Mechanical bronze-triggered crossbows were invented in Warring States China (~400 BCE). Bronze Age armies fought with hand-drawn recurve bows, bronze daggers, and spears!'
+      };
+    }
+  }
+
+  // Antikythera Astronomical Computer (~150 BCE Hellenistic)
+  if (currentEra === 'early_bronze' || currentEra === 'late_bronze' || currentEra === 'early_iron') {
+    if (optLower.includes('advanced antikythera-style geared astronomical')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Hellenistic Era): Geared bronze differential mechanical calculators (like the Antikythera Mechanism) were invented around 150 BCE!'
+      };
+    }
+  }
+
+  // Deep Salt Drilling Derricks (~100 BCE Han Dynasty)
+  if (currentEra !== 'imperial_era') {
+    if (optLower.includes('deep underground salt-drilling derricks')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Imperial Era): Deep bamboo percussion drilling for subterranean brine and natural gas was invented in Han Dynasty Sichuan (~100 BCE).'
+      };
+    }
+  }
+
   // =========================================================================
   // 0.5. CIVILIZATION SCALE CONSTRAINTS (City-State vs Kingdom vs Empire)
   // =========================================================================
@@ -2082,6 +2112,138 @@ export function checkOptionDisallowed(
       }
     }
   }
+
+
+    // --- RESEARCHED GEOGRAPHY & RESOURCE CONTRADICTIONS ---
+    if (optLower.includes('marine murex sea snail beds')) {
+      const terrain = selectedList('g2_terrain');
+      const isLandlocked = terrain.length > 0 && terrain.every((t) =>
+        t.toLowerCase().includes('mountain') || t.toLowerCase().includes('steppe') || t.toLowerCase().includes('plateau')
+      ) && !hasText('g3_barriers', 'coastlines');
+      if (isLandlocked) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Marine murex sea snails live exclusively on ocean shorelines; a landlocked mountainous interior realm has no marine snail beds!'
+        };
+      }
+    }
+
+    if (optLower.includes('wild silk cocoons and fine white mulberry groves')) {
+      if (hasText('g2_terrain', 'arid desert expanses') && !hasText('g1_freshwater', 'river')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Delicate white mulberry trees require fertile soils and reliable rainfall; they wither in hyper-arid sand deserts!'
+        };
+      }
+    }
+
+    if (optLower.includes('lack of textile plant fibers or sheep wool')) {
+      if (hasText('g4_resources', 'wild silk cocoons') || hasText('e1_crops', 'cotton and flax') || hasText('e2_animals', 'sheep and goats')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You already possess abundant sheep, cotton/flax crops, or mulberry silk; you cannot lack textile fibers!'
+        };
+      }
+    }
+
+    if (optLower.includes('lack of domestic clay deposits for pottery')) {
+      if (hasText('g4_resources', 'alluvial clay') || hasText('a2_medium', 'baked or sun-dried clay tablets') || hasText('a3_monuments', 'baked-brick houses')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: You selected rich alluvial clay, brick cities, or clay tablets, directly contradicting a lack of domestic clay!'
+        };
+      }
+    }
+
+    // --- RESEARCHED ANIMAL & CROP CONTRADICTIONS ---
+    if (optLower.includes('cotton and flax / linseed')) {
+      if (hasText('g2_terrain', 'high-altitude flat plateau') && !hasText('g1_freshwater', 'flooding river')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Cotton requires a 200-day frost-free growing season with intense summer heat; it freezes and dies on cold wind-swept plateaus!'
+        };
+      }
+    }
+
+    if (optLower.includes('domesticated dromedary & bactrian camels')) {
+      if (hasText('g2_terrain', 'dense, humid tropical rainforest') || hasText('g3_barriers', 'mangrove flats')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Camels\' soft footpads rot and suffer fatal foot diseases in soggy, humid rainforest mud and tidal mangrove swamps!'
+        };
+      }
+    }
+
+    if (optLower.includes('asian war elephants & work elephants')) {
+      if ((hasText('g2_terrain', 'arid desert expanses') && !hasText('g1_freshwater', 'river')) || hasText('g2_terrain', 'high-altitude flat plateau')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: War elephants consume 300+ lbs of fresh greenery and 50 gallons of water daily; waterless deserts starve them, and freezing alpine plateaus cause fatal hypothermia!'
+        };
+      }
+    }
+
+    // --- RESEARCHED ENGINEERING & ARCHITECTURE CONTRADICTIONS ---
+    if (optLower.includes('suspension rope bridges and paved mountain stairways')) {
+      const terrain = selectedList('g2_terrain');
+      const isPurePlains = terrain.length > 0 && terrain.every((t) => t.toLowerCase().includes('flat, featureless alluvial floodplains'));
+      if (isPurePlains && !hasText('g3_barriers', 'canyon gorges')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Suspension rope bridges require sheer, towering bedrock canyon cliffs on both sides to anchor the cables! You cannot string a suspension bridge across 50 miles of flat alluvial mud floodplains.'
+        };
+      }
+    }
+
+    if (optLower.includes('artificial enclosed naval harbors (cothons)')) {
+      const terrain = selectedList('g2_terrain');
+      const isLandlocked = terrain.length > 0 && terrain.every((t) =>
+        t.toLowerCase().includes('mountain') || t.toLowerCase().includes('steppe') || t.toLowerCase().includes('plateau')
+      ) && !hasText('g3_barriers', 'coastlines');
+      if (isLandlocked) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: An artificial circular naval cothon with covered drydocks is designed for sea-going war triremes; it requires an ocean or sea coastline!'
+        };
+      }
+    }
+
+    // --- RESEARCHED GOVERNANCE & GENDER CONTRADICTIONS ---
+    if (optLower.includes('egalitarian civic council of merchant-artisan guilds')) {
+      if (hasText('r1_structure', 'theocratic god-king worship') || hasText('s1_apex', 'god-king')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: An egalitarian civic merchant council with no grand palaces contradicts absolute god-king autocracy!'
+        };
+      }
+    }
+
+    if (optLower.includes('matrilineal royal succession') || optLower.includes('matriarchal clan mothers')) {
+      if (hasText('s4_gender', 'strict patriarchal seclusion')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Matrilineal succession and queen mothers directly contradict strict patriarchal seclusion where women are legal property locked indoors!'
+        };
+      }
+    }
+
+    if (optLower.includes('strict patriarchal seclusion')) {
+      if (hasText('p2_succession', 'matrilineal') || hasText('s1_apex', 'matriarchal')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Strict patriarchal seclusion contradicts matrilineal royal succession and ruling clan mothers!'
+        };
+      }
+    }
+
+    if (optLower.includes('trans-saharan gold-salt trade')) {
+      if (hasText('e2_animals', 'none — all goods are carried on the backs of human porters')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Crossing the vast Sahara sand sea requires pack camels; human porters cannot carry enough water across hundreds of miles of sand dunes to survive!'
+        };
+      }
+    }
 
   return { isDisallowed: false, reason: null };
 }
