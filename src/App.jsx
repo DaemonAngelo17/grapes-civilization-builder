@@ -22,7 +22,9 @@ import ImageModal from './components/ImageModal';
 import { 
   GRAPES_CATEGORIES, 
   GRAPES_QUESTIONS, 
-  HISTORICAL_PRESETS 
+  HISTORICAL_PRESETS,
+  HISTORICAL_ERAS,
+  CIVILIZATION_SCALES
 } from './data/grapesData';
 
 const ICONS = {
@@ -40,6 +42,8 @@ export default function App() {
 
   const [civilizationName, setCivilizationName] = useState(defaultPreset.name);
   const [inspiration, setInspiration] = useState(defaultPreset.inspiration);
+  const [currentEra, setCurrentEra] = useState(defaultPreset.era || 'early_bronze');
+  const [currentScale, setCurrentScale] = useState(defaultPreset.scale || 'regional_kingdom');
   const [answers, setAnswers] = useState(defaultPreset.answers);
   const [customNotes, setCustomNotes] = useState({});
   const [activeCategory, setActiveCategory] = useState('G');
@@ -90,6 +94,8 @@ export default function App() {
     if (preset) {
       setCivilizationName(preset.name);
       setInspiration(preset.inspiration);
+      if (preset.era) setCurrentEra(preset.era);
+      if (preset.scale) setCurrentScale(preset.scale);
       setAnswers(preset.answers);
       setCustomNotes({});
       showToast(`Loaded Preset: ${preset.name}`);
@@ -118,6 +124,8 @@ export default function App() {
       'Phoenicia & Carthage (Maritime Thalassocracy)'
     ];
     const randomInspiration = inspirationsList[Math.floor(Math.random() * inspirationsList.length)];
+    const randomEra = HISTORICAL_ERAS[Math.floor(Math.random() * HISTORICAL_ERAS.length)].id;
+    const randomScale = CIVILIZATION_SCALES[Math.floor(Math.random() * CIVILIZATION_SCALES.length)].id;
 
     const newAnswers = {};
     for (const cat of GRAPES_CATEGORIES) {
@@ -137,6 +145,8 @@ export default function App() {
 
     setCivilizationName(randomName);
     setInspiration(randomInspiration);
+    setCurrentEra(randomEra);
+    setCurrentScale(randomScale);
     setAnswers(newAnswers);
     setCustomNotes({});
     showToast('The Oracles have cast their lot! New Civilization generated.');
@@ -147,6 +157,8 @@ export default function App() {
     if (window.confirm('Are you sure you want to clear all selections and start fresh?')) {
       setCivilizationName('');
       setInspiration('');
+      setCurrentEra('early_bronze');
+      setCurrentScale('regional_kingdom');
       setAnswers({});
       setCustomNotes({});
       showToast('All answers cleared.');
@@ -190,6 +202,10 @@ export default function App() {
           setCivilizationName={setCivilizationName}
           inspiration={inspiration}
           setInspiration={setInspiration}
+          currentEra={currentEra}
+          setCurrentEra={setCurrentEra}
+          currentScale={currentScale}
+          setCurrentScale={setCurrentScale}
           onLoadPreset={handleLoadPreset}
           onRandomize={handleRandomize}
           onReset={handleReset}
@@ -313,6 +329,8 @@ export default function App() {
                         onCustomChange={handleCustomChange}
                         allAnswers={answers}
                         logicGuardEnabled={logicGuardEnabled}
+                        currentEra={currentEra}
+                        currentScale={currentScale}
                         onEnlargeImage={(visual, opt) => setEnlargedImage({ visual, optionText: opt })}
                       />
                     ))}
@@ -368,6 +386,8 @@ export default function App() {
         <DossierView
           civilizationName={civilizationName}
           inspiration={inspiration}
+          currentEra={currentEra}
+          currentScale={currentScale}
           answers={answers}
           customNotes={customNotes}
           onClose={() => setIsDossierOpen(false)}

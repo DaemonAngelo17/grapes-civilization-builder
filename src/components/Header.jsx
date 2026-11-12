@@ -10,15 +10,26 @@ import {
   Compass,
   CheckCircle2,
   Brain,
-  Layers
+  Layers,
+  Hourglass,
+  Globe2
 } from 'lucide-react';
-import { INSPIRATIONS, HISTORICAL_PRESETS } from '../data/grapesData';
+import { 
+  INSPIRATIONS, 
+  HISTORICAL_PRESETS,
+  HISTORICAL_ERAS,
+  CIVILIZATION_SCALES
+} from '../data/grapesData';
 
 export default function Header({
   civilizationName,
   setCivilizationName,
   inspiration,
   setInspiration,
+  currentEra,
+  setCurrentEra,
+  currentScale,
+  setCurrentScale,
   onLoadPreset,
   onRandomize,
   onReset,
@@ -32,6 +43,9 @@ export default function Header({
   setOrderMode
 }) {
   const percentComplete = Math.round((totalAnswered / totalQuestions) * 100);
+
+  const selectedEraObj = HISTORICAL_ERAS.find((e) => e.id === currentEra) || HISTORICAL_ERAS[0];
+  const selectedScaleObj = CIVILIZATION_SCALES.find((s) => s.id === currentScale) || CIVILIZATION_SCALES[1];
 
   return (
     <header className="parchment-card rounded-2xl p-5 md:p-6 mb-6 border border-[#cfc1a8] shadow-md relative overflow-hidden">
@@ -204,6 +218,99 @@ export default function Header({
           >
             <RotateCcw size={16} />
           </button>
+        </div>
+      </div>
+
+      {/* Historical Era & Civilization Scale Selectors (Step 0 Foundations) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 mt-4 border-t border-[#dfd3be]">
+        {/* Historical Era (Time Period) */}
+        <div className="p-3.5 rounded-xl bg-[#faf6ee] border border-[#d6c7b0] shadow-xs">
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <label className="text-xs font-bold font-cinzel text-[#48372b] uppercase tracking-wider flex items-center gap-1.5">
+              <Hourglass size={14} className="text-[#935923]" />
+              Historical Era (Time Period)
+            </label>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#f0e3ce] text-[#7a481c] border border-[#dfcbb0]">
+              Technology & Politics Gate
+            </span>
+          </div>
+          <select
+            value={currentEra}
+            onChange={(e) => setCurrentEra(e.target.value)}
+            className="w-full text-xs sm:text-sm font-sans-ui font-semibold px-3 py-2 rounded-lg bg-[#ffffff] border border-[#d2c4ad] text-[#241a15] focus:outline-none focus:ring-2 focus:ring-[#935923] cursor-pointer"
+          >
+            {HISTORICAL_ERAS.map((era) => (
+              <option key={era.id} value={era.id}>
+                ⏳ {era.name}
+              </option>
+            ))}
+          </select>
+          {selectedEraObj && (
+            <div className="mt-2 text-[11px] text-[#5c4a3b] font-sans-ui leading-tight bg-[#f5ede0] p-2.5 rounded-lg border border-[#e5d8c3]">
+              <div className="font-semibold text-[#733f11] mb-0.5">{selectedEraObj.period}</div>
+              <p className="text-[#695646] mb-1.5">{selectedEraObj.description}</p>
+              <div className="flex flex-wrap gap-1.5">
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedEraObj.ironAvailable ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                  {selectedEraObj.ironAvailable ? '✓ Iron Metallurgy' : '✕ Bronze Only (No Iron)'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedEraObj.coinsAvailable ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                  {selectedEraObj.coinsAvailable ? '✓ Stamped Coins' : '✕ Weighed Bullion / Grain'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedEraObj.alphabetAvailable ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                  {selectedEraObj.alphabetAvailable ? '✓ 22-Letter Alphabet' : '✕ Cuneiform / Glyphs'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedEraObj.concreteAvailable ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-200 text-stone-700'}`}>
+                  {selectedEraObj.concreteAvailable ? '✓ Underwater Concrete' : '✕ Cut Stone / Brick Only'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedEraObj.democracyAvailable ? 'bg-sky-100 text-sky-800' : 'bg-stone-200 text-stone-700'}`}>
+                  {selectedEraObj.democracyAvailable ? '✓ Citizen Assemblies' : '✕ Monarchy / Theocracy Only'}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Civilization Scale (Size & Extent) */}
+        <div className="p-3.5 rounded-xl bg-[#faf6ee] border border-[#d6c7b0] shadow-xs">
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <label className="text-xs font-bold font-cinzel text-[#48372b] uppercase tracking-wider flex items-center gap-1.5">
+              <Globe2 size={14} className="text-[#935923]" />
+              Civilization Scale (Size & Extent)
+            </label>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#f0e3ce] text-[#7a481c] border border-[#dfcbb0]">
+              Geography & Government Gate
+            </span>
+          </div>
+          <select
+            value={currentScale}
+            onChange={(e) => setCurrentScale(e.target.value)}
+            className="w-full text-xs sm:text-sm font-sans-ui font-semibold px-3 py-2 rounded-lg bg-[#ffffff] border border-[#d2c4ad] text-[#241a15] focus:outline-none focus:ring-2 focus:ring-[#935923] cursor-pointer"
+          >
+            {CIVILIZATION_SCALES.map((scale) => (
+              <option key={scale.id} value={scale.id}>
+                🌍 {scale.name}
+              </option>
+            ))}
+          </select>
+          {selectedScaleObj && (
+            <div className="mt-2 text-[11px] text-[#5c4a3b] font-sans-ui leading-tight bg-[#f5ede0] p-2.5 rounded-lg border border-[#e5d8c3]">
+              <p className="text-[#695646] mb-1.5">{selectedScaleObj.description}</p>
+              <div className="flex flex-wrap gap-1.5">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#e8dcce] text-[#58412e]">
+                  {selectedScaleObj.maxTerrains === 1 ? '📍 Max 1 Local Terrain' : selectedScaleObj.maxTerrains === 2 ? '📍 Max 2 Neighboring Terrains' : '📍 Multi-Biome (Unlimited Terrains)'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedScaleObj.canBuildGreatWall ? 'bg-emerald-100 text-emerald-800' : 'bg-stone-200 text-stone-700'}`}>
+                  {selectedScaleObj.canBuildGreatWall ? '✓ Frontier Great Walls' : '✕ Too Small for Great Wall'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedScaleObj.canRunDirectDemocracy ? 'bg-sky-100 text-sky-800' : 'bg-stone-200 text-stone-700'}`}>
+                  {selectedScaleObj.canRunDirectDemocracy ? '✓ Direct Town Hall Assembly' : '✕ Too Vast for Direct Democracy'}
+                </span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${selectedScaleObj.canRunMegaBureaucracy ? 'bg-amber-100 text-amber-800' : 'bg-stone-200 text-stone-700'}`}>
+                  {selectedScaleObj.canRunMegaBureaucracy ? '✓ Imperial Provincial Governors' : '✕ Local City Magistrates'}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>

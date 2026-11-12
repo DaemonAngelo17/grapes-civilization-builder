@@ -21,10 +21,13 @@ import {
 import { generateNarrativeEssay } from '../utils/narrativeGenerator';
 import { generateFactSheetData } from '../utils/factSheetGenerator';
 import { generateTeacherStressTest } from '../utils/stressTestGenerator';
+import { HISTORICAL_ERAS, CIVILIZATION_SCALES } from '../data/grapesData';
 
 export default function DossierView({
   civilizationName,
   inspiration,
+  currentEra = 'early_bronze',
+  currentScale = 'regional_kingdom',
   answers,
   customNotes,
   onClose
@@ -35,7 +38,17 @@ export default function DossierView({
   const [revealedModels, setRevealedModels] = useState({});
 
   const name = civilizationName?.trim() || 'The Sovereign Realm';
-  const narrativeParagraphs = generateNarrativeEssay(civilizationName, inspiration, answers, customNotes);
+  const eraObj = HISTORICAL_ERAS.find((e) => e.id === currentEra) || HISTORICAL_ERAS[0];
+  const scaleObj = CIVILIZATION_SCALES.find((s) => s.id === currentScale) || CIVILIZATION_SCALES[1];
+
+  const narrativeParagraphs = generateNarrativeEssay(
+    civilizationName, 
+    inspiration, 
+    answers, 
+    customNotes,
+    currentEra,
+    currentScale
+  );
   const factSheetData = generateFactSheetData(answers, customNotes);
   const stressTestQuestions = generateTeacherStressTest(answers, customNotes);
 
@@ -48,7 +61,9 @@ export default function DossierView({
 
   const handleCopyFullMarkdown = () => {
     let md = `# CIVILIZATION DOSSIER: ${name.toUpperCase()}\n`;
-    if (inspiration) md += `*Real-World Inspiration: ${inspiration}*\n\n`;
+    if (inspiration) md += `*Real-World Inspiration: ${inspiration}*\n`;
+    md += `*Historical Era: ${eraObj.name} (${eraObj.period})*\n`;
+    md += `*Civilization Scale: ${scaleObj.name}*\n\n`;
 
     md += `## PART I: ENCYCLOPEDIA NARRATIVE ESSAY\n\n`;
     md += narrativeParagraphs.join('\n\n');
@@ -95,6 +110,10 @@ export default function DossierView({
     const payload = {
       civilizationName: name,
       inspiration,
+      era: currentEra,
+      eraName: eraObj.name,
+      scale: currentScale,
+      scaleName: scaleObj.name,
       timestamp: new Date().toISOString(),
       answers,
       customNotes,
@@ -235,8 +254,23 @@ export default function DossierView({
             <p className="text-sm md:text-base text-[#6d5747] font-archaic italic">
               {inspiration ? `In the Grand Tradition of ${inspiration}` : 'Ancient Civilization Comprehensive Charter'}
             </p>
-            <div className="mt-3 text-xs text-[#8c7766] font-sans-ui">
+            <div className="mt-2 text-xs text-[#8c7766] font-sans-ui">
               Exhaustive G.R.A.P.E.S. Synthesis & Oral Defense Simulation
+            </div>
+
+            {/* Historical Era & Scale Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-3.5 text-xs font-sans-ui">
+              <span className="px-3 py-1 rounded-full bg-[#faecd6] text-[#784318] border border-[#e2ceb4] font-semibold flex items-center gap-1 shadow-xs">
+                ⏳ Era: {eraObj.name}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-[#e8f1e6] text-[#2c5825] border border-[#cbdec7] font-semibold flex items-center gap-1 shadow-xs">
+                🌍 Scale: {scaleObj.name}
+              </span>
+              {inspiration && (
+                <span className="px-3 py-1 rounded-full bg-[#efe7db] text-[#554234] border border-[#d6c7b4] font-medium flex items-center gap-1">
+                  🏛️ Archetype: {inspiration}
+                </span>
+              )}
             </div>
 
             {/* Antique Seal Stamp */}
@@ -317,6 +351,22 @@ export default function DossierView({
                       Structured tabular matrix for oral defense flashcard study
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Core Parameters Summary Card */}
+              <div className="parchment-panel rounded-xl p-4 border border-[#cfbfa7] bg-[#f5ede0] grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-sans-ui">
+                <div>
+                  <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Civilization Archetype</span>
+                  <span className="font-semibold text-[#241a15]">{inspiration || 'Original Ancient Synthesis'}</span>
+                </div>
+                <div>
+                  <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Historical Era</span>
+                  <span className="font-semibold text-[#241a15]">⏳ {eraObj.name}</span>
+                </div>
+                <div>
+                  <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Civilization Scale</span>
+                  <span className="font-semibold text-[#241a15]">🌍 {scaleObj.name}</span>
                 </div>
               </div>
 

@@ -19,6 +19,8 @@ export default function QuestionCard({
   onCustomChange,
   allAnswers,
   logicGuardEnabled = true,
+  currentEra = 'early_bronze',
+  currentScale = 'regional_kingdom',
   onEnlargeImage
 }) {
   const isCheckbox = question.type === 'checkbox';
@@ -33,7 +35,14 @@ export default function QuestionCard({
 
   const handleOptionClick = (option) => {
     // Check if disallowed by logic
-    const { isDisallowed } = checkOptionDisallowed(question.id, option, allAnswers, logicGuardEnabled);
+    const { isDisallowed } = checkOptionDisallowed(
+      question.id, 
+      option, 
+      allAnswers, 
+      logicGuardEnabled,
+      currentEra,
+      currentScale
+    );
     if (isDisallowed) {
       return; // Option is locked by logic
     }
@@ -125,7 +134,9 @@ export default function QuestionCard({
             question.id,
             option,
             allAnswers,
-            logicGuardEnabled
+            logicGuardEnabled,
+            currentEra,
+            currentScale
           );
           const visual = getOptionVisual(option);
           const hasImage = visual && visual.url && !imageErrors[idx];

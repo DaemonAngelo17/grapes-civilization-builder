@@ -1,7 +1,14 @@
 // Grade 7 Historical Logic Connection & Conflict Rules
-// Exhaustive cross-category contradiction matrix that links geography, economy, politics, social structure, religion, and achievements.
+// Exhaustive cross-category contradiction matrix that links geography, economy, politics, social structure, religion, achievements, ERA, and CIVILIZATION SCALE.
 
-export function checkOptionDisallowed(questionId, optionText, answers, logicGuardEnabled = true) {
+export function checkOptionDisallowed(
+  questionId, 
+  optionText, 
+  answers, 
+  logicGuardEnabled = true,
+  currentEra = 'early_bronze',
+  currentScale = 'regional_kingdom'
+) {
   if (!logicGuardEnabled) {
     return { isDisallowed: false, reason: null };
   }
@@ -22,6 +29,116 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
   };
 
   const optLower = optionText.toLowerCase();
+
+  // =========================================================================
+  // 0. CHRONOLOGICAL ERA CONSTRAINTS (What did not exist in earlier eras)
+  // =========================================================================
+  const isBronzeAge = currentEra === 'early_bronze' || currentEra === 'late_bronze';
+  const isPreClassical = isBronzeAge || currentEra === 'early_iron';
+
+  // Iron metallurgy (invented ~1200 BCE)
+  if (isBronzeAge) {
+    if (optLower.includes('high-grade iron ore')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Bronze Age): You chose a Bronze Age civilization (before 1200 BCE)! Iron ore extraction and smelting did not exist yet; your civilization uses copper and bronze.'
+      };
+    }
+    if (optLower.includes('heavy iron-tipped plows')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Bronze Age): Iron-tipped plows belong to the Iron Age (after 1000 BCE). Bronze Age plows were made of wood, stone, or bronze!'
+      };
+    }
+  }
+
+  // Stamped Coinage (invented ~600 BCE in Lydia)
+  if (isBronzeAge || currentEra === 'early_iron') {
+    if (optLower.includes('standardized stamped coins')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Pre-600 BCE): State-stamped coins were not invented until around 600 BCE in ancient Lydia! In earlier eras, trade relied on weighed silver bullion, grain rations, or commodity money.'
+      };
+    }
+  }
+
+  // Roman Underwater Concrete (invented ~200 BCE)
+  if (currentEra !== 'imperial_era') {
+    if (optLower.includes('concrete that can set underwater')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Roman Era Invention): Underwater pozzolanic volcanic concrete was invented by Roman engineers in the late Republic (~200 BCE)! It was unknown in earlier eras.'
+      };
+    }
+  }
+
+  // Phonetic Alphabet (invented ~1100 BCE by Phoenicians)
+  if (currentEra === 'early_bronze') {
+    if (optLower.includes('phonetic alphabet (20-30 simple letters)')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Early Bronze Age): The 22-letter phonetic alphabet was created by Phoenician sailors around 1100 BCE. In the Early Bronze Age (3000 BCE), people wrote in complex cuneiform or hieroglyphic glyphs!'
+      };
+    }
+  }
+
+  // Direct Democracy (developed 508 BCE in Athens)
+  if (isBronzeAge) {
+    if (optLower.includes('direct democracy (all free adult male citizens vote')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Classical Era): Direct citizen democracy was developed in Classical Athens (508 BCE). Bronze Age civilizations were universally ruled by absolute god-kings, priest-rulers, or dynasts.'
+      };
+    }
+    if (optLower.includes('jury trials & restorative justice')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Classical Era): Large citizen jury trials were a Classical Greek invention. In the Bronze Age, justice was administered directly by royal judges or temple priests.'
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0.5. CIVILIZATION SCALE CONSTRAINTS (City-State vs Kingdom vs Empire)
+  // =========================================================================
+  if (currentScale === 'city_state') {
+    // City-States are confined to 1 local geographic terrain
+    if (questionId === 'g2_terrain') {
+      const currentTerrains = selectedList('g2_terrain');
+      if (currentTerrains.length >= 1 && !currentTerrains.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Scale-Locked (City-State Limit): A local City-State occupies a single river valley or coastal bay! It cannot span multiple unrelated climates (e.g. rainforest AND desert). Upgrade to a Continental Empire to span multiple biomes.'
+        };
+      }
+    }
+
+    // City-States cannot build thousands of miles of Great Walls
+    if (questionId === 'a3_monuments' && optLower.includes('thousands of miles of frontier defensive walls')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale-Locked (City-State): A single city-state does not have thousands of miles of borders or millions of laborers to build a Great Wall! This wonder requires a Grand Continental Empire.'
+      };
+    }
+
+    // City-States cannot have multi-province Feudal Bureaucracies
+    if (questionId === 'p1_gov_system' && optLower.includes('feudal bureaucracy (emperor rules through appointed governors')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale-Locked: A single city-state has no far-off foreign provinces to appoint imperial governors over!'
+      };
+    }
+  }
+
+  if (currentScale === 'continental_empire') {
+    // Continental Empires CANNOT run Direct Democracy (people can't walk 3,000 miles to a town square vote)
+    if (questionId === 'p1_gov_system' && optLower.includes('direct democracy (all free adult male citizens vote directly')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale-Locked (Empire Scale): In a continental empire spanning thousands of miles, millions of citizens cannot travel on foot to meet in one town square assembly! Continental empires require representative governors, satraps, or an emperor.'
+      };
+    }
+  }
 
   // =========================================================================
   // 1. TERRAIN & WATER CONTRADICTIONS
@@ -279,12 +396,11 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       if (hasText('g2_terrain', 'dense, humid tropical rainforest')) {
         return {
           isDisallowed: true,
-          reason: '🔒 Contradiction: Fast cavalry cannot gallop or shoot bows inside dense tropical rainforest canopies full of tangled vines!'
+          reason: '🔒 Contradiction: Fast cavalry cannot gallop or shoot bows inside dense tropical rainforest canopies tangled with thick roots and vines!'
         };
       }
     }
 
-    // Heavy infantry phalanx cannot fight in dense jungle or jagged rocky cliffs
     if (optLower.includes('heavy infantry phalanx')) {
       if (hasText('g2_terrain', 'dense, humid tropical rainforest')) {
         return {
@@ -304,7 +420,6 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
       }
     }
 
-    // Naval supremacy requires sea / coast
     const terrain = selectedList('g2_terrain');
     const isLandlocked = terrain.length > 0 && terrain.every((t) =>
       t.toLowerCase().includes('mountain') || t.toLowerCase().includes('steppe') || t.toLowerCase().includes('plateau')
@@ -451,7 +566,7 @@ export function checkOptionDisallowed(questionId, optionText, answers, logicGuar
         hasText('g6_disasters', 'multi-year severe droughts')) {
       return {
         isDisallowed: true,
-        reason: '🔒 Contradiction: In ancient history (like Mesopotamia), when unannounced floods drown whole cities and droughts cause mass starvation, people never viewed the gods as predictable loving protectors!'
+        reason: '🔒 Contradiction: In ancient history (like Mesopotamia), when unannounced floods drown whole cities and droughts cause mass famine, people never viewed the gods as predictable loving protectors!'
       };
     }
   }

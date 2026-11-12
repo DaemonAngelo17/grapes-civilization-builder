@@ -1,6 +1,102 @@
 // Exhaustive G.R.A.P.E.S. Civilization Builder Data Structure
 // Written in engaging Grade 7 History language with detailed historical explanations.
 
+export const HISTORICAL_ERAS = [
+  {
+    id: 'early_bronze',
+    name: 'Early Bronze Age (c. 3500 – 2000 BCE)',
+    period: 'Dawn of Writing & First Cities (e.g. Sumer & Old Kingdom Egypt)',
+    description: 'The dawn of human civilization. Copper and bronze tools are cutting-edge; iron does not exist yet. Money is weighed silver or grain rations; writing is on clay tablets or papyrus.',
+    ironAvailable: false,
+    coinsAvailable: false,
+    alphabetAvailable: false,
+    concreteAvailable: false,
+    democracyAvailable: false,
+    compassAvailable: false
+  },
+  {
+    id: 'late_bronze',
+    name: 'Middle to Late Bronze Age (c. 2000 – 1100 BCE)',
+    period: 'Age of War Chariots & Diplomacy (e.g. New Kingdom Egypt & Babylon)',
+    description: 'The golden age of horse chariots, massive temples, and royal diplomacy. Bronze swords dominate the battlefield. Early phonetic writing begins to emerge near the end.',
+    ironAvailable: false,
+    coinsAvailable: false,
+    alphabetAvailable: false,
+    concreteAvailable: false,
+    democracyAvailable: false,
+    compassAvailable: false
+  },
+  {
+    id: 'early_iron',
+    name: 'Early Iron Age (c. 1100 – 500 BCE)',
+    period: 'Iron Swords & the Phoenician Alphabet (e.g. Assyria & Phoenicia)',
+    description: 'Bronze gives way to cheaper, harder iron tools and weapons. Phoenician sailors spread a simple 22-letter phonetic alphabet across the sea. Stamped coins begin emerging near 600 BCE.',
+    ironAvailable: true,
+    coinsAvailable: false,
+    alphabetAvailable: true,
+    concreteAvailable: false,
+    democracyAvailable: false,
+    compassAvailable: false
+  },
+  {
+    id: 'classical_antiquity',
+    name: 'Classical Antiquity (c. 500 – 100 BCE)',
+    period: 'Democracy, Phalanxes & Stamped Coins (e.g. Athens, Sparta & Persia)',
+    description: 'The era of Classical Greece, the Persian Empire, and Warring States China. Stamped silver coins, citizen democracies, trireme war fleets, and Greek hoplite phalanxes flourish.',
+    ironAvailable: true,
+    coinsAvailable: true,
+    alphabetAvailable: true,
+    concreteAvailable: false,
+    democracyAvailable: true,
+    compassAvailable: false
+  },
+  {
+    id: 'imperial_era',
+    name: 'Imperial Classical Era (c. 100 BCE – 500 CE)',
+    period: 'Mega-Empires & Great Walls (e.g. Roman Empire & Han Dynasty China)',
+    description: 'Giant continental empires spanning thousands of miles. Roman underwater concrete, aqueducts, Han silk production, compass orientation, and stone frontier walls reach their peak.',
+    ironAvailable: true,
+    coinsAvailable: true,
+    alphabetAvailable: true,
+    concreteAvailable: true,
+    democracyAvailable: true,
+    compassAvailable: true
+  }
+];
+
+export const CIVILIZATION_SCALES = [
+  {
+    id: 'city_state',
+    name: 'Independent City-State (Local: ~10,000–50,000 citizens)',
+    description: 'A single fortified city with surrounding farm fields (like early Ur, Athens, Sparta, or Tikal). Confined to ONE local geographic terrain and one water source. Citizens can assemble directly in person.',
+    maxTerrains: 1,
+    maxWaters: 1,
+    canBuildGreatWall: false,
+    canRunDirectDemocracy: true,
+    canRunMegaBureaucracy: false
+  },
+  {
+    id: 'regional_kingdom',
+    name: 'Regional Kingdom or League (Medium: ~100,000–1,000,000 people)',
+    description: 'A unified river valley, peninsula, or federation of allied cities (like Old Kingdom Egypt, the Delian League, or Shang China). Can span up to 2 neighboring terrain zones.',
+    maxTerrains: 2,
+    maxWaters: 2,
+    canBuildGreatWall: false,
+    canRunDirectDemocracy: false,
+    canRunMegaBureaucracy: true
+  },
+  {
+    id: 'continental_empire',
+    name: 'Grand Continental Empire (Mega: Millions of subjects across biomes)',
+    description: 'A colossal multi-ethnic superstate spanning multiple climates, mountain ranges, and seas (like the Roman Empire, Persian Empire, Han China, or Inca Empire). Requires provincial governors and royal roads.',
+    maxTerrains: 99,
+    maxWaters: 99,
+    canBuildGreatWall: true,
+    canRunDirectDemocracy: false,
+    canRunMegaBureaucracy: true
+  }
+];
+
 export const INSPIRATIONS = [
   { id: 'mesopotamia', name: 'Mesopotamia (Sumer, Akkad, Babylon, Assyria)', region: 'Fertile Crescent' },
   { id: 'egypt', name: 'Ancient Egypt (Old, Middle, New Kingdom)', region: 'Nile River Valley' },
@@ -95,9 +191,8 @@ export const GRAPES_QUESTIONS = {
       number: 'G1',
       title: 'Dominant Terrain & Topography (Where do your people live?)',
       type: 'checkbox',
-      
       category: 'G',
-      guidance: 'Choose up to 2 land types. Your landscape decides where you can build towns, how easy it is to travel, and whether farming is easy or backbreaking.',
+      guidance: 'Choose your land types. A City-State is confined to 1 local terrain, while a Grand Empire can span multiple biomes across continents!',
       grade7Tip: 'Think about real history: Greece had rocky peninsulas and mountains (so they became sailors!), while Mesopotamia had flat river valleys (so they built huge mud-brick cities).',
       options: [
         'Flat, featureless alluvial floodplains (great for farming, terrible for defense)',
@@ -153,10 +248,8 @@ export const GRAPES_QUESTIONS = {
       number: 'G4',
       title: 'Abundant Natural Resources (What useful materials does nature give you?)',
       type: 'checkbox',
-      
-      
       category: 'G',
-      guidance: 'Select 2 to 4 raw materials that are everywhere in your land. These materials decide what your tools, weapons, houses, and art are made from.',
+      guidance: 'Select the raw materials abundant in your land. Note: High-grade iron ore was only discovered and smelted during the Iron Age (after 1200 BCE)!',
       grade7Tip: 'The Sumerians had almost no stone or wood, so they made everything—even their school tablets and houses—out of river mud and clay! The Maya had sharp black volcanic glass (obsidian) for swords.',
       options: [
         'Rich alluvial clay and mud (for bricks, pottery, and writing tablets)',
@@ -215,10 +308,8 @@ export const GRAPES_QUESTIONS = {
       number: 'E1',
       title: 'Staple Agricultural Crops (What food feeds your growing cities?)',
       type: 'checkbox',
-      
-      
       category: 'E',
-      guidance: 'Pick 2 to 3 main crops. In ancient history, an empire is only as strong as its farmers. If crops fail, cities starve and empires collapse.',
+      guidance: 'Pick your main crops. In ancient history, an empire is only as strong as its farmers. If crops fail, cities starve and empires collapse.',
       grade7Tip: 'Mesopotamia and Egypt grew wheat and barley for bread and beer. Ancient China relied on rice and millet. In the Americas, indigenous farmers grew the "Three Sisters" (corn, beans, and squash together!).',
       options: [
         'Wheat and Barley (for bread, porridge, and brewing beer — standard in fertile crescents)',
@@ -270,7 +361,7 @@ export const GRAPES_QUESTIONS = {
       title: 'Medium of Exchange / Currency (How do people pay for goods?)',
       type: 'radio',
       category: 'E',
-      guidance: 'Coins were not invented until around 600 BCE in Lydia! Before coins, ancient civilizations used barter, weighed silver, or food rations.',
+      guidance: 'Stamped coins were not invented until around 600 BCE in Lydia! In the Bronze Age, ancient people used barter, weighed silver bullion, or state grain rations.',
       grade7Tip: 'In ancient Egypt, workers building the pyramids were paid in daily rations of bread, beer, and onions from the pharaoh’s royal granary! The Maya used cacao beans (chocolate!) like dollar bills.',
       options: [
         'Standardized Stamped Coins (electrum, gold, silver, or bronze coins guaranteed by the state)',
@@ -306,7 +397,7 @@ export const GRAPES_QUESTIONS = {
       title: 'System of Government (Who holds supreme political power?)',
       type: 'radio',
       category: 'P',
-      guidance: 'Who makes the ultimate decisions in your society? Is it one all-powerful king, a council of rich families, or a democratic citizen vote?',
+      guidance: 'Who makes the ultimate decisions in your society? Note: Direct democracy only works on small city-state scales, while continental empires require provincial administration.',
       grade7Tip: 'In Athens, free male citizens voted on every single law in a direct democracy. In Sparta, a military council and two kings ruled. In Egypt, the Pharaoh held total absolute power.',
       options: [
         'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)',
@@ -360,9 +451,8 @@ export const GRAPES_QUESTIONS = {
       number: 'P4',
       title: 'Military Organization & Doctrines (How does your army fight?)',
       type: 'checkbox',
-      
       category: 'P',
-      guidance: 'Select up to 3 core military branches and fighting tactics. How does your army protect borders or defeat attacking invaders?',
+      guidance: 'Select your military branches and fighting tactics. Note: War chariots require horses and open plains, while navies require coastlines!',
       grade7Tip: 'Greek hoplites locked their shields together into an unbreakable human tank called a "phalanx". The Assyrians were masters of siege warfare with giant battering rams.',
       options: [
         'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)',
@@ -541,7 +631,7 @@ export const GRAPES_QUESTIONS = {
       title: 'Death, Burial, and the Afterlife (What happens after you die?)',
       type: 'radio',
       category: 'R',
-      guidance: 'Where does the human soul go after physical death? How your people bury their dead reflects their deepest hopes and fears.',
+      guidance: 'Where does the human soul go after physical death? Note: Cremation on funeral pyres directly contradicts physical mummification!',
       grade7Tip: 'Egyptians believed the god Anubis weighed your heart against the feather of truth—if your heart was light, you entered a beautiful paradise of reed fields! The Mesopotamians believed everyone went to a dusty, dark underworld where souls ate dirt.',
       options: [
         'Moral Judgment & Paradise (heart/soul is weighed; good people go to a fertile paradise, bad are devoured)',
@@ -595,7 +685,7 @@ export const GRAPES_QUESTIONS = {
       title: 'Writing System & Script (How do your people write and keep records?)',
       type: 'radio',
       category: 'A',
-      guidance: 'Writing was invented to count grain and record taxes! What kind of script does your civilization use to write laws and poetry?',
+      guidance: 'Writing was invented to count grain and record taxes! Note: Phonetic alphabets were not invented until around 1100 BCE by the Phoenicians.',
       grade7Tip: 'The Sumerians pressed wedge-shaped sticks into wet clay (cuneiform). The Egyptians drew sacred pictures (hieroglyphs). The Phoenicians invented a simple 22-letter alphabet where each letter was a sound—the ancestor of our English alphabet today!',
       options: [
         'Cuneiform (wedge-shaped marks pressed into wet clay with a reed stylus)',
@@ -631,9 +721,8 @@ export const GRAPES_QUESTIONS = {
       number: 'A4',
       title: 'Monumental Architecture (What giant structures will your people be remembered for?)',
       type: 'checkbox',
-      
       category: 'A',
-      guidance: 'Select up to 3 colossal construction projects that show off your empire’s wealth, engineering power, and devotion to the gods.',
+      guidance: 'Select your construction projects. Note: Building thousands of miles of frontier walls requires a massive continental empire with millions of workers!',
       grade7Tip: 'The Great Pyramid of Giza was the tallest man-made structure on Earth for over 3,800 years! Roman aqueducts carried millions of gallons of mountain water into cities using gravity alone.',
       options: [
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape',
@@ -652,7 +741,7 @@ export const GRAPES_QUESTIONS = {
       title: 'Scientific, Mathematical & Technological Breakthroughs (What inventions change history?)',
       type: 'checkbox',
       category: 'A',
-      guidance: 'Select the scientific and technological breakthroughs made by your scholars, inventors, and doctors.',
+      guidance: 'Select your breakthroughs. Note: Underwater concrete was Roman (200 BCE), iron metallurgy was 1200 BCE, while base-60 math was Sumerian (3000 BCE).',
       grade7Tip: 'The Babylonians used a base-60 math system, which is the reason we have 60 seconds in a minute and 360 degrees in a circle! The Maya independently invented the concept of "Zero" long before Europeans used it.',
       options: [
         'Base-60 math system (giving us 60-minute hours and 360-degree circles)',
@@ -673,6 +762,8 @@ export const GRAPES_QUESTIONS = {
 export const HISTORICAL_PRESETS = {
   egypt: {
     name: 'Kemet (The Black Land of the Nile)',
+    era: 'early_bronze',
+    scale: 'regional_kingdom',
     inspiration: 'Ancient Egypt (Old, Middle, New Kingdom)',
     answers: {
       g2_terrain: [
@@ -716,8 +807,7 @@ export const HISTORICAL_PRESETS = {
       p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
       p3_law_system: 'Social-Class Tiered Punishments (a noble who injures a peasant pays a small silver fine; a peasant who injures a noble is executed)',
       p4_military: [
-        'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)',
-        'Elite Chariot Corps (two-wheeled horse-drawn platforms with composite bow archers)'
+        'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)'
       ],
       p5_foreign_policy: 'Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)',
       s1_apex: 'The God-King and Royal Dynasty (untouchable divine bloodline)',
@@ -750,6 +840,8 @@ export const HISTORICAL_PRESETS = {
   },
   mesopotamia: {
     name: 'Sumer & Babylon (The Land Between the Rivers)',
+    era: 'early_bronze',
+    scale: 'city_state',
     inspiration: 'Mesopotamia (Sumer, Akkad, Babylon, Assyria)',
     answers: {
       g2_terrain: [
@@ -817,13 +909,14 @@ export const HISTORICAL_PRESETS = {
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape'
       ],
       a5_science: [
-        'Base-60 math system (giving us 60-minute hours and 360-degree circles)',
-        'Advanced metallurgy (smelting bronze alloys, cast iron, or quench-hardened steel)'
+        'Base-60 math system (giving us 60-minute hours and 360-degree circles)'
       ]
     }
   },
   maya: {
     name: 'Tikal & Copan (The Jade Jaguar Realm)',
+    era: 'classical_antiquity',
+    scale: 'city_state',
     inspiration: 'Maya / Aztec / Inca (Mesoamerica & Andes)',
     answers: {
       g2_terrain: [
@@ -895,6 +988,8 @@ export const HISTORICAL_PRESETS = {
   },
   greece_rome: {
     name: 'The Classical Polis League',
+    era: 'classical_antiquity',
+    scale: 'continental_empire',
     inspiration: 'Classical Greece & Rome (Polis & Imperium)',
     answers: {
       g2_terrain: [
@@ -930,7 +1025,7 @@ export const HISTORICAL_PRESETS = {
       e4_taxation: [
         'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
       ],
-      p1_gov_system: 'Direct Democracy (all free adult male citizens vote directly on laws and wars in a public assembly)',
+      p1_gov_system: 'Aristocratic Oligarchy / Republic (ruled by a Senate or Council of wealthy landowning families)',
       p2_succession: 'Election by Citizen Assembly or Noble Council (term limits or life appointments via vote)',
       p3_law_system: 'Jury Trials & Restorative Justice (large citizen juries vote on guilt; focus on fines, debt forgiveness, or ostracism/exile)',
       p4_military: [

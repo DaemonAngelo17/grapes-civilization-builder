@@ -104,3 +104,4 @@ export default function ImageModal({ visual, optionText, onClose }) {
     </div>
   );
 }
+

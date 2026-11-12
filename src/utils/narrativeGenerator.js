@@ -1,9 +1,21 @@
 // Rich Encyclopedia-Style Historical Narrative Essay Generator
-// Synthesizes all 6 G.R.A.P.E.S. categories into a cohesive academic treatise.
+// Synthesizes all 6 G.R.A.P.E.S. categories into a cohesive academic treatise, woven with Historical Era and Civilization Scale.
 
-export function generateNarrativeEssay(civilizationName, inspiration, answers, customNotes = {}) {
+import { HISTORICAL_ERAS, CIVILIZATION_SCALES } from '../data/grapesData';
+
+export function generateNarrativeEssay(
+  civilizationName, 
+  inspiration, 
+  answers, 
+  customNotes = {},
+  currentEra = 'early_bronze',
+  currentScale = 'regional_kingdom'
+) {
   const name = civilizationName?.trim() || 'The Sovereign Realm';
   const inspText = inspiration ? `drawing deep institutional parallels with ${inspiration}` : 'forged as a unique synthesis of ancient civilizations';
+
+  const eraObj = HISTORICAL_ERAS.find((e) => e.id === currentEra) || HISTORICAL_ERAS[0];
+  const scaleObj = CIVILIZATION_SCALES.find((s) => s.id === currentScale) || CIVILIZATION_SCALES[1];
 
   // Helper to extract clean answer list or string, appending custom notes if present
   const getVal = (id, fallback = 'custom local adaptations') => {
@@ -36,7 +48,7 @@ export function generateNarrativeEssay(civilizationName, inspiration, answers, c
   const disasters = formatList(getVal('g6_disasters', ['seasonal ecological shocks']));
 
   const geoParagraph = `I. GEOGRAPHIC CRADLE & ECOLOGICAL ADAPTATION:
-The physical foundations of ${name} were inextricably bound to its territorial topography and hydrological reality, ${inspText}. Settlement coalesced primarily around ${water.toLowerCase()}, which served as both the physical lifeblood of urban density and the primary axis of agrarian canalization. The sovereign terrain was dominated by ${terrain.toLowerCase()}, dictating both settlement patterns and transport corridors. For territorial defense, the state enjoyed natural shields in the form of ${barriers.toLowerCase()}, though frontier outposts remained vigilant against irregular incursions. The physical territory was naturally blessed with an abundance of ${resources.toLowerCase()}, which supplied raw materials for monumental civic programs, metallurgy, and domestic handicrafts. Nevertheless, autarky proved elusive; the empire faced perennial domestic shortages of ${shortages.toLowerCase()}, necessitating expansive commercial routes or aggressive external tribute collection. Survival demanded continual vigilance against recurrent ecological cataclysms, particularly ${disasters.toLowerCase()}, which periodically tested the hydraulic engineering and administrative cohesion of the imperial core.`;
+Flourishing during the ${eraObj.name} (${eraObj.period}), ${name} organized its territory as a ${scaleObj.name.toLowerCase()}, ${inspText}. The physical foundations of the society were inextricably bound to its territorial topography and hydrological reality. Settlement coalesced primarily around ${water.toLowerCase()}, which served as both the physical lifeblood of urban density and the primary axis of agrarian canalization. The sovereign terrain was dominated by ${terrain.toLowerCase()}, dictating both settlement patterns and transport corridors across the realm. For territorial defense, the state enjoyed natural shields in the form of ${barriers.toLowerCase()}, though frontier outposts remained vigilant against irregular incursions. The physical territory was naturally blessed with an abundance of ${resources.toLowerCase()}, which supplied raw materials for monumental civic programs, metallurgy, and domestic handicrafts. Nevertheless, autarky proved elusive; the society faced perennial domestic shortages of ${shortages.toLowerCase()}, necessitating expansive commercial routes or aggressive external tribute collection. Survival demanded continual vigilance against recurrent ecological cataclysms, particularly ${disasters.toLowerCase()}, which periodically tested the hydraulic engineering and administrative cohesion of the territorial core.`;
 
   // --- PARAGRAPH 2: RELIGION (R) ---
   const divineStructure = getVal('r1_structure', 'veneration of ancestral cosmic forces');
@@ -56,7 +68,7 @@ The metaphysical worldview of ${name} was anchored in a profound theology center
   const breakthroughs = formatList(getVal('a5_science', ['pioneering mathematical and metallurgical breakthroughs']));
 
   const achParagraph = `III. INTELLECTUAL ACHIEVEMENTS & MATERIAL CULTURE:
-The intellectual and technological corpus of ${name} demonstrated remarkable ingenuity, immortalized through its mastery of ${writing.toLowerCase()}. Scribes and state archivists recorded legal decrees, census tallies, and sacred poetry upon ${medium.toLowerCase()}, bequeathing an enduring epigraphic legacy to posterity. The skyline of the metropolitan centers was commanded by colossal engineering feats, including ${monuments.toLowerCase()}, which served simultaneously as civic focal points, astronomical alignments, and physical manifestations of state authority. Agrarian security was magnified through sophisticated works of hydraulic engineering, specifically ${hydraulic.toLowerCase()}, which harnessed unpredictable seasonal waters to sustain urban food reserves. Furthermore, the intellectual elite distinguished themselves through seminal breakthroughs such as ${breakthroughs.toLowerCase()}, innovations that accelerated craftsmanship, navigation, and administrative standardization across the realm.`;
+Reflecting the cutting-edge innovations of the ${eraObj.name}, the intellectual and technological corpus of ${name} demonstrated remarkable ingenuity, immortalized through its mastery of ${writing.toLowerCase()}. Scribes and state archivists recorded legal decrees, census tallies, and sacred poetry upon ${medium.toLowerCase()}, bequeathing an enduring epigraphic legacy to posterity. The skyline of the metropolitan centers was commanded by colossal engineering feats, including ${monuments.toLowerCase()}, which served simultaneously as civic focal points, astronomical alignments, and physical manifestations of state authority. Agrarian security was magnified through sophisticated works of hydraulic engineering, specifically ${hydraulic.toLowerCase()}, which harnessed seasonal waters to sustain urban food reserves. Furthermore, the intellectual elite distinguished themselves through seminal breakthroughs such as ${breakthroughs.toLowerCase()}, innovations that accelerated craftsmanship, navigation, and administrative standardization across the realm.`;
 
   // --- PARAGRAPH 4: POLITICS (P) ---
   const govSystem = getVal('p1_gov_system', 'a structured sovereign authority');
@@ -66,7 +78,7 @@ The intellectual and technological corpus of ${name} demonstrated remarkable ing
   const foreignPolicy = getVal('p5_foreign_policy', 'strategic tributary arrangements');
 
   const polParagraph = `IV. STATECRAFT, JURISPRUDENCE & MILITARY DOCTRINE:
-Sovereign governance in ${name} was institutionalized through ${govSystem.toLowerCase()}, consolidating legislative, judicial, and executive authority within recognized constitutional bodies. Dynastic continuity and administrative stability were governed by ${succession.toLowerCase()}, minimizing the destabilizing perils of interregnum succession disputes. Social order and civil behavior were maintained by ${lawSystem.toLowerCase()}, which provided clear judicial expectations and curbed private blood feuds through institutional state sanctions. To protect borders and enforce geopolitical interests, the high command fielded a martial apparatus relying upon ${military.toLowerCase()}, deployed with tactical discipline to neutralize regional rivals and subdue rebellious frontier garrisons. In diplomatic and territorial relations, imperial hegemony over conquered territories was maintained through ${foreignPolicy.toLowerCase()}, a strategy calibrated to balance fiscal extraction against the risk of provincial revolt.`;
+Operating across the geopolitical dimensions of a ${scaleObj.name.toLowerCase()}, sovereign governance in ${name} was institutionalized through ${govSystem.toLowerCase()}, consolidating legislative, judicial, and executive authority within recognized constitutional bodies. Dynastic continuity and administrative stability were governed by ${succession.toLowerCase()}, minimizing the destabilizing perils of interregnum succession disputes. Social order and civil behavior were maintained by ${lawSystem.toLowerCase()}, which provided clear judicial expectations and curbed private blood feuds through institutional state sanctions. To protect borders and enforce geopolitical interests, the high command fielded a martial apparatus relying upon ${military.toLowerCase()}, deployed with tactical discipline to neutralize regional rivals and subdue rebellious frontier garrisons. In diplomatic and territorial relations, hegemony over neighboring territories was maintained through ${foreignPolicy.toLowerCase()}, a strategy calibrated to balance fiscal extraction against the risk of provincial revolt.`;
 
   // --- PARAGRAPH 5: ECONOMY (E) ---
   const crops = formatList(getVal('e1_crops', ['staple cereal grains']));
@@ -76,7 +88,7 @@ Sovereign governance in ${name} was institutionalized through ${govSystem.toLowe
   const trade = getVal('e5_trade', 'far-reaching overland and coastal routes');
 
   const ecoParagraph = `V. ECONOMIC FOUNDATIONS & MERCANTILE NETWORKS:
-The wealth of ${name} was rooted fundamentally in the soil, sustained by the intensive cultivation of ${crops.toLowerCase()}. Agrarian labor and logistical transport were bolstered by domestic herds of ${animals.toLowerCase()}, which provided essential draft power, animal protein, and strategic mobility. Commercial transactions and administrative accounting were facilitated through ${currency.toLowerCase()}, creating an integrated fiscal system that permitted market exchange alongside state redistribution. The imperial treasury sustained its standing armies and public infrastructure through an extractive fiscal apparatus relying on ${taxation.toLowerCase()}. Beyond domestic production, mercantile wealth flowed into the great cities via ${trade.toLowerCase()}, linking remote provincial outposts with distant foreign markets and securing luxury prestige goods that signaled aristocratic rank.`;
+The wealth of ${name} was rooted fundamentally in the soil, sustained by the intensive cultivation of ${crops.toLowerCase()}. Agrarian labor and logistical transport were bolstered by domestic herds of ${animals.toLowerCase()}, which provided essential draft power, animal protein, and strategic mobility. Commercial transactions and administrative accounting were facilitated through ${currency.toLowerCase()}, creating an integrated fiscal system that permitted market exchange alongside state redistribution. The state treasury sustained its standing armies and public infrastructure through an extractive fiscal apparatus relying on ${taxation.toLowerCase()}. Beyond domestic production, mercantile wealth flowed into the great cities via ${trade.toLowerCase()}, linking remote provincial outposts with distant foreign markets and securing luxury prestige goods that signaled aristocratic rank.`;
 
   // --- PARAGRAPH 6: SOCIAL STRUCTURE (S) ---
   const apex = getVal('s1_apex', 'an exalted ruling aristocracy');
