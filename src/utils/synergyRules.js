@@ -121,6 +121,28 @@ export const LOGICAL_SYNERGIES = {
   "Wild silk cocoons and fine white mulberry groves (for imperial silk weaving and thread)": [
     { targetQ: "s2_middle", option: "Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)" },
     { targetQ: "e3_currency", option: "Bolts of Woven Silk and Standardized Spun Yarn Skeins (used alongside copper cash for official payments and international tribute)" }
+  ],
+  "Volcanic oceanic high islands and coral ring atolls surrounded by vast open ocean (like Polynesia / Tonga / Hawaii)": [
+    { targetQ: "g1_freshwater", option: "Basalt island freshwater lenses, volcanic crater springs, and coconut/breadfruit water storage (like Pacific atolls and high islands)" }
+  ],
+  "Outrigger War Canoes & Amphibious Shock Warriors (fast double-hulled vessels carrying warriors armed with shark-tooth clubs and hardwood spears)": [
+    { targetQ: "a5_science", option: "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation" }
+  ],
+  "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation": [
+    { targetQ: "a1_writing", option: "Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (mapping ocean swell refraction and historical treaties without ink)" }
+  ],
+  "Nomadic Steppe Imperial Confederacy (mobile royal court unifying dozens of horse-riding clans under a supreme Chanyu or Khagan)": [
+    { targetQ: "e2_animals", option: "Horses and Camels (for aristocratic cavalry, messengers, and desert caravan trade)" },
+    { targetQ: "e1_crops", option: "Pastoral Transhumance & Herd Grazing (minimal grain farming; diet of roasted meat, fermented mare's milk [kumis], cheese, and wild steppe grains)" }
+  ],
+  "Cattle & Livestock Wealth Standard (fines, taxes, royal tribute, and marriage alliances paid in live heads of cattle)": [
+    { targetQ: "e2_animals", option: "Vast Herds of Sanga & Zebu Cattle (walking banks of wealth, milk, blood, leather, and royal bride-price prestige)" }
+  ],
+  "Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)": [
+    { targetQ: "g4_resources", option: "Quarried limestone, granite, or marble (for permanent monuments)" }
+  ],
+  "Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean": [
+    { targetQ: "g4_resources", option: "Basalt, andesite, and diorite volcanic stones (for monumental carving and hard stone grinding tools)" }
   ]
 };
 

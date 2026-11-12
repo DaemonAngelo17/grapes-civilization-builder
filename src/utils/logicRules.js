@@ -2368,5 +2368,53 @@ export function checkOptionDisallowed(
       }
     }
 
+    // New Archetype Contradictions:
+    // Outrigger War Canoes vs Landlocked Mountains
+    if (optLower.includes('outrigger war canoes') || optLower.includes('double-hulled outrigger catamaran')) {
+      const terrain = selectedList('g2_terrain');
+      const isLandlocked = terrain.length > 0 && terrain.every((t) =>
+        t.toLowerCase().includes('mountain') || t.toLowerCase().includes('steppe')
+      ) && !hasText('g3_barriers', 'coastlines') && !hasText('g2_terrain', 'island');
+      if (isLandlocked) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Outrigger voyaging canoes require open ocean or coastal waterways; they cannot navigate landlocked mountain ranges!'
+        };
+      }
+      if (hasText('g5_shortages', 'lack of tall timber')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Contradiction: Double-hulled catamarans and outrigger war canoes require massive tree trunks for hulls and masts, which your timber shortage prevents!'
+        };
+      }
+    }
+
+    // Nomadic Steppe Confederacy vs Horse Shortages
+    if ((optLower.includes('nomadic steppe imperial confederacy') || optLower.includes('royal kurgan burial mounds')) &&
+        (hasText('g5_shortages', 'lack of horses or pack animals') || hasText('e2_animals', 'none — all goods are carried on the backs of human porters'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Steppe confederacies and kurgan horse burials require vast herds of domesticated horses!'
+      };
+    }
+
+    // Cattle Standard / Sanga Cattle vs Human Porters
+    if ((optLower.includes('vast herds of sanga & zebu cattle') || optLower.includes('cattle & livestock wealth standard')) &&
+        hasText('e2_animals', 'none — all goods are carried on the backs of human porters')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Cattle currency and zebu herds contradict a society that has zero domesticated animals!'
+      };
+    }
+
+    // Dzimbahwe Granite Enclosures / Moai vs Hard Stone Shortage
+    if ((optLower.includes('mortarless granite enclosures (dzimbahwe)') || optLower.includes('megalithic volcanic tuff statues (moai)')) &&
+        hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Contradiction: Building massive mortarless granite enclosures or carving 14-ton Moai statues requires quarrying hard stone!'
+      };
+    }
+
   return { isDisallowed: false, reason: null };
 }

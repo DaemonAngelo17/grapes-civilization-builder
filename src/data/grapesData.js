@@ -106,6 +106,10 @@ export const INSPIRATIONS = [
   { id: 'grecoroman', name: 'Classical Greece & Rome (Polis & Imperium)', region: 'Mediterranean Basin' },
   { id: 'persia', name: 'Persian Empire (Achaemenid & Sasanian)', region: 'Iranian Plateau & Near East' },
   { id: 'phoenicia', name: 'Phoenicia & Carthage (Maritime Thalassocracy)', region: 'Levant & Western Mediterranean' },
+  { id: 'africa', name: 'Sub-Saharan African Kingdoms (Kush, Aksum, Nok & Great Zimbabwe)', region: 'Nile Cataracts, Savanna & Swahili Coast' },
+  { id: 'steppe', name: 'Eurasian Steppe Confederations (Scythians, Xiongnu & Royal Nomads)', region: 'Central Asian Grasslands & Altai Mountains' },
+  { id: 'oceania', name: 'Austronesian & Polynesian Voyagers (Lapita, Tonga & Rapa Nui)', region: 'Pacific Ocean Archipelagos' },
+  { id: 'north_america', name: 'Pre-Columbian North America (Mississippian Cahokia & Ancestral Puebloans)', region: 'Mississippi Basin & Colorado Plateau' },
   { id: 'custom', name: 'Custom / Synthetic Historical Hybrid', region: 'Imagined Ancient World' }
 ];
 
@@ -204,7 +208,8 @@ export const GRAPES_QUESTIONS = {
         'Fertile volcanic caldera valleys with nutrient-rich soils and crater lakes (like the Valley of Mexico)',
         'Vast river delta marshlands and bayous intersected by tidal estuaries',
         "Elevated temperate highland savanna with fertile volcanic basalt plateaus and acacia woodlands (like the Ethiopian highlands / Kingdom of Aksum)",
-        "Coastal fog oasis and hyper-arid desert scrub bordered by rich cold-water ocean upwelling currents (like the Peruvian coast / Caral & Paracas)"
+        "Coastal fog oasis and hyper-arid desert scrub bordered by rich cold-water ocean upwelling currents (like the Peruvian coast / Caral & Paracas)",
+        "Volcanic oceanic high islands and coral ring atolls surrounded by vast open ocean (like Polynesia / Tonga / Hawaii)"
       ]
     },
     {
@@ -225,7 +230,8 @@ export const GRAPES_QUESTIONS = {
         'Braided loess river basin prone to massive silt accumulation and devastating course shifts (like the Yellow River / Huang He)',
         'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)',
         "Tropical crater caldera lakes and seasonal interconnected marshland lagoons (like Lake Texcoco and the Valley of Oaxaca)",
-        "Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)"
+        "Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)",
+        "Basalt island freshwater lenses, volcanic crater springs, and coconut/breadfruit water storage (like Pacific atolls and high islands)"
       ]
     },
     {
@@ -333,7 +339,8 @@ export const GRAPES_QUESTIONS = {
         'Date Palms and Figs (drought-resistant sweet staples producing timber, fibers, and wine in desert oases)',
         'Sorghum, Yams, and Teff (heat-tolerant grains cultivated along tropical and savannah river courses)',
         "Cotton and Flax / Linseed (fibers for high-volume textile industries, sails, and oil presses)",
-        "Taro, Yams, and Breadfruit (starchy root and tree staples cultivated on volcanic terraces and wetland ponds)"
+        "Taro, Yams, and Breadfruit (starchy root and tree staples cultivated on volcanic terraces and wetland ponds)",
+        "Pastoral Transhumance & Herd Grazing (minimal grain farming; diet of roasted meat, fermented mare's milk [kumis], cheese, and wild steppe grains)"
       ]
     },
     {
@@ -353,7 +360,9 @@ export const GRAPES_QUESTIONS = {
         'Donkeys and Mules (sure-footed pack equines carrying bulky freight through mountain passes)',
         'War Hounds and Herding Dogs (bred for guarding storehouses, palace security, and battlefield support)',
         "Domesticated Dromedary & Bactrian Camels (enduring desert caravanners able to carry 400 lbs across waterless sand for a week)",
-        "Asian War Elephants & Work Elephants (trained for heavy logging, clearing jungle tracks, and terrifying battlefield shock)"
+        "Asian War Elephants & Work Elephants (trained for heavy logging, clearing jungle tracks, and terrifying battlefield shock)",
+        "Vast Herds of Sanga & Zebu Cattle (walking banks of wealth, milk, blood, leather, and royal bride-price prestige)",
+        "Domesticated Pacific Pigs, Red Jungle Fowl (Chickens), and Poi Dogs (transported across oceans in voyaging canoes)"
       ]
     },
     {
@@ -371,7 +380,8 @@ export const GRAPES_QUESTIONS = {
         'Self-Sufficient Command Economy (foreign trade is banned or strictly controlled by royal agents; everything needed is produced internally)',
         'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)',
         "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)",
-        "Trans-Saharan Gold-Salt Trade (caravans crossing vast sand seas connecting savannah goldfields with coastal salt domes)"
+        "Trans-Saharan Gold-Salt Trade (caravans crossing vast sand seas connecting savannah goldfields with coastal salt domes)",
+        "Continental River-Confluence Canoe Networks (trading copper plates, mica, lightning-whelk shells, and furs across thousands of miles of rivers)"
       ]
     },
     {
@@ -390,7 +400,9 @@ export const GRAPES_QUESTIONS = {
         'Pure Barter & Credit Tallies (trading goods directly or keeping tabs on clay tablets)',
         'Cast Bronze Tool Money (currency cast in the shape of miniature spade blades, knives, or rings)',
         "Bolts of Woven Silk and Standardized Spun Yarn Skeins (used alongside copper cash for official payments and international tribute)",
-        "Steatite Inscribed Merchant Seals and Clay Envelope Bullae (merchant authentication counters certifying token transactions)"
+        "Steatite Inscribed Merchant Seals and Clay Envelope Bullae (merchant authentication counters certifying token transactions)",
+        "Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)",
+        "Cattle & Livestock Wealth Standard (fines, taxes, royal tribute, and marriage alliances paid in live heads of cattle)"
       ]
     },
     {
@@ -432,7 +444,8 @@ export const GRAPES_QUESTIONS = {
         'Maritime Thalassocracy (naval confederation where autonomous coastal port cities contribute galleys and maritime tribute)',
         'Diarchy (two co-equal hereditary kings balancing civil domestic duties and active wartime command)',
         "Confederated Tribal League / Amphictyony (council of autonomous clans or regional delegates united around a shared religious sanctuary)",
-        "Egalitarian Civic Council of Merchant-Artisan Guilds (collective urban governance with no grand royal palaces, like the Indus cities)"
+        "Egalitarian Civic Council of Merchant-Artisan Guilds (collective urban governance with no grand royal palaces, like the Indus cities)",
+        "Nomadic Steppe Imperial Confederacy (mobile royal court unifying dozens of horse-riding clans under a supreme Chanyu or Khagan)"
       ]
     },
     {
@@ -472,7 +485,8 @@ export const GRAPES_QUESTIONS = {
         'Trial by Ordeal (accused is thrown into a sacred river; if they sink, the river god rejects them as guilty)',
         'Codified Civil Jurisprudence with written contracts, professional advocates, and legal precedents (Roman civil law tradition)',
         "Elders' Oral Customary Law (unwritten ancestral precedents, kinship compensation wergild fines, and sacred taboo prohibitions)",
-        "Sumptuary Regulations and Ritual Propriety (Confucian Li \u2014 enforcing social order through strict codes of clothing, ceremonial deference, and moral education)"
+        "Sumptuary Regulations and Ritual Propriety (Confucian Li \u2014 enforcing social order through strict codes of clothing, ceremonial deference, and moral education)",
+        "Sacred Kapu / Tapu Ecological & Social Taboo Code (strict spiritual laws regulating fishing seasons, resource conservation, and chief conduct)"
       ]
     },
     {
@@ -494,7 +508,8 @@ export const GRAPES_QUESTIONS = {
         'Horse Archer Light Cavalry (highly mobile skirmishers employing the feigned retreat and Parthian shot)',
         'Armored War Elephant Corps (massive beasts bred for battlefield shock, breaking enemy infantry lines and terrifying cavalry)',
         "Disciplined Crossbow Phalanxes & Volley Formations (massed rank-and-file archers firing mechanical bronze-triggered crossbows)",
-        "Guerilla Mountain Skirmishers & Slinger Corps (highly mobile highland troops using lead slingshots, darts, and ambush tactics)"
+        "Guerilla Mountain Skirmishers & Slinger Corps (highly mobile highland troops using lead slingshots, darts, and ambush tactics)",
+        "Outrigger War Canoes & Amphibious Shock Warriors (fast double-hulled vessels carrying warriors armed with shark-tooth clubs and hardwood spears)"
       ]
     },
     {
@@ -553,7 +568,8 @@ export const GRAPES_QUESTIONS = {
         'Astronomer-Physicians and Master Herbalists (keepers of sacred calendars, medicine, and temple engineering)',
         'Naval Navigators and Master Shipwrights (commanding extraordinary maritime prestige and guild privileges)',
         "Civil Engineers, Hydraulic Architects, and Quarry Masters (highly privileged master builders who design aqueducts, walls, and canals)",
-        "Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)"
+        "Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)",
+        "Hereditary Griots, Praise-Singers, and Oral Genealogists (living libraries who memorize centuries of royal law, history, and music)"
       ]
     },
     {
@@ -691,7 +707,8 @@ export const GRAPES_QUESTIONS = {
         'Sky Burial or Ossuary Caves (returning the physical body to nature/ancestral bone pits)',
         'Vast subterranean necropolises guarded by terracotta armies and sealed with celestial constellation vaults',
         "Ancestor Mountain Abodes (spirits become guardian ancestral spirits dwelling in high mountain peaks, watching over village crops)",
-        "Ship Burial and Aquatic Voyages (deceased royalty are placed in sea-going ships with weapons and treasure, launched to sea or buried under earthen barrows)"
+        "Ship Burial and Aquatic Voyages (deceased royalty are placed in sea-going ships with weapons and treasure, launched to sea or buried under earthen barrows)",
+        "Royal Kurgan Burial Mounds (timber-lined underground tombs filled with sacrificed horses, gold animal-style art, and weapons under earthen hills)"
       ]
     },
     {
@@ -752,7 +769,9 @@ export const GRAPES_QUESTIONS = {
         'Syllabary script where characters represent phonetic consonant-vowel combinations (like Linear B)',
         'Undeciphered glyph seals stamped into steatite and terracotta for merchant cargo attribution',
         "Monumental Boustrophedon Script ('as the ox plows' \u2014 alternating left-to-right and right-to-left lines carved on temple stone)",
-        "Kharosthi and Aramaic Administrative Cursive (rapid ink-on-parchment script designed for imperial courier decrees across multi-lingual empires)"
+        "Kharosthi and Aramaic Administrative Cursive (rapid ink-on-parchment script designed for imperial courier decrees across multi-lingual empires)",
+        "Ge'ez / Meroitic Abugida Script & Royal Trilingual Stone Inscriptions (syllabic alphabets carved on towering granite obelisks)",
+        "Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (mapping ocean swell refraction and historical treaties without ink)"
       ]
     },
     {
@@ -793,7 +812,9 @@ export const GRAPES_QUESTIONS = {
         'Rock-cut cliffside temples and royal mausoleums carved directly into towering sandstone canyons',
         'Vast hypostyle reception halls with soaring stone column forests and glazed ceramic brick friezes',
         "Artificial Enclosed Naval Harbors (Cothons) with covered drydocks and slipways for 200+ warships (like Carthage)",
-        "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)"
+        "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)",
+        "Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)",
+        "Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean"
       ]
     },
     {
@@ -816,7 +837,8 @@ export const GRAPES_QUESTIONS = {
         'Distillation of essential oils, chemical mordants, and medicinal antiseptic extracts',
         "Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)",
         "Advanced Antikythera-Style Geared Astronomical Calculators (bronze differential gear trains tracking planetary orbits and eclipse cycles)",
-        "Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)"
+        "Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)",
+        "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation"
       ]
     }
   ]
@@ -1140,7 +1162,7 @@ export const HISTORICAL_PRESETS = {
         'Pure Theocracy (the High Priest IS the ruler; religious law and state law are identical)'
       ],
       a4_hydraulic: [
-        'Chinampas ("floating gardens" built on shallow lake beds using woven reeds and fertile mud)'
+        'Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved deep into bedrock to access deep aquifers and cool communal gathering)'
       ],
       a1_writing: [
         'Pictographs & Ideograms carved into stone stelae and folding bark-paper books (codices)'

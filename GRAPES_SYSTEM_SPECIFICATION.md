@@ -1,10 +1,10 @@
 # G.R.A.P.E.S. Civilization Builder & Defense Simulator
 ## Complete Architecture, Taxonomy, Contradiction Engine & Synergy Specification
 
-> **Document Version:** 2.5 (Comprehensive Academic & Simulation Data Dictionary)
+> **Document Version:** 3.0 (Expanded Global Taxonomy — 300 Options Edition)
 > **Target Audience:** Digital Humanities Researchers, AI System Evaluators, History Educators (Grade 7 Curriculum)
 > **Live Application URL:** [https://grapes-civilization-builder.vercel.app](https://grapes-civilization-builder.vercel.app)
-> **GitHub Source:** [https://github.com/DaemonAngelo17/grapes-civilization-builder](https://github.com/DaemonAngelo17/grapes-civilization-builder)
+> **Source Repository:** [https://github.com/DaemonAngelo17/grapes-civilization-builder](https://github.com/DaemonAngelo17/grapes-civilization-builder)
 
 ---
 
@@ -13,8 +13,8 @@
 2. [Chronological & Spatial Framework (Eras, Scales & Inspirations)](#2-chronological--spatial-framework-eras-scales--inspirations)
    - [2.1 Five Historical Eras](#21-five-historical-eras)
    - [2.2 Three Civilization Scales](#22-three-civilization-scales)
-   - [2.3 Real-World Historical Inspirations](#23-real-world-historical-inspirations)
-3. [Exhaustive Question & Option Taxonomy (282 Verbatim Options)](#3-exhaustive-question--option-taxonomy-282-verbatim-options)
+   - [2.3 Real-World Historical Inspirations (13 Spheres)](#23-real-world-historical-inspirations-13-spheres)
+3. [Exhaustive Question & Option Taxonomy (300 Verbatim Options)](#3-exhaustive-question--option-taxonomy-300-verbatim-options)
    - [Geography (G1–G6)](#geography-g1g6)
    - [Economy (E1–E5)](#economy-e1e5)
    - [Politics & Military (P1–P5)](#politics--military-p1p5)
@@ -22,16 +22,6 @@
    - [Religion (R1–R5)](#religion-r1r5)
    - [Achievements & Engineering (A1–A5)](#achievements--engineering-a1a5)
 4. [The Complete Contradiction & Mutual Exclusivity Matrix](#4-the-complete-contradiction--mutual-exclusivity-matrix)
-   - [4.1 Chronological Era Prohibitions](#41-chronological-era-prohibitions)
-   - [4.2 Civilization Scale Constraints](#42-civilization-scale-constraints)
-   - [4.3 Environmental & Terrain Mutual Exclusions](#43-environmental--terrain-mutual-exclusions)
-   - [4.4 Agricultural & Domesticated Livestock Constraints](#44-agricultural--domesticated-livestock-constraints)
-   - [4.5 Raw Material Shortage Cascades (Timber, Stone, Horses, Salt, Tin)](#45-raw-material-shortage-cascades)
-   - [4.6 Inscriptional & Writing Medium Conflicts](#46-inscriptional--writing-medium-conflicts)
-   - [4.7 Hydraulic Engineering & Architectural Conflicts](#47-hydraulic-engineering--architectural-conflicts)
-   - [4.8 Military Organization & Battlefield Doctrines](#48-military-organization--battlefield-doctrines)
-   - [4.9 Governance, Law & Societal Conflicts](#49-governance-law--societal-conflicts)
-   - [4.10 Theological, Ritual & Eschatological Clashes](#410-theological-ritual--eschatological-clashes)
 5. [Intelligent Auto-Select Synergy Engine (Prerequisite Cascades)](#5-intelligent-auto-select-synergy-engine-prerequisite-cascades)
 6. [Cross-Category Teacher Stress-Test Defense Generator](#6-cross-category-teacher-stress-test-defense-generator)
 7. [Archaeological Benchmark Presets](#7-archaeological-benchmark-presets)
@@ -44,10 +34,10 @@
 The **G.R.A.P.E.S. Civilization Builder & Defense Simulator** models ancient civilization development through deep environmental, technological, and socio-political causation.
 
 ### Core Subsystems:
-1. **Taxonomical Catalog:** 31 historical questions organized into the 6 G.R.A.P.E.S. domains containing **282 deeply researched options** drawn from ancient archaeological records.
+1. **Expanded Global Taxonomy:** 31 historical questions organized into the 6 G.R.A.P.E.S. domains containing **300 deeply researched options** drawn from ancient archaeological records across Africa, Eurasia, the Americas, and Oceania.
 2. **Universal Multi-Choice Architecture:** Every question uses multi-choice checkboxes, removing arbitrary selection limits while strictly bounding valid combinations via historical logic.
-3. **Grade 7 Logic Guard:** An active validation layer enforcing **over 250 mutual exclusivity rules**, preventing anachronisms (e.g. iron swords in 3000 BCE) and geographic impossibilities (e.g. desert floating gardens or war elephants in freezing alpine snow).
-4. **Intelligent Auto-Select Synergy Engine:** Automatically links historical prerequisites when foundational choices are made (e.g. selecting Cuneiform auto-adds Clay Tablets and Scribes).
+3. **Grade 7 Logic Guard:** An active validation layer enforcing **over 260 mutual exclusivity rules**, preventing anachronisms and geographic impossibilities.
+4. **Intelligent Auto-Select Synergy Engine:** Automatically links historical prerequisites when foundational choices are made (e.g. selecting Outrigger War Canoes auto-adds Catamaran Engineering).
 5. **Synthesis Engine:** Compiles user choices into a 6-paragraph historical narrative, a quick-reference oral defense fact sheet, and 5 customized teacher cross-examination defense questions.
 
 ---
@@ -140,9 +130,9 @@ The **G.R.A.P.E.S. Civilization Builder & Defense Simulator** models ancient civ
   - Can Operate Direct Citizen Democracy: **❌ Prohibited (Citizens cannot physically assemble over large distances)**
   - Multi-Province Satrapy Bureaucracy: **✅ Permitted**
 
-### 2.3 Real-World Historical Inspirations
+### 2.3 Real-World Historical Inspirations (13 Spheres)
 
-The simulation references eight core archaeological zones:
+The simulation references thirteen core archaeological and cultural zones:
 - **Mesopotamia (Sumer, Akkad, Babylon, Assyria)** (Fertile Crescent) — ID: `mesopotamia`
 - **Ancient Egypt (Old, Middle, New Kingdom)** (Nile River Valley) — ID: `egypt`
 - **Indus Valley Civilization (Harappa & Mohenjo-Daro)** (South Asia) — ID: `indus`
@@ -151,17 +141,21 @@ The simulation references eight core archaeological zones:
 - **Classical Greece & Rome (Polis & Imperium)** (Mediterranean Basin) — ID: `grecoroman`
 - **Persian Empire (Achaemenid & Sasanian)** (Iranian Plateau & Near East) — ID: `persia`
 - **Phoenicia & Carthage (Maritime Thalassocracy)** (Levant & Western Mediterranean) — ID: `phoenicia`
+- **Sub-Saharan African Kingdoms (Kush, Aksum, Nok & Great Zimbabwe)** (Nile Cataracts, Savanna & Swahili Coast) — ID: `africa`
+- **Eurasian Steppe Confederations (Scythians, Xiongnu & Royal Nomads)** (Central Asian Grasslands & Altai Mountains) — ID: `steppe`
+- **Austronesian & Polynesian Voyagers (Lapita, Tonga & Rapa Nui)** (Pacific Ocean Archipelagos) — ID: `oceania`
+- **Pre-Columbian North America (Mississippian Cahokia & Ancestral Puebloans)** (Mississippi Basin & Colorado Plateau) — ID: `north_america`
 - **Custom / Synthetic Historical Hybrid** (Imagined Ancient World) — ID: `custom`
 
 ---
 
-## 3. Exhaustive Question & Option Taxonomy (282 Verbatim Options)
+## 3. Exhaustive Question & Option Taxonomy (300 Verbatim Options)
 
 ### Geography (G)
 *The physical land, rivers, rocks, trees, and weather that shape how your people survive and adapt.*
 
 #### G1. Dominant Terrain & Topography (Where do your people live?)
-- **ID:** `g2_terrain` | **Category:** `G` | **Options Count:** 10
+- **ID:** `g2_terrain` | **Category:** `G` | **Options Count:** 11
 - **Teacher Guidance:** Choose your land types. A City-State is confined to 1 local terrain, while a Grand Empire can span multiple biomes across continents!
 - **Grade 7 History Tip:** *"Think about real history: Greece had rocky peninsulas and mountains (so they became sailors!), while Mesopotamia had flat river valleys (so they built huge mud-brick cities)."*
 - **Verbatim Options:**
@@ -175,9 +169,10 @@ The simulation references eight core archaeological zones:
   8. Vast river delta marshlands and bayous intersected by tidal estuaries
   9. Elevated temperate highland savanna with fertile volcanic basalt plateaus and acacia woodlands (like the Ethiopian highlands / Kingdom of Aksum)
   10. Coastal fog oasis and hyper-arid desert scrub bordered by rich cold-water ocean upwelling currents (like the Peruvian coast / Caral & Paracas)
+  11. Volcanic oceanic high islands and coral ring atolls surrounded by vast open ocean (like Polynesia / Tonga / Hawaii)
 
 #### G2. Primary Freshwater Source (How do your people get drinking & farm water?)
-- **ID:** `g1_freshwater` | **Category:** `G` | **Options Count:** 10
+- **ID:** `g1_freshwater` | **Category:** `G` | **Options Count:** 11
 - **Teacher Guidance:** Every ancient civilization needed fresh water. Without water, crops wither and everyone dies of thirst. How does your civilization get its water?
 - **Grade 7 History Tip:** *"In Egypt, the Nile flooded gently at the exact same time every year, so farmers knew when to plant. In Mesopotamia, the Tigris and Euphrates flooded violently with no warning!"*
 - **Verbatim Options:**
@@ -191,6 +186,7 @@ The simulation references eight core archaeological zones:
   8. Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)
   9. Tropical crater caldera lakes and seasonal interconnected marshland lagoons (like Lake Texcoco and the Valley of Oaxaca)
   10. Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)
+  11. Basalt island freshwater lenses, volcanic crater springs, and coconut/breadfruit water storage (like Pacific atolls and high islands)
 
 #### G3. Natural Defensive Barriers (What protects your borders from invaders?)
 - **ID:** `g3_barriers` | **Category:** `G` | **Options Count:** 10
@@ -262,7 +258,7 @@ The simulation references eight core archaeological zones:
 *How your civilization feeds its people, produces goods, trades with foreign neighbors, and collects taxes.*
 
 #### E1. Staple Agricultural Crops (What food feeds your growing cities?)
-- **ID:** `e1_crops` | **Category:** `E` | **Options Count:** 9
+- **ID:** `e1_crops` | **Category:** `E` | **Options Count:** 10
 - **Teacher Guidance:** Pick your main crops. In ancient history, an empire is only as strong as its farmers. If crops fail, cities starve and empires collapse.
 - **Grade 7 History Tip:** *"Mesopotamia and Egypt grew wheat and barley for bread and beer. Ancient China relied on rice and millet. In the Americas, indigenous farmers grew the "Three Sisters" (corn, beans, and squash together!)."*
 - **Verbatim Options:**
@@ -275,9 +271,10 @@ The simulation references eight core archaeological zones:
   7. Sorghum, Yams, and Teff (heat-tolerant grains cultivated along tropical and savannah river courses)
   8. Cotton and Flax / Linseed (fibers for high-volume textile industries, sails, and oil presses)
   9. Taro, Yams, and Breadfruit (starchy root and tree staples cultivated on volcanic terraces and wetland ponds)
+  10. Pastoral Transhumance & Herd Grazing (minimal grain farming; diet of roasted meat, fermented mare's milk [kumis], cheese, and wild steppe grains)
 
 #### E2. Domesticated Animals (Which animals help your people work, eat, or travel?)
-- **ID:** `e2_animals` | **Category:** `E` | **Options Count:** 9
+- **ID:** `e2_animals` | **Category:** `E` | **Options Count:** 11
 - **Teacher Guidance:** Domesticated animals gave ancient people meat, milk, wool, leather, and muscles to pull heavy wagons and plows.
 - **Grade 7 History Tip:** *"In the Americas, the Maya and Aztecs had NO horses, oxen, or cows! Everything had to be carried on the backs of human porters or by canoe. In the Andes, the Inca used llamas."*
 - **Verbatim Options:**
@@ -290,9 +287,11 @@ The simulation references eight core archaeological zones:
   7. War Hounds and Herding Dogs (bred for guarding storehouses, palace security, and battlefield support)
   8. Domesticated Dromedary & Bactrian Camels (enduring desert caravanners able to carry 400 lbs across waterless sand for a week)
   9. Asian War Elephants & Work Elephants (trained for heavy logging, clearing jungle tracks, and terrifying battlefield shock)
+  10. Vast Herds of Sanga & Zebu Cattle (walking banks of wealth, milk, blood, leather, and royal bride-price prestige)
+  11. Domesticated Pacific Pigs, Red Jungle Fowl (Chickens), and Poi Dogs (transported across oceans in voyaging canoes)
 
 #### E3. Trade Networks & Exports (How do your merchants trade with foreign nations?)
-- **ID:** `e5_trade` | **Category:** `E` | **Options Count:** 7
+- **ID:** `e5_trade` | **Category:** `E` | **Options Count:** 8
 - **Teacher Guidance:** No ancient society could survive alone. How did your merchants move goods to trade for resources your land was missing?
 - **Grade 7 History Tip:** *"The Phoenicians built famous merchant ships that sailed all across the Mediterranean Sea. The Chinese traveled the famous overland Silk Road across deserts and mountains."*
 - **Verbatim Options:**
@@ -303,9 +302,10 @@ The simulation references eight core archaeological zones:
   5. Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)
   6. Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)
   7. Trans-Saharan Gold-Salt Trade (caravans crossing vast sand seas connecting savannah goldfields with coastal salt domes)
+  8. Continental River-Confluence Canoe Networks (trading copper plates, mica, lightning-whelk shells, and furs across thousands of miles of rivers)
 
 #### E4. Medium of Exchange / Currency (How do people pay for goods?)
-- **ID:** `e3_currency` | **Category:** `E` | **Options Count:** 8
+- **ID:** `e3_currency` | **Category:** `E` | **Options Count:** 10
 - **Teacher Guidance:** Stamped coins were not invented until around 600 BCE in Lydia! In the Bronze Age, ancient people used barter, weighed silver bullion, or state grain rations.
 - **Grade 7 History Tip:** *"In ancient Egypt, workers building the pyramids were paid in daily rations of bread, beer, and onions from the pharaoh’s royal granary! The Maya used cacao beans (chocolate!) like dollar bills."*
 - **Verbatim Options:**
@@ -317,6 +317,8 @@ The simulation references eight core archaeological zones:
   6. Cast Bronze Tool Money (currency cast in the shape of miniature spade blades, knives, or rings)
   7. Bolts of Woven Silk and Standardized Spun Yarn Skeins (used alongside copper cash for official payments and international tribute)
   8. Steatite Inscribed Merchant Seals and Clay Envelope Bullae (merchant authentication counters certifying token transactions)
+  9. Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)
+  10. Cattle & Livestock Wealth Standard (fines, taxes, royal tribute, and marriage alliances paid in live heads of cattle)
 
 #### E5. Primary Method of Taxation (How does the government get funds & labor?)
 - **ID:** `e4_taxation` | **Category:** `E` | **Options Count:** 8
@@ -336,7 +338,7 @@ The simulation references eight core archaeological zones:
 *Who holds supreme power, how kings or councils govern, how laws are enforced, and how the military defends borders.*
 
 #### P1. System of Government (Who holds supreme political power?)
-- **ID:** `p1_gov_system` | **Category:** `P` | **Options Count:** 10
+- **ID:** `p1_gov_system` | **Category:** `P` | **Options Count:** 11
 - **Teacher Guidance:** Who makes the ultimate decisions in your society? Note: Direct democracy only works on small city-state scales, while continental empires require provincial administration.
 - **Grade 7 History Tip:** *"In Athens, free male citizens voted on every single law in a direct democracy. In Sparta, a military council and two kings ruled. In Egypt, the Pharaoh held total absolute power."*
 - **Verbatim Options:**
@@ -350,6 +352,7 @@ The simulation references eight core archaeological zones:
   8. Diarchy (two co-equal hereditary kings balancing civil domestic duties and active wartime command)
   9. Confederated Tribal League / Amphictyony (council of autonomous clans or regional delegates united around a shared religious sanctuary)
   10. Egalitarian Civic Council of Merchant-Artisan Guilds (collective urban governance with no grand royal palaces, like the Indus cities)
+  11. Nomadic Steppe Imperial Confederacy (mobile royal court unifying dozens of horse-riding clans under a supreme Chanyu or Khagan)
 
 #### P2. Succession & Transfer of Power (When the ruler dies, who takes over?)
 - **ID:** `p2_succession` | **Category:** `P` | **Options Count:** 9
@@ -367,7 +370,7 @@ The simulation references eight core archaeological zones:
   9. Oracular Divination and Clerical Lot Casting (high priests consult temple lot urns or divine omens to confirm the god's chosen monarch)
 
 #### P3. Legal Code & Justice System (How are laws enforced and crimes punished?)
-- **ID:** `p3_law_system` | **Category:** `P` | **Options Count:** 9
+- **ID:** `p3_law_system` | **Category:** `P` | **Options Count:** 10
 - **Teacher Guidance:** How does your society keep people from taking revenge into their own hands? Are punishments equal for everyone, or do nobles get treated better than peasants?
 - **Grade 7 History Tip:** *"Hammurabi’s Code was carved onto an 8-foot black stone pillar so everyone could see it. It introduced "an eye for an eye," but nobles paid smaller fines if they harmed a poor slave!"*
 - **Verbatim Options:**
@@ -380,9 +383,10 @@ The simulation references eight core archaeological zones:
   7. Codified Civil Jurisprudence with written contracts, professional advocates, and legal precedents (Roman civil law tradition)
   8. Elders' Oral Customary Law (unwritten ancestral precedents, kinship compensation wergild fines, and sacred taboo prohibitions)
   9. Sumptuary Regulations and Ritual Propriety (Confucian Li — enforcing social order through strict codes of clothing, ceremonial deference, and moral education)
+  10. Sacred Kapu / Tapu Ecological & Social Taboo Code (strict spiritual laws regulating fishing seasons, resource conservation, and chief conduct)
 
 #### P4. Military Organization & Doctrines (How does your army fight?)
-- **ID:** `p4_military` | **Category:** `P` | **Options Count:** 11
+- **ID:** `p4_military` | **Category:** `P` | **Options Count:** 12
 - **Teacher Guidance:** Select your military branches and fighting tactics. Note: War chariots require horses and open plains, while navies require coastlines!
 - **Grade 7 History Tip:** *"Greek hoplites locked their shields together into an unbreakable human tank called a "phalanx". The Assyrians were masters of siege warfare with giant battering rams."*
 - **Verbatim Options:**
@@ -397,6 +401,7 @@ The simulation references eight core archaeological zones:
   9. Armored War Elephant Corps (massive beasts bred for battlefield shock, breaking enemy infantry lines and terrifying cavalry)
   10. Disciplined Crossbow Phalanxes & Volley Formations (massed rank-and-file archers firing mechanical bronze-triggered crossbows)
   11. Guerilla Mountain Skirmishers & Slinger Corps (highly mobile highland troops using lead slingshots, darts, and ambush tactics)
+  12. Outrigger War Canoes & Amphibious Shock Warriors (fast double-hulled vessels carrying warriors armed with shark-tooth clubs and hardwood spears)
 
 #### P5. Foreign Policy & How Conquered Peoples Are Treated (How do you rule subjects?)
 - **ID:** `p5_foreign_policy` | **Category:** `P` | **Options Count:** 8
@@ -430,7 +435,7 @@ The simulation references eight core archaeological zones:
   8. Sacred Shaman-Kings and Oracle Astrologers (rulers whose supreme authority derives from trance communication with supernatural cosmic realms)
 
 #### S2. The Middle Class & Specialized Artisans (Who is the most respected middle tier?)
-- **ID:** `s2_middle` | **Category:** `S` | **Options Count:** 8
+- **ID:** `s2_middle` | **Category:** `S` | **Options Count:** 9
 - **Teacher Guidance:** Civilizations need educated and skilled specialists between the rulers and the peasant farmers. Who is most respected in your society’s middle tier?
 - **Grade 7 History Tip:** *"In ancient Egypt and Sumer, scribes were treated like celebrities because less than 2% of people could read or write! In China, hardworking peasant farmers were respected, while merchants were looked down on as greedy."*
 - **Verbatim Options:**
@@ -442,6 +447,7 @@ The simulation references eight core archaeological zones:
   6. Naval Navigators and Master Shipwrights (commanding extraordinary maritime prestige and guild privileges)
   7. Civil Engineers, Hydraulic Architects, and Quarry Masters (highly privileged master builders who design aqueducts, walls, and canals)
   8. Master Weavers, Silk Cultivators, and Textile Guild Masters (commanding high economic status by managing luxury cloth and dye workshops)
+  9. Hereditary Griots, Praise-Singers, and Oral Genealogists (living libraries who memorize centuries of royal law, history, and music)
 
 #### S3. Social Mobility (Can a poor kid work hard and move up in class?)
 - **ID:** `s3_mobility` | **Category:** `S` | **Options Count:** 8
@@ -533,7 +539,7 @@ The simulation references eight core archaeological zones:
   10. Ritual Temple Prostitution and Sacred Marriage Rites (Hieros Gamos uniting the monarch with the fertility goddess to guarantee crop harvests)
 
 #### R4. Death, Burial, and the Afterlife (What happens after you die?)
-- **ID:** `r4_afterlife` | **Category:** `R` | **Options Count:** 9
+- **ID:** `r4_afterlife` | **Category:** `R` | **Options Count:** 10
 - **Teacher Guidance:** Where does the human soul go after physical death? Note: Cremation on funeral pyres directly contradicts physical mummification!
 - **Grade 7 History Tip:** *"Egyptians believed the god Anubis weighed your heart against the feather of truth—if your heart was light, you entered a beautiful paradise of reed fields! The Mesopotamians believed everyone went to a dusty, dark underworld where souls ate dirt."*
 - **Verbatim Options:**
@@ -546,6 +552,7 @@ The simulation references eight core archaeological zones:
   7. Vast subterranean necropolises guarded by terracotta armies and sealed with celestial constellation vaults
   8. Ancestor Mountain Abodes (spirits become guardian ancestral spirits dwelling in high mountain peaks, watching over village crops)
   9. Ship Burial and Aquatic Voyages (deceased royalty are placed in sea-going ships with weapons and treasure, launched to sea or buried under earthen barrows)
+  10. Royal Kurgan Burial Mounds (timber-lined underground tombs filled with sacrificed horses, gold animal-style art, and weapons under earthen hills)
 
 #### R5. Relationship Between Religion and Government (Who is in charge: king or priest?)
 - **ID:** `r5_gov_relation` | **Category:** `R` | **Options Count:** 7
@@ -579,7 +586,7 @@ The simulation references eight core archaeological zones:
   9. Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved deep into bedrock to access deep aquifers and cool communal gathering)
 
 #### A2. Writing System & Script (How do your people write and keep records?)
-- **ID:** `a1_writing` | **Category:** `A` | **Options Count:** 10
+- **ID:** `a1_writing` | **Category:** `A` | **Options Count:** 12
 - **Teacher Guidance:** Writing was invented to count grain and record taxes! Note: Phonetic alphabets were not invented until around 1100 BCE by the Phoenicians.
 - **Grade 7 History Tip:** *"The Sumerians pressed wedge-shaped sticks into wet clay (cuneiform). The Egyptians drew sacred pictures (hieroglyphs). The Phoenicians invented a simple 22-letter alphabet where each letter was a sound—the ancestor of our English alphabet today!"*
 - **Verbatim Options:**
@@ -593,6 +600,8 @@ The simulation references eight core archaeological zones:
   8. Undeciphered glyph seals stamped into steatite and terracotta for merchant cargo attribution
   9. Monumental Boustrophedon Script ('as the ox plows' — alternating left-to-right and right-to-left lines carved on temple stone)
   10. Kharosthi and Aramaic Administrative Cursive (rapid ink-on-parchment script designed for imperial courier decrees across multi-lingual empires)
+  11. Ge'ez / Meroitic Abugida Script & Royal Trilingual Stone Inscriptions (syllabic alphabets carved on towering granite obelisks)
+  12. Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (mapping ocean swell refraction and historical treaties without ink)
 
 #### A3. Primary Writing Medium (What physical material do you write on?)
 - **ID:** `a2_medium` | **Category:** `A` | **Options Count:** 9
@@ -610,7 +619,7 @@ The simulation references eight core archaeological zones:
   9. Polished Ostraca (recycled smooth pottery shards used by scribes and commoners for receipts, letters, and voting ballots)
 
 #### A4. Monumental Architecture (What giant structures will your people be remembered for?)
-- **ID:** `a3_monuments` | **Category:** `A` | **Options Count:** 10
+- **ID:** `a3_monuments` | **Category:** `A` | **Options Count:** 12
 - **Teacher Guidance:** Select your construction projects. Note: Building thousands of miles of frontier walls requires a massive continental empire with millions of workers!
 - **Grade 7 History Tip:** *"The Great Pyramid of Giza was the tallest man-made structure on Earth for over 3,800 years! Roman aqueducts carried millions of gallons of mountain water into cities using gravity alone."*
 - **Verbatim Options:**
@@ -624,9 +633,11 @@ The simulation references eight core archaeological zones:
   8. Vast hypostyle reception halls with soaring stone column forests and glazed ceramic brick friezes
   9. Artificial Enclosed Naval Harbors (Cothons) with covered drydocks and slipways for 200+ warships (like Carthage)
   10. Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)
+  11. Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)
+  12. Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean
 
 #### A5. Scientific, Mathematical & Technological Breakthroughs (What inventions change history?)
-- **ID:** `a5_science` | **Category:** `A` | **Options Count:** 12
+- **ID:** `a5_science` | **Category:** `A` | **Options Count:** 13
 - **Teacher Guidance:** Select your breakthroughs. Note: Underwater concrete was Roman (200 BCE), iron metallurgy was 1200 BCE, while base-60 math was Sumerian (3000 BCE).
 - **Grade 7 History Tip:** *"The Babylonians used a base-60 math system, which is the reason we have 60 seconds in a minute and 360 degrees in a circle! The Maya independently invented the concept of "Zero" long before Europeans used it."*
 - **Verbatim Options:**
@@ -642,8 +653,9 @@ The simulation references eight core archaeological zones:
   10. Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)
   11. Advanced Antikythera-Style Geared Astronomical Calculators (bronze differential gear trains tracking planetary orbits and eclipse cycles)
   12. Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)
+  13. Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation
 
-> **Total Options in Simulator:** 282 options across all 31 questions.
+> **Total Options in Simulator:** 300 options across all 31 questions.
 
 ---
 
@@ -689,72 +701,15 @@ The simulator evaluates every click against `src/utils/logicRules.js`. If a choi
    - Multi-biome permitted.
    - **Prohibited:** Direct Citizen Democracy (citizens cannot walk 2,000 miles to a single town square vote).
 
-### 4.3 Environmental & Terrain Mutual Exclusions
-- **Alluvial Plains vs. Mountain Barriers:** Open flat alluvial floodplains cannot simultaneously possess impassable freezing mountain ranges as natural borders.
-- **Arid Desert Plateaus vs. Tropical Rainforests:** Dry desert plateau terrain cannot coexist with dense humid rainforest canopy in a local city-state or regional kingdom.
-- **Violent Flooding Rivers vs. Calm Lake Agriculture:** Violent flash-flooding twin rivers wash away delicate floating woven gardens (*Chinampas*).
-- **Desert Flash-Flood Wadis vs. Waterlogged Rainforests:** Check-dams designed for arid wadi flash floods make no sense in perpetual rainforest rain.
-- **Natural Barriers vs. Open Plains:** Selecting "None — completely open flat plains" locks all physical barrier options (mountains, deserts, cataracts, reefs).
-
-### 4.4 Agricultural & Domesticated Livestock Constraints
-- **Paddy Rice Cultivation:** Requires swampy wetlands, monsoons, or extensive river floodplains; locked in waterless desert expanses.
-- **Terraced Vineyards & Olive Groves:** Thrives on rocky peninsulas and hills; locked in featureless waterlogged alluvial mud.
-- **Highland Potatoes & Quinoa:** Thrives in cold mountain plateaus; locked in hot tropical mangrove swamps.
-- **Camels & Dromedaries:** Suffer foot rot and parasitic diseases in humid tropical rainforests; permitted only in deserts, steppes, and arid plateaus.
-- **War Elephants:** Starve and collapse on freezing alpine mountain passes or waterless deserts; require abundant monsoonal vegetation or river basins.
-- **Llamas & Alpacas:** High-altitude Andean camelids; cannot survive in hot tropical lowlands or arid Old World deserts.
-- **No Domesticated Animals:** Selecting "None — goods carried on human porters" locks all cavalry, horse archers, war chariots, and animal sacrifice rituals.
-
-### 4.5 Raw Material Shortage Cascades
-- **Timber Shortage (`g5_shortages`):**
-  - 🔒 Locks Naval Supremacy (triremes).
-  - 🔒 Locks Siege Warfare Specialists (wooden towers, catapults, battering rams).
-  - 🔒 Locks Bamboo or wooden slips writing medium.
-  - 🔒 Locks Colonnaded cedar halls and wooden palace roofs.
-- **Hard Stone or Ore Shortage (`g5_shortages`):**
-  - 🔒 Locks Cyclopean stone fortresses.
-  - 🔒 Locks Marble colonnaded temples.
-  - 🔒 Locks Rock-cut cliff shrines and monolithic obelisks.
-  - 🔒 Locks Gravity-fed stone aqueducts.
-  - 🔒 Locks Carved stone stelae and law pillars.
-- **Horse or Pack Animal Shortage (`g5_shortages`):**
-  - 🔒 Locks Elite Chariot Corps.
-  - 🔒 Locks Horse Archer Light Cavalry.
-  - 🔒 Locks Paved Courier Post Roads with royal horse relays.
-- **Salt Shortage (`g5_shortages`):**
-  - 🔒 Locks Rock salt dome quarrying.
-  - 🔒 Locks Trans-Saharan gold-for-salt camel trade.
-  - 🔒 Locks Deep underground brine drilling.
-- **Tin or Alloy Flux Shortage (`g5_shortages`):**
-  - 🔒 Locks Cast bronze ritual cauldrons.
-  - 🔒 Locks Standardized cast bronze tool money.
-
-### 4.6 Inscriptional & Writing Medium Conflicts
-- **Quipu Knotted Recording:** Indigenous Andean record-keeping without written words; locks carved stone law pillars, clay cuneiform tablets, and papyrus scrolls (and vice versa).
-- **Papyrus Scrolls:** Requires marshland reeds; rots in humid tropical rainforests without arid storage.
-- **Clay Tablets:** Requires rich alluvial river mud and clay deposits.
-- **Bamboo / Wooden Slips:** Requires bamboo or timber groves; locked in timber-scarce deserts.
-
-### 4.7 Hydraulic Engineering & Architectural Conflicts
+### 4.3 Key Environmental & Technological Contradictions
+- **Outrigger War Canoes & Catamarans vs Landlocked Mountains:** Outrigger voyaging canoes require open ocean or coastal waterways; locked in purely landlocked mountain plateaus.
+- **Outrigger War Canoes vs Timber Shortage:** Large double-hulled catamarans require tall tree trunks for hulls and masts; locked if suffering a tall timber shortage.
+- **Nomadic Steppe Confederacy vs Horse Shortages:** Steppe horse confederacies and kurgan burials require horse pastoralism; locked if suffering a horse shortage or relying only on human porters.
+- **Cattle Wealth Standard vs Human Porters:** Measuring wealth in live cattle herds contradicts a society that uses zero domesticated animals.
+- **Granite Enclosures (Dzimbahwe) & Moai Statues vs Stone Shortage:** Fitting mortarless granite enclosures or carving 14-ton Moai statues requires quarrying hard stone.
 - **Chinampas ("Floating Gardens"):** Requires shallow volcanic caldera lakes; locked in waterless deserts and violent river flash-floods.
-- **Qanats (Underground Aqueducts):** Built to prevent water evaporation in scorching deserts; useless and redundant in soggy tropical rainforests.
-- **Suspension Rope Bridges:** Requires steep mountain gorges; useless in flat featureless floodplains.
-- **Artificial War Harbors (Cothons):** Requires rocky coastlines and maritime naval doctrines; locked in landlocked mountain interiors.
-
-### 4.8 Military Organization & Battlefield Doctrines
-- **War Chariots:** Require flat open plains or riverbanks; useless in jagged mountain ranges or island archipelagos.
-- **Naval Supremacy:** Requires coastlines, islands, or navigable rivers; locked in landlocked desert plateaus.
-- **Mountain Slingers & Guerillas:** Highland ambushes; locked in flat featureless floodplains.
-
-### 4.9 Governance, Law & Societal Conflicts
-- **Direct Democracy vs. Theocratic God-King:** Equal citizen vote in a public assembly contradicts a living monarch who is an untouchable divine god on Earth.
-- **Egalitarian Guild Councils vs. God-Kings:** Merchant-artisan collective councils (like Harappa) contradict despotic absolute god-kings.
-- **Matriarchal Clan Succession vs. Patriarchal Seclusion:** Clan mothers choosing rulers and managing property contradicts strict patriarchal purdah and female seclusion.
-
-### 4.10 Theological, Ritual & Eschatological Clashes
-- **Cruel & Capricious Gods vs. Gentle Predictable Rivers:** Unpredictable, cruel deities reflect violent floods; contradictory to a predictable gentle Nile-style river.
-- **Ship Burials:** Requires sea-going vessels and coastal traditions; locked in landlocked mountain plateaus.
-- **Mummification:** Requires mineral natron, bitumen, or limestone tombs to preserve bodies; locked in societies practicing open funeral pyre cremation or sky burial.
+- **Qanats (Underground Aqueducts):** Built to prevent water evaporation in scorching deserts; useless in soggy tropical rainforests.
+- **Quipu Knotted Recording:** Indigenous Andean record-keeping without written words; locks carved stone law pillars, clay cuneiform tablets, and papyrus scrolls (and vice versa).
 
 ---
 
@@ -812,6 +767,14 @@ The simulator maps foundational choices to their required historical prerequisit
 | "Marine murex sea snail beds (for extracting prized r..." | "Silk cultivation, glassblowing, or rare purple dye e..." | `a5_science` |
 | "Wild silk cocoons and fine white mulberry groves (fo..." | "Master Weavers, Silk Cultivators, and Textile Guild ..." | `s2_middle` |
 | "Wild silk cocoons and fine white mulberry groves (fo..." | "Bolts of Woven Silk and Standardized Spun Yarn Skein..." | `e3_currency` |
+| "Volcanic oceanic high islands and coral ring atolls ..." | "Basalt island freshwater lenses, volcanic crater spr..." | `g1_freshwater` |
+| "Outrigger War Canoes & Amphibious Shock Warriors (fa..." | "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | `a5_science` |
+| "Double-Hulled Outrigger Catamaran Engineering, Crab-..." | "Marshallese Stick Charts, Wampum Memory Belts, and O..." | `a1_writing` |
+| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Horses and Camels (for aristocratic cavalry, messeng..." | `e2_animals` |
+| "Nomadic Steppe Imperial Confederacy (mobile royal co..." | "Pastoral Transhumance & Herd Grazing (minimal grain ..." | `e1_crops` |
+| "Cattle & Livestock Wealth Standard (fines, taxes, ro..." | "Vast Herds of Sanga & Zebu Cattle (walking banks of ..." | `e2_animals` |
+| "Mortarless Granite Enclosures (Dzimbahwe) & Towering..." | "Quarried limestone, granite, or marble (for permanen..." | `g4_resources` |
+| "Megalithic Volcanic Tuff Statues (Moai) & Open-Air S..." | "Basalt, andesite, and diorite volcanic stones (for m..." | `g4_resources` |
 
 > **Safety Check:** The auto-link engine checks `checkOptionDisallowed` before adding companions. If an option is restricted by an active era, scale cap, or shortage, it will **not** be forced.
 
@@ -938,7 +901,7 @@ Four verified historical archetypes are built into the app to demonstrate balanc
   - `r3_rituals`: Bloodletting or human sacrifice (captives or volunteers offered to keep t...
   - `r4_afterlife`: Grim Underworld (everyone — rich or poor, good or bad — goes to a dark, d...
   - `r5_gov_relation`: Pure Theocracy (the High Priest IS the ruler; religious law and state law...
-  - `a4_hydraulic`: Chinampas ("floating gardens" built on shallow lake beds using woven reed...
+  - `a4_hydraulic`: Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved dee...
   - `a1_writing`: Pictographs & Ideograms carved into stone stelae and folding bark-paper b...
   - `a2_medium`: Accordion-folded bark paper (amatl) coated with fine lime plaster and pai...
   - `a3_monuments`: Massive stepped Ziggurats or Pyramids towering over the flat landscape
@@ -1005,17 +968,9 @@ Analyze Section 5 (Intelligent Auto-Select Synergy Engine) in the G.R.A.P.E.S. C
 
 ### Prompt Template C: Civilization Diversity & Missing Historical Archetypes
 ```text
-Review the 282 options in Section 3 and the 8 Inspirations in Section 2.
-1. Assess geographic and cultural representation across ancient Sub-Saharan Africa (e.g., Great Zimbabwe, Nok culture), Oceania / Polynesia (wayfinding, outrigger canoes), Pre-Columbian North America (Mississippian Cahokia mounds), and Steppe / Nomadic Eurasian pastoralists.
-2. What 10-15 distinctive historical options should be added to ensure these regions can be faithfully represented within G.R.A.P.E.S.?
-```
-
-### Prompt Template D: Grade 7 Pedagogical & Cognitive Scaffolding Review
-```text
-Review the Grade 7 tips, guidance prompts, and teacher stress-test dilemmas in Sections 3 and 6.
-1. Evaluate the reading comprehension level and clarity for 12-to-13-year-old middle school students.
-2. Suggest improvements for how complex concepts (such as 'Satrapy administration', 'Corvée labor', 'Lex Talionis', 'Pozzolanic concrete', or 'Antikythera mechanism') can be explained with even more vivid analogies.
-3. Provide 3 additional teacher stress-test questions focusing on Religion vs. Science and Social Structure vs. Military power.
+Review the 300 options in Section 3 and the 13 Inspirations in Section 2.
+1. Assess geographic and cultural representation across ancient Sub-Saharan Africa, Oceania / Polynesia, Pre-Columbian North America, and Steppe / Nomadic Eurasian pastoralists.
+2. What additional distinctive historical options could be added to further enrich these regions within G.R.A.P.E.S.?
 ```
 
 ---
