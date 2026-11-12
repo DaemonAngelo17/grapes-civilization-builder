@@ -783,7 +783,7 @@ export const HISTORICAL_PRESETS = {
       ],
       g5_shortages: [
         'Lack of tall timber for shipbuilding and large roofs (like Egypt/Mesopotamia)',
-        'Lack of horses or pack animals for transport and cavalry'
+        'Lack of tin or alloy fluxes (crippling bronze tool and weapon manufacture unless sustained by maritime trade)'
       ],
       g6_disasters: [
         'Multi-year severe droughts that dry up canals and cause famine',
@@ -801,7 +801,7 @@ export const HISTORICAL_PRESETS = {
       e3_currency: 'State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)',
       e4_taxation: [
         'Agricultural Tithe (tax collectors measure field sizes after floods and take 10% to 30% of the harvest)',
-        'Corvée Labor System (every peasant family owes 2 months of physical labor per year digging canals or building pyramids during the off-season)'
+        'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
       ],
       p1_gov_system: 'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)',
       p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
@@ -883,9 +883,9 @@ export const HISTORICAL_PRESETS = {
       p3_law_system: 'Written Public Law Pillars (like Hammurabi\'s Code — carved in stone in the town square so no judge can make up rules)',
       p4_military: [
         'Permanent Professional Standing Army (full-time paid soldiers who train year-round)',
-        'Siege Warfare Specialists (battering rams, siege towers, sappers digging under walls, catapults)'
+        'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)'
       ],
-      p5_foreign_policy: 'Mass Deportation & Assimilation (relocating conquered populations across the empire so they can\'t rebel)',
+      p5_foreign_policy: 'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)',
       s1_apex: 'Priest-Kings and Temple High Priests (mediators between gods and humans)',
       s2_middle: 'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)',
       s3_mobility: 'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)',
@@ -932,8 +932,8 @@ export const HISTORICAL_PRESETS = {
         'Gold, silver, jade, or lapis lazuli (for luxury goods and religious idols)'
       ],
       g5_shortages: [
-        'Lack of hard stone or metal ores (only have mud and clay)',
-        'Lack of horses or pack animals for transport and cavalry'
+        'Lack of horses or pack animals for transport and cavalry',
+        'Lack of tin or alloy fluxes (crippling bronze tool and weapon manufacture unless sustained by maritime trade)'
       ],
       g6_disasters: [
         'Multi-year severe droughts that dry up canals and cause famine',
@@ -945,11 +945,10 @@ export const HISTORICAL_PRESETS = {
       e2_animals: [
         'None — all goods are carried on the backs of human porters and canoes (like the Maya/Aztec)'
       ],
-      e5_trade: 'Overland Silk/Incense Caravan Routes (long-distance relay trade across deserts and mountains)',
+      e5_trade: 'Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)',
       e3_currency: 'Commodity Money (cacao beans, cowrie shells, salt blocks, or bolts of silk used as cash)',
       e4_taxation: [
-        'Tribute from Conquered Provinces (citizens pay zero taxes because conquered neighbors fund the empire)',
-        'Corvée Labor System (every peasant family owes 2 months of physical labor per year digging canals or building pyramids during the off-season)'
+        'Agricultural Tithe (tax collectors measure field sizes after floods and take 10% to 30% of the harvest)'
       ],
       p1_gov_system: 'Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)',
       p2_succession: 'Hereditary Primogeniture (passes strictly to the eldest son or royal bloodline)',
@@ -958,9 +957,9 @@ export const HISTORICAL_PRESETS = {
         'Seasonal Peasant Levy (farmers are drafted after harvest season, given spears, and sent to fight)',
         'Psychological Terror (flaying rebel leaders and building pyramids of skulls so cities surrender without fighting)'
       ],
-      p5_foreign_policy: 'Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)',
+      p5_foreign_policy: 'Commercial Colonies & Trading Posts (founding fortified coastal or frontier harbor factories to monopolize resources)',
       s1_apex: 'The God-King and Royal Dynasty (untouchable divine bloodline)',
-      s2_middle: 'Master Craftsmen & Metallurgists (stonemasons, bronze-smiths, jewelers)',
+      s2_middle: 'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)',
       s3_mobility: 'Rigid Hereditary Caste System (zero mobility; you must marry and work in the exact caste your parents were born into)',
       s4_gender: 'Religious & Economic Influence (men hold political office, but women serve as powerful High Priestesses, healers, and market textile merchants)',
       s5_unfree_labor: 'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)',
@@ -976,7 +975,7 @@ export const HISTORICAL_PRESETS = {
         'Chinampas ("floating gardens" built on shallow lake beds using woven reeds and fertile mud)'
       ],
       a1_writing: 'Pictographs & Ideograms carved into stone stelae and folding bark-paper books (codices)',
-      a2_medium: 'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets',
+      a2_medium: 'Accordion-folded bark paper (amatl) coated with fine lime plaster and painted in mineral pigments',
       a3_monuments: [
         'Massive stepped Ziggurats or Pyramids towering over the flat landscape'
       ],
@@ -988,7 +987,7 @@ export const HISTORICAL_PRESETS = {
   },
   greece_rome: {
     name: 'The Classical Polis League',
-    era: 'classical_antiquity',
+    era: 'imperial_era',
     scale: 'continental_empire',
     inspiration: 'Classical Greece & Rome (Polis & Imperium)',
     answers: {
@@ -996,7 +995,7 @@ export const HISTORICAL_PRESETS = {
         'Rocky peninsula with jagged coastlines and hundreds of small islands (like Greece)',
         'Steep, jagged mountain ranges (requires terrace farming, provides natural fortresses)'
       ],
-      g1_freshwater: 'High-altitude glacial mountain meltwater (like the Andes — cold, fast-flowing streams)',
+      g1_freshwater: 'Karst subterranean river systems and highland limestone springs (like southwest China and the Balkans)',
       g3_barriers: [
         'Treacherous rocky coastlines, reefs, and stormy seas',
         'Impassable, freezing mountain ranges blocking the border'
@@ -1034,7 +1033,7 @@ export const HISTORICAL_PRESETS = {
       ],
       p5_foreign_policy: 'Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)',
       s1_apex: 'Landowning Warrior Aristocracy / Patricians (noble families who control the cavalry and estates)',
-      s2_middle: 'Free Smallholder Farmers (seen as the virtuous backbone of society and the military, while merchants are looked down on as greedy parasites)',
+      s2_middle: 'Master Craftsmen & Metallurgists (stonemasons, bronze-smiths, jewelers)',
       s3_mobility: 'Wealth-Based Mobility (class is determined purely by property/income; if a merchant gets rich enough, they move up a tier)',
       s4_gender: 'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)',
       s5_unfree_labor: 'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)',
