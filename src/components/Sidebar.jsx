@@ -8,8 +8,7 @@ import {
   Users, 
   CheckCircle2, 
   Scroll,
-  ChevronRight,
-  BookOpen
+  ChevronRight
 } from 'lucide-react';
 import { GRAPES_CATEGORIES, GRAPES_QUESTIONS } from '../data/grapesData';
 
@@ -23,16 +22,18 @@ const ICONS = {
 };
 
 export default function Sidebar({
+  categories,
   activeCategory,
   onSelectCategory,
   answers,
   hasGeneratedDossier,
   onOpenDossier,
   isMobileOpen,
-  setIsMobileOpen
+  setIsMobileOpen,
+  orderMode
 }) {
   // Compute completion counts
-  const categoryStats = GRAPES_CATEGORIES.map((cat) => {
+  const categoryStats = categories.map((cat, idx) => {
     const questions = GRAPES_QUESTIONS[cat.key] || [];
     const total = questions.length;
     let completed = 0;
@@ -43,6 +44,7 @@ export default function Sidebar({
     }
     return {
       ...cat,
+      stepNumber: idx + 1,
       total,
       completed,
       isFullyAnswered: completed === total
@@ -77,16 +79,16 @@ export default function Sidebar({
                   VI
                 </span>
                 <h2 className="font-cinzel text-base font-bold text-[#241a15]">
-                  G.R.A.P.E.S. INDEX
+                  {orderMode === 'logical' ? 'BUILD-UP STEPS' : 'G.R.A.P.E.S. INDEX'}
                 </h2>
               </div>
               <p className="text-[11px] text-[#6d594a] mt-0.5 font-sans-ui">
-                Six Pillars of Civilization
+                {orderMode === 'logical' ? 'Step-by-step civilization design' : 'Six Pillars of Civilization'}
               </p>
             </div>
             <button
               onClick={() => setIsMobileOpen(false)}
-              className="md:hidden text-[#6d594a] hover:text-[#241a15] p-1"
+              className="md:hidden text-[#6d594a] hover:text-[#241a15] p-1 cursor-pointer"
             >
               ✕
             </button>
@@ -95,7 +97,7 @@ export default function Sidebar({
           {/* Overall Progress Gauge */}
           <div className="py-3 border-b border-[#dfd4c0]">
             <div className="flex justify-between items-center text-xs mb-1 font-sans-ui">
-              <span className="font-semibold text-[#44352b]">Imperial Progress</span>
+              <span className="font-semibold text-[#44352b]">Civilization Progress</span>
               <span className="font-bold text-[#8c531b]">
                 {totalCompleted}/{totalQuestions} ({overallPct}%)
               </span>
@@ -124,7 +126,7 @@ export default function Sidebar({
                     const el = document.getElementById(`sec-${cat.key}`);
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }}
-                  className={`w-full text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1.5 ${
+                  className={`w-full text-left p-2.5 rounded-lg border transition-all flex flex-col gap-1.5 cursor-pointer ${
                     isActive
                       ? 'bg-[#f0e4d2] border-[#935923] shadow-xs'
                       : 'bg-[#faf6ee] hover:bg-[#f3eadc] border-[#dfd3be]'
@@ -141,10 +143,11 @@ export default function Sidebar({
                       <div>
                         <div className="flex items-center gap-1.5">
                           <span className="font-cinzel font-bold text-xs text-[#241a15]">
-                            {cat.key}. {cat.name}
+                            {orderMode === 'logical' ? `Step ${cat.stepNumber}: ` : `${cat.key}. `}
+                            {cat.name}
                           </span>
                         </div>
-                        <span className="text-[10px] text-[#786454] block leading-tight">
+                        <span className="text-[10px] text-[#786454] block leading-tight font-sans-ui">
                           {cat.subtitle.split('&')[0]}
                         </span>
                       </div>
@@ -190,7 +193,7 @@ export default function Sidebar({
               <span>{hasGeneratedDossier ? 'Open Dossier' : 'Generate Dossier'}</span>
             </button>
             <p className="text-[10px] text-center text-[#7a6757] font-sans-ui">
-              Creates 6-part Narrative, Fact Sheet & Defense Test
+              6-Part Essay, Fact Sheet & Defense Simulator
             </p>
           </div>
         </div>
@@ -198,4 +201,3 @@ export default function Sidebar({
     </>
   );
 }
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Mountain, 
   Flame, 
@@ -10,7 +10,9 @@ import {
   Sparkles, 
   CheckCircle2, 
   ArrowUp,
-  AlertCircle
+  AlertCircle,
+  Lightbulb,
+  Check
 } from 'lucide-react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -32,7 +34,7 @@ const ICONS = {
 };
 
 export default function App() {
-  // Initialize with Ancient Egypt preset by default so user immediately sees a live, populated civilization
+  // Default to Ancient Egypt preset so the app opens with rich, valid selections
   const defaultPreset = HISTORICAL_PRESETS.egypt;
 
   const [civilizationName, setCivilizationName] = useState(defaultPreset.name);
@@ -42,13 +44,27 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('G');
   const [isDossierOpen, setIsDossierOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [logicGuardEnabled, setLogicGuardEnabled] = useState(true);
+  const [orderMode, setOrderMode] = useState('logical'); // 'logical' (build-up: G, E, P, S, R, A) or 'grapes' (G, R, A, P, E, S)
   const [toastMessage, setToastMessage] = useState(null);
 
   // Show temporary toast message
   const showToast = (msg) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3000);
+    setTimeout(() => setToastMessage(null), 3500);
   };
+
+  // Reorder categories based on chosen mode
+  const orderedCategories = useMemo(() => {
+    if (orderMode === 'logical') {
+      // Build-Up Sequence: 1. Geography, 2. Economy, 3. Politics, 4. Social Structure, 5. Religion, 6. Achievements
+      const desiredKeys = ['G', 'E', 'P', 'S', 'R', 'A'];
+      return desiredKeys.map((key) => GRAPES_CATEGORIES.find((c) => c.key === key));
+    }
+    // G.R.A.P.E.S. Acronym Sequence
+    const grapesKeys = ['G', 'R', 'A', 'P', 'E', 'S'];
+    return grapesKeys.map((key) => GRAPES_CATEGORIES.find((c) => c.key === key));
+  }, [orderMode]);
 
   // Handle question answer change
   const handleAnswerChange = (questionId, value) => {
@@ -179,12 +195,17 @@ export default function App() {
           totalAnswered={totalAnsweredCount}
           totalQuestions={totalQuestionsCount}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+          logicGuardEnabled={logicGuardEnabled}
+          setLogicGuardEnabled={setLogicGuardEnabled}
+          orderMode={orderMode}
+          setOrderMode={setOrderMode}
         />
 
         {/* Content Layout with Sticky Sidebar */}
         <div className="flex gap-6 items-start">
           {/* Sidebar Navigation */}
           <Sidebar
+            categories={orderedCategories}
             activeCategory={activeCategory}
             onSelectCategory={setActiveCategory}
             answers={answers}
@@ -192,11 +213,12 @@ export default function App() {
             onOpenDossier={() => setIsDossierOpen(true)}
             isMobileOpen={isMobileSidebarOpen}
             setIsMobileOpen={setIsMobileSidebarOpen}
+            orderMode={orderMode}
           />
 
           {/* Main Question Feed */}
           <main className="flex-1 space-y-12 min-w-0">
-            {GRAPES_CATEGORIES.map((cat) => {
+            {orderedCategories.map((cat, catIdx) => {
               const IconComp = ICONS[cat.icon] || Mountain;
               const questions = GRAPES_QUESTIONS[cat.key] || [];
 
@@ -230,8 +252,11 @@ export default function App() {
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="font-cinzel text-xs font-bold px-2 py-0.5 rounded text-white" style={{ backgroundColor: cat.color }}>
-                              PILLAR {cat.key}
+                            <span
+                              className="font-cinzel text-xs font-bold px-2 py-0.5 rounded text-white"
+                              style={{ backgroundColor: cat.color }}
+                            >
+                              {orderMode === 'logical' ? `STEP ${catIdx + 1}` : `PILLAR ${cat.key}`}
                             </span>
                             <h2 className="text-xl md:text-2xl font-bold font-cinzel text-[#241a15]">
                               {cat.name.toUpperCase()}
@@ -255,7 +280,20 @@ export default function App() {
                       </div>
                     </div>
 
-                    <p className="text-xs md:text-sm text-[#4d3e33] mt-2 font-serif border-t border-[#ded1be] pt-2">
+                    {/* Grade 7 "Why it Matters" Big Callout Box */}
+                    {cat.whyItMatters && (
+                      <div className="mt-3 p-3.5 rounded-xl bg-[#f8f0de] border border-[#e2d2ba] text-xs md:text-sm text-[#4d3a2b] flex items-start gap-2.5 leading-relaxed font-sans-ui">
+                        <Lightbulb size={18} className="text-[#935923] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[#64390f] block mb-0.5">
+                            Why this pillar comes here in your civilization:
+                          </strong>
+                          {cat.whyItMatters}
+                        </div>
+                      </div>
+                    )}
+
+                    <p className="text-xs md:text-sm text-[#544336] mt-2 font-serif border-t border-[#ded1be] pt-2 italic">
                       {cat.description}
                     </p>
                   </div>
@@ -271,6 +309,8 @@ export default function App() {
                         customNote={customNotes[question.id]}
                         onChange={handleAnswerChange}
                         onCustomChange={handleCustomChange}
+                        allAnswers={answers}
+                        logicGuardEnabled={logicGuardEnabled}
                       />
                     ))}
                   </div>
@@ -284,10 +324,10 @@ export default function App() {
                 <Scroll size={32} />
               </div>
               <h3 className="text-xl md:text-2xl font-bold font-cinzel text-[#241a15]">
-                Ready for the Oral Defense Examination?
+                Ready to Defend Your Civilization in Front of Your Teacher?
               </h3>
               <p className="text-xs md:text-sm text-[#665243] max-w-xl mx-auto font-serif">
-                Compile your configured institutions into a 6-paragraph historical narrative essay, an oral defense quick-reference table, and 5 tricky cross-category teacher stress-test questions!
+                Compile your choices into a 6-paragraph historical narrative essay, a quick-reference study table, and 5 tricky cross-category teacher stress-test questions with practice talking points!
               </p>
               <div className="pt-2">
                 <button
@@ -324,4 +364,3 @@ export default function App() {
     </div>
   );
 }
-
