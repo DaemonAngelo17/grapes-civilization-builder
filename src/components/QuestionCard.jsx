@@ -6,10 +6,12 @@ import {
   Lock, 
   Lightbulb, 
   ZoomIn,
-  Sparkles
+  Sparkles,
+  GraduationCap
 } from 'lucide-react';
 import { checkOptionDisallowed } from '../utils/logicRules';
 import { getOptionVisual } from '../data/optionImages';
+import { isComplexOptionText } from '../data/grapesData';
 
 export default function QuestionCard({
   question,
@@ -92,6 +94,12 @@ export default function QuestionCard({
         </div>
 
         <div className="flex items-center gap-2">
+          {question.minComplexity === 'complex' && (
+            <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-900 border border-purple-300 shadow-2xs font-sans-ui">
+              <GraduationCap size={12} className="text-purple-700" />
+              Complex (Grades 9–12 / AP)
+            </span>
+          )}
           <span className="text-xs px-2.5 py-1 rounded-full bg-[#ede4d2] text-[#5e4b3c] font-medium border border-[#dbccb5]">
             {limitBadge}
           </span>
@@ -215,6 +223,12 @@ export default function QuestionCard({
                   <div className="flex flex-wrap items-center gap-1.5 justify-between">
                     <span className={`font-medium ${isDisallowed ? 'line-through text-[#7f6c5b]' : ''}`}>
                       {option}
+                      {isComplexOptionText(option) && (
+                        <span className="inline-flex items-center gap-0.5 ml-2 text-[10px] font-bold px-1.5 py-0.2 rounded bg-purple-100 text-purple-900 border border-purple-300 shrink-0 font-sans-ui align-middle">
+                          <GraduationCap size={10} className="text-purple-700" />
+                          AP Tier
+                        </span>
+                      )}
                     </span>
                     {isRecommended && (
                       <div className="flex items-center gap-1.5 shrink-0 my-0.5">

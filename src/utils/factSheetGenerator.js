@@ -2,11 +2,12 @@
 
 import { GRAPES_CATEGORIES, GRAPES_QUESTIONS } from '../data/grapesData';
 
-export function generateFactSheetData(answers, customNotes = {}) {
+export function generateFactSheetData(answers, customNotes = {}, currentQuestions = null) {
   const result = [];
+  const questionsMap = currentQuestions || GRAPES_QUESTIONS;
 
   for (const cat of GRAPES_CATEGORIES) {
-    const questions = GRAPES_QUESTIONS[cat.key] || [];
+    const questions = questionsMap[cat.key] || [];
     const rows = [];
 
     for (const q of questions) {

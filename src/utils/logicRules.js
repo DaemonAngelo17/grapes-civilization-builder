@@ -139,6 +139,28 @@ export function checkOptionDisallowed(
     }
   }
 
+  // Cataphract Super-Heavy Cavalry & Macedonian Hammer-and-Anvil
+  if (isBronzeAge) {
+    if (optLower.includes('cataphract super-heavy shock cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Iron Age Innovation): Armored cataphract cavalry encased in full iron barding charging with two-handed kontos lances did not exist in the Bronze Age. Bronze Age warriors fought on two-wheeled chariots!'
+      };
+    }
+    if (optLower.includes('promissory notes & state flying-cash')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Classical / Medieval): Promissory paper notes and credit bills did not exist in the Bronze Age; economies operated on weighted grain or bullion.'
+      };
+    }
+    if (optLower.includes('incendiary naphtha / greek fire')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked (Late Classical / Antiquity): Pressurized incendiary siphons and distilled petroleum weapons are late Classical innovations unknown to Bronze Age builders.'
+      };
+    }
+  }
+
   // Deep Salt Drilling Derricks (~100 BCE Han Dynasty)
   if (currentEra !== 'imperial_era') {
     if (optLower.includes('deep underground salt-drilling derricks')) {
@@ -263,6 +285,26 @@ export function checkOptionDisallowed(
         return {
           isDisallowed: true,
           reason: '🔒 Land Size Limit (City-State): A single city-state possesses the quarry stone and civic budget to erect up to 2 monumental marvels.'
+        };
+      }
+    }
+
+    // City-States cannot support 1,000,000+ Megacity cores
+    if (questionId === 'g7_settlement') {
+      if (optLower.includes('hyper-dense walled megacity core')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Scale Limit (City-State): A single city-state (~10,000–50,000 people) cannot support a megacity of 100,000 to 1,000,000+ inhabitants! Megacity carrying capacity requires a Grand Continental Empire like Rome or Chang\'an.'
+        };
+      }
+    }
+
+    // City-States do not require Imperial Courier Highways across provinces
+    if (questionId === 'p6_intelligence_bureaucracy') {
+      if (optLower.includes('imperial courier relay highways')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Scale Limit (City-State): A local city-state does not span hundreds of miles of provinces requiring horse relay postal stations every 15 miles! This logistics network requires a Regional Kingdom or Continental Empire.'
         };
       }
     }

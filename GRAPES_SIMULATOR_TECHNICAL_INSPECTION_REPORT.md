@@ -4,8 +4,8 @@
 
 **Date of Audit:** November 13, 2026  
 **Audited Directory:** `/Users/ezrajosephsaracho/.gemini/antigravity/scratch/grapes-civilization-builder/`  
-**Current Codebase Version:** v3.1 Advanced Mutual Exclusivity & 300-Option Balanced Edition (React 19 + Tailwind CSS v4 + Vite 8)  
-**Target Invariant Reference:** California Grade 7 History-Social Science Standards, NCSS C3 Framework & Academic Comparative Historiography  
+**Current Codebase Version:** v4.0 3-Tiered Grade-Level Complexity Engine & 390-Option Taxonomical Edition (React 19 + Tailwind CSS v4 + Vite 8)  
+**Target Invariant Reference:** California Grade 7–12 History-Social Science Standards, NCSS C3 Framework & Academic Comparative Historiography  
 **Live Production URL:** [https://grapes-civilization-builder.vercel.app](https://grapes-civilization-builder.vercel.app)  
 **Source Repository:** [https://github.com/DaemonAngelo17/grapes-civilization-builder](https://github.com/DaemonAngelo17/grapes-civilization-builder)
 
@@ -53,6 +53,7 @@ const [civilizationName, setCivilizationName] = useState(defaultPreset.name);
 const [inspiration, setInspiration] = useState(defaultPreset.inspiration);
 const [currentEra, setCurrentEra] = useState(defaultPreset.era || 'early_bronze');
 const [currentScale, setCurrentScale] = useState(defaultPreset.scale || 'regional_kingdom');
+const [complexityMode, setComplexityMode] = useState('normal'); // 'basic' | 'normal' | 'complex'
 const [answers, setAnswers] = useState(defaultPreset.answers);
 const [customNotes, setCustomNotes] = useState({});
 const [activeCategory, setActiveCategory] = useState('G');
@@ -65,6 +66,12 @@ const [enlargedImage, setEnlargedImage] = useState(null); // { visual, optionTex
 const [toastMessage, setToastMessage] = useState(null);
 ```
 
+### Dynamic Complexity Tier Engine (`COMPLEXITY_MODES`):
+The application dynamically branches questions and option limits across 3 educational tiers:
+1. **🌱 Basic Mode (Grades 4–6):** Filters to the 12 core foundational inquiries (`g2_terrain`, `g1_freshwater`, `e1_crops`, `e5_trade`, `p1_gov_system`, `p4_military`, `s1_apex`, `s3_mobility`, `r1_structure`, `r4_afterlife`, `a1_writing`, `a3_monuments`), limiting each inquiry to its first 6 foundational options (72 total options).
+2. **🏛️ Normal Mode (Grades 7–8):** Renders the 31 standard secondary curriculum inquiries (`G1`–`A5`) and 300 validated options.
+3. **🎓 Complex Mode (Grades 9–12 / AP):** Expands to 37 exhaustive inquiries (including `G7`, `E6`, `P6`, `S6`, `R6`, `A6`) and 390 total options, enforcing advanced demographic, fiscal, and ecological locks.
+
 ### Universal Multi-Choice Value Normalization:
 To eliminate legacy scalar string vs. array discrepancies, every question's selection value is treated uniformly as an array of selected option strings:
 
@@ -76,15 +83,30 @@ const selectedList = Array.isArray(value)
     : [];
 ```
 
-### Progress & Completion Metrics:
-Completion status is calculated dynamically across all 31 inquiries:
+### Dynamic Progress & Completion Metrics:
+Completion status is calculated dynamically against a variable denominator $D \in \{12, 31, 37\}$:
 
-$$\text{PercentComplete} = \min\left(100, \max\left(0, \operatorname{round}\left(\frac{\text{TotalAnswered}}{31} \times 100\right)\right)\right)$$
+$$\text{PercentComplete} = \min\left(100, \max\left(0, \operatorname{round}\left(\frac{\text{TotalAnswered}}{D} \times 100\right)\right)\right)$$
 
-Where `TotalAnswered` is evaluated per inquiry:
+Where `allQuestions` and `TotalAnswered` adapt reactively to `complexityMode`:
 
 ```javascript
-const totalAnswered = useMemo(() => {
+const currentQuestions = useMemo(() => {
+  return getFilteredQuestions(complexityMode);
+}, [complexityMode]);
+
+const allQuestions = useMemo(() => {
+  const list = [];
+  for (const cat of GRAPES_CATEGORIES) {
+    const qs = currentQuestions[cat.key] || [];
+    list.push(...qs);
+  }
+  return list;
+}, [currentQuestions]);
+
+const totalQuestionsCount = allQuestions.length; // 12 in basic, 31 in normal, 37 in complex
+
+const totalAnsweredCount = useMemo(() => {
   let count = 0;
   for (const q of allQuestions) {
     const val = answers[q.id];
@@ -99,19 +121,27 @@ const totalAnswered = useMemo(() => {
 
 ## 2. Universal Multi-Choice Taxonomy & Asset Architecture
 
-The master dataset in `src/data/grapesData.js` indexes **300 uniquely researched, non-redundant historical options** across 31 inquiries.
+The master dataset in `src/data/grapesData.js` indexes **390 uniquely researched, non-redundant historical options** across 37 inquiries.
 
-### Master Option Distribution Matrix
+### Master Option Distribution Matrix (v4.0 Complex Mode)
 
-| Category Code | Category Domain | Inquiries | Option Range | Total Options | Visual Artifacts |
-|---|---|---|---|---|---|
-| **G** | **Geography** | 6 inquiries (G1–G6) | 9 – 13 / question | **64 options** | 64 artifacts |
-| **E** | **Economy** | 5 inquiries (E1–E5) | 8 – 11 / question | **47 options** | 47 artifacts |
-| **P** | **Politics & Military** | 5 inquiries (P1–P5) | 8 – 12 / question | **50 options** | 50 artifacts |
-| **S** | **Social Structure** | 5 inquiries (S1–S5) | 7 – 9 / question | **40 options** | 40 artifacts |
-| **R** | **Religion** | 5 inquiries (R1–R5) | 7 – 10 / question | **44 options** | 44 artifacts |
-| **A** | **Achievements** | 5 inquiries (A1–A5) | 9 – 13 / question | **55 options** | 55 artifacts |
-| **TOTALS** | **All 6 Domains** | **31 Inquiries** | **7 – 13 / question** | **300 Options** | **300 Artifacts** |
+| Category Code | Category Domain | Inquiries | Option Range | Standard (v3.1) | Appended | New Complex Q | Total Options | Visual Artifacts |
+|---|---|---|---|---|---|---|---|---|
+| **G** | **Geography** | 7 inquiries (G1–G7) | 10 – 16 / question | 64 opts | +8 opts | +9 (G7) | **73 options** | 73 artifacts |
+| **E** | **Economy** | 6 inquiries (E1–E6) | 10 – 12 / question | 47 opts | +9 opts | +9 (E6) | **61 options** | 61 artifacts |
+| **P** | **Politics & Military** | 6 inquiries (P1–P6) | 9 – 15 / question | 50 opts | +8 opts | +9 (P6) | **63 options** | 63 artifacts |
+| **S** | **Social Structure** | 6 inquiries (S1–S6) | 8 – 10 / question | 40 opts | +5 opts | +9 (S6) | **51 options** | 51 artifacts |
+| **R** | **Religion** | 6 inquiries (R1–R6) | 8 – 11 / question | 44 opts | +5 opts | +9 (R6) | **55 options** | 55 artifacts |
+| **A** | **Achievements** | 6 inquiries (A1–A6) | 9 – 13 / question | 55 opts | +1 opt | +9 (A6) | **67 options** | 67 artifacts |
+| **TOTALS** | **All 6 Domains** | **37 Inquiries** | **8 – 16 / question** | **300 Opts** | **+36 Opts** | **+54 Opts** | **390 Options** | **390 Artifacts** |
+
+### The 6 Complex-Only Inquiries (`minComplexity: 'complex'`):
+1. **G7 (`g7_settlement`):** *Settlement Morphology, Urban Density & Carrying Capacity* (9 options) — Models hyper-dense walled megacities, low-density tropical garden urbanism, tell-mounds, and pastoral nomadic ordus.
+2. **E6 (`e6_property_land`):** *Land Tenure, Property Law & Agrarian Surplus Extraction* (9 options) — Covers royal monopolies, Roman latifundia, equal-field allotments, communal ayllu tenure, and military cleruchies.
+3. **P6 (`p6_intelligence_bureaucracy`):** *State Intelligence, Surveillance, Census & Diplomatic Logistics* (9 options) — Analyzes Achaemenid royal couriers, Baojia mutual surveillance, Incan Chasqui quipu runners, and Spartan Krypteia.
+4. **S6 (`s6_demographics_health`):** *Disease Ecology, Sanitation, Public Health & Demographic Pressures* (9 options) — Addresses Roman Cloaca Maxima flush sewers, zoonotic crowd-disease endemicity, night-soil composting, and Ever-Normal famine granaries.
+5. **R6 (`r6_orthodoxy_heresy`):** *Religious Orthodoxy, Syncretism, Sectarianism & Ideological Control* (9 options) — Spans imperial pantheon syncretism, iconoclasm, Ashokan edicts of toleration, book burnings, and imperial ruler cults.
+6. **A6 (`a6_ecology_collapse`):** *Anthropogenic Environmental Impact & Structural Collapse Vectors* (9 options) — Details hillside deforestation, canal soil salinization, fiscal-military currency debasement, karst aquifer exhaustion, and sustainable agro-ecology.
 
 ### Visual Artifact Resolution & Fallback Engine (`src/data/optionImages.js`):
 Every option links to high-definition archaeological or geographical photography hosted on Unsplash and Wikimedia Commons. The viewer features:
@@ -339,3 +369,4 @@ The codebase includes 4 rigorously validated benchmark presets in `src/data/grap
 ---
 
 **Report Certification:** Certified conforming to official Grade 7 History-Social Science curriculum standards and comparative ancient world history methodologies.
+

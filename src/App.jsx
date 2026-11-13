@@ -25,7 +25,9 @@ import {
   GRAPES_QUESTIONS, 
   HISTORICAL_PRESETS,
   HISTORICAL_ERAS,
-  CIVILIZATION_SCALES
+  CIVILIZATION_SCALES,
+  getFilteredQuestions,
+  COMPLEXITY_MODES
 } from './data/grapesData';
 
 const ICONS = {
@@ -45,6 +47,7 @@ export default function App() {
   const [inspiration, setInspiration] = useState(defaultPreset.inspiration);
   const [currentEra, setCurrentEra] = useState(defaultPreset.era || 'early_bronze');
   const [currentScale, setCurrentScale] = useState(defaultPreset.scale || 'regional_kingdom');
+  const [complexityMode, setComplexityMode] = useState('normal'); // 'basic' | 'normal' | 'complex'
   const [answers, setAnswers] = useState(defaultPreset.answers);
   const [customNotes, setCustomNotes] = useState({});
   const [activeCategory, setActiveCategory] = useState('G');
@@ -55,6 +58,35 @@ export default function App() {
   const [orderMode, setOrderMode] = useState('logical'); // 'logical' (build-up) or 'grapes'
   const [enlargedImage, setEnlargedImage] = useState(null); // { visual, optionText }
   const [toastMessage, setToastMessage] = useState(null);
+
+  // Dynamic question & option filtering based on Complexity Mode
+  // Basic: 12 Core Questions | 72 Foundational Options
+  // Normal: 31 Standard Questions | 300 Options
+  // Complex: 37 Exhaustive Questions | 390 Options
+  const currentQuestions = useMemo(() => {
+    return getFilteredQuestions(complexityMode);
+  }, [complexityMode]);
+
+  const allQuestions = useMemo(() => {
+    const list = [];
+    for (const cat of GRAPES_CATEGORIES) {
+      const qs = currentQuestions[cat.key] || [];
+      list.push(...qs);
+    }
+    return list;
+  }, [currentQuestions]);
+
+  const totalQuestionsCount = allQuestions.length;
+
+  const totalAnsweredCount = useMemo(() => {
+    let count = 0;
+    for (const q of allQuestions) {
+      const val = answers[q.id];
+      if (Array.isArray(val) && val.length > 0) count++;
+      else if (typeof val === 'string' && val.trim() !== '') count++;
+    }
+    return count;
+  }, [answers, allQuestions]);
 
   // Show temporary toast message
   const showToast = (msg) => {
@@ -158,7 +190,7 @@ export default function App() {
 
     const newAnswers = {};
     for (const cat of GRAPES_CATEGORIES) {
-      const qList = GRAPES_QUESTIONS[cat.key] || [];
+      const qList = currentQuestions[cat.key] || [];
       for (const q of qList) {
         // Multi-choice for all questions: pick 1 or 2 options
         const numPicks = Math.floor(Math.random() * 2) + 1;
@@ -189,20 +221,6 @@ export default function App() {
     }
   };
 
-  // Compute total questions and total answered
-  let totalQuestionsCount = 0;
-  let totalAnsweredCount = 0;
-
-  for (const cat of GRAPES_CATEGORIES) {
-    const qList = GRAPES_QUESTIONS[cat.key] || [];
-    totalQuestionsCount += qList.length;
-    for (const q of qList) {
-      const val = answers[q.id];
-      if (Array.isArray(val) && val.length > 0) totalAnsweredCount++;
-      else if (typeof val === 'string' && val.trim() !== '') totalAnsweredCount++;
-    }
-  }
-
   // Scroll to top helper
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -230,6 +248,8 @@ export default function App() {
           setCurrentEra={setCurrentEra}
           currentScale={currentScale}
           setCurrentScale={setCurrentScale}
+          complexityMode={complexityMode}
+          setComplexityMode={setComplexityMode}
           onLoadPreset={handleLoadPreset}
           onRandomize={handleRandomize}
           onReset={handleReset}
@@ -258,13 +278,14 @@ export default function App() {
             isMobileOpen={isMobileSidebarOpen}
             setIsMobileOpen={setIsMobileSidebarOpen}
             orderMode={orderMode}
+            currentQuestions={currentQuestions}
           />
 
           {/* Main Question Feed */}
           <main className="flex-1 space-y-12 min-w-0">
             {orderedCategories.map((cat, catIdx) => {
               const IconComp = ICONS[cat.icon] || Mountain;
-              const questions = GRAPES_QUESTIONS[cat.key] || [];
+              const questions = currentQuestions[cat.key] || [];
 
               // Category completion
               let catAnswered = 0;
@@ -415,8 +436,10 @@ export default function App() {
           inspiration={inspiration}
           currentEra={currentEra}
           currentScale={currentScale}
+          complexityMode={complexityMode}
           answers={answers}
           customNotes={customNotes}
+          currentQuestions={currentQuestions}
           onClose={() => setIsDossierOpen(false)}
         />
       )}

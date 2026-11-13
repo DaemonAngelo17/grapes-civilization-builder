@@ -2,32 +2,34 @@
 
 [![Live Web Application](https://img.shields.io/badge/Live_Demo-Vercel_Deployment-blue?style=for-the-badge&logo=vercel)](https://grapes-civilization-builder.vercel.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-DaemonAngelo17%2Fgrapes--civilization--builder-181717?style=for-the-badge&logo=github)](https://github.com/DaemonAngelo17/grapes-civilization-builder)
+[![Version](https://img.shields.io/badge/Version-v4.0_3--Tiered_Engine-purple?style=for-the-badge)](https://github.com/DaemonAngelo17/grapes-civilization-builder)
 [![React](https://img.shields.io/badge/React-19.2.6-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.0.12-646cff?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.3.5-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Curriculum](https://img.shields.io/badge/Curriculum-Grade_7_World_History-darkgreen?style=for-the-badge)](https://www.socialstudies.org/standards/c3)
+[![Curriculum](https://img.shields.io/badge/Curriculum-Grades_4--12_%2F_AP_World_History-darkgreen?style=for-the-badge)](https://www.socialstudies.org/standards/c3)
 
-> An interactive digital humanities laboratory and pedagogical simulator modeling ancient world history through the **G.R.A.P.E.S.** framework (**G**eography, **R**eligion, **A**chievements, **P**olitics, **E**conomy, **S**ocial Structure). Students construct historically coherent civilizations across 31 fundamental inquiries and defend their societal doctrines against cross-examination by AI and teacher stress-testing.
+> An interactive digital humanities laboratory and pedagogical simulator modeling ancient world history through the **G.R.A.P.E.S.** framework (**G**eography, **R**eligion, **A**chievements, **P**olitics, **E**conomy, **S**ocial Structure). Features a **3-Tiered Grade-Level Complexity Engine** scaling seamlessly from Elementary (Grades 4–6: 12 Questions) to Middle School (Grades 7–8: 31 Questions) to High School / AP (Grades 9–12: 37 Questions & 390 Options). Students construct historically coherent civilizations and defend their doctrines in oral defense stress-tests.
 
 ---
 
 ## 🏛️ Table of Contents
 1. [Pedagogical Thesis & Core Philosophy](#1-pedagogical-thesis--core-philosophy)
-2. [Key Architectural Subsystems](#2-key-architectural-subsystems)
-   - [2.1 Universal Multi-Choice Architecture (300 Options)](#21-universal-multi-choice-architecture-300-options)
-   - [2.2 Chronological Eras & Spatial Civilization Scales](#22-chronological-eras--spatial-civilization-scales)
-   - [2.3 Real-World Historical Inspirations (13 Spheres)](#23-real-world-historical-inspirations-13-spheres)
-   - [2.4 Grade 7 Logic Guard (Contradiction Engine)](#24-grade-7-logic-guard-contradiction-engine)
-   - [2.5 Two-Tiered Intelligent Synergy Engine](#25-two-tiered-intelligent-synergy-engine)
-   - [2.6 Tri-Partite Imperial Dossier Studio](#26-tri-partite-imperial-dossier-studio)
-3. [Exhaustive G.R.A.P.E.S. Inquiry Taxonomy](#3-exhaustive-grapes-inquiry-taxonomy)
-4. [Teacher Stress-Test & Oral Defense Simulator](#4-teacher-stress-test--oral-defense-simulator)
-5. [Archaeological Benchmark Presets](#5-archaeological-benchmark-presets)
-6. [Component Hierarchy & Data Flow](#6-component-hierarchy--data-flow)
-7. [Repository File Map](#7-repository-file-map)
-8. [Installation & Local Development](#8-installation--local-development)
-9. [Production Build & Deployment](#9-production-build--deployment)
-10. [Academic References & Standards Alignment](#10-academic-references--standards-alignment)
+2. [3-Tiered Grade-Level Complexity Engine (v4.0)](#2-3-tiered-grade-level-complexity-engine-v40)
+3. [Key Architectural Subsystems](#3-key-architectural-subsystems)
+   - [3.1 Universal Multi-Choice Architecture (390 Options)](#31-universal-multi-choice-architecture-390-options)
+   - [3.2 Chronological Eras & Spatial Civilization Scales](#32-chronological-eras--spatial-civilization-scales)
+   - [3.3 Real-World Historical Inspirations (13 Spheres)](#33-real-world-historical-inspirations-13-spheres)
+   - [3.4 Grade 7 Logic Guard (Contradiction Engine)](#34-grade-7-logic-guard-contradiction-engine)
+   - [3.5 Two-Tiered Intelligent Synergy Engine](#35-two-tiered-intelligent-synergy-engine)
+   - [3.6 Tri-Partite Imperial Dossier Studio](#36-tri-partite-imperial-dossier-studio)
+4. [Exhaustive G.R.A.P.E.S. Inquiry Taxonomy (37 Inquiries)](#4-exhaustive-grapes-inquiry-taxonomy-37-inquiries)
+5. [Teacher Stress-Test & Oral Defense Simulator](#5-teacher-stress-test--oral-defense-simulator)
+6. [Archaeological Benchmark Presets](#6-archaeological-benchmark-presets)
+7. [Component Hierarchy & Data Flow](#7-component-hierarchy--data-flow)
+8. [Repository File Map](#8-repository-file-map)
+9. [Installation & Local Development](#9-installation--local-development)
+10. [Production Build & Deployment](#10-production-build--deployment)
+11. [Academic References & Standards Alignment](#11-academic-references--standards-alignment)
 
 ---
 
@@ -54,15 +56,42 @@ Cosmic Order & Divine Rule        Labor Pyramids & Rights              Monuments
 
 ---
 
-## 2. Key Architectural Subsystems
+## 2. 3-Tiered Grade-Level Complexity Engine (v4.0)
 
-### 2.1 Universal Multi-Choice Architecture (300 Options)
-The application indexes **300 deeply researched options** across **31 inquiries** spanning all 6 G.R.A.P.E.S. categories. Each option includes:
+The v4.0 architecture introduces a dynamic complexity toggle that tailors question depth, taxonomic volume, and algorithmic constraints to specific classroom cognitive levels:
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                      3-TIERED GRADE-LEVEL COMPLEXITY ENGINE                            │
+├─────────────┬────────────────┬───────────┬─────────┬───────────────────────────────────┤
+│ Tier Mode   │ Target Grades  │ Questions │ Options │ Pedagogical & Algorithmic Focus   │
+├─────────────┼────────────────┼───────────┼─────────┼───────────────────────────────────┤
+│ 🌱 Basic    │ Grades 4–6     │ 12 Core   │ 72 Opts │ Foundational survival mechanics;  │
+│             │ (Elementary)   │ (2 / cat) │ (6 / Q) │ guided synergies; baseline locks. │
+├─────────────┼────────────────┼───────────┼─────────┼───────────────────────────────────┤
+│ 🏛️ Normal   │ Grades 7–8     │ 31 Stand. │ 300 Opts│ Comprehensive secondary syllabus; │
+│             │ (Middle School)│ (5–6/cat) │ (7–13/Q)│ Grade 7 Logic Guard; 275+ rules.  │
+├─────────────┼────────────────┼───────────┼─────────┼───────────────────────────────────┤
+│ 🎓 Complex  │ Grades 9–12    │ 37 Exh.   │ 390 Opts│ Advanced historiography; land     │
+│             │ (High School/AP│ (6–7/cat) │ (8–16/Q)│ tenure, intelligence & collapse.  │
+└─────────────┴────────────────┴───────────┴─────────┴───────────────────────────────────┘
+```
+
+- **Dynamic Progress Denominator:** The readiness meter dynamically switches its denominator (`12` in Basic, `31` in Normal, `37` in Complex), ensuring intuitive goal tracking.
+- **Foundational 12 Core Questions (Basic Tier):** Focuses on survival essentials: Topography (`G1`), Freshwater (`G2`), Crops (`E1`), Trade (`E3`), Government (`P1`), Military (`P4`), Ruling Apex (`S1`), Mobility (`S3`), Divinity (`R1`), Afterlife (`R4`), Writing (`A2`), and Monuments (`A4`).
+- **6 Complex-Only Inquiries (Complex Tier):** Extends each domain into college-preparatory systems thinking: `G7` (Settlement Morphology), `E6` (Land Tenure & Property Law), `P6` (State Intelligence & Surveillance), `S6` (Disease Ecology & Sanitation), `R6` (Orthodoxy & Ideological Control), and `A6` (Anthropogenic Environmental Collapse).
+
+---
+
+## 3. Key Architectural Subsystems
+
+### 3.1 Universal Multi-Choice Architecture (390 Options)
+The application indexes **390 deeply researched options** across **37 inquiries** spanning all 6 G.R.A.P.E.S. categories. Each option includes:
 - Authentic archaeological and historical descriptions drawn from primary civilizations across Africa, Eurasia, the Americas, and Oceania.
 - High-resolution visual artifacts with attribution and interactive zoom modal inspection.
 - Instant contextual logic evaluation preventing anachronisms or geographical impossibilities.
 
-### 2.2 Chronological Eras & Spatial Civilization Scales
+### 3.2 Chronological Eras & Spatial Civilization Scales
 
 #### Five Historical Eras:
 | Era ID | Historical Period | Chronology | Key Technological & Institutional Invariants |
@@ -129,59 +158,65 @@ The system structures all historical knowledge into 31 inquiries across the 6 st
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                      G.R.A.P.E.S. TAXONOMIC DOMAINS                    │
+│                      G.R.A.P.E.S. TAXONOMIC DOMAINS (v4.0)             │
 ├───────────────────┬───────────────┬────────────────────────────────────┤
-│ Category          │ Code & Range  │ Inquiries & Options                │
+│ Category          │ Code & Range  │ Inquiries & Options (Complex Mode) │
 ├───────────────────┼───────────────┼────────────────────────────────────┤
-│ Geography (G)     │ G1 – G6       │ 6 Inquiries  | 64 Total Options    │
-│ Economy (E)       │ E1 – E5       │ 5 Inquiries  | 47 Total Options    │
-│ Politics (P)      │ P1 – P5       │ 5 Inquiries  | 50 Total Options    │
-│ Social Structure  │ S1 – S5       │ 5 Inquiries  | 40 Total Options    │
-│ Religion (R)      │ R1 – R5       │ 5 Inquiries  | 44 Total Options    │
-│ Achievements (A)  │ A1 – A5       │ 5 Inquiries  | 55 Total Options    │
+│ Geography (G)     │ G1 – G7       │ 7 Inquiries  | 73 Total Options    │
+│ Economy (E)       │ E1 – E6       │ 6 Inquiries  | 61 Total Options    │
+│ Politics (P)      │ P1 – P6       │ 6 Inquiries  | 63 Total Options    │
+│ Social Structure  │ S1 – S6       │ 6 Inquiries  | 51 Total Options    │
+│ Religion (R)      │ R1 – R6       │ 6 Inquiries  | 55 Total Options    │
+│ Achievements (A)  │ A1 – A6       │ 6 Inquiries  | 67 Total Options    │
 ├───────────────────┴───────────────┼────────────────────────────────────┤
-│ TOTAL MASTER TAXONOMY             │ 31 Inquiries | 300 Validated Items │
+│ TOTAL MASTER TAXONOMY             │ 37 Inquiries | 390 Validated Items │
 └───────────────────────────────────┴────────────────────────────────────┘
 ```
 
 ### Complete Breakdown of Inquiries:
-- **Geography (G1–G6):**
-  - `G1` (`g2_terrain`): Dominant Terrain & Topography (11 options)
-  - `G2` (`g1_freshwater`): Primary Freshwater Source (11 options)
+- **Geography (G1–G7):**
+  - `G1` (`g2_terrain`): Dominant Terrain & Topography (11 standard + 2 complex = 13 options)
+  - `G2` (`g1_freshwater`): Primary Freshwater Source (11 standard + 1 complex = 12 options)
   - `G3` (`g3_barriers`): Natural Defensive Barriers (10 options)
-  - `G4` (`g4_resources`): Abundant Natural Resources (13 options)
-  - `G5` (`g5_shortages`): Critical Resource Shortages (9 options)
-  - `G6` (`g6_disasters`): Recurring Environmental Disasters (10 options)
-- **Economy (E1–E5):**
-  - `E1` (`e1_crops`): Staple Agricultural Crops (10 options)
-  - `E2` (`e2_animals`): Domesticated Animals (11 options)
-  - `E3` (`e5_trade`): Trade Networks & Exports (8 options)
-  - `E4` (`e3_currency`): Medium of Exchange / Currency (10 options)
-  - `E5` (`e4_taxation`): Primary Method of Taxation (8 options)
-- **Politics & Military (P1–P5):**
-  - `P1` (`p1_gov_system`): System of Government (11 options)
-  - `P2` (`p2_succession`): Succession & Transfer of Power (9 options)
-  - `P3` (`p3_law_system`): Legal Code & Justice System (10 options)
-  - `P4` (`p4_military`): Military Organization & Doctrines (12 options)
-  - `P5` (`p5_foreign_policy`): Foreign Policy & Treatment of Conquered Peoples (8 options)
-- **Social Structure (S1–S5):**
-  - `S1` (`s1_apex`): The Ruling Apex (8 options)
-  - `S2` (`s2_middle`): The Middle Class & Specialized Artisans (9 options)
-  - `S3` (`s3_mobility`): Social Mobility (8 options)
-  - `S4` (`s4_gender`): Gender Roles & Legal Status of Women (7 options)
-  - `S5` (`s5_unfree_labor`): The Bottom Tier & Unfree Labor (8 options)
-- **Religion (R1–R5):**
-  - `R1` (`r1_structure`): Structure of the Divine (9 options)
-  - `R2` (`r2_demeanor`): Demeanor of the Gods (8 options)
-  - `R3` (`r3_rituals`): Primary Religious Rituals & Practices (10 options)
-  - `R4` (`r4_afterlife`): Death, Burial, and the Afterlife (10 options)
-  - `R5` (`r5_gov_relation`): Relationship Between Religion and Government (7 options)
-- **Achievements & Engineering (A1–A5):**
-  - `A1` (`a4_hydraulic`): Agricultural & Hydraulic Engineering (9 options)
+  - `G4` (`g4_resources`): Abundant Natural Resources (13 standard + 3 complex = 16 options)
+  - `G5` (`g5_shortages`): Critical Resource Shortages (9 standard + 1 complex = 10 options)
+  - `G6` (`g6_disasters`): Recurring Environmental Disasters (10 standard + 1 complex = 11 options)
+  - `G7` (`g7_settlement`): **[Complex Invariant]** Settlement Morphology, Urban Density & Carrying Capacity (9 options)
+- **Economy (E1–E6):**
+  - `E1` (`e1_crops`): Staple Agricultural Crops (10 standard + 2 complex = 12 options)
+  - `E2` (`e2_animals`): Domesticated Animals (11 standard + 1 complex = 12 options)
+  - `E3` (`e5_trade`): Trade Networks & Exports (8 standard + 2 complex = 10 options)
+  - `E4` (`e3_currency`): Medium of Exchange / Currency (10 standard + 2 complex = 12 options)
+  - `E5` (`e4_taxation`): Primary Method of Taxation (8 standard + 2 complex = 10 options)
+  - `E6` (`e6_property_land`): **[Complex Invariant]** Land Tenure, Property Law & Agrarian Surplus Extraction (9 options)
+- **Politics & Military (P1–P6):**
+  - `P1` (`p1_gov_system`): System of Government (11 standard + 1 complex = 12 options)
+  - `P2` (`p2_succession`): Succession & Transfer of Power (9 standard + 2 complex = 11 options)
+  - `P3` (`p3_law_system`): Legal Code & Justice System (10 standard + 1 complex = 11 options)
+  - `P4` (`p4_military`): Military Organization & Doctrines (12 standard + 3 complex = 15 options)
+  - `P5` (`p5_foreign_policy`): Foreign Policy & Treatment of Conquered Peoples (8 standard + 1 complex = 9 options)
+  - `P6` (`p6_intelligence_bureaucracy`): **[Complex Invariant]** State Intelligence, Surveillance, Census & Diplomatic Logistics (9 options)
+- **Social Structure (S1–S6):**
+  - `S1` (`s1_apex`): The Ruling Apex (8 standard + 1 complex = 9 options)
+  - `S2` (`s2_middle`): The Middle Class & Specialized Artisans (9 standard + 1 complex = 10 options)
+  - `S3` (`s3_mobility`): Social Mobility (8 standard + 1 complex = 9 options)
+  - `S4` (`s4_gender`): Gender Roles & Legal Status of Women (7 standard + 1 complex = 8 options)
+  - `S5` (`s5_unfree_labor`): The Bottom Tier & Unfree Labor (8 standard + 1 complex = 9 options)
+  - `S6` (`s6_demographics_health`): **[Complex Invariant]** Disease Ecology, Sanitation, Public Health & Demographic Pressures (9 options)
+- **Religion (R1–R6):**
+  - `R1` (`r1_structure`): Structure of the Divine (9 standard + 1 complex = 10 options)
+  - `R2` (`r2_demeanor`): Demeanor of the Gods (8 standard + 1 complex = 9 options)
+  - `R3` (`r3_rituals`): Primary Religious Rituals & Practices (10 standard + 1 complex = 11 options)
+  - `R4` (`r4_afterlife`): Death, Burial, and the Afterlife (10 standard + 1 complex = 11 options)
+  - `R5` (`r5_gov_relation`): Relationship Between Religion and Government (7 standard + 1 complex = 8 options)
+  - `R6` (`r6_orthodoxy_heresy`): **[Complex Invariant]** Religious Orthodoxy, Syncretism, Sectarianism & Ideological Control (9 options)
+- **Achievements & Engineering (A1–A6):**
+  - `A1` (`a4_hydraulic`): Agricultural & Hydraulic Engineering (9 standard + 1 complex = 10 options)
   - `A2` (`a1_writing`): Writing System & Script (12 options)
   - `A3` (`a2_medium`): Primary Writing Medium (9 options)
   - `A4` (`a3_monuments`): Monumental Architecture (12 options)
   - `A5` (`a5_science`): Scientific, Mathematical & Technological Breakthroughs (13 options)
+  - `A6` (`a6_ecology_collapse`): **[Complex Invariant]** Anthropogenic Environmental Impact & Structural Collapse Vectors (9 options)
 
 ---
 
@@ -376,3 +411,4 @@ The project is pre-configured for zero-configuration continuous deployment on Ve
 **Author:** Ezra Joseph Saracho ([@DaemonAngelo17](https://github.com/DaemonAngelo17))  
 **License:** MIT License  
 **Academic Inquiries:** Digital Humanities & Ancient World History Education Lab
+

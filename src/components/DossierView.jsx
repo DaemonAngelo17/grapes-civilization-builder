@@ -28,8 +28,10 @@ export default function DossierView({
   inspiration,
   currentEra = 'early_bronze',
   currentScale = 'regional_kingdom',
+  complexityMode = 'normal',
   answers,
   customNotes,
+  currentQuestions,
   onClose
 }) {
   const [activeTab, setActiveTab] = useState('all'); // 'all', 'essay', 'factsheet', 'stresstest'
@@ -49,7 +51,7 @@ export default function DossierView({
     currentEra,
     currentScale
   );
-  const factSheetData = generateFactSheetData(answers, customNotes);
+  const factSheetData = generateFactSheetData(answers, customNotes, currentQuestions);
   const stressTestQuestions = generateTeacherStressTest(answers, customNotes);
 
   const handleCopyEssay = () => {
@@ -63,7 +65,8 @@ export default function DossierView({
     let md = `# CIVILIZATION DOSSIER: ${name.toUpperCase()}\n`;
     if (inspiration) md += `*Real-World Inspiration: ${inspiration}*\n`;
     md += `*Historical Era: ${eraObj.name} (${eraObj.period})*\n`;
-    md += `*Civilization Scale: ${scaleObj.name}*\n\n`;
+    md += `*Civilization Scale: ${scaleObj.name}*\n`;
+    md += `*Complexity Tier: ${complexityMode === 'basic' ? 'Basic (Grades 4–6: 12 Core Questions)' : complexityMode === 'complex' ? 'Complex (Grades 9–12 / AP: 37 Exhaustive Questions)' : 'Normal (Grades 7–8: 31 Questions)'}*\n\n`;
 
     md += `## PART I: ENCYCLOPEDIA NARRATIVE ESSAY\n\n`;
     md += narrativeParagraphs.join('\n\n');
@@ -355,18 +358,24 @@ export default function DossierView({
               </div>
 
               {/* Core Parameters Summary Card */}
-              <div className="parchment-panel rounded-xl p-4 border border-[#cfbfa7] bg-[#f5ede0] grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-sans-ui">
+              <div className="parchment-panel rounded-xl p-4 border border-[#cfbfa7] bg-[#f5ede0] grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-sans-ui">
                 <div>
                   <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Civilization Archetype</span>
-                  <span className="font-semibold text-[#241a15]">{inspiration || 'Original Ancient Synthesis'}</span>
+                  <span className="font-semibold text-[#241a15] truncate block">{inspiration || 'Ancient Synthesis'}</span>
+                </div>
+                <div>
+                  <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Complexity Tier</span>
+                  <span className="font-semibold text-[#241a15]">
+                    {complexityMode === 'basic' ? '🌱 Basic (12 Qs)' : complexityMode === 'complex' ? '🎓 Complex (37 Qs)' : '🏛️ Normal (31 Qs)'}
+                  </span>
                 </div>
                 <div>
                   <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Historical Era</span>
-                  <span className="font-semibold text-[#241a15]">⏳ {eraObj.name}</span>
+                  <span className="font-semibold text-[#241a15] truncate block">⏳ {eraObj.name}</span>
                 </div>
                 <div>
                   <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Civilization Scale</span>
-                  <span className="font-semibold text-[#241a15]">🌍 {scaleObj.name}</span>
+                  <span className="font-semibold text-[#241a15] truncate block">🌍 {scaleObj.name}</span>
                 </div>
               </div>
 

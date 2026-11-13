@@ -6,19 +6,20 @@ import {
   Scroll, 
   Menu, 
   Dices, 
-  Landmark,
-  Compass,
-  CheckCircle2,
-  Brain,
-  Layers,
-  Hourglass,
-  Globe2
+  Landmark, 
+  Compass, 
+  CheckCircle2, 
+  Brain, 
+  Layers, 
+  Hourglass, 
+  Globe2,
+  GraduationCap
 } from 'lucide-react';
 import { 
   INSPIRATIONS, 
-  HISTORICAL_PRESETS,
-  HISTORICAL_ERAS,
-  CIVILIZATION_SCALES
+  HISTORICAL_PRESETS, 
+  HISTORICAL_ERAS, 
+  CIVILIZATION_SCALES 
 } from '../data/grapesData';
 
 export default function Header({
@@ -30,6 +31,8 @@ export default function Header({
   setCurrentEra,
   currentScale,
   setCurrentScale,
+  complexityMode = 'normal',
+  setComplexityMode,
   onLoadPreset,
   onRandomize,
   onReset,
@@ -77,7 +80,7 @@ export default function Header({
                   G.R.A.P.E.S. CIVILIZATION BUILDER
                 </h1>
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-sans-ui bg-[#e8dcce] text-[#6d5137] border border-[#cfbfae] uppercase tracking-wider">
-                  Grade 7 Edition
+                  {complexityMode === 'basic' ? '🌱 Basic (Grades 4–6)' : complexityMode === 'complex' ? '🎓 Complex (Grades 9–12 / AP)' : '🏛️ Normal (Grades 7–8)'}
                 </span>
               </div>
               <p className="text-xs md:text-sm text-[#665243] font-archaic italic">
@@ -105,6 +108,78 @@ export default function Header({
             <Scroll size={16} />
             <span>Generate Civilization Dossier</span>
           </button>
+        </div>
+      </div>
+
+      {/* Grade-Level Complexity Engine: 3-Pill Toggle Bar */}
+      <div className="py-3 px-4 my-4 rounded-xl bg-[#eee3ce] border border-[#d6c5aa] shadow-2xs flex flex-col lg:flex-row items-center justify-between gap-3 text-xs font-sans-ui">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="w-6 h-6 rounded-md bg-[#935923] text-white flex items-center justify-center shadow-xs">
+            <GraduationCap size={15} />
+          </div>
+          <div>
+            <span className="font-bold text-[#3d2e23] uppercase tracking-wider text-[11px] font-cinzel block">
+              Complexity Tier
+            </span>
+            <span className="text-[10px] text-[#78614e] hidden sm:block">
+              Choose your grade-level rigor & question depth
+            </span>
+          </div>
+        </div>
+
+        {/* 3-Pill Toggle Switch */}
+        <div className="inline-flex p-1 rounded-xl bg-[#dfceb3] border border-[#cbbaa0] shadow-inner max-w-full overflow-x-auto">
+          <button
+            type="button"
+            onClick={() => setComplexityMode('basic')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
+              complexityMode === 'basic'
+                ? 'bg-gradient-to-r from-[#2e7d32] to-[#388e3c] text-white shadow-sm ring-1 ring-[#1b5e20]'
+                : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
+            }`}
+            title="Grades 4–6: 12 Core Questions, 6 foundational options each, guided auto-synergies"
+          >
+            <span>🌱</span>
+            <span>Basic (Grades 4–6)</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">12 Qs</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setComplexityMode('normal')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
+              complexityMode === 'normal'
+                ? 'bg-gradient-to-r from-[#935923] to-[#7f4a18] text-white shadow-sm ring-1 ring-[#5a3310]'
+                : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
+            }`}
+            title="Grades 7–8: 31 Standard Questions, 300 Options, Standard Logic Guard"
+          >
+            <span>🏛️</span>
+            <span>Normal (Grades 7–8)</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">31 Qs</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setComplexityMode('complex')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
+              complexityMode === 'complex'
+                ? 'bg-gradient-to-r from-[#4a2e7a] to-[#5e3a9b] text-white shadow-sm ring-1 ring-[#321c56]'
+                : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
+            }`}
+            title="Grades 9–12 / AP: 37 Exhaustive Questions, 390 Options, Fiscal, Demographic & Ecological Locks"
+          >
+            <span>🎓</span>
+            <span>Complex (Grades 9–12 / AP)</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">37 Qs</span>
+          </button>
+        </div>
+
+        {/* Live Tagline */}
+        <div className="text-[11px] text-[#6d5543] font-medium italic text-center lg:text-right shrink-0">
+          {complexityMode === 'basic' && '🌱 12 Core Questions | Guided Auto-Synergies | Foundational Locks'}
+          {complexityMode === 'normal' && '🏛️ 31 Standard Questions | 300 Options | Standard Logic Guard'}
+          {complexityMode === 'complex' && '🎓 37 Exhaustive Questions | 390 Options | Hardcore Fiscal & Ecological Locks'}
         </div>
       </div>
 

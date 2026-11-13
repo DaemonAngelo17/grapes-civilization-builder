@@ -30,11 +30,12 @@ export default function Sidebar({
   onOpenDossier,
   isMobileOpen,
   setIsMobileOpen,
-  orderMode
+  orderMode,
+  currentQuestions
 }) {
-  // Compute completion counts
+  // Compute completion counts based on active complexity filtered questions
   const categoryStats = categories.map((cat, idx) => {
-    const questions = GRAPES_QUESTIONS[cat.key] || [];
+    const questions = (currentQuestions && currentQuestions[cat.key]) || GRAPES_QUESTIONS[cat.key] || [];
     const total = questions.length;
     let completed = 0;
     for (const q of questions) {
