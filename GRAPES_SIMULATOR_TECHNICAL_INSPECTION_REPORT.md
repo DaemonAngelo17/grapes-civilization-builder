@@ -226,12 +226,17 @@ When an oceanic island or coral ring atoll (`g2_terrain`) is selected:
 
 ---
 
-## 4. Two-Tiered Intelligent Synergy Engine
+## 4. Intelligent Synergy Engine & Complexity Execution
 
-Audited from `src/utils/synergyRules.js` (Lines 1–480).
+Audited from `src/utils/synergyRules.js` (Lines 1–890).
 
-### 4.1 Mandatory vs. Recommended Synergy Tiers
-The synergy engine distinguishes between non-negotiable physical dependencies and logical cultural congruences:
+### 4.1 Synergy Execution Tiers by Complexity Mode
+The synergy engine distinguishes between non-negotiable physical dependencies (`mandatory`) and logical cultural congruences (`recommended`), with behavior dynamically calibrated to the active `complexityMode`:
+- **🌱 Basic Mode (`basic` — Grades 4–6):** Both `mandatory` and `recommended` synergies **auto-select immediately** (up to the strict 2-option cap per question enforced by `checkOptionDisallowed`). This guides younger students seamlessly through foundational civilization choices without cognitive overload. Non-basic questions and complex-only options are excluded.
+- **🏛️ Normal & 🎓 Complex Modes (`normal` / `complex`):**
+  - **`mandatory` synergies auto-select immediately** (respecting scale limits, sovereign caps, and chronological era locks).
+  - **`recommended` synergies do NOT auto-select.** Instead, they generate active recommendations rendered with glowing amber badges (`✨ Recommended Synergy`) on the `QuestionCard`, allowing students to explore cultural synergies voluntarily.
+  - Options marked `minComplexity: 'complex'` are exclusively recommended in `complex` mode.
 
 ```javascript
 // Two-tiered badge render in QuestionCard.jsx
@@ -248,48 +253,103 @@ The synergy engine distinguishes between non-negotiable physical dependencies an
 )}
 ```
 
-### 4.2 51 Single-Trigger Pair Synergies & Cascade Logic
-When `autoSynergiesEnabled === true`, foundational selections automatically cascade into downstream categories:
+### 4.2 74 Single-Trigger Pair Synergies & Cascade Logic
+When `autoSynergiesEnabled === true`, foundational selections automatically cascade into downstream categories. The v4.0 expansion added 24 new historical pairs across land tenure, urban morphology, surveillance, and health ecology:
 
 ```
-Trigger Choice (Foundational) ─────────> Target Category & Option
-──────────────────────────────────────────────────────────────────────────
-Hieroglyphs (A2)               ──[Mandatory]──> Papyrus / Carved Stone (A3)
-Cuneiform (A2)                 ──[Mandatory]──> Wet Clay Tablets (A3)
-Quipu Knotted Cords (A2)       ──[Mandatory]──> Dyed Wool / Cotton Cords (A3)
-Predictable Nile River (G2)    ──[Recommended]─> Shadufs & Basin Irrigation (A1)
-Underground Cenotes (G2)       ──[Recommended]─> Aguadas & Plaster Cisterns (A1)
-Steep Alpine Mountains (G1)    ──[Recommended]─> Stone Terrace Farming (A1)
-Volcanic Oceanic Island (G1)   ──[Mandatory]──> Double-Hulled War Canoes (P4)
-Cattle Wealth Standard (E4)    ──[Recommended]─> Pastoral Livestock Wealth (S1)
-Merit Civil Service Exam (P1)  ──[Recommended]─> Scholar-Bureaucrats Apex (S1)
-Mummification Rites (R4)       ──[Recommended]─> Necropolises / Pyramids (A4)
-Standardized Stamped Coins (E4)──[Recommended]─> Market Merchant Guilds (S2)
+Trigger Choice (Foundational) ─────────────────> Target Category & Option
+──────────────────────────────────────────────────────────────────────────────────────────
+Hyper-Dense Megacity (G7)       ──[Mandatory]───> Zoonotic Crowd-Disease Endemicity (S6)
+                                ──[Recommended]─> Ever-Normal Famine Granaries (S6)
+Low-Density Tropical City (G7)  ──[Mandatory]───> Dense Tropical Rainforest (G2)
+                                ──[Recommended]─> Monoculture & Karst Aquifer Collapse (A6)
+Mobile Seasonal Ordu (G7)       ──[Mandatory]───> Nomadic Steppe Imperial Confederacy (P1)
+                                ──[Mandatory]───> Pastoral Transhumance & Herd Grazing (E1)
+Latifundia Slave Estates (E6)   ──[Mandatory]───> Prisoners of War & Chattel Slavery (S5)
+                                ──[Recommended]─> Slave-Revolt & Latifundia Hollowing (A6)
+Equal-Field System / Juntian (E6)─[Recommended]─> Baojia Household Mutual Surveillance (P6)
+                                ──[Recommended]─> Free Smallholder Yeoman Farmers (S2)
+Communal Ayllu / Calpulli (E6)  ──[Mandatory]───> Reciprocal Mit'a Labor Service (E4)
+                                ──[Recommended]─> Quipu Statistical Census Ledgers (P6)
+Military Cleruchy Grants (E6)   ──[Mandatory]───> Permanent Professional Standing Army (P4)
+                                ──[Recommended]─> Military Valor Nobility Reward (S3)
+Imperial Post Relay Spies (P6)  ──[Mandatory]───> Satrapy Provincial Administration (P5)
+                                ──[Recommended]─> Pluralistic Edicts of Toleration (R6)
+Baojia Mutual Surveillance (P6) ──[Mandatory]───> Legalism Collective Punishment (P3)
+                                ──[Recommended]─> Book Burning & Scholar Suppression (R6)
+Krypteia Youth Police (P6)      ──[Mandatory]───> State Serfs / Helots (S5)
+                                ──[Recommended]─> Military Junta / Stratocracy (P1)
+Citizen Ostracism Courts (P6)   ──[Mandatory]───> Direct Participatory Democracy (P1)
+                                ──[Recommended]─> Polished Ostraca Voting Shards (A2)
+Municipal Flush Sewers (S6)     ──[Mandatory]───> Aqueducts, Sewers & Public Baths (A3)
+                                ──[Recommended]─> Endemic Lead/Mercury Poisoning (S6)
+Night-Soil Composting & Tea (S6)──[Recommended]─> Wet-paddy Rice and Millet (E1)
+                                ──[Recommended]─> Herbal Medicine & Trepanation (A5)
+Book Burning (Fenshu Kengru)(R6)──[Mandatory]───> Legalism Collective Punishment (P3)
+                                ──[Mandatory]───> Centralized Absolute Monarchy (P1)
+Strict Monotheistic Exclusivism (R6)─[Mandatory]─> Monolatry / Early Monotheism (R1)
+                                ──[Recommended]─> Strict Leprosaria & Impurity Taboos (S6)
+Cataphract Shock Cavalry (P4)   ──[Mandatory]───> High-Grade Iron Ore (G4)
+                                ──[Mandatory]───> Horses and Camels (E2)
+Tax Farming Publicani (E4)      ──[Recommended]─> Venality of Office & Tax Wealth (S3)
+                                ──[Recommended]─> Aristocratic Oligarchy / Republic (P1)
+Liturgical Sponsorship (E4)     ──[Recommended]─> Naval Supremacy Triremes (P4)
+                                ──[Recommended]─> Ecstatic Festivals & Drama Games (R3)
+Vestal Priestess Orders (S4)    ──[Recommended]─> Temple Oblates & Dedicatees (S5)
+                                ──[Recommended]─> Daily Temple Food/Wine Offerings (R3)
+Ge'ez Abugida Script (A1)       ──[Mandatory]───> Dzimbahwe Granite Enclosures (A3)
+                                ──[Recommended]─> Monsoon Indian Ocean Dhow Trade (E5)
+Marshallese Stick Charts (A1)   ──[Mandatory]───> Elders' Oral Customary Law (P3)
+Moai Megalithic Statues (A3)    ──[Mandatory]───> Basalt, Andesite & Diorite Stones (G4)
+                                ──[Recommended]─> Island Ecological Exhaustion (A6)
+River-Confluence Canoes (E5)    ──[Recommended]─> Massive Earthwork Effigy Mounds (A3)
+                                ──[Mandatory]───> Wampum Shell Belts & Gift Exchange (E3)
+Inverted Siphons & Dams (A4)    ──[Mandatory]───> Aqueducts, Sewers & Public Baths (A3)
+                                ──[Recommended]─> Underwater Hydraulic Concrete (A5)
 ```
 
-### 4.3 Multi-Trigger Compound Synergy Architecture
+### 4.3 12 Multi-Trigger Compound Synergy Cascades
 Evaluated via `COMPOUND_SYNERGIES`:
 
-#### 1. Mesoamerican Sacrificial & Obsidian Complex (`bloodletting_obsidian_complex`):
-- **Triggers:** Ritual bloodletting / human sacrifice (`r3_rituals`) + High-grade volcanic obsidian deposits (`g4_resources`).
-- **Cascaded Synergies:**
-  - Auto-recommends *Ritual War Captives* in `s5_unfree_labor`.
-  - Auto-recommends *Ritual Athletic & Sacrificial Prowess* in `s3_mobility`.
+1. **Mesoamerican Sacrificial & Obsidian Complex (`bloodletting_obsidian_complex`):**
+   - *Triggers:* Ritual bloodletting / human sacrifice (`r3_rituals`) + High-grade volcanic obsidian deposits (`g4_resources`).
+   - *Cascades:* Recommends *Ritual War Captives* (`s5_unfree_labor`) and *Ritual Athletic & Sacrificial Prowess* (`s3_mobility`).
+2. **Continental Imperial Satrapy Administration (`satrapy_continental_empire`):**
+   - *Triggers:* Continental Empire scale (`currentScale === 'continental_empire'`) + Satrapy Provincial Administration (`p5_foreign_policy`) + Iron Age or later.
+   - *Cascades:* Recommends *Kharosthi and Aramaic Administrative Cursive* (`a1_writing`) and *Tribute from Conquered Provinces* (`e4_taxation`).
+3. **Oceanic Wayfinding & High Island Agriculture (`ocean_voyaging_agriculture`):**
+   - *Triggers:* Open ocean expanse barriers (`g3_barriers`) + Taro, yams, and breadfruit (`e1_crops`).
+   - *Cascades:* Mandates *Celestial navigation* (`a5_science`) and *Naval Navigators and Master Shipwrights* (`s2_middle`).
+4. **Mesopotamian Hydraulic & Salinization Trap (`mesopotamia_salinization_complex`):**
+   - *Triggers:* Violent twin rivers (`g1_freshwater`) + Basin irrigation and shadufs (`a4_hydraulic`) + Arid desert or alluvial floodplain (`g2_terrain`).
+   - *Cascades:* Mandates *Soil salinization* (`g6_disasters`) and recommends *Irreversible Alluvial Soil Salinization* (`a6_ecology_collapse`).
+5. **Qin/Han Legalist-Bureaucratic Superstate (`qin_han_legalist_complex`):**
+   - *Triggers:* Legalism collective punishment (`p3_law_system`) + Civil service exams (`p2_succession`) + Continental empire scale.
+   - *Cascades:* Mandates *Thousands of miles of frontier walls* (`a3_monuments`), *State Monopolies* (`e4_taxation`), and recommends *Baojia mutual surveillance* (`p6_intelligence_bureaucracy`).
+6. **Roman Imperial Latifundia & Concrete Complex (`roman_imperial_complex`):**
+   - *Triggers:* Underwater hydraulic concrete (`a5_science`) + Stone aqueducts (`a3_monuments`) + Chattel slavery (`s5_unfree_labor`).
+   - *Cascades:* Recommends *Latifundia slave plantations* (`e6_property_land`), *Flush sewers & thermae* (`s6_demographics_health`), and *Slave-revolt collapse* (`a6_ecology_collapse`).
+7. **Andean Mit'a & Vertical Archipelago State (`inca_andean_complex`):**
+   - *Triggers:* Quipu knotted cords (`a1_writing`) + Suspension rope bridges (`a4_hydraulic`) + Jagged mountain ranges (`g2_terrain`).
+   - *Cascades:* Mandates *Vertical Archipelago Exchange* (`e5_trade`), *Reciprocal Mit'a Labor Service* (`e4_taxation`), and *State Grain Redistribution* (`e3_currency`).
+8. **Steppe Nomadic Kurgan & Cavalry Hegemony (`steppe_nomad_complex`):**
+   - *Triggers:* High-altitude flat steppe (`g2_terrain`) + Horse archer light cavalry (`p4_military`) + Pastoral transhumance (`e1_crops`).
+   - *Cascades:* Mandates *Tanistry / Kurultai Council* (`p2_succession`), *Royal Kurgan Burial Mounds* (`r4_afterlife`), and *Severe winter blizzards (dzud)* (`g6_disasters`).
+9. **Sub-Saharan African Iron-Cattle-Monsoon Complex (`afro_indian_ocean_complex`):**
+   - *Triggers:* Highland savanna (`g2_terrain`) + Sorghum/yams/teff (`e1_crops`) + High-grade iron ore (`g4_resources`).
+   - *Cascades:* Recommends *Zebu cattle wealth* (`e2_animals`), *Dzimbahwe granite enclosures* (`a3_monuments`), and *Monsoon Indian Ocean dhow trade* (`e5_trade`).
+10. **Athenian Maritime Democracy & Silver Complex (`athens_thalassocracy_complex`):**
+    - *Triggers:* Direct democracy (`p1_gov_system`) + Trireme naval supremacy (`p4_military`) + Standardized stamped coins (`e3_currency`).
+    - *Cascades:* Recommends *Liturgical wealth sponsorship (Chorēgia)* (`e4_taxation`), *Citizen ostracism courts* (`p6_intelligence_bureaucracy`), and *Philosophical Agora pluralism* (`r6_orthodoxy_heresy`).
+11. **Mississippian Mound-Builder River Network (`cahokia_mound_complex`):**
+    - *Triggers:* Earthwork effigy mounds (`a3_monuments`) + Three Sisters maize agriculture (`e1_crops`).
+    - *Cascades:* Recommends *Continental river canoe networks* (`e5_trade`), *Wampum shell belts* (`e3_currency`), and *River-confluence palisaded mound centers* (`g7_settlement`).
+12. **Mediterranean Deforestation & Kiln Crisis (`mediterranean_deforestation_complex`):**
+    - *Triggers:* Advanced bronze/iron metallurgy (`a5_science`) + Trireme naval fleet (`p4_military`) + Dense timber forests (`g4_resources`).
+    - *Cascades:* Recommends *Widespread Deforestation & Hillside Soil Erosion* (`a6_ecology_collapse`).
 
-#### 2. Continental Imperial Satrapy Administration (`satrapy_continental_empire`):
-- **Triggers:** Continental Empire scale (`currentScale === 'continental_empire'`) + Imperial royal highways & postal relay stations (`a5_science`).
-- **Cascaded Synergies:**
-  - Auto-recommends *Kharosthi and Aramaic Administrative Cursive* in `a1_writing`.
-  - Auto-recommends *Tribute from Conquered Provinces* in `e4_taxation`.
-
-#### 3. Oceanic Wayfinding & High Island Agriculture (`ocean_voyaging_agriculture`):
-- **Triggers:** Volcanic oceanic high islands (`g2_terrain`) + Double-hulled voyaging canoes (`p4_military` or `a5_science`).
-- **Cascaded Synergies:**
-  - **Mandates** *Celestial Navigation & Swell Piloting* in `a5_science`.
-  - **Mandates** *Master Shipwrights and Navigators Guild* in `s2_middle`.
-
-### 4.4 UI Badge Recommendation Extraction Algorithm
-`getSynergyRecommendations(questionId, answers, currentEra, currentScale)` inspects all active selections across the other 30 questions, parses single and compound synergy rules, filters out options disallowed by the logic guard, and returns active recommendation objects for immediate rendering.
+### 4.4 UI Recommendation Engine & Complexity Awareness
+`getSynergyRecommendations(answers, logicGuardEnabled, currentEra, currentScale, complexityMode)` parses all active selections against single and compound triggers, checks validity against `complexityMode` (via `getFilteredQuestions`), excludes options locked by the logic guard, and returns active recommendations for immediate badge and button rendering.
 
 ---
 

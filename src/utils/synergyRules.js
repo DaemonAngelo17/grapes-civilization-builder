@@ -4,6 +4,7 @@
 // Architectural Split: 'mandatory' (Hard Prerequisite Cascade) vs 'recommended' (Soft Historical Synergy)
 
 import { checkOptionDisallowed } from './logicRules.js';
+import { getFilteredQuestions } from '../data/grapesData.js';
 
 export const LOGICAL_SYNERGIES = {
   // --- FRESHWATER & HYDROLOGICAL PREREQUISITES ---
@@ -127,7 +128,8 @@ export const LOGICAL_SYNERGIES = {
     { targetQ: "e2_animals", option: "Vast Herds of Sanga & Zebu Cattle (walking banks of wealth, milk, blood, leather, and royal bride-price prestige)", type: "recommended" }
   ],
   "Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean": [
-    { targetQ: "g4_resources", option: "Basalt, andesite, and diorite volcanic stones (for monumental carving and hard stone grinding tools)", type: "mandatory" }
+    { targetQ: "g4_resources", option: "Basalt, andesite, and diorite volcanic stones (for monumental carving and hard stone grinding tools)", type: "mandatory" },
+    { targetQ: "a6_ecology_collapse", option: "Island Ecological Exhaustion & Palm Deforestation (exhausting slow-growing island timber and seabird guano colonies traps populations without ocean-going timber)", type: "recommended" }
   ],
 
   // --- TRADE, ECONOMY & CURRENCY SYNERGIES ---
@@ -209,6 +211,122 @@ export const LOGICAL_SYNERGIES = {
   ],
   "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation": [
     { targetQ: "a1_writing", option: "Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (mapping ocean swell refraction and historical treaties without ink)", type: "mandatory" }
+  ],
+
+  // --- COMPLEX & HISTORICAL PAIR SYNERGIES (v4.0) ---
+  // 1. Hyper-Dense Megacity
+  "Hyper-Dense Walled Megacity Core (100,000–1,000,000+ inhabitants fed by radial canal and granary networks, like Rome, Chang'an, or Babylon)": [
+    { targetQ: "s6_demographics_health", option: "High-Density Zoonotic Crowd-Disease Endemicity (living alongside cattle, pigs, and dense trade routes breeds smallpox/measles immunity—deadly to isolated neighbors)", type: "mandatory" },
+    { targetQ: "s6_demographics_health", option: "State Famine Relief Granaries (Ever-Normal Granaries — state buys grain in bumper years and sells cheap during plagues/famines to prevent mass starvation)", type: "recommended" }
+  ],
+  // 2. Low-Density Tropical Urbanism
+  "Low-Density Tropical Urbanism (dispersed stone temple cores surrounded by sprawling forested garden-homesteads, like Classic Maya Tikal or Angkor)": [
+    { targetQ: "g2_terrain", option: "Dense, humid tropical rainforest with thick canopy", type: "mandatory" },
+    { targetQ: "a6_ecology_collapse", option: "Monoculture Vulnerability & Aquifer Depletion (over-reliance on a single staple crop and dropping karst water tables leads to catastrophic collapse during megadroughts)", type: "recommended" }
+  ],
+  // 3. Mobile Seasonal Encampments / Ordu
+  "Mobile Seasonal Encampments / Ordu (portable felt yurts and wagon-cities shifting across summer alpine and winter steppe pastures)": [
+    { targetQ: "p1_gov_system", option: "Nomadic Steppe Imperial Confederacy (mobile royal court unifying dozens of horse-riding clans under a supreme Chanyu or Khagan)", type: "mandatory" },
+    { targetQ: "e1_crops", option: "Pastoral Transhumance & Herd Grazing (minimal grain farming; diet of roasted meat, fermented mare's milk [kumis], cheese, and wild steppe grains)", type: "mandatory" }
+  ],
+  // 4. Latifundia Slave Estates
+  "Latifundia / Aristocratic Slave Estates (vast private plantations owned by senators/nobles and worked by chained chattel slaves, squeezing out small farmers)": [
+    { targetQ: "s5_unfree_labor", option: "Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)", type: "mandatory" },
+    { targetQ: "a6_ecology_collapse", option: "Slave-Revolt & Latifundia Hollowing (replacing free citizen-farmers with massive slave plantations hollows out the military recruiting pool and sparks servile wars)", type: "recommended" }
+  ],
+  // 5. Equal-Field System (Juntian)
+  "Equal-Field State Allotment System (Juntian — state periodically redistributes farmland to peasant households based on family size to prevent noble land-grabs)": [
+    { targetQ: "p6_intelligence_bureaucracy", option: "Household Registration & Mutual Surveillance Groups (Baojia / Shang Yang system — families grouped into units of 5 or 10 sharing collective guilt for crimes)", type: "recommended" },
+    { targetQ: "s2_middle", option: "Free Smallholder Farmers (seen as the virtuous backbone of society and the military, while merchants are looked down on as greedy parasites)", type: "recommended" }
+  ],
+  // 6. Communal Kinship Ayllu / Calpulli
+  "Communal Kinship Ayllu / Calpulli Landholding (land is owned collectively by ancestral clans and worked reciprocally; cannot be bought or sold privately)": [
+    { targetQ: "e4_taxation", option: "Reciprocal Mit'a Labor Service (rotational community work quotas on royal terraces and storehouses in exchange for state festival feasts)", type: "mandatory" },
+    { targetQ: "p6_intelligence_bureaucracy", option: "Quipu Statistical Census & Royal Warehouse Audits (Chasqui foot-runners delivering knotted demographic and granary ledgers along mountain roads)", type: "recommended" }
+  ],
+  // 7. Military Cleruchy / Timar
+  "Military Cleruchy / Timar Land Grants (conquered arable land parcelled out to veteran soldiers and heavy cavalrymen in exchange for hereditary military service)": [
+    { targetQ: "p4_military", option: "Permanent Professional Standing Army (full-time paid soldiers who train year-round)", type: "mandatory" },
+    { targetQ: "s3_mobility", option: "Military Valor (a peasant who captures an enemy commander or shows bravery in battle is rewarded with land and noble status)", type: "recommended" }
+  ],
+  // 8. Imperial Courier Relay & Inspectors
+  "Imperial Courier Relay Highways & Secret Inspectors ('King's Eyes and Ears' — horse relay stations every 15 miles with royal spies auditing satraps)": [
+    { targetQ: "p5_foreign_policy", option: "Satrapy Provincial Administration (regional autonomy, local religious tolerance, and royal governors connected by imperial post roads)", type: "mandatory" },
+    { targetQ: "r6_orthodoxy_heresy", option: "Pluralistic Edicts of Toleration (Cyrus Cylinder / Ashoka's Rock Edicts — state funds diverse local temples and protects minority sects to ensure loyalty)", type: "recommended" }
+  ],
+  // 9. Household Registration & Mutual Surveillance (Baojia)
+  "Household Registration & Mutual Surveillance Groups (Baojia / Shang Yang system — families grouped into units of 5 or 10 sharing collective guilt for crimes)": [
+    { targetQ: "p3_law_system", option: "Legalism (strict, harsh collective punishment — if one person breaks the law, their whole family or neighborhood is punished)", type: "mandatory" },
+    { targetQ: "r6_orthodoxy_heresy", option: "Book Burning & Suppression of Rival Schools (Fenshu Kengru — state bans dissenting philosophical scrolls and executes non-conformist scholars)", type: "recommended" }
+  ],
+  // 10. Cryptographic Scytale & Krypteia
+  "Cryptographic Scytale Ciphers & Secret Military Police (Krypteia — covert youth squads surveilling subject serf populations and eliminating rebel leaders)": [
+    { targetQ: "s5_unfree_labor", option: "State Serfs / Helots (conquered locals tied permanently to the land who farm for the ruling warrior class and frequently revolt)", type: "mandatory" },
+    { targetQ: "p1_gov_system", option: "Military Junta / Stratocracy (ruled by warrior-kings and a council of top generals)", type: "recommended" }
+  ],
+  // 11. Citizen Ostracism & Informer Courts
+  "Citizen Ostracism & Public Informer Courts (Sycos / Graphē — citizens vote to exile overly ambitious demagogues for 10 years to prevent tyranny)": [
+    { targetQ: "p1_gov_system", option: "Direct Democracy (all free adult male citizens vote directly on laws and wars in a public assembly)", type: "mandatory" },
+    { targetQ: "a2_medium", option: "Polished Ostraca (recycled smooth pottery shards used by scribes and commoners for receipts, letters, and voting ballots)", type: "recommended" }
+  ],
+  // 12. Hydraulic Flush Sewers & Thermae
+  "Municipal Hydraulic Flush Sewers, Lead/Terracotta Piping & Public Thermae (Cloaca Maxima-style waste removal reducing waterborne cholera/dysentery)": [
+    { targetQ: "a3_monuments", option: "Gravity-fed stone aqueducts, subterranean sewers, and public bathhouses", type: "mandatory" },
+    { targetQ: "s6_demographics_health", option: "Endemic Lead/Mercury Metallurgical & Cosmetic Poisoning (elite and artisan life expectancy lowered by silver-smelting fumes, lead pipes, or cinnabar elixirs)", type: "recommended" }
+  ],
+  // 13. Night-Soil Composting & Boiled Tea Culture
+  "Night-Soil Composting & Boiled Water / Herbal Tea Culture (systematic collection of urban human waste for farm fertilizer paired with boiled drinking water)": [
+    { targetQ: "e1_crops", option: "Wet-paddy Rice and Millet (high-calorie crops supporting massive populations)", type: "recommended" },
+    { targetQ: "a5_science", option: "Herbal medicine, cranial surgery (trepanation), and setting broken bones", type: "recommended" }
+  ],
+  // 14. Book Burning & Suppression (Fenshu Kengru)
+  "Book Burning & Suppression of Rival Schools (Fenshu Kengru — state bans dissenting philosophical scrolls and executes non-conformist scholars)": [
+    { targetQ: "p3_law_system", option: "Legalism (strict, harsh collective punishment — if one person breaks the law, their whole family or neighborhood is punished)", type: "mandatory" },
+    { targetQ: "p1_gov_system", option: "Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)", type: "mandatory" }
+  ],
+  // 15. Strict Iconoclastic Exclusivism
+  "Strict Iconoclastic / Monotheistic Exclusivism (foreign idols and rival temples are smashed; only the single true covenant or state doctrine is tolerated)": [
+    { targetQ: "r1_structure", option: "Monolatry / Early Monotheism (worship of one supreme creator god above all others)", type: "mandatory" },
+    { targetQ: "s6_demographics_health", option: "Strict Leprosaria, Quarantine Gates & Ritual Impurity Taboos (religious laws mandating isolation of contagious skin diseases, corpses, and tainted meats)", type: "recommended" }
+  ],
+  // 16. Cataphract Shock Cavalry
+  "Cataphract Super-Heavy Shock Cavalry (both rider and warhorse encased in full scale or lamellar iron armor charging with two-handed kontos lances)": [
+    { targetQ: "g4_resources", option: "High-grade iron ore (for superior armor and agricultural plows)", type: "mandatory" },
+    { targetQ: "e2_animals", option: "Horses and Camels (for aristocratic cavalry, messengers, and desert caravan trade)", type: "mandatory" }
+  ],
+  // 17. Tax Farming Syndicates (Publicani)
+  "Tax Farming Syndicates (Publicani — private investor corporations bidding at auction for the right to collect provincial taxes for a profit)": [
+    { targetQ: "s3_mobility", option: "Venality of Office & Equestrian Tax-Farming Wealth (buying noble titles or senatorial rank through state fiscal service)", type: "recommended" },
+    { targetQ: "p1_gov_system", option: "Aristocratic Oligarchy / Republic (ruled by a Senate or Council of wealthy landowning families)", type: "recommended" }
+  ],
+  // 18. Liturgical Wealth Sponsorship (Chorēgia / Trierarchy)
+  "Liturgical Wealth Sponsorship (Chorēgia / Trierarchy — the richest citizens are legally required to personally fund one warship or public festival per year)": [
+    { targetQ: "p4_military", option: "Naval Supremacy (trireme warships with bronze battering rams dominating sea lanes)", type: "recommended" },
+    { targetQ: "r3_rituals", option: "Ecstatic festivals, theatrical drama, and athletic games held in honor of patron deities", type: "recommended" }
+  ],
+  // 19. Sacred Virgin Priestess Orders
+  "Sacred Virgin Priestess Orders (Vestals / God's Wives of Amun / Acllas — elite celibate women wielding immense financial, legal, and political immunity)": [
+    { targetQ: "s5_unfree_labor", option: "Temple Oblates and Sacred Dedicatees (families pledged to perpetual temple service as brewers, weavers, and agricultural tenders for the gods)", type: "recommended" },
+    { targetQ: "r3_rituals", option: "Daily food, wine, and incense offerings placed in front of temple statues", type: "recommended" }
+  ],
+  // 20. Ge'ez / Meroitic Abugida Script
+  "Ge'ez / Meroitic Abugida Script & Royal Trilingual Stone Inscriptions (syllabic alphabets carved on towering granite obelisks)": [
+    { targetQ: "a3_monuments", option: "Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)", type: "mandatory" },
+    { targetQ: "e5_trade", option: "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)", type: "recommended" }
+  ],
+  // 21. Marshallese Stick Charts & Oral Songlines
+  "Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (mapping ocean swell refraction and historical treaties without ink)": [
+    { targetQ: "p3_law_system", option: "Elders' Oral Customary Law (unwritten ancestral precedents, kinship compensation wergild fines, and sacred taboo prohibitions)", type: "mandatory" }
+  ],
+  // 23. Continental River-Confluence Canoe Networks
+  "Continental River-Confluence Canoe Networks (trading copper plates, mica, lightning-whelk shells, and furs across thousands of miles of rivers)": [
+    { targetQ: "a3_monuments", option: "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)", type: "recommended" },
+    { targetQ: "e3_currency", option: "Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)", type: "mandatory" }
+  ],
+  // 24. Inverted Siphons & Hydraulic Pipelines
+  "Inverted Siphons, Pressurized Lead/Ceramic Pipelines, and Multiple-Arch Masonry Dams (crossing deep valleys under hydrostatic pressure)": [
+    { targetQ: "a3_monuments", option: "Gravity-fed stone aqueducts, subterranean sewers, and public bathhouses", type: "mandatory" },
+    { targetQ: "a5_science", option: "Concrete that can set underwater (for building massive harbors and domes)", type: "recommended" }
   ]
 };
 
@@ -287,14 +405,331 @@ export const COMPOUND_SYNERGIES = [
         type: "mandatory"
       }
     ]
+  },
+  {
+    id: "mesopotamia_salinization_complex",
+    title: "Mesopotamian Hydraulic & Salinization Trap",
+    condition: (answers) => {
+      const g1 = answers.g1_freshwater || [];
+      const g1List = Array.isArray(g1) ? g1 : [g1];
+      const hasTwinRivers = g1List.some(r => r.toLowerCase().includes('violent, unpredictable twin rivers'));
+
+      const a4 = answers.a4_hydraulic || [];
+      const a4List = Array.isArray(a4) ? a4 : [a4];
+      const hasBasinIrrigation = a4List.some(h => h.toLowerCase().includes('basin irrigation, dikes, and shadufs'));
+
+      const g2 = answers.g2_terrain || [];
+      const g2List = Array.isArray(g2) ? g2 : [g2];
+      const hasAridOrFloodplain = g2List.some(t => 
+        t.toLowerCase().includes('arid desert expanses') || 
+        t.toLowerCase().includes('flat, featureless alluvial floodplains')
+      );
+
+      return hasTwinRivers && hasBasinIrrigation && hasAridOrFloodplain;
+    },
+    targets: [
+      {
+        targetQ: "g6_disasters",
+        option: "Soil salinization (over-irrigation making the soil too salty to grow crops)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "a6_ecology_collapse",
+        option: "Irreversible Alluvial Soil Salinization (centuries of intensive desert canal irrigation without drainage raises groundwater salt, turning wheat fields into white salt flats)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "qin_han_legalist_complex",
+    title: "Qin/Han Legalist-Bureaucratic Superstate",
+    condition: (answers, currentEra, currentScale) => {
+      const p3 = answers.p3_law_system || [];
+      const p3List = Array.isArray(p3) ? p3 : [p3];
+      const hasLegalism = p3List.some(l => l.toLowerCase().includes('legalism (strict, harsh collective punishment'));
+
+      const p2 = answers.p2_succession || [];
+      const p2List = Array.isArray(p2) ? p2 : [p2];
+      const hasExams = p2List.some(s => s.toLowerCase().includes('meritocratic civil service exams'));
+
+      const isEmpire = currentScale === 'continental_empire';
+      return hasLegalism && hasExams && isEmpire;
+    },
+    targets: [
+      {
+        targetQ: "a3_monuments",
+        option: "Thousands of miles of frontier defensive walls and watchtowers (like the Great Wall)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "e4_taxation",
+        option: "State Monopolies (the government owns all salt, iron, and mines; citizens must buy from the state)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "p6_intelligence_bureaucracy",
+        option: "Household Registration & Mutual Surveillance Groups (Baojia / Shang Yang system — families grouped into units of 5 or 10 sharing collective guilt for crimes)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "roman_imperial_complex",
+    title: "Roman Imperial Latifundia & Concrete Complex",
+    condition: (answers) => {
+      const a5 = answers.a5_science || [];
+      const a5List = Array.isArray(a5) ? a5 : [a5];
+      const hasConcrete = a5List.some(s => s.toLowerCase().includes('concrete that can set underwater'));
+
+      const a3 = answers.a3_monuments || [];
+      const a3List = Array.isArray(a3) ? a3 : [a3];
+      const hasAqueducts = a3List.some(m => m.toLowerCase().includes('gravity-fed stone aqueducts'));
+
+      const s5 = answers.s5_unfree_labor || [];
+      const s5List = Array.isArray(s5) ? s5 : [s5];
+      const hasChattel = s5List.some(u => u.toLowerCase().includes('prisoners of war & chattel slavery'));
+
+      return hasConcrete && hasAqueducts && hasChattel;
+    },
+    targets: [
+      {
+        targetQ: "e6_property_land",
+        option: "Latifundia / Aristocratic Slave Estates (vast private plantations owned by senators/nobles and worked by chained chattel slaves, squeezing out small farmers)",
+        type: "recommended"
+      },
+      {
+        targetQ: "s6_demographics_health",
+        option: "Municipal Hydraulic Flush Sewers, Lead/Terracotta Piping & Public Thermae (Cloaca Maxima-style waste removal reducing waterborne cholera/dysentery)",
+        type: "recommended"
+      },
+      {
+        targetQ: "a6_ecology_collapse",
+        option: "Slave-Revolt & Latifundia Hollowing (replacing free citizen-farmers with massive slave plantations hollows out the military recruiting pool and sparks servile wars)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "inca_andean_complex",
+    title: "Andean Mit'a & Vertical Archipelago State",
+    condition: (answers) => {
+      const a1 = answers.a1_writing || [];
+      const a1List = Array.isArray(a1) ? a1 : [a1];
+      const hasQuipu = a1List.some(w => w.toLowerCase().includes('quipu / knotted cords'));
+
+      const a4 = answers.a4_hydraulic || [];
+      const a4List = Array.isArray(a4) ? a4 : [a4];
+      const hasBridges = a4List.some(h => h.toLowerCase().includes('suspension rope bridges'));
+
+      const g2 = answers.g2_terrain || [];
+      const g2List = Array.isArray(g2) ? g2 : [g2];
+      const hasMountains = g2List.some(t => t.toLowerCase().includes('steep, jagged mountain ranges'));
+
+      return hasQuipu && hasBridges && hasMountains;
+    },
+    targets: [
+      {
+        targetQ: "e5_trade",
+        option: "Vertical Archipelago Exchange (highland and lowland ecological tiers swapping mountain tubers/wool for coastal fish and valley cotton)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "e4_taxation",
+        option: "Reciprocal Mit'a Labor Service (rotational community work quotas on royal terraces and storehouses in exchange for state festival feasts)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "e3_currency",
+        option: "State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)",
+        type: "mandatory"
+      }
+    ]
+  },
+  {
+    id: "steppe_nomad_complex",
+    title: "Steppe Nomadic Kurgan & Cavalry Hegemony",
+    condition: (answers) => {
+      const g2 = answers.g2_terrain || [];
+      const g2List = Array.isArray(g2) ? g2 : [g2];
+      const hasSteppe = g2List.some(t => t.toLowerCase().includes('high-altitude flat plateau (steppe)'));
+
+      const p4 = answers.p4_military || [];
+      const p4List = Array.isArray(p4) ? p4 : [p4];
+      const hasHorseArchers = p4List.some(m => m.toLowerCase().includes('horse archer light cavalry'));
+
+      const e1 = answers.e1_crops || [];
+      const e1List = Array.isArray(e1) ? e1 : [e1];
+      const hasPastoral = e1List.some(c => c.toLowerCase().includes('pastoral transhumance & herd grazing'));
+
+      return hasSteppe && hasHorseArchers && hasPastoral;
+    },
+    targets: [
+      {
+        targetQ: "p2_succession",
+        option: "Tanistry / Kurultai Council (hereditary noble tribal assembly choosing the most battle-tested prince from the royal clan)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "r4_afterlife",
+        option: "Royal Kurgan Burial Mounds (timber-lined underground tombs filled with sacrificed horses, gold animal-style art, and weapons under earthen hills)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "g6_disasters",
+        option: "Severe winter blizzards and permafrost frosts (dzud) freezing pasture grasslands and devastating herds of livestock",
+        type: "mandatory"
+      }
+    ]
+  },
+  {
+    id: "afro_indian_ocean_complex",
+    title: "Sub-Saharan African Iron-Cattle-Monsoon Complex",
+    condition: (answers) => {
+      const g2 = answers.g2_terrain || [];
+      const g2List = Array.isArray(g2) ? g2 : [g2];
+      const hasSavanna = g2List.some(t => t.toLowerCase().includes('elevated temperate highland savanna'));
+
+      const e1 = answers.e1_crops || [];
+      const e1List = Array.isArray(e1) ? e1 : [e1];
+      const hasSorghum = e1List.some(c => c.toLowerCase().includes('sorghum, yams, and teff'));
+
+      const g4 = answers.g4_resources || [];
+      const g4List = Array.isArray(g4) ? g4 : [g4];
+      const hasIron = g4List.some(r => r.toLowerCase().includes('high-grade iron ore'));
+
+      return hasSavanna && hasSorghum && hasIron;
+    },
+    targets: [
+      {
+        targetQ: "e2_animals",
+        option: "Vast Herds of Sanga & Zebu Cattle (walking banks of wealth, milk, blood, leather, and royal bride-price prestige)",
+        type: "recommended"
+      },
+      {
+        targetQ: "a3_monuments",
+        option: "Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)",
+        type: "recommended"
+      },
+      {
+        targetQ: "e5_trade",
+        option: "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "athens_thalassocracy_complex",
+    title: "Athenian Maritime Democracy & Silver Complex",
+    condition: (answers) => {
+      const p1 = answers.p1_gov_system || [];
+      const p1List = Array.isArray(p1) ? p1 : [p1];
+      const hasDemocracy = p1List.some(g => g.toLowerCase().includes('direct democracy'));
+
+      const p4 = answers.p4_military || [];
+      const p4List = Array.isArray(p4) ? p4 : [p4];
+      const hasNaval = p4List.some(m => m.toLowerCase().includes('naval supremacy (trireme warships'));
+
+      const e3 = answers.e3_currency || [];
+      const e3List = Array.isArray(e3) ? e3 : [e3];
+      const hasCoins = e3List.some(c => c.toLowerCase().includes('standardized stamped coins'));
+
+      return hasDemocracy && hasNaval && hasCoins;
+    },
+    targets: [
+      {
+        targetQ: "e4_taxation",
+        option: "Liturgical Wealth Sponsorship (Chorēgia / Trierarchy — the richest citizens are legally required to personally fund one warship or public festival per year)",
+        type: "recommended"
+      },
+      {
+        targetQ: "p6_intelligence_bureaucracy",
+        option: "Citizen Ostracism & Public Informer Courts (Sycos / Graphē — citizens vote to exile overly ambitious demagogues for 10 years to prevent tyranny)",
+        type: "recommended"
+      },
+      {
+        targetQ: "r6_orthodoxy_heresy",
+        option: "Philosophical Academy Pluralism (Hundreds of Schools / Agora — competing rationalist, stoic, legalist, and naturalist schools debate freely in public)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "cahokia_mound_complex",
+    title: "Mississippian Mound-Builder River Network",
+    condition: (answers) => {
+      const a3 = answers.a3_monuments || [];
+      const a3List = Array.isArray(a3) ? a3 : [a3];
+      const hasMounds = a3List.some(m => m.toLowerCase().includes('massive earthwork effigy mounds'));
+
+      const e1 = answers.e1_crops || [];
+      const e1List = Array.isArray(e1) ? e1 : [e1];
+      const hasThreeSisters = e1List.some(c => c.toLowerCase().includes('maize (corn), beans, and squash'));
+
+      return hasMounds && hasThreeSisters;
+    },
+    targets: [
+      {
+        targetQ: "e5_trade",
+        option: "Continental River-Confluence Canoe Networks (trading copper plates, mica, lightning-whelk shells, and furs across thousands of miles of rivers)",
+        type: "recommended"
+      },
+      {
+        targetQ: "e3_currency",
+        option: "Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)",
+        type: "recommended"
+      },
+      {
+        targetQ: "g7_settlement",
+        option: "River-Confluence Palisaded Mound Centers (ceremonial plaza earthworks surrounded by timber stockades and floodplain farm hamlets, like Cahokia)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "mediterranean_deforestation_complex",
+    title: "Mediterranean Deforestation & Kiln Crisis",
+    condition: (answers) => {
+      const a5 = answers.a5_science || [];
+      const a5List = Array.isArray(a5) ? a5 : [a5];
+      const hasMetallurgy = a5List.some(s => s.toLowerCase().includes('advanced metallurgy'));
+
+      const p4 = answers.p4_military || [];
+      const p4List = Array.isArray(p4) ? p4 : [p4];
+      const hasNaval = p4List.some(m => m.toLowerCase().includes('naval supremacy (trireme warships'));
+
+      const g4 = answers.g4_resources || [];
+      const g4List = Array.isArray(g4) ? g4 : [g4];
+      const hasForests = g4List.some(r => r.toLowerCase().includes('dense cedar, oak, or mahogany forests'));
+
+      return hasMetallurgy && hasNaval && hasForests;
+    },
+    targets: [
+      {
+        targetQ: "a6_ecology_collapse",
+        option: "Widespread Deforestation & Hillside Soil Erosion (clear-cutting forests for lime plaster kilns, charcoal smelting, and trireme fleets strips topsoil into rivers)",
+        type: "recommended"
+      }
+    ]
   }
 ];
 
+function getValidOptionsMap(complexityMode) {
+  const filtered = getFilteredQuestions(complexityMode);
+  const map = new Map();
+  for (const qList of Object.values(filtered)) {
+    for (const q of qList) {
+      map.set(q.id, new Set(q.options));
+    }
+  }
+  return map;
+}
+
 /**
  * Evaluates newly added options and returns updated answers with logical companion options auto-selected.
- * - 'mandatory': automatically selects the companion option immediately (if not disallowed and caps not exceeded).
- * - 'recommended': does NOT force-check if currentScale === 'city_state' or if target question already has selections.
- *                 Only auto-selects if currentScale !== 'city_state' and target question currently has 0 selections.
+ * - In 'basic' mode: Both 'mandatory' and 'recommended' synergies auto-select (up to the 2-option cap per question)
+ *   to help younger students build a coherent society effortlessly.
+ * - In 'normal' and 'complex' modes: 'mandatory' synergies auto-select (respecting scale caps and logic locks),
+ *   while 'recommended' synergies show the glowing "Recommended Synergy" badge on the QuestionCard.
  */
 export function applyLogicalSynergies(
   questionId,
@@ -307,21 +742,27 @@ export function applyLogicalSynergies(
 ) {
   let updatedAnswers = { ...allAnswers, [questionId]: selectedList };
   const autoSelectedMessages = [];
+  const validOptionsMap = getValidOptionsMap(complexityMode);
 
   const tryAutoSelect = (sourceDesc, targetQ, targetOpt, type) => {
+    // Verify target question and option exist within the active complexity mode
+    const validSet = validOptionsMap.get(targetQ);
+    if (!validSet || !validSet.has(targetOpt)) return false;
+
     const currentSelected = updatedAnswers[targetQ] || [];
     const currentList = Array.isArray(currentSelected) ? currentSelected : [currentSelected];
 
     // If already selected, nothing to do
     if (currentList.includes(targetOpt)) return false;
 
-    // For recommended synergies:
-    // Do NOT force-check if user is in a city_state with limited cap slots or if another valid option in target question is chosen.
-    // Only auto-select if target question currently has 0 selections and not in city_state.
+    // Synergy auto-selection behavior by complexity mode:
     if (type === 'recommended') {
-      if (currentScale === 'city_state' || currentList.length > 0) {
+      // In normal and complex modes, recommended synergies do NOT auto-select.
+      // They are rendered as glowing badges on the QuestionCard via getSynergyRecommendations.
+      if (complexityMode !== 'basic') {
         return false;
       }
+      // In basic mode: both mandatory and recommended auto-select (up to 2-option cap per question).
     }
 
     // Verify that the companion is not disallowed by era, scale caps, or contradiction
@@ -402,8 +843,13 @@ export function getSynergyRecommendations(
   complexityMode = 'normal'
 ) {
   const recommendations = new Map();
+  const validOptionsMap = getValidOptionsMap(complexityMode);
 
   const addRec = (sourceDesc, targetQ, targetOpt, type, title) => {
+    // Only recommend options that exist in the active complexityMode
+    const validSet = validOptionsMap.get(targetQ);
+    if (!validSet || !validSet.has(targetOpt)) return;
+
     const currentSelected = allAnswers[targetQ] || [];
     const currentList = Array.isArray(currentSelected) ? currentSelected : [currentSelected];
 
