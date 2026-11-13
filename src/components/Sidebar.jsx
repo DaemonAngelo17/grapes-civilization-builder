@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Mountain, 
   Flame, 
@@ -11,6 +11,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { GRAPES_CATEGORIES, GRAPES_QUESTIONS } from '../data/grapesData';
+import CivilizationRadarWidget from './CivilizationRadarWidget';
 
 const ICONS = {
   Mountain,
@@ -31,8 +32,10 @@ export default function Sidebar({
   isMobileOpen,
   setIsMobileOpen,
   orderMode,
-  currentQuestions
+  currentQuestions,
+  complexityMode = 'normal'
 }) {
+  const [isRadarCollapsed, setIsRadarCollapsed] = useState(false);
   // Compute completion counts based on active complexity filtered questions
   const categoryStats = categories.map((cat, idx) => {
     const questions = (currentQuestions && currentQuestions[cat.key]) || GRAPES_QUESTIONS[cat.key] || [];
@@ -52,9 +55,12 @@ export default function Sidebar({
     };
   });
 
-  const totalQuestions = categoryStats.reduce((sum, c) => sum + c.total, 0);
+  const dynamicDenominator = complexityMode === 'basic' ? 12 : complexityMode === 'complex' ? 37 : 31;
   const totalCompleted = categoryStats.reduce((sum, c) => sum + c.completed, 0);
-  const overallPct = Math.round((totalCompleted / totalQuestions) * 100);
+  const overallPct = Math.min(100, Math.round((totalCompleted / dynamicDenominator) * 100));
+
+  const p7Val = answers['p7_neighbor_relations'];
+  const isP7Answered = Array.isArray(p7Val) ? p7Val.length > 0 : (typeof p7Val === 'string' && p7Val.trim() !== '');
 
   return (
     <>
@@ -100,7 +106,7 @@ export default function Sidebar({
             <div className="flex justify-between items-center text-xs mb-1 font-sans-ui">
               <span className="font-semibold text-[#44352b]">Civilization Progress</span>
               <span className="font-bold text-[#8c531b]">
-                {totalCompleted}/{totalQuestions} ({overallPct}%)
+                {totalCompleted}/{dynamicDenominator} ({overallPct}%)
               </span>
             </div>
             <div className="w-full h-2 rounded-full bg-[#e3d7c3] overflow-hidden border border-[#d2c3aa]">
@@ -109,6 +115,15 @@ export default function Sidebar({
                 style={{ width: `${overallPct}%` }}
               />
             </div>
+          </div>
+
+          {/* Live Civilization DNA & Radar Widget */}
+          <div className="py-2 border-b border-[#dfd4c0]">
+            <CivilizationRadarWidget
+              answers={answers}
+              isCollapsed={isRadarCollapsed}
+              onToggleCollapse={() => setIsRadarCollapsed(!isRadarCollapsed)}
+            />
           </div>
 
           {/* Navigation Category Items */}
@@ -179,6 +194,45 @@ export default function Sidebar({
                 </button>
               );
             })}
+
+            {/* Direct Geopolitics / Neighborhood (P7) Nav Button */}
+            <div className="pt-1.5 pb-1">
+              <button
+                type="button"
+                onClick={() => {
+                  onSelectCategory('P');
+                  setIsMobileOpen(false);
+                  const el = document.getElementById('q-p7_neighbor_relations');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }}
+                className={`w-full text-left p-2 rounded-lg border transition-all flex items-center justify-between cursor-pointer ${
+                  isP7Answered
+                    ? 'bg-[#eef5ee] border-[#b8dab8] text-[#1c4d21]'
+                    : 'bg-[#faf4ec] hover:bg-[#f3eadc] border-[#dfd3be] text-[#543f30]'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded flex items-center justify-center bg-[#8c531b] text-white text-[11px] font-bold font-cinzel shrink-0">
+                    P7
+                  </span>
+                  <div>
+                    <span className="font-cinzel text-xs font-bold block leading-tight">
+                      Geopolitics &amp; Neighborhood
+                    </span>
+                    <span className="text-[10px] text-[#7a6453] font-sans-ui block">
+                      Cross-border relations &amp; buffers
+                    </span>
+                  </div>
+                </div>
+                {isP7Answered ? (
+                  <CheckCircle2 size={15} className="text-emerald-700 shrink-0" />
+                ) : (
+                  <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-[#e8dcce] text-[#6d5137] shrink-0">
+                    P7
+                  </span>
+                )}
+              </button>
+            </div>
           </nav>
 
           {/* Dossier Quick Access Button in Sidebar */}

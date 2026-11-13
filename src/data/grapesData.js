@@ -1707,5 +1707,427 @@ export const HISTORICAL_PRESETS = {
         'Celestial navigation (sailing out of sight of land at night using the North Star)'
       ]
     }
+  },
+  aksum_kush: {
+    name: 'Kingdoms of Kush & Aksum (Nile Gold & Red Sea Fragrance)',
+    era: 'classical_antiquity',
+    scale: 'regional_kingdom',
+    inspiration: 'Nubian Kush & Kingdom of Aksum (Horn of Africa & Upper Nile)',
+    answers: {
+      g2_terrain: [
+        'Steep, jagged mountain ranges (requires terrace farming, provides natural fortresses)',
+        'Vast river delta marshlands and bayous intersected by tidal estuaries'
+      ],
+      g1_freshwater: [
+        'High-altitude glacial mountain meltwater (like the Andes — cold, fast-flowing streams)'
+      ],
+      g3_barriers: [
+        'Cataracts (shallow, boulder-filled river rapids that stop enemy boats)',
+        'Impassable, freezing mountain ranges blocking the border'
+      ],
+      g4_resources: [
+        'Gold, silver, jade, or lapis lazuli (for luxury goods and religious idols)',
+        'High-grade iron ore (for superior armor and agricultural plows)',
+        'Dense cedar, oak, or mahogany forests (for shipbuilding and palace roofs)'
+      ],
+      e1_crops: [
+        'Sorghum, Millet, and Teff (drought-resistant grains suited to dry heat or high elevations)',
+        'Wheat and Barley (for bread, porridge, and brewing beer — standard in fertile crescents)'
+      ],
+      e2_animals: [
+        'Cattle and Oxen (heavy pulling, meat, dairy, leather, and status wealth)',
+        'Donkeys and Mules (hardy pack animals carrying goods over rocky mountain trails)'
+      ],
+      e3_currency: [
+        'Standardized Stamped Coins (electrum, gold, silver, or bronze coins guaranteed by the state)'
+      ],
+      e4_taxation: [
+        'Customs Duties & Trade Tariffs (taxing merchant ships at harbors and caravans at city gates)'
+      ],
+      e5_trade: [
+        'Maritime Trade Empire (merchant fleets sailing across seas to establish trading colonies)',
+        'Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)'
+      ],
+      p1_gov_system: [
+        'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)'
+      ],
+      p2_succession: [
+        'Hereditary Primogeniture (eldest child automatically inherits the crown to prevent civil war)'
+      ],
+      p3_law_crime: [
+        'Codified Written Law Code (carved onto stone pillars in public squares — like Hammurabi\'s Code)'
+      ],
+      p4_military: [
+        'Armored War Elephant Corps (massive beasts bred for battlefield shock, breaking enemy infantry lines and terrifying cavalry)',
+        'Heavy Infantry Phalanx (wall of overlapping bronze shields and 18-foot pikes)'
+      ],
+      p5_foreign_policy: [
+        'Establishment of Armed Commercial Enclaves & Frontier Garrison Colonies (planting veteran soldier-colonists to guard borders and extract raw materials)'
+      ],
+      p7_neighbor_relations: [
+        'Extraterritorial Merchant Enclaves & Thalassocratic Middlemen (avoiding land wars with giant empires by operating indispensable trading ports and merchant quarters inside their borders, like Phoenicia or Kilwa)'
+      ],
+      s1_apex: [
+        'Divine King / Living God on Earth (ruler claims descent from the sun or sky; disobedience is a religious sin)'
+      ],
+      s2_middle: [
+        'Wealthy Merchants & Caravaneers (trading luxury goods across seas and deserts)'
+      ],
+      s3_mobility: [
+        'Merit-Based Imperial Exams (poor peasant boys can study for decades to pass state exams and become royal governors)'
+      ],
+      s4_gender: [
+        'Complementary Gender Roles (women hold significant power as priestesses, merchants, or estate managers, but men lead the military)'
+      ],
+      s5_unfree_labor: [
+        'Prisoners of War & Chattel Slavery (captured enemies become permanent property working in state silver mines, galleys, and estates)'
+      ],
+      r1_structure: [
+        'Monotheism (single all-powerful cosmic creator god who demands total moral obedience)'
+      ],
+      r2_demeanor: [
+        'Loving & Benevolent (the gods protect the weak, demand moral righteousness, and reward virtue with eternal paradise)'
+      ],
+      r3_rituals: [
+        'Pilgrimages to sacred mountain peaks, oracle grottos, or ancestral burial sanctuaries'
+      ],
+      r4_afterlife: [
+        'Paradise vs. Torment Judgment (souls are judged based on earthly morality: righteous enter eternal paradise, wicked suffer torment)'
+      ],
+      r5_gov_relation: [
+        'State Theocracy (priesthood controls the government, or the king is the supreme pontiff)'
+      ],
+      a1_writing: [
+        'Ge\'ez / Meroitic Abugida Script (etched into royal obelisk stelae and tomb papyri)'
+      ],
+      a2_medium: [
+        'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets'
+      ],
+      a3_monuments: [
+        'Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)'
+      ],
+      a4_hydraulic: [
+        'Gravity-fed stone aqueducts, cisterns, and water conduits'
+      ],
+      a5_science: [
+        'Celestial navigation (sailing out of sight of land at night using the North Star)'
+      ]
+    }
+  },
+  xiongnu_steppe: {
+    name: 'The Steppe Confederacy of the Great Khans (Xiongnu & Scythians)',
+    era: 'early_iron',
+    scale: 'nomadic_confederacy',
+    inspiration: 'Xiongnu Empire & Eurasian Steppe Nomads',
+    answers: {
+      g2_terrain: [
+        'Vast, flat, open grasslands and semi-arid steppes (ideal for grazing herds and cavalry, hard to defend without walls)'
+      ],
+      g1_freshwater: [
+        'Seasonal monsoon rains and rainwater harvesting reservoirs (like the Indus/Khmer)'
+      ],
+      g3_barriers: [
+        'Impassable, freezing mountain ranges blocking the border',
+        'Vast, waterless deserts that starve invading armies before they arrive'
+      ],
+      g4_resources: [
+        'Dense cedar, oak, or mahogany forests (for shipbuilding and palace roofs)',
+        'Copper and tin deposits (for smelting bronze weapons and armor)'
+      ],
+      e1_crops: [
+        'Sorghum, Millet, and Teff (drought-resistant grains suited to dry heat or high elevations)'
+      ],
+      e2_animals: [
+        'Horses and Camels (speed, cavalry shock warfare, long-range desert trade)',
+        'Sheep, Goats, and Cattle (meat, wool, milk, and leather for clothing)'
+      ],
+      e3_currency: [
+        'Pure Barter & Credit Tallies (trading goods directly or keeping tabs on clay tablets)',
+        'Cattle & Livestock Wealth Standard (fines, taxes, royal tribute, and marriage alliances paid in live heads of cattle)'
+      ],
+      e4_taxation: [
+        'Tribute from Conquered Provinces (citizens pay zero taxes because conquered neighbors fund the empire)'
+      ],
+      e5_trade: [
+        'Overland Silk/Incense Caravan Routes (long-distance relay trade across deserts and mountains)'
+      ],
+      p1_gov_system: [
+        'Nomadic Steppe Imperial Confederacy (council of horse clan chieftains electing a supreme warlord/Khagan with mobile seasonal tent courts)'
+      ],
+      p2_succession: [
+        'Tanistry / Kurultai Clan Election (council of warrior clan leaders meets to elect the fiercest, most capable adult heir)'
+      ],
+      p3_law_crime: [
+        'Customary Tribal Oath Councils & Blood Wergild (compensating victim families in cattle, horses, or blood vengeance)'
+      ],
+      p4_military: [
+        'Horse Archer Light Cavalry (highly mobile skirmishers employing the feigned retreat and Parthian shot)'
+      ],
+      p5_foreign_policy: [
+        'Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings\' sons in the imperial palace)'
+      ],
+      p7_neighbor_relations: [
+        'Asymmetric \'Steppe vs. Sown\' Extortion & Heqin Treaties (using mobile cavalry raids to force rich agricultural neighbors to pay annual silk, grain, and royal marriage bribes, like the Xiongnu)'
+      ],
+      s1_apex: [
+        'Landowning Warrior Aristocracy / Patricians (noble families who control the cavalry and estates)'
+      ],
+      s2_middle: [
+        'Master Craftsmen & Metallurgists (stonemasons, bronze-smiths, jewelers)'
+      ],
+      s3_mobility: [
+        'Military Valor / Warrior Meritocracy (any common soldier or slave who captures enemy generals is promoted to officer)'
+      ],
+      s4_gender: [
+        'Egalitarian Partnership (women hunt, ride into battle, own property, and can lead clans, like Scythian/Mongol nomads)'
+      ],
+      s5_unfree_labor: [
+        'Temporary Debt Bondage (citizens who can\'t pay taxes work as servants for 3 to 7 years, then must legally be freed)'
+      ],
+      r1_structure: [
+        'Animism & Shamanism (the world is alive with spirits in trees, rivers, and animals; shamans travel between spirit realms)'
+      ],
+      r2_demeanor: [
+        'Cosmic Order / Ma\'at (gods represent absolute truth, balance, and justice; mortals must preserve cosmic harmony)'
+      ],
+      r3_rituals: [
+        'Animal sacrifices (bulls, goats, sheep) burned on outdoor altars'
+      ],
+      r4_afterlife: [
+        'Ancestral Reincarnation (souls are reborn into their own clan or family line after death)'
+      ],
+      r5_gov_relation: [
+        'Royal Shamanism (the ruler is an initiate who interprets celestial omens directly)'
+      ],
+      a1_writing: [
+        'Undeciphered glyph seals stamped into steatite and terracotta (like the Indus Valley script)'
+      ],
+      a2_medium: [
+        'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets'
+      ],
+      a3_monuments: [
+        'Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)'
+      ],
+      a4_hydraulic: [
+        'Deep underground qanats / puquios (horizontal subterranean tunnels tapping mountain aquifers across deserts)'
+      ],
+      a5_science: [
+        'Celestial navigation (sailing out of sight of land at night using the North Star)'
+      ]
+    }
+  },
+  polynesia: {
+    name: 'The Wayfinder Archipelago (Polynesian Ocean Navigators)',
+    era: 'early_medieval',
+    scale: 'thalassocracy_network',
+    inspiration: 'Polynesian Voyaging Societies (Tonga, Samoa, Hawaii, Rapa Nui)',
+    answers: {
+      g2_terrain: [
+        'Volcanic oceanic high islands and coral ring atolls surrounded by vast open ocean (like Polynesia / Tonga / Hawaii)'
+      ],
+      g1_freshwater: [
+        'Basalt island freshwater lenses, volcanic crater springs, and coconut/breadfruit water storage (like Pacific atolls and high islands)'
+      ],
+      g3_barriers: [
+        'Treacherous rocky coastlines, reefs, and stormy seas'
+      ],
+      g4_resources: [
+        'Dense cedar, oak, or mahogany forests (for shipbuilding and palace roofs)',
+        'Volcanic basalt, andesite, and obsidian stones (for razor-sharp adzes and ceremonial carvings)'
+      ],
+      e1_crops: [
+        'Taro, Yams, Breadfruit, and Coconut Palms (vegetatively propagated tropical root crops and tree staples)'
+      ],
+      e2_animals: [
+        'Pigs, Dogs, and Junglefowl / Chickens (hardy omnivores transported on voyaging canoes)'
+      ],
+      e3_currency: [
+        'Commodity Money (cacao beans, cowrie shells, salt blocks, or bolts of silk used as cash)',
+        'Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)'
+      ],
+      e4_taxation: [
+        'Labor Corvée / Mit\'a System (citizens pay zero money; every household must work 60 days on royal monuments, canals, or roads)'
+      ],
+      e5_trade: [
+        'Maritime Trade Empire (merchant fleets sailing across seas to establish trading colonies)'
+      ],
+      p1_gov_system: [
+        'Aristocratic Oligarchy / Republic (ruled by a Senate or Council of wealthy landowning families)'
+      ],
+      p2_succession: [
+        'Hereditary Primogeniture (eldest child automatically inherits the crown to prevent civil war)'
+      ],
+      p3_law_crime: [
+        'Sacred Taboo / Kapu Prohibitions (violating divine prohibitions on chiefs, sacred reefs, or royal groves incurs instant execution)'
+      ],
+      p4_military: [
+        'Outrigger War Canoes & Amphibious Shock Warriors (fast double-hulled vessels carrying warriors armed with shark-tooth clubs and hardwood spears)'
+      ],
+      p5_foreign_policy: [
+        'Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)'
+      ],
+      p7_neighbor_relations: [
+        'Splendid Geographic Isolation & Non-Intervention (relying on impassable oceans, deserts, or mountain walls to ignore foreign wars completely, trading only at a single regulated border port)'
+      ],
+      s1_apex: [
+        'Sacred Ariki High Chief / Paramount Matriline (possessing intense mana and sacred genealogies traced back to cosmic creator gods)'
+      ],
+      s2_middle: [
+        'Master Wayfinders / Tātai Navigators & Canoe Builders (possessing secret wave-swell lore and celestial star compasses)'
+      ],
+      s3_mobility: [
+        'Strict Caste System (citizens are born into a rigid tier with zero upward movement)'
+      ],
+      s4_gender: [
+        'Complementary Gender Roles (women hold significant power as priestesses, merchants, or estate managers, but men lead the military)'
+      ],
+      s5_unfree_labor: [
+        'Paid Free Laborers Only (monuments are built by proud, well-fed peasant crews paid in meat, beer, grain, and tax exemptions)'
+      ],
+      r1_structure: [
+        'Animism & Shamanism (the world is alive with spirits in trees, rivers, and animals; shamans travel between spirit realms)'
+      ],
+      r2_demeanor: [
+        'Cosmic Order / Ma\'at (gods represent absolute truth, balance, and justice; mortals must preserve cosmic harmony)'
+      ],
+      r3_rituals: [
+        'Sacred Masked Dances and Trance Dramas (initiates embody spirits through elaborate costumes and rhythmic drumming)'
+      ],
+      r4_afterlife: [
+        'Ancestral Reincarnation (souls are reborn into their own clan or family line after death)'
+      ],
+      r5_gov_relation: [
+        'Divine Kingship / Living God (ruler is the absolute biological embodiment of divinity)'
+      ],
+      a1_writing: [
+        'Marshallese Stick Charts, Wampum Memory Belts, and Oral Songlines (navigational wave-swell grids and spoken lineage memory without written scripts)'
+      ],
+      a2_medium: [
+        'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets'
+      ],
+      a3_monuments: [
+        'Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean'
+      ],
+      a4_hydraulic: [
+        'Basin irrigation, dikes, and shadufs (counterweight buckets to lift river water)'
+      ],
+      a5_science: [
+        'Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation'
+      ]
+    }
+  },
+  qin_han: {
+    name: 'The Middle Kingdom (Qin & Han Legalist-Confucian Superstate)',
+    era: 'imperial_era',
+    scale: 'continental_empire',
+    inspiration: 'Imperial China (Qin, Han, Tang Dynasties)',
+    answers: {
+      g2_terrain: [
+        'Flat, featureless alluvial floodplains with rich river mud (fertile soil, but zero natural defenses)',
+        'Vast river delta marshlands and bayous intersected by tidal estuaries'
+      ],
+      g1_freshwater: [
+        'Braided loess river basin prone to massive silt accumulation and devastating course shifts (like the Yellow River / Huang He)'
+      ],
+      g3_barriers: [
+        'Impassable, freezing mountain ranges blocking the border',
+        'Vast, waterless deserts that starve invading armies before they arrive'
+      ],
+      g4_resources: [
+        'High-grade iron ore (for superior armor and agricultural plows)',
+        'Rich alluvial clay and mud (for bricks, pottery, and writing tablets)',
+        'Dense cedar, oak, or mahogany forests (for shipbuilding and palace roofs)'
+      ],
+      e1_crops: [
+        'Wet-Field Paddy Rice (requires massive canal irrigation, terraced fields, and communal labor; feeds dense populations)',
+        'Wheat and Barley (for bread, porridge, and brewing beer — standard in fertile crescents)'
+      ],
+      e2_animals: [
+        'Horses and Camels (speed, cavalry shock warfare, long-range desert trade)',
+        'Cattle and Oxen (heavy pulling, meat, dairy, leather, and status wealth)'
+      ],
+      e3_currency: [
+        'Cast Bronze Tool Money (currency cast in the shape of miniature spade blades, knives, or rings)',
+        'Standardized Stamped Coins (electrum, gold, silver, or bronze coins guaranteed by the state)'
+      ],
+      e4_taxation: [
+        'State Monopolies (the government owns all salt, iron, and mines; citizens must buy from the state)'
+      ],
+      e5_trade: [
+        'Overland Silk/Incense Caravan Routes (long-distance relay trade across deserts and mountains)'
+      ],
+      p1_gov_system: [
+        'Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)'
+      ],
+      p2_succession: [
+        'Mandate of Heaven / Dynastic Cycle (ruling family stays in power until floods/famines prove the gods revoked their right to rule, justifying rebellion)',
+        'Meritocratic Civil Service Exams (officials are chosen by passing brutal written tests on law and philosophy)'
+      ],
+      p3_law_crime: [
+        'Harsh Legalism & Collective Punishment (Draconian/Shang Yang laws — mutilation, forced labor, entire families executed for one person\'s crime)'
+      ],
+      p4_military: [
+        'Disciplined Crossbow Phalanxes & Volley Formations (massed rank-and-file archers firing mechanical bronze-triggered crossbows)',
+        'Permanent Professional Standing Army (full-time paid soldiers who train year-round)'
+      ],
+      p5_foreign_policy: [
+        'Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)'
+      ],
+      p6_intelligence_bureaucracy: [
+        'Imperial Courier Relay Highways & Secret Inspectors (\'King\'s Eyes and Ears\' — horse relay stations every 15 miles with royal spies auditing satraps)',
+        'Household Registration & Mutual Surveillance Groups (Baojia / Shang Yang system — families grouped into units of 5 or 10 sharing collective guilt for crimes)'
+      ],
+      p7_neighbor_relations: [
+        'Hegemonic Core & Tributary Buffer States (turning weaker bordering kingdoms into puppet shield-states that absorb barbarian attacks and pay annual tribute, like Rome or Han China)'
+      ],
+      s1_apex: [
+        'Divine King / Living God on Earth (ruler claims descent from the sun or sky; disobedience is a religious sin)'
+      ],
+      s2_middle: [
+        'Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)'
+      ],
+      s3_mobility: [
+        'Merit-Based Imperial Exams (poor peasant boys can study for decades to pass state exams and become royal governors)'
+      ],
+      s4_gender: [
+        'Strict Patriarchal Seclusion (women are legally minors owned by fathers/husbands, kept indoors, cannot own land)'
+      ],
+      s5_unfree_labor: [
+        'Penal Convict Labor Crews (criminals and political dissidents sentenced to brutal hard labor in state iron mines and remote frontier wall construction)'
+      ],
+      r1_structure: [
+        'Animism & Shamanism (the world is alive with spirits in trees, rivers, and animals; shamans travel between spirit realms)'
+      ],
+      r2_demeanor: [
+        'Cosmic Order / Ma\'at (gods represent absolute truth, balance, and justice; mortals must preserve cosmic harmony)'
+      ],
+      r3_rituals: [
+        'Oracle divination (reading cracks in burned turtle shells/ox bones, or inspecting animal livers to foresee divine will)'
+      ],
+      r4_afterlife: [
+        'Ancestral Veneration (dead ancestors become protective spirits who guide the family, requiring regular food/drink offerings)'
+      ],
+      r5_gov_relation: [
+        'Mandate of Heaven (the gods choose virtuous rulers; corrupt tyrants provoke divine rebellions)'
+      ],
+      a1_writing: [
+        'Logographic Characters / Hanzi (each word is a distinct, complex symbol — takes 10+ years to master)'
+      ],
+      a2_medium: [
+        'Carved directly into limestone walls, obelisks, and wax-covered wooden tablets',
+        'Inscribed on animal bones, bamboo strips, and silk scrolls'
+      ],
+      a3_monuments: [
+        'Thousands of miles of frontier defensive walls and watchtowers (like the Great Wall)'
+      ],
+      a4_hydraulic: [
+        'Inverted siphons, pressurized lead/ceramic pipelines, and high-altitude siphoning aqueducts'
+      ],
+      a5_science: [
+        'Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)',
+        'Magnetic compass lodestone orientation and early earthquake seismoscopes',
+        'Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)'
+      ]
+    }
   }
 };

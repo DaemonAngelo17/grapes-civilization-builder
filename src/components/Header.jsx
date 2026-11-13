@@ -47,7 +47,8 @@ export default function Header({
   orderMode,
   setOrderMode
 }) {
-  const percentComplete = Math.round((totalAnswered / totalQuestions) * 100);
+  const dynamicDenominator = complexityMode === 'basic' ? 12 : complexityMode === 'complex' ? 37 : 31;
+  const percentComplete = Math.min(100, Math.round((totalAnswered / dynamicDenominator) * 100));
 
   const selectedEraObj = HISTORICAL_ERAS.find((e) => e.id === currentEra) || HISTORICAL_ERAS[0];
   const selectedScaleObj = CIVILIZATION_SCALES.find((s) => s.id === currentScale) || CIVILIZATION_SCALES[1];
@@ -77,28 +78,39 @@ export default function Header({
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold font-cinzel text-[#241a15] tracking-wide">
-                  G.R.A.P.E.S. CIVILIZATION BUILDER
+                  G.R.A.P.E.S. CIVILIZATION BUILDER &amp; DEFENSE SIMULATOR
                 </h1>
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-sans-ui bg-[#e8dcce] text-[#6d5137] border border-[#cfbfae] uppercase tracking-wider">
                   {complexityMode === 'basic' ? '🌱 Basic (Grades 4–6)' : complexityMode === 'complex' ? '🎓 Complex (Grades 9–12 / AP)' : '🏛️ Normal (Grades 7–8)'}
                 </span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-cinzel bg-[#efe0ca] text-[#8c531b] border border-[#d6c4a8]">
+                  v6.0 ADVANCED GAMIFIED LAB
+                </span>
               </div>
               <p className="text-xs md:text-sm text-[#665243] font-archaic italic">
-                Build an ancient empire step-by-step from the ground up & defend it in your oral defense!
+                Build an ancient empire, test historical constraints, simulate crisis events & defend it in your oral defense!
               </p>
             </div>
           </div>
         </div>
 
         {/* Global Progress & Dossier Button */}
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="hidden sm:flex flex-col text-right font-sans-ui">
-            <span className="text-xs font-semibold text-[#483a30]">
-              Civilization Readiness
-            </span>
-            <span className="text-xs text-[#8c531b] font-bold">
-              {totalAnswered} / {totalQuestions} answered ({percentComplete}%)
-            </span>
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col text-right font-sans-ui min-w-[170px]">
+            <div className="flex justify-between items-center text-xs mb-1">
+              <span className="font-semibold text-[#483a30]">
+                Readiness:
+              </span>
+              <span className="text-xs text-[#8c531b] font-bold">
+                {totalAnswered} / {dynamicDenominator} ({percentComplete}%)
+              </span>
+            </div>
+            <div className="w-full h-2 rounded-full bg-[#dfd2bd] overflow-hidden border border-[#cbbaa0]">
+              <div
+                className="h-full bg-gradient-to-r from-[#935923] via-[#b8762f] to-[#c59b27] transition-all duration-300"
+                style={{ width: `${percentComplete}%` }}
+              />
+            </div>
           </div>
 
           <button
@@ -137,11 +149,11 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#2e7d32] to-[#388e3c] text-white shadow-sm ring-1 ring-[#1b5e20]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 4–6: 13 Core Questions, foundational options, guided auto-synergies"
+            title="Grades 4–6: 12 Core Questions, foundational options, guided auto-synergies"
           >
             <span>🌱</span>
             <span>Basic (Grades 4–6)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">13 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">12 Qs</span>
           </button>
 
           <button
@@ -152,11 +164,11 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#935923] to-[#7f4a18] text-white shadow-sm ring-1 ring-[#5a3310]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 7–8: 32 Standard Questions, Standard Logic Guard"
+            title="Grades 7–8: 31 Standard Questions, Standard Logic Guard & Two-Tiered Synergies"
           >
             <span>🏛️</span>
             <span>Normal (Grades 7–8)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">32 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">31 Qs</span>
           </button>
 
           <button
@@ -167,19 +179,19 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#4a2e7a] to-[#5e3a9b] text-white shadow-sm ring-1 ring-[#321c56]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 9–12 / AP: 38 Exhaustive Questions, Fiscal, Demographic & Ecological Locks"
+            title="Grades 9–12 / AP: 37 Exhaustive Questions, Fiscal, Demographic & Carrying-Capacity Locks"
           >
             <span>🎓</span>
             <span>Complex (Grades 9–12 / AP)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">38 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">37 Qs</span>
           </button>
         </div>
 
         {/* Live Tagline */}
         <div className="text-[11px] text-[#6d5543] font-medium italic text-center lg:text-right shrink-0">
-          {complexityMode === 'basic' && '🌱 13 Core Questions | Guided Auto-Synergies | Foundational Locks'}
-          {complexityMode === 'normal' && '🏛️ 32 Standard Questions | Standard Logic Guard'}
-          {complexityMode === 'complex' && '🎓 38 Exhaustive Questions | Hardcore Fiscal, Demographic & Ecological Locks'}
+          {complexityMode === 'basic' && '🌱 12 Core Inquiries | 72 Foundational Options | Simplified Auto-Pilot Synergies'}
+          {complexityMode === 'normal' && '🏛️ 31 Standard Inquiries | 300 Options | Standard Logic Guard & Two-Tiered Synergies'}
+          {complexityMode === 'complex' && '🎓 37 Exhaustive Inquiries | 390 Options | Macroeconomic & Carrying-Capacity Locks'}
         </div>
       </div>
 
@@ -288,11 +300,15 @@ export default function Header({
               }}
               className="w-full text-xs font-sans-ui px-2.5 py-2 rounded-lg bg-[#f2e7d5] border border-[#cfbfa7] text-[#3d2f24] hover:bg-[#ebdfcc] transition-colors cursor-pointer"
             >
-              <option value="">🏛️ Load Preset...</option>
-              <option value="egypt">Ancient Egypt (Nile Kemet)</option>
-              <option value="mesopotamia">Mesopotamia (Sumer & Babylon)</option>
-              <option value="maya">Classic Maya (Cenotes & Jade)</option>
-              <option value="greece_rome">Classical Polis League (Greece/Rome)</option>
+              <option value="">🏛️ Load Benchmark Preset...</option>
+              <option value="egypt">🇪🇬 Ancient Egypt (Nile Kemet)</option>
+              <option value="mesopotamia">🏺 Mesopotamia (Sumer & Babylon)</option>
+              <option value="maya">🌿 Classic Maya (Lowland Pyramids & Cenotes)</option>
+              <option value="greece_rome">🏛️ Classical Greece & Rome (Polis & Imperium)</option>
+              <option value="aksum_kush">🦁 Kingdoms of Kush & Aksum (Nile Gold & Red Sea)</option>
+              <option value="xiongnu_steppe">🏹 Steppe Nomadic Confederacy (Xiongnu Khaganate)</option>
+              <option value="polynesia">🌊 Polynesian Wayfinders (Oceanic Thalassocracy)</option>
+              <option value="qin_han">🐉 Imperial China (Qin & Han Dynasty)</option>
             </select>
           </div>
 

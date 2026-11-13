@@ -280,6 +280,7 @@ export default function App() {
             setIsMobileOpen={setIsMobileSidebarOpen}
             orderMode={orderMode}
             currentQuestions={currentQuestions}
+            complexityMode={complexityMode}
           />
 
           {/* Main Question Feed */}

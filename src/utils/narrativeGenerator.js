@@ -9,7 +9,8 @@ export function generateNarrativeEssay(
   answers, 
   customNotes = {},
   currentEra = 'early_bronze',
-  currentScale = 'regional_kingdom'
+  currentScale = 'regional_kingdom',
+  complexityMode = 'normal'
 ) {
   const name = civilizationName?.trim() || 'The Sovereign Realm';
   const inspText = inspiration ? `drawing deep institutional parallels with ${inspiration}` : 'forged as a unique synthesis of ancient civilizations';
@@ -101,6 +102,69 @@ The wealth of ${name} was rooted fundamentally in the soil, sustained by the int
   const socParagraph = `VI. SOCIAL STRATIFICATION, MOBILITY & CIVIC LIFE:
 The social pyramid of ${name} was crowned by ${apex.toLowerCase()}, whose absolute prestige and symbolic supremacy commanded universal deference across the civic body. Beneath this ruling echelon flourished an indispensable middle strata comprised of ${middle.toLowerCase()}, who maintained the literacy, mercantile capital, and technical crafts upon which civilization depended. The permeability of class boundaries was dictated by ${mobility.toLowerCase()}, establishing whether humble subjects could aspire to imperial promotion or remained bound to ancestral vocations. The domestic and public standing of women was defined by ${gender.toLowerCase()}, setting the precise legal parameters for property ownership, marriage covenants, and religious priesthoods. At the base of the societal pyramid labored ${unfree.toLowerCase()}, whose compulsory toil beneath mines, fields, or monumental quarries underwrote the leisure, cultural triumphs, and imperial dominance of the governing elite.`;
 
+  if (complexityMode === 'basic') {
+    const basicP1 = `I. OUR HOMELAND & WAYS OF LIFE:
+Flourishing in the ${eraObj.name}, our civilization known as ${name} settled around ${water} surrounded by ${terrain}. To feed our people, our farmers grew bountiful harvests of ${crops}, while our herders cared for ${animals}. For defense against invaders, our borders were shielded by ${barriers}. We bartered and traded with foreign travelers using ${currency}, bringing luxury goods home across ${trade}.`;
+
+    const basicP2 = `II. SACRED GODS & GREAT WONDERS:
+The people of ${name} believed deeply in ${divineStructure}, offering prayers and gifts through ${rituals}. When great kings and citizens passed away, they traveled toward ${afterlife}. To honor our deities and showcase our greatness, our builders constructed magnificent ${monuments}. Our scholars and scribes wrote laws, stories, and records using ${writing} inscribed on ${medium}, and created clever inventions like ${breakthroughs}.`;
+
+    const basicP3 = `III. RULERS, WARRIORS & COMMUNITY:
+Our realm was guided by ${govSystem}, with wise leadership passed down through ${succession}. When danger threatened our frontiers, ${military} marched out with courage to defend our lands. At the top of our society stood ${apex}, supported by hardworking ${middle}. Laws and customs ensured order across our homeland, giving ${name} a proud legacy that would be remembered for thousands of years.`;
+
+    return [basicP1, basicP2, basicP3];
+  }
+
   return [geoParagraph, relParagraph, achParagraph, polParagraph, ecoParagraph, socParagraph];
+}
+
+/**
+ * Calculates the 4-Vector Imperial Stability & Collapse Scorecard for Complex Mode
+ */
+export function calculateStabilityScorecard(answers = {}, currentEra = 'early_bronze', currentScale = 'regional_kingdom') {
+  const has = (qid, kw) => {
+    const val = answers[qid];
+    if (Array.isArray(val)) return val.some(item => item.toLowerCase().includes(kw.toLowerCase()));
+    if (typeof val === 'string') return val.toLowerCase().includes(kw.toLowerCase());
+    return false;
+  };
+
+  let agrarian = 50;
+  if (has('a4_hydraulic', 'irrigation') || has('a4_hydraulic', 'terrace') || has('a4_hydraulic', 'stepwells') || has('a4_hydraulic', 'qanats')) agrarian += 25;
+  if (has('e1_crops', 'wheat') || has('e1_crops', 'rice') || has('e1_crops', 'maize') || has('e1_crops', 'sorghum')) agrarian += 15;
+  if (has('g6_disasters', 'drought') || has('g6_disasters', 'locust')) agrarian -= 20;
+  if (has('g5_shortages', 'farmland') || has('g5_shortages', 'timber')) agrarian -= 15;
+  agrarian = Math.min(100, Math.max(15, agrarian));
+
+  let fiscal = 45;
+  if (has('e3_currency', 'stamped coins') || has('e3_currency', 'weighed metal') || has('e3_currency', 'banknotes')) fiscal += 30;
+  if (has('e4_taxation', 'monopolies') || has('e4_taxation', 'customs') || has('e4_taxation', 'land tax')) fiscal += 20;
+  if (has('e3_currency', 'pure barter') && currentScale === 'continental_empire') fiscal -= 35;
+  if (has('p4_military', 'standing army') && has('e3_currency', 'pure barter')) fiscal -= 25;
+  fiscal = Math.min(100, Math.max(10, fiscal));
+
+  let cohesion = 50;
+  if (has('p3_law_crime', 'codified') || has('p3_law_crime', 'jury') || has('p3_law_crime', 'restorative')) cohesion += 25;
+  if (has('r5_gov_relation', 'mandate') || has('r5_gov_relation', 'civic') || has('r6_orthodoxy_heresy', 'pluralistic')) cohesion += 20;
+  if (has('s5_unfree_labor', 'chattel slavery') || has('s5_unfree_labor', 'helots')) cohesion -= 20;
+  if (has('p3_law_crime', 'draconian') && has('s3_mobility', 'caste')) cohesion -= 15;
+  cohesion = Math.min(100, Math.max(15, cohesion));
+
+  let ecological = 55;
+  if (has('a4_hydraulic', 'check-dams') || has('e6_property_land', 'communal') || has('e6_property_land', 'infield')) ecological += 25;
+  if (has('g6_disasters', 'salinization') || has('a6_ecology_collapse', 'salinization') || has('a6_ecology_collapse', 'monoculture')) ecological -= 25;
+  if (has('g6_disasters', 'deforestation') || has('a6_ecology_collapse', 'deforestation')) ecological -= 20;
+  if (has('g6_disasters', 'volcanic') || has('g6_disasters', 'earthquake')) ecological -= 10;
+  ecological = Math.min(100, Math.max(10, ecological));
+
+  const overall = Math.round((agrarian + fiscal + cohesion + ecological) / 4);
+
+  return {
+    agrarianCapacity: { score: agrarian, label: agrarian > 70 ? 'Resilient Food Surplus' : agrarian > 45 ? 'Adequate Subsistence' : 'Vulnerable to Crop Failure' },
+    fiscalLegibility: { score: fiscal, label: fiscal > 70 ? 'Liquid State Treasury' : fiscal > 45 ? 'Solvent Regional Accounts' : 'Fiscal Deficit & Liquidity Trap' },
+    socialCohesion: { score: cohesion, label: cohesion > 70 ? 'High Institutional Trust' : cohesion > 45 ? 'Moderate Factional Friction' : 'Severe Rebellion Risk' },
+    ecologicalSustainability: { score: ecological, label: ecological > 70 ? 'Harmonious Soil Equilibrium' : ecological > 45 ? 'Stressed Carrying Capacity' : 'Imminent Ecological Depletion' },
+    overallStabilityIndex: overall
+  };
 }
 

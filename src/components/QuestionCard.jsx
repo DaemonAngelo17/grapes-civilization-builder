@@ -235,21 +235,35 @@ export default function QuestionCard({
                     </span>
                     {isRecommended && (
                       <div className="flex items-center gap-1.5 shrink-0 my-0.5">
-                        <span
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-900 border border-amber-300 shadow-xs animate-pulse font-sans-ui"
-                          title={`Historical synergy linked to: ${recommendation.title || recommendation.sourceOption}`}
-                        >
-                          <Sparkles size={11} className="text-amber-600" />
-                          ✨ Historical Synergy
-                        </span>
+                        {recommendation.type === 'mandatory' ? (
+                          <span
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-900 border border-rose-300 shadow-xs animate-pulse font-sans-ui"
+                            title={`Mandatory historical prerequisite linked to: ${recommendation.title || recommendation.sourceOption}`}
+                          >
+                            <Lock size={11} className="text-rose-700" />
+                            🔒 Mandatory Synergy
+                          </span>
+                        ) : (
+                          <span
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-900 border border-amber-300 shadow-xs animate-pulse font-sans-ui"
+                            title={`Recommended historical synergy linked to: ${recommendation.title || recommendation.sourceOption}`}
+                          >
+                            <Sparkles size={11} className="text-amber-600" />
+                            💡 Recommended Synergy
+                          </span>
+                        )}
                         <button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleOptionClick(option);
                           }}
-                          className="text-[10px] px-2 py-0.5 rounded bg-[#935923] hover:bg-[#7a481b] text-white font-medium shadow-xs transition-colors cursor-pointer"
-                          title="Click to add this recommended synergy"
+                          className={`text-[10px] px-2 py-0.5 rounded text-white font-medium shadow-xs transition-colors cursor-pointer ${
+                            recommendation.type === 'mandatory'
+                              ? 'bg-rose-700 hover:bg-rose-800'
+                              : 'bg-[#935923] hover:bg-[#7a481b]'
+                          }`}
+                          title="Click to add this historical synergy"
                         >
                           + Add
                         </button>
