@@ -371,6 +371,66 @@ export const LOGICAL_SYNERGIES = {
   "Mamluk / Janissary Elite Slave-Soldiers (foreign youths acquired as unfree dependents and trained as an elite, privileged military caste)": [
     { targetQ: "p4_military", option: "Permanent Professional Standing Army (full-time paid soldiers who train year-round)", type: "mandatory" },
     { targetQ: "a6_ecology_collapse", option: "Praetorian / Warlord Provincial Fragmentation (empowering frontier generals and satraps with private armies leads to endless civil war and imperial breakup)", type: "recommended" }
+  ],
+  // 33. Royal & Temple Domain Monopoly
+  "Royal & Temple Domain Monopoly (all land belongs to the God-King or Temple, leased out to dependent serfs in exchange for labor and grain)": [
+    { targetQ: "e3_currency", option: "State Grain Redistribution (no money; all farmers give crops to the temple/palace, which hands out daily rations of bread and beer)", type: "mandatory" },
+    { targetQ: "s1_apex", option: "The God-King and Royal Dynasty (untouchable divine bloodline)", type: "recommended" }
+  ],
+  // 34. Private Freehold Smallholder Yeomanry
+  "Private Freehold Smallholder Yeomanry (independent citizen-farmers own private family plots alienable by written contract and mortgage)": [
+    { targetQ: "s2_middle", option: "Free Smallholder Farmers (seen as the virtuous backbone of society and the military, while merchants are looked down on as greedy parasites)", type: "mandatory" },
+    { targetQ: "p3_law_system", option: "Codified Civil Jurisprudence with written contracts, professional advocates, and legal precedents (Roman civil law tradition)", type: "recommended" }
+  ],
+  // 35. Debt-Bondage Sharecropping Estates
+  "Debt-Bondage Sharecropping Estates (landless tenant farmers surrender 50–80% of their harvest to wealthy urban creditors)": [
+    { targetQ: "s5_unfree_labor", option: "Temporary Debt Bondage (citizens who can't pay taxes work as servants for 3 to 7 years, then must legally be freed)", type: "mandatory" },
+    { targetQ: "p3_law_system", option: "Social-Class Tiered Punishments (a noble who injures a peasant pays a small silver fine; a peasant who injures a noble is executed)", type: "recommended" }
+  ],
+  // 36. Sacred Ecological Commons
+  "Sacred Ecological Commons (reef lagoons, taro terraces, and forest groves managed by hereditary chiefs under seasonal ritual harvesting taboos)": [
+    { targetQ: "p3_law_system", option: "Sacred Kapu / Tapu Ecological & Social Taboo Code (strict spiritual laws regulating fishing seasons, resource conservation, and chief conduct)", type: "mandatory" },
+    { targetQ: "a6_ecology_collapse", option: "Sustainable Regenerative Agro-Ecology (combining nitrogen-fixing chinampas/three-sisters or seasonal flood silt with strict forest conservation to endure for millennia)", type: "recommended" }
+  ],
+  // 37. Diplomatic Gift-Exchange & Cuneiform Archive Brotherhood
+  "Diplomatic Gift-Exchange & Cuneiform Archive Brotherhood (Amarna-style royal correspondence in diplomatic lingua franca accompanied by gold and chariot gifts)": [
+    { targetQ: "a1_writing", option: "Cuneiform (wedge-shaped marks pressed into wet clay with a reed stylus)", type: "mandatory" },
+    { targetQ: "p5_foreign_policy", option: "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)", type: "recommended" }
+  ],
+  // 38. Maritime Merchant Consul & Harbor Espionage Network
+  "Maritime Merchant Consul & Harbor Espionage Network (commercial guild agents in foreign ports reporting naval movements and grain market shifts)": [
+    { targetQ: "e5_trade", option: "Maritime Trade Empire (merchant fleets sailing across seas to establish trading colonies)", type: "mandatory" },
+    { targetQ: "s1_apex", option: "Plutocratic Merchant Oligarchy (hereditary merchant dynasties controlling shipping guilds and private banks)", type: "recommended" }
+  ],
+  // 39. Imperial Pantheon Syncretism
+  "Imperial Pantheon Syncretism (conquered peoples' gods are absorbed and equated with imperial deities, like the Roman Interpretatio Graeca)": [
+    { targetQ: "p5_foreign_policy", option: "Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)", type: "recommended" },
+    { targetQ: "r1_structure", option: "Anthropomorphic Polytheism (dozens of gods with human personalities, jealousy, and family drama)", type: "mandatory" }
+  ],
+  // 40. Mandatory Imperial Ruler Cult Loyalty Sacrifices
+  "Mandatory Imperial Ruler Cult Loyalty Sacrifices (burning incense to the divine Emperor's genius to test political loyalty, persecuting refusers)": [
+    { targetQ: "r5_gov_relation", option: "Imperial Pontificate (the secular Emperor acts as supreme high priest to subordinate the priesthood to imperial policy)", type: "mandatory" },
+    { targetQ: "p1_gov_system", option: "Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)", type: "recommended" }
+  ],
+  // 41. Caesaro-Papism & State Ecumenical Councils
+  "Caesaro-Papism & State Ecumenical Councils (the Emperor convenes and presides over religious councils to enforce uniform theological creeds across the empire)": [
+    { targetQ: "r6_orthodoxy_heresy", option: "Strict Iconoclastic / Monotheistic Exclusivism (foreign idols and rival temples are smashed; only the single true covenant or state doctrine is tolerated)", type: "recommended" },
+    { targetQ: "p1_gov_system", option: "Centralized Absolute Monarchy (one King/Emperor holds total power over a unified empire)", type: "mandatory" }
+  ],
+  // 42. Dual-Crown Diarchy of Sacred King and Secular War Chief
+  "Dual-Crown Diarchy of Sacred King and Secular War Chief (a ritual taboo monarch manages spiritual harmony while a secular commander runs warfare and taxes)": [
+    { targetQ: "p1_gov_system", option: "Diarchy (two co-equal hereditary kings balancing civil domestic duties and active wartime command)", type: "mandatory" },
+    { targetQ: "s1_apex", option: "Dual Monarchs (co-ruling royal lineages balancing judicial administration and martial command)", type: "mandatory" }
+  ],
+  // 43. Porphyrogeniture ('Born in the Purple')
+  "Porphyrogeniture ('Born in the Purple' — succession restricted to children born after the reigning monarch ascended the sacred throne)": [
+    { targetQ: "g4_resources", option: "Marine murex sea snail beds (for extracting prized royal Tyrian purple dye)", type: "recommended" },
+    { targetQ: "s1_apex", option: "The God-King and Royal Dynasty (untouchable divine bloodline)", type: "mandatory" }
+  ],
+  // 44. Incendiary Naphtha / Greek Fire Siphons
+  "Incendiary Naphtha / Greek Fire Siphons and Fortified Riverine Monitor Fleets": [
+    { targetQ: "g4_resources", option: "Natural bitumen and surface asphalt seeps (for caulking boats, water-sealing bricks, and embalming)", type: "mandatory" },
+    { targetQ: "a5_science", option: "Distillation of essential oils, chemical mordants, and medicinal antiseptic extracts", type: "mandatory" }
   ]
 };
 
@@ -783,6 +843,134 @@ export const COMPOUND_SYNERGIES = [
       {
         targetQ: "g7_settlement",
         option: "Oasis Ksar & Canyon Cliff-Cavern Settlements (defensible mud-brick fortresses or rock-cut canyon dwellings clustered around desert springs, like Petra or Mesa Verde)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "late_bronze_diplomatic_complex",
+    title: "Late Bronze Age Amarna Diplomatic Chariot Club",
+    condition: (answers, currentEra) => {
+      if (currentEra !== 'late_bronze') return false;
+      const p4 = answers.p4_military || [];
+      const p4List = Array.isArray(p4) ? p4 : [p4];
+      const hasChariot = p4List.some(m => m.toLowerCase().includes('elite chariot corps'));
+
+      const a1 = answers.a1_writing || [];
+      const a1List = Array.isArray(a1) ? a1 : [a1];
+      const hasCuneiform = a1List.some(w => w.toLowerCase().includes('cuneiform'));
+
+      return hasChariot && hasCuneiform;
+    },
+    targets: [
+      {
+        targetQ: "p6_intelligence_bureaucracy",
+        option: "Diplomatic Gift-Exchange & Cuneiform Archive Brotherhood (Amarna-style royal correspondence in diplomatic lingua franca accompanied by gold and chariot gifts)",
+        type: "recommended"
+      },
+      {
+        targetQ: "p5_foreign_policy",
+        option: "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "phoenician_cothon_complex",
+    title: "Phoenician / Carthaginian Cothon Mercenary Thalassocracy",
+    condition: (answers) => {
+      const a3 = answers.a3_monuments || [];
+      const a3List = Array.isArray(a3) ? a3 : [a3];
+      const hasCothon = a3List.some(m => m.toLowerCase().includes('cothons'));
+
+      const a1 = answers.a1_writing || [];
+      const a1List = Array.isArray(a1) ? a1 : [a1];
+      const hasAlphabet = a1List.some(w => w.toLowerCase().includes('phonetic alphabet'));
+
+      const g4 = answers.g4_resources || [];
+      const g4List = Array.isArray(g4) ? g4 : [g4];
+      const hasMurex = g4List.some(r => r.toLowerCase().includes('marine murex sea snail beds'));
+
+      return hasCothon && hasAlphabet && hasMurex;
+    },
+    targets: [
+      {
+        targetQ: "p1_gov_system",
+        option: "Maritime Thalassocracy (naval confederation where autonomous coastal port cities contribute galleys and maritime tribute)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "s1_apex",
+        option: "Plutocratic Merchant Oligarchy (hereditary merchant dynasties controlling shipping guilds and private banks)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "p6_intelligence_bureaucracy",
+        option: "Maritime Merchant Consul & Harbor Espionage Network (commercial guild agents in foreign ports reporting naval movements and grain market shifts)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "late_imperial_fortress_complex",
+    title: "Late Imperial Cataphract & Greek Fire Fortress State",
+    condition: (answers, currentEra) => {
+      if (currentEra !== 'imperial_era') return false;
+      const p4 = answers.p4_military || [];
+      const p4List = Array.isArray(p4) ? p4 : [p4];
+      const hasCataphract = p4List.some(m => m.toLowerCase().includes('cataphract super-heavy shock cavalry'));
+
+      const r5 = answers.r5_gov_relation || [];
+      const r5List = Array.isArray(r5) ? r5 : [r5];
+      const hasCaesaroPapism = r5List.some(r => r.toLowerCase().includes('caesaro-papism'));
+
+      return hasCataphract && hasCaesaroPapism;
+    },
+    targets: [
+      {
+        targetQ: "p2_succession",
+        option: "Porphyrogeniture ('Born in the Purple' — succession restricted to children born after the reigning monarch ascended the sacred throne)",
+        type: "recommended"
+      },
+      {
+        targetQ: "e6_property_land",
+        option: "Military Cleruchy / Timar Land Grants (conquered arable land parcelled out to veteran soldiers and heavy cavalrymen in exchange for hereditary military service)",
+        type: "recommended"
+      },
+      {
+        targetQ: "a6_ecology_collapse",
+        option: "Imperial Fiscal-Military Overstretch & Debasement (maintaining massive frontier walls and mercenary armies forces coin silver debasement and hyperinflation)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "persian_satrapy_qanat_complex",
+    title: "Achaemenid Persian Royal Road & Qanat Satrapy",
+    condition: (answers) => {
+      const a4 = answers.a4_hydraulic || [];
+      const a4List = Array.isArray(a4) ? a4 : [a4];
+      const hasQanats = a4List.some(h => h.toLowerCase().includes('qanats'));
+
+      const p5 = answers.p5_foreign_policy || [];
+      const p5List = Array.isArray(p5) ? p5 : [p5];
+      const hasSatrapy = p5List.some(f => f.toLowerCase().includes('satrapy provincial administration'));
+
+      const r1 = answers.r1_structure || [];
+      const r1List = Array.isArray(r1) ? r1 : [r1];
+      const hasDualism = r1List.some(r => r.toLowerCase().includes('cosmic dualism'));
+
+      return hasQanats && hasSatrapy && hasDualism;
+    },
+    targets: [
+      {
+        targetQ: "p6_intelligence_bureaucracy",
+        option: "Imperial Courier Relay Highways & Secret Inspectors ('King's Eyes and Ears' — horse relay stations every 15 miles with royal spies auditing satraps)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "r6_orthodoxy_heresy",
+        option: "Pluralistic Edicts of Toleration (Cyrus Cylinder / Ashoka's Rock Edicts — state funds diverse local temples and protects minority sects to ensure loyalty)",
         type: "recommended"
       }
     ]

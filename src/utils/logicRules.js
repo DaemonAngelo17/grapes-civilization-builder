@@ -1682,6 +1682,659 @@ export function checkOptionDisallowed(
   }
 
   // =========================================================================
+  // 0H. GEOLOGICAL, RESOURCE & SHORTAGE CASCADE LOCKOUTS (v4.2)
+  // =========================================================================
+
+  // 1. Marine Murex Sea Snails (g4 #12) vs. Landlocked Biomes
+  if (optLower.includes('marine murex sea snail beds')) {
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const hasCoastal = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('rocky peninsula with jagged coastlines') ||
+               tl.includes('vast river delta marshlands') ||
+               tl.includes('coastal fog oasis') ||
+               tl.includes('volcanic oceanic high islands') ||
+               tl.includes('sub-arctic boreal taiga');
+      });
+      if (!hasCoastal) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Marine Biology Lock: Murex sea snails live in shallow ocean waters—landlocked mountains, steppes, and interior deserts cannot harvest sea snails for Tyrian purple dye!"
+        };
+      }
+    }
+  }
+  if (hasText('g4_resources', 'marine murex sea snail beds')) {
+    if (
+      optLower.includes('high-altitude flat plateau (steppe)') ||
+      optLower.includes('endorheic inland basin with terminal salt lakes')
+    ) {
+      const terrains = selectedList('g2_terrain');
+      const hasCoastal = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('rocky peninsula with jagged coastlines') ||
+               tl.includes('vast river delta marshlands') ||
+               tl.includes('coastal fog oasis') ||
+               tl.includes('volcanic oceanic high islands') ||
+               tl.includes('sub-arctic boreal taiga');
+      });
+      if (!hasCoastal && terrains.length === 0) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Marine Biology Lock: Murex sea snails live in shallow ocean waters—landlocked mountains, steppes, and interior deserts cannot harvest sea snails for Tyrian purple dye!"
+        };
+      }
+    }
+  }
+
+  // 2. Volcanic Obsidian (g4 #8) & Basalt/Andesite (g4 #13) vs. Non-Volcanic Featureless Mud
+  const isVolcanicStoneOption = optLower.includes('obsidian (volcanic glass') || optLower.includes('basalt, andesite, and diorite volcanic stones');
+  if (isVolcanicStoneOption) {
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const isOnlyMud = terrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('flat, featureless alluvial floodplains') || tl.includes('vast river delta marshlands');
+      });
+      if (isOnlyMud) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Geological Lock: Obsidian (volcanic glass) and basalt require volcanic calderas, mountain ranges, highland basalt plateaus, or volcanic islands—they do not form in flat alluvial mud deltas!"
+        };
+      }
+    }
+  }
+  if (hasText('g4_resources', 'obsidian (volcanic glass') || hasText('g4_resources', 'basalt, andesite, and diorite volcanic stones')) {
+    if (optLower.includes('flat, featureless alluvial floodplains')) {
+      const terrains = selectedList('g2_terrain');
+      const hasVolcanicOrMountain = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('steep, jagged mountain ranges') ||
+               tl.includes('fertile volcanic caldera valleys') ||
+               tl.includes('elevated temperate highland savanna') ||
+               tl.includes('volcanic oceanic high islands');
+      });
+      if (!hasVolcanicOrMountain && terrains.length === 0) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Geological Lock: Obsidian (volcanic glass) and basalt require volcanic calderas, mountain ranges, highland basalt plateaus, or volcanic islands—they do not form in flat alluvial mud deltas!"
+        };
+      }
+    }
+  }
+
+  // 3. Baltic Amber, Bog Iron & Sub-Arctic Fur Pelts (g4) vs. Hot/Tropical Biomes
+  if (optLower.includes('baltic amber, bog iron deposits, and dense sub-arctic fur pelts')) {
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const hasCold = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('sub-arctic boreal taiga') ||
+               tl.includes('high-altitude flat plateau (steppe)') ||
+               tl.includes('steep, jagged mountain ranges');
+      });
+      if (!hasCold) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Biome Resource Lock: Dense sub-arctic winter furs and bog iron form in cold northern taiga and highland marshes, not in tropical jungles or hot deserts!"
+        };
+      }
+    }
+  }
+  if (hasText('g4_resources', 'baltic amber, bog iron deposits, and dense sub-arctic fur pelts')) {
+    if (
+      optLower.includes('dense, humid tropical rainforest') ||
+      optLower.includes('arid desert expanses surrounded by narrow fertile river')
+    ) {
+      const terrains = selectedList('g2_terrain');
+      const hasCold = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('sub-arctic boreal taiga') ||
+               tl.includes('high-altitude flat plateau (steppe)') ||
+               tl.includes('steep, jagged mountain ranges');
+      });
+      if (!hasCold) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Biome Resource Lock: Dense sub-arctic winter furs and bog iron form in cold northern taiga and highland marshes, not in tropical jungles or hot deserts!"
+        };
+      }
+    }
+  }
+
+  // 4. Wild Silk & Mulberry Groves (g4 #11) vs. Freezing / Hyper-Arid Biomes & Fiber Shortages
+  if (optLower.includes('wild silk cocoons and fine white mulberry groves')) {
+    if (hasText('g5_shortages', 'lack of textile plant fibers or sheep wool')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Botanical Lock: Silkworms feed exclusively on white mulberry trees, which require warm temperate or subtropical river valleys—and conflict with a critical textile fiber shortage!"
+      };
+    }
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const isOnlyColdOrDesert = terrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('sub-arctic boreal taiga') ||
+               tl.includes('arid desert expanses') ||
+               tl.includes('high-altitude flat plateau (steppe)');
+      });
+      if (isOnlyColdOrDesert) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Botanical Lock: Silkworms feed exclusively on white mulberry trees, which require warm temperate or subtropical river valleys—and conflict with a critical textile fiber shortage!"
+        };
+      }
+    }
+  }
+  if (hasText('g4_resources', 'wild silk cocoons and fine white mulberry groves')) {
+    if (optLower.includes('lack of textile plant fibers or sheep wool')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Botanical Lock: Silkworms feed exclusively on white mulberry trees, which require warm temperate or subtropical river valleys—and conflict with a critical textile fiber shortage!"
+      };
+    }
+  }
+
+  // 5. Textile Fiber Shortage (g5 #8) Downstream Locks
+  if (hasText('g5_shortages', 'lack of textile plant fibers or sheep wool')) {
+    if (
+      optLower.includes('wild silk cocoons and fine white mulberry groves') ||
+      optLower.includes('cotton and flax / linseed') ||
+      optLower.includes('sheep and goats (for wool') ||
+      optLower.includes('llamas and alpacas (light pack animals and source of warm mountain wool') ||
+      optLower.includes('bolts of woven silk and standardized spun yarn skeins') ||
+      optLower.includes('master weavers, silk cultivators, and textile guild masters')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Resource Shortage Cascade: If your land critically lacks textile plant fibers and wool, you cannot domestically grow cotton/flax, raise wool sheep/alpacas, or use domestic silk bolts as state currency!"
+      };
+    }
+  }
+  if (optLower.includes('lack of textile plant fibers or sheep wool')) {
+    if (
+      hasText('g4_resources', 'wild silk cocoons and fine white mulberry groves') ||
+      hasText('e1_crops', 'cotton and flax / linseed') ||
+      hasText('e2_animals', 'sheep and goats (for wool') ||
+      hasText('e2_animals', 'llamas and alpacas (light pack animals and source of warm mountain wool') ||
+      hasText('e3_currency', 'bolts of woven silk and standardized spun yarn skeins') ||
+      hasText('s2_middle', 'master weavers, silk cultivators, and textile guild masters')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Resource Shortage Cascade: If your land critically lacks textile plant fibers and wool, you cannot domestically grow cotton/flax, raise wool sheep/alpacas, or use domestic silk bolts as state currency!"
+      };
+    }
+  }
+
+  // 6. Clay Shortage (g5 #9) Downstream Locks
+  if (hasText('g5_shortages', 'lack of domestic clay deposits for pottery')) {
+    if (
+      optLower.includes('baked or sun-dried clay tablets') ||
+      optLower.includes('polished ostraca (recycled smooth pottery shards') ||
+      optLower.includes('steatite inscribed merchant seals and clay envelope bullae') ||
+      optLower.includes('vast subterranean necropolises guarded by terracotta armies') ||
+      optLower.includes('planned grid-layout cities with standardized baked-brick houses') ||
+      optLower.includes('vast hypostyle reception halls with soaring stone column forests and glazed ceramic brick friezes')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Clay Shortage Cascade: Without domestic clay deposits, your society cannot bake clay writing tablets, recycle broken pottery shards (ostraca), mold terracotta armies, or build baked-brick grid cities!"
+      };
+    }
+  }
+  if (optLower.includes('lack of domestic clay deposits for pottery')) {
+    if (
+      hasText('a2_medium', 'baked or sun-dried clay tablets') ||
+      hasText('a2_medium', 'polished ostraca (recycled smooth pottery shards') ||
+      hasText('e3_currency', 'steatite inscribed merchant seals and clay envelope bullae') ||
+      hasText('r4_afterlife', 'vast subterranean necropolises guarded by terracotta armies') ||
+      hasText('a3_monuments', 'planned grid-layout cities with standardized baked-brick houses') ||
+      hasText('a3_monuments', 'glazed ceramic brick friezes')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Clay Shortage Cascade: Without domestic clay deposits, your society cannot bake clay writing tablets, recycle broken pottery shards (ostraca), mold terracotta armies, or build baked-brick grid cities!"
+      };
+    }
+  }
+
+  // 7. Lack of Arable Farmland (g5 #3) Downstream Locks
+  if (hasText('g5_shortages', 'lack of arable farmland (too mountainous or rocky to grow enough grain)')) {
+    if (
+      optLower.includes('wheat and barley (for bread, porridge, and brewing beer') ||
+      optLower.includes('wet-paddy rice and millet (high-calorie crops supporting massive populations)') ||
+      optLower.includes('state grain redistribution (no money; all farmers give crops to the temple/palace') ||
+      optLower.includes('agricultural tithe (tax collectors measure field sizes after floods') ||
+      optLower.includes('state famine relief granaries (ever-normal granaries')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Agrarian Shortage Lock: If your terrain is too rocky or mountainous to grow enough grain, you cannot run a grain-redistribution command economy or rely on massive wheat/rice flood-tithes! Instead, specialize in olives/grapes, high-altitude tubers, pastoralism, or maritime trade."
+      };
+    }
+  }
+  if (optLower.includes('lack of arable farmland (too mountainous or rocky to grow enough grain)')) {
+    if (
+      hasText('e1_crops', 'wheat and barley') ||
+      hasText('e1_crops', 'wet-paddy rice and millet') ||
+      hasText('e3_currency', 'state grain redistribution') ||
+      hasText('e4_taxation', 'agricultural tithe') ||
+      hasText('s6_demographics_health', 'state famine relief granaries')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Agrarian Shortage Lock: If your terrain is too rocky or mountainous to grow enough grain, you cannot run a grain-redistribution command economy or rely on massive wheat/rice flood-tithes! Instead, specialize in olives/grapes, high-altitude tubers, pastoralism, or maritime trade."
+      };
+    }
+  }
+
+  // 8. Lack of Fuel Firewood & Charcoal (g5 #7) Expanded Locks
+  if (hasText('g5_shortages', 'lack of fuel firewood and charcoal')) {
+    if (
+      optLower.includes('dense cedar, oak, or mahogany forests') ||
+      optLower.includes('planned grid-layout cities with standardized baked-brick houses') ||
+      optLower.includes('widespread deforestation & hillside soil erosion (clear-cutting forests for lime plaster kilns')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Fuel Shortage Lock: Firing millions of kiln-baked bricks and lime-plaster furnaces requires immense quantities of firewood and charcoal!"
+      };
+    }
+  }
+  if (optLower.includes('lack of fuel firewood and charcoal')) {
+    if (
+      hasText('g4_resources', 'dense cedar, oak, or mahogany forests') ||
+      hasText('a3_monuments', 'planned grid-layout cities with standardized baked-brick houses') ||
+      hasText('a6_ecology_collapse', 'widespread deforestation & hillside soil erosion (clear-cutting forests for lime plaster kilns')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Fuel Shortage Lock: Firing millions of kiln-baked bricks and lime-plaster furnaces requires immense quantities of firewood and charcoal!"
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0I. WRITING SCRIPT & MEDIUM ECOLOGICAL / BIOLOGICAL LOCKS (v4.2)
+  // =========================================================================
+
+  // 1. Parchment / Vellum (a2 #4) vs. Zero Livestock (e2 #5)
+  if (optLower.includes('parchment or vellum made from scraped, dried animal skins')) {
+    if (hasText('e2_animals', 'none — all goods are carried on the backs of human porters and canoes')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Biological Material Lock: Parchment and vellum are manufactured from the hides of domesticated sheep, goats, and calves—a society without domesticated herd animals cannot mass-produce animal-skin parchment!"
+      };
+    }
+  }
+  if (optLower.includes('none — all goods are carried on the backs of human porters and canoes')) {
+    if (hasText('a2_medium', 'parchment or vellum made from scraped, dried animal skins')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Biological Material Lock: Parchment and vellum are manufactured from the hides of domesticated sheep, goats, and calves—a society without domesticated herd animals cannot mass-produce animal-skin parchment!"
+      };
+    }
+  }
+
+  // 2. Palm-Leaf Manuscripts (a2 #7) & Bark-Paper Codices (a2 #6) vs. Treeless / Freezing Biomes
+  const isTreeBarkOrPalmOption = optLower.includes('accordion-folded bark paper (amatl)') || optLower.includes('dried and smoothed palm-leaf manuscripts');
+  if (isTreeBarkOrPalmOption) {
+    if (hasText('g5_shortages', 'lack of tall timber for shipbuilding and large roofs')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Botanical Medium Lock: Fig-bark paper (amatl) and palm-leaf manuscripts require tropical or warm oasis trees (like amate figs and talipot palms) and cannot be produced in freezing steppes or timber-starved lands!"
+      };
+    }
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const isOnlyColdTreeless = terrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('sub-arctic boreal taiga') ||
+               tl.includes('high-altitude flat plateau (steppe)') ||
+               tl.includes('steep, jagged mountain ranges');
+      });
+      if (isOnlyColdTreeless) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Botanical Medium Lock: Fig-bark paper (amatl) and palm-leaf manuscripts require tropical or warm oasis trees (like amate figs and talipot palms) and cannot be produced in freezing steppes or timber-starved lands!"
+        };
+      }
+    }
+  }
+  if (hasText('a2_medium', 'accordion-folded bark paper (amatl)') || hasText('a2_medium', 'dried and smoothed palm-leaf manuscripts')) {
+    if (optLower.includes('lack of tall timber for shipbuilding and large roofs')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Botanical Medium Lock: Fig-bark paper (amatl) and palm-leaf manuscripts require tropical or warm oasis trees (like amate figs and talipot palms) and cannot be produced in freezing steppes or timber-starved lands!"
+      };
+    }
+  }
+
+  // 3. Papyrus Scrolls (a2 #2) vs. Cold / Highland / Humid Rainforest Environments
+  if (optLower.includes('papyrus scrolls made from pressed river reeds')) {
+    const terrains = selectedList('g2_terrain');
+    if (terrains.length > 0) {
+      const isBadForPapyrus = terrains.every(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('dense, humid tropical rainforest') ||
+               tl.includes('sub-arctic boreal taiga') ||
+               tl.includes('high-altitude flat plateau (steppe)') ||
+               tl.includes('steep, jagged mountain ranges');
+      });
+      if (isBadForPapyrus) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Taphonomic Lock: Papyrus reeds only grow in warm river marshes (like the Nile) and rapidly rot into pulp in humid tropical rainforests!"
+        };
+      }
+    }
+  }
+  if (hasText('a2_medium', 'papyrus scrolls made from pressed river reeds')) {
+    if (optLower.includes('dense, humid tropical rainforest with thick canopy')) {
+      const terrains = selectedList('g2_terrain');
+      const hasValidPapyrusTerrain = terrains.some(t => {
+        const tl = t.toLowerCase();
+        return tl.includes('arid desert expanses') ||
+               tl.includes('flat, featureless alluvial floodplains') ||
+               tl.includes('vast river delta marshlands');
+      });
+      if (!hasValidPapyrusTerrain && terrains.length === 0) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Taphonomic Lock: Papyrus reeds only grow in warm river marshes (like the Nile) and rapidly rot into pulp in humid tropical rainforests!"
+        };
+      }
+    }
+  }
+
+  // 4. Cast Bronze Ritual Inscriptions (a2 #8) vs. Metal / Tin / Fuel Shortages
+  if (optLower.includes('cast bronze vessels with long ritual inscriptions')) {
+    if (
+      hasText('g5_shortages', 'lack of hard stone or metal ores') ||
+      hasText('g5_shortages', 'lack of tin or alloy fluxes') ||
+      hasText('g5_shortages', 'lack of fuel firewood and charcoal')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Metallurgical Medium Lock: Casting inscribed bronze cauldrons and bells requires copper, tin alloy fluxes, and charcoal blast furnaces!"
+      };
+    }
+  }
+  if (hasText('a2_medium', 'cast bronze vessels with long ritual inscriptions')) {
+    if (
+      optLower.includes('lack of hard stone or metal ores') ||
+      optLower.includes('lack of tin or alloy fluxes') ||
+      optLower.includes('lack of fuel firewood and charcoal')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Metallurgical Medium Lock: Casting inscribed bronze cauldrons and bells requires copper, tin alloy fluxes, and charcoal blast furnaces!"
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0J. POLITICAL, JURIDICAL, THEOLOGICAL & SURVEILLANCE LOCKOUTS (v4.2)
+  // =========================================================================
+
+  // 1. Pure Theocracy (r5 #1) vs. Secular / Democratic / Guild Governments (p1)
+  if (hasText('r5_gov_relation', 'pure theocracy (the high priest is the ruler; religious law and state law are identical)')) {
+    if (
+      optLower.includes('direct democracy (all free adult male citizens vote directly') ||
+      optLower.includes('aristocratic oligarchy / republic (ruled by a senate') ||
+      optLower.includes('military junta / stratocracy (ruled by warrior-kings') ||
+      optLower.includes('egalitarian civic council of merchant-artisan guilds') ||
+      optLower.includes('civic religion (priests are just regular government officials') ||
+      optLower.includes('power struggle (the king and the temple priests constantly compete')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Constitutional Lock: In a Pure Theocracy, the High Priest holds supreme divine authority—you cannot simultaneously be a secular citizen democracy, a merchant guild council, or have elected civic priests!"
+      };
+    }
+  }
+  if (optLower.includes('pure theocracy (the high priest is the ruler; religious law and state law are identical)')) {
+    if (
+      hasText('p1_gov_system', 'direct democracy (all free adult male citizens vote directly') ||
+      hasText('p1_gov_system', 'aristocratic oligarchy / republic (ruled by a senate') ||
+      hasText('p1_gov_system', 'military junta / stratocracy (ruled by warrior-kings') ||
+      hasText('p1_gov_system', 'egalitarian civic council of merchant-artisan guilds') ||
+      hasText('r5_gov_relation', 'civic religion (priests are just regular government officials') ||
+      hasText('r5_gov_relation', 'power struggle (the king and the temple priests constantly compete')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Constitutional Lock: In a Pure Theocracy, the High Priest holds supreme divine authority—you cannot simultaneously be a secular citizen democracy, a merchant guild council, or have elected civic priests!"
+      };
+    }
+  }
+
+  // 2. Distant / Indifferent Gods (r2 #4) or Impersonal Cosmic Monism vs. Interventionist Divination & Ordeals
+  const hasDistantOrKarmicGods = 
+    hasText('r2_demeanor', 'distant and indifferent (the gods created the world and now ignore human affairs)') ||
+    hasText('r2_demeanor', 'karmic & moral self-causation (the universe operates by automatic moral law');
+
+  if (hasDistantOrKarmicGods) {
+    if (
+      optLower.includes('oracular divination and clerical lot casting') ||
+      optLower.includes('trial by ordeal (accused is thrown into a sacred river') ||
+      optLower.includes('cruel, capricious, and angry (because floods/disasters') ||
+      optLower.includes('vulnerable and dependent on human energy (gods grow weak') ||
+      optLower.includes('bloodletting or human sacrifice (captives or volunteers offered')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Theological Contradiction: If the gods are distant and indifferent to human affairs (or the cosmos runs on automatic karmic law), they will not intervene in river trials by ordeal, answer oracle lot urns, or starve without human blood sacrifices!"
+      };
+    }
+  }
+  if (
+    optLower.includes('distant and indifferent (the gods created the world and now ignore human affairs)') ||
+    optLower.includes('karmic & moral self-causation (the universe operates by automatic moral law')
+  ) {
+    if (
+      hasText('p2_succession', 'oracular divination and clerical lot casting') ||
+      hasText('p3_law_system', 'trial by ordeal (accused is thrown into a sacred river') ||
+      hasText('r2_demeanor', 'cruel, capricious, and angry') ||
+      hasText('r2_demeanor', 'vulnerable and dependent on human energy') ||
+      hasText('r3_rituals', 'bloodletting or human sacrifice')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Theological Contradiction: If the gods are distant and indifferent to human affairs (or the cosmos runs on automatic karmic law), they will not intervene in river trials by ordeal, answer oracle lot urns, or starve without human blood sacrifices!"
+      };
+    }
+  }
+
+  // 3. Orthodoxy & Heresy (r6_orthodoxy_heresy) Internal Mutual Exclusivities
+  if (hasText('r6_orthodoxy_heresy', 'strict iconoclastic / monotheistic exclusivism')) {
+    if (
+      optLower.includes('imperial pantheon syncretism') ||
+      optLower.includes('pluralistic edicts of toleration') ||
+      optLower.includes('philosophical academy pluralism') ||
+      optLower.includes('mandatory imperial ruler cult loyalty sacrifices')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Lock: You cannot simultaneously smash all foreign temples under strict iconoclasm while absorbing foreign gods via syncretism or issuing pluralistic edicts of religious toleration!"
+      };
+    }
+  }
+  if (optLower.includes('strict iconoclastic / monotheistic exclusivism')) {
+    if (
+      hasText('r6_orthodoxy_heresy', 'imperial pantheon syncretism') ||
+      hasText('r6_orthodoxy_heresy', 'pluralistic edicts of toleration') ||
+      hasText('r6_orthodoxy_heresy', 'philosophical academy pluralism') ||
+      hasText('r6_orthodoxy_heresy', 'mandatory imperial ruler cult loyalty sacrifices')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Lock: You cannot simultaneously smash all foreign temples under strict iconoclasm while absorbing foreign gods via syncretism or issuing pluralistic edicts of religious toleration!"
+      };
+    }
+  }
+
+  if (hasText('r6_orthodoxy_heresy', 'pluralistic edicts of toleration')) {
+    if (
+      optLower.includes('strict iconoclastic / monotheistic exclusivism') ||
+      optLower.includes('book burning & suppression of rival schools') ||
+      optLower.includes('total enslavement & extraction (razing enemy cities') ||
+      optLower.includes('mass deportation & assimilation (relocating conquered populations')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Lock: You cannot simultaneously smash all foreign temples under strict iconoclasm while absorbing foreign gods via syncretism or issuing pluralistic edicts of religious toleration!"
+      };
+    }
+  }
+  if (optLower.includes('pluralistic edicts of toleration')) {
+    if (
+      hasText('r6_orthodoxy_heresy', 'strict iconoclastic / monotheistic exclusivism') ||
+      hasText('r6_orthodoxy_heresy', 'book burning & suppression of rival schools') ||
+      hasText('p5_foreign_policy', 'total enslavement & extraction') ||
+      hasText('p5_foreign_policy', 'mass deportation & assimilation')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Lock: You cannot simultaneously smash all foreign temples under strict iconoclasm while absorbing foreign gods via syncretism or issuing pluralistic edicts of religious toleration!"
+      };
+    }
+  }
+
+  // 4. Land Tenure (e6_property_land) vs. Social & Economic Structure
+  const isStateOrClanLandMonopoly = 
+    hasText('e6_property_land', 'royal & temple domain monopoly') ||
+    hasText('e6_property_land', 'communal kinship ayllu / calpulli landholding');
+
+  if (isStateOrClanLandMonopoly) {
+    if (
+      optLower.includes('latifundia / aristocratic slave estates') ||
+      optLower.includes('private freehold smallholder yeomanry') ||
+      optLower.includes('debt-bondage sharecropping estates') ||
+      optLower.includes('plutocratic merchant oligarchy')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Property Law Contradiction: If 100% of farmland is owned by the God-King/Temple or held in inalienable clan trust, private citizens cannot buy, sell, mortgage, or accumulate private slave plantations!"
+      };
+    }
+  }
+  if (optLower.includes('royal & temple domain monopoly') || optLower.includes('communal kinship ayllu / calpulli landholding')) {
+    if (
+      hasText('e6_property_land', 'latifundia / aristocratic slave estates') ||
+      hasText('e6_property_land', 'private freehold smallholder yeomanry') ||
+      hasText('e6_property_land', 'debt-bondage sharecropping estates') ||
+      hasText('s1_apex', 'plutocratic merchant oligarchy')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Property Law Contradiction: If 100% of farmland is owned by the God-King/Temple or held in inalienable clan trust, private citizens cannot buy, sell, mortgage, or accumulate private slave plantations!"
+      };
+    }
+  }
+
+  // 5. Intelligence & Surveillance (p6_intelligence_bureaucracy) Locks
+  if (optLower.includes("imperial courier relay highways & secret inspectors ('king's eyes and ears'")) {
+    if (currentScale === 'city_state') {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+      };
+    }
+    if (hasText('g5_shortages', 'lack of horses or pack animals for transport and cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+      };
+    }
+    if (hasText('e2_animals', 'none — all goods are carried on the backs of human porters and canoes')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+      };
+    }
+  }
+
+  if (optLower.includes('quipu statistical census & royal warehouse audits')) {
+    if (!hasText('a1_writing', 'quipu / knotted cords')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+      };
+    }
+  }
+
+  if (optLower.includes('diplomatic gift-exchange & cuneiform archive brotherhood')) {
+    if (hasText('p5_foreign_policy', 'isolationism')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+      };
+    }
+    const writing = selectedList('a1_writing');
+    if (writing.length > 0) {
+      const allNonWritten = writing.every(w => {
+        const wl = w.toLowerCase();
+        return wl.includes('quipu / knotted cords') || wl.includes('oral traditions & mnemonic songlines');
+      });
+      if (allNonWritten) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+        };
+      }
+    }
+  }
+
+  if (optLower.includes('citizen ostracism & public informer courts')) {
+    const gov = selectedList('p1_gov_system');
+    if (gov.length > 0) {
+      const hasDemocracyOrRepublic = gov.some(g => {
+        const gl = g.toLowerCase();
+        return gl.includes('direct democracy') || gl.includes('aristocratic oligarchy / republic');
+      });
+      if (!hasDemocracyOrRepublic) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Administrative Logistics Lock: Your intelligence and surveillance network must match your transport animals, writing system, territorial scale, and constitutional structure!"
+        };
+      }
+    }
+  }
+
+  // 6. Military Doctrine (p4_military) vs. Resource & Governance Locks
+  if (optLower.includes('heavy infantry phalanx (wall of overlapping bronze shields') || optLower.includes('disciplined crossbow phalanxes & volley formations')) {
+    if (hasText('g5_shortages', 'lack of hard stone or metal ores')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Military Supply Lock: Heavy bronze phalanxes, crossbows, war elephants, and companion cavalry cannot be fielded if your land lacks the metal ores, timber, horses, or elephants required to equip them!"
+      };
+    }
+  }
+  if (optLower.includes('armored war elephant corps')) {
+    const animals = selectedList('e2_animals');
+    if (animals.length > 0) {
+      const hasElephants = animals.some(a => a.toLowerCase().includes('asian war elephants & work elephants'));
+      if (!hasElephants) {
+        return {
+          isDisallowed: true,
+          reason: "🔒 Military Supply Lock: Heavy bronze phalanxes, crossbows, war elephants, and companion cavalry cannot be fielded if your land lacks the metal ores, timber, horses, or elephants required to equip them!"
+        };
+      }
+    }
+  }
+  if (optLower.includes('combined-arms macedonian pike & companion cavalry')) {
+    if (hasText('g5_shortages', 'lack of horses or pack animals for transport and cavalry') || hasText('g5_shortages', 'lack of tall timber for shipbuilding and large roofs')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Military Supply Lock: Heavy bronze phalanxes, crossbows, war elephants, and companion cavalry cannot be fielded if your land lacks the metal ores, timber, horses, or elephants required to equip them!"
+      };
+    }
+  }
+
+  // =========================================================================
   // 1. GEOGRAPHY (G1 - G6) DEEP CONTRADICTIONS
   // =========================================================================
 

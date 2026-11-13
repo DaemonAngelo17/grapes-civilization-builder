@@ -1,6 +1,6 @@
-# G.R.A.P.E.S. Civilization Builder: Master Relationship & Interdependency Document (v4.1)
+# G.R.A.P.E.S. Civilization Builder: Master Relationship & Interdependency Document (v4.2)
 
-**Document Version:** 4.1.0  
+**Document Version:** 4.2.0  
 **Target Architecture:** Multi-Variable Historical Logic Guard, Intelligent Synergy Engine & Grade-Level Complexity System  
 **Repository Location:** `grapes-civilization-builder`  
 **Live Production URL:** [https://grapes-civilization-builder.vercel.app](https://grapes-civilization-builder.vercel.app)
@@ -276,6 +276,60 @@ Innovations cannot be selected prior to their genuine historical emergence:
 
 ---
 
+### 3.8 Geological, Resource & Shortage Cascade Lockouts (v4.2)
+
+1. **Marine Murex Sea Snails vs. Landlocked Biomes:**
+   - Harvesting *Marine murex sea snails* (`g4_resources`) for Tyrian purple dye requires ocean waters and is locked if the civilization is landlocked.
+2. **Volcanic Obsidian & Basalt vs. Sediment Mud:**
+   - *Obsidian* and *Basalt/andesite* (`g4_resources`) require volcanic formations or mountains, and are prohibited in pure alluvial floodplains and marsh deltas.
+3. **Baltic Amber, Bog Iron & Sub-Arctic Furs vs. Hot/Tropical Biomes:**
+   - *Baltic amber, bog iron, and sub-arctic fur pelts* (`g4_resources`) form exclusively in cold northern taiga or highland steppes/mountains, not in tropical jungles or arid deserts.
+4. **Wild Silk & Mulberry Groves vs. Freezing/Arid Biomes & Fiber Shortages:**
+   - *Wild silk cocoons and white mulberry groves* (`g4_resources`) require temperate/subtropical river valleys and cannot exist in freezing taiga, hyper-arid deserts, or under a textile fiber shortage.
+5. **Textile Fiber Shortage Cascades:**
+   - *Lack of textile plant fibers or sheep wool* (`g5_shortages`) locks cotton/flax crops, wool sheep/alpacas, silk currency bolts, and master textile guilds.
+6. **Clay Shortage Cascades:**
+   - *Lack of domestic clay deposits* (`g5_shortages`) locks clay writing tablets, recycled ostraca, clay merchant envelope bullae, terracotta armies, baked-brick grid cities, and glazed ceramic brick friezes.
+7. **Arable Farmland Shortage Cascades:**
+   - *Lack of arable farmland* (`g5_shortages`) locks wheat/rice staples, state grain-redistribution currency, agricultural crop tithes, and state famine granaries.
+8. **Fuel Firewood & Charcoal Shortage Cascades:**
+   - *Lack of fuel firewood and charcoal* (`g5_shortages`) locks dense timber forests, kiln-baked brick cities, and kiln/smelter deforestation collapse vectors.
+
+---
+
+### 3.9 Writing Script & Medium Ecological / Biological Locks (v4.2)
+
+1. **Parchment / Vellum vs. Zero Domesticated Livestock:**
+   - *Parchment or vellum* (`a2_medium`) is made from sheep/calf/goat hides; societies without domesticated animals cannot produce animal parchment.
+2. **Palm-Leaf Manuscripts & Bark-Paper Codices vs. Treeless / Freezing Biomes:**
+   - *Bark paper (amatl)* and *palm-leaf manuscripts* (`a2_medium`) require tropical or oasis trees and cannot be produced in freezing steppes, taiga, or timber-starved biomes.
+3. **Papyrus Scrolls vs. Cold / Highland / Rainforest Biomes:**
+   - *Papyrus scrolls* (`a2_medium`) require warm marshlands (like the Nile) and rot rapidly in humid tropical rainforests or freezing climates.
+4. **Cast Bronze Ritual Inscriptions vs. Metal / Fuel Shortages:**
+   - Inscribed bronze ritual vessels require copper, tin fluxes, and charcoal blast furnaces; they are locked if metal, tin, or fuel is critically scarce.
+
+---
+
+### 3.10 Political, Juridical, Theological & Surveillance Lockouts (v4.2)
+
+1. **Pure Theocracy vs. Secular / Democratic / Guild Governance:**
+   - *Pure Theocracy* (`r5_gov_relation`) vests supreme authority in the High Priest and excludes direct democracy, merchant guild councils, or elected civic priests.
+2. **Distant / Indifferent Gods & Karmic Monism vs. Interventionist Rites:**
+   - If the gods are *distant and indifferent* or the cosmos operates on automatic *karmic self-causation* (`r2_demeanor`), the divine will not intervene in river trials by ordeal, answer oracle lot urns, or demand human blood sacrifices.
+3. **Iconoclastic Monotheism vs. Syncretism & Pluralism:**
+   - *Strict Iconoclastic Exclusivism* (`r6_orthodoxy_heresy`) prohibits imperial pantheon syncretism and edicts of religious toleration. Conversely, *Pluralistic Toleration* excludes book burning, total enslavement, and mass deportation.
+4. **State / Clan Land Monopoly vs. Private Real Estate:**
+   - If 100% of farmland is inalienable *Royal/Temple Domain* or *Communal Ayllu* trust (`e6_property_land`), private citizens cannot buy, mortgage, or accumulate private slave latifundia, and private merchant oligarchs cannot dominate society.
+5. **Intelligence & Surveillance Infrastructure Consistency:**
+   - *Imperial Courier Relay Highways* (`p6_intelligence_bureaucracy`) require territorial scale beyond a city-state and draft/pack horses.
+   - *Quipu Statistical Audits* require quipu knotted cords (`a1_writing`).
+   - *Diplomatic Cuneiform Archives* cannot function under isolationist foreign policies or non-written record systems.
+   - *Citizen Ostracism* requires democratic citizen assemblies or aristocratic republican councils.
+6. **Military Supply Realism:**
+   - Bronze phalanxes and crossbow formations require metal ores; war elephant corps require domesticated elephants; companion cavalry with 18-foot sarissas requires warhorses and tall timber.
+
+---
+
 ---
 
 ## 4. Single-Trigger Pair Synergy Network (`LOGICAL_SYNERGIES`)
@@ -370,10 +424,22 @@ The master synergy registry maps **74 pairwise historical dependencies**. When a
 | 82 | **Cinnabar & Porcelain Clay** (`g4`)| `s6_health` | Endemic Lead/Mercury Poisoning | `recommended` | Toxic mercury sulfide fumes and alchemical elixirs. |
 | 83 | **Chartered Merchant Karums** (`e5`)| `e3_currency` | Weighed Metal Bullion & Silver Rings | `mandatory` | Extraterritorial merchant colonies trade in silver weight. |
 | 84 | **Mamluk / Janissary Soldiers** (`s5`)| `p4_military` | Permanent Professional Standing Army | `mandatory` | Enslaved captive youths trained as standing corps. |
+| 85 | **Royal & Temple Domain Monopoly** (`e6`)| `e3_currency` | State Grain Redistribution | `mandatory` | Palace/temple leases paid in redistributive grain. |
+| 86 | **Private Freehold Yeomanry** (`e6`)| `s2_middle` | Free Smallholder Farmers | `mandatory` | Smallholder farmers form the yeoman citizen core. |
+| 87 | **Debt-Bondage Sharecropping** (`e6`)| `s5_unfree_labor` | Temporary Debt Bondage | `mandatory` | Tenant sharecroppers fall into debt peonage. |
+| 88 | **Sacred Ecological Commons** (`e6`)| `p3_law_system` | Sacred Kapu / Tapu Taboo Code | `mandatory` | Communal lagoons/forests regulated by chief taboos. |
+| 89 | **Amarna Cuneiform Brotherhood** (`p6`)| `a1_writing` | Cuneiform script on baked clay | `mandatory` | Diplomatic lingua franca letters on clay tablets. |
+| 90 | **Maritime Harbor Espionage** (`p6`)| `e5_trade` | Maritime Trade Empire | `mandatory` | Commercial harbor consuls track competitor navies. |
+| 91 | **Imperial Pantheon Syncretism** (`r6`)| `r1_structure` | Anthropomorphic Polytheism | `mandatory` | Foreign deities matched with imperial pantheon gods. |
+| 92 | **Imperial Ruler Cult Sacrifices** (`r6`)| `r5_gov_relation` | Imperial Pontificate | `mandatory` | Incense sacrifice to emperor requires imperial high priest. |
+| 93 | **Caesaro-Papism Ecumenical Councils** (`r5`)| `p1_gov_system` | Centralized Absolute Monarchy | `mandatory` | Enforcing uniform dogma requires autocratic monarchy. |
+| 94 | **Dual-Crown Diarchy** (`r5`)| `p1_gov_system` | Diarchy (two co-equal kings) | `mandatory` | Sacred taboo king paired with secular war king. |
+| 95 | **Porphyrogeniture ('Born in Purple')** (`p2`)| `s1_apex` | The God-King and Royal Dynasty | `mandatory` | Succession restricted to divine palace-born bloodline. |
+| 96 | **Incendiary Greek Fire Siphons** (`p4`)| `g4_resources` | Natural bitumen and surface asphalt | `mandatory` | Naval flame siphons require petroleum bitumen seeps. |
 
 ---
 
-## 5. The 13 Multi-Trigger Compound Cascades
+## 5. The 17 Multi-Trigger Compound Cascades
 
 Compound synergies trigger when **multiple foundational variables coincide**, modeling complex historical civilizational paradigms:
 
@@ -494,6 +560,36 @@ flowchart TD
   - Auto-recommends *Rock-cut cliffside temples and royal mausoleums* (`a3_monuments`).
   - Auto-recommends *Oasis Ksar & Canyon Cliff-Cavern Settlements* (`g7_settlement`).
 - **Historiography:** The Nabataean Kingdom at Petra transformed hyper-arid sandstone canyons into an opulent merchant oasis. By constructing terraced check-dams and hidden cisterns to capture winter flash floods, they monopolized the trans-desert frankincense caravan routes, financing monumentally carved rock-cut cliffside facades (*Al-Khazneh*) via customs transit tolls.
+
+### 14. Late Bronze Age Amarna Diplomatic Chariot Club (`late_bronze_diplomatic_complex`)
+- **Triggers:** Late Bronze Age (`currentEra === 'late_bronze'`) + Elite Chariot Corps (`p4_military`) + Cuneiform script (`a1_writing`).
+- **Cascaded Effects:**
+  - Auto-recommends *Diplomatic Gift-Exchange & Cuneiform Archive Brotherhood* (`p6_intelligence_bureaucracy`).
+  - Auto-recommends *Strategic Royal Marriage Alliances & Client Royal Hostages* (`p5_foreign_policy`).
+- **Historiography:** In the 14th century BCE Amarna Age, the Great Kings of Egypt, Babylon, Mitanni, and Hatti formed an interconnected diplomatic club addressing each other as "Brother," negotiating diplomatic marriages, exchanging gold and composite-bow chariots, and maintaining state archives in Akkadian cuneiform on clay tablets.
+
+### 15. Carthaginian / Phoenician Cothon Mercenary Thalassocracy (`phoenician_cothon_complex`)
+- **Triggers:** Artificial Enclosed Naval Harbors (Cothons) (`a3_monuments`) + Phonetic Alphabet (`a1_writing`) + Marine murex sea snail beds (`g4_resources`).
+- **Cascaded Effects:**
+  - **Mandates** *Maritime Thalassocracy* (`p1_gov_system`).
+  - **Mandates** *Plutocratic Merchant Oligarchy* (`s1_apex`).
+  - Auto-recommends *Maritime Merchant Consul & Harbor Espionage Network* (`p6_intelligence_bureaucracy`).
+- **Historiography:** Phoenician Tyre and Carthaginian merchant oligarchs leveraged secret Tyrian purple dye monopolies and phonetic alphabetic bookkeeping to finance naval thalassocracies, shielding hundreds of war galleys inside hidden circular naval drydock basins (cothons) and employing international harbor spies.
+
+### 16. Byzantine / Sasanian Cataphract & Greek Fire Fortress State (`late_imperial_fortress_complex`)
+- **Triggers:** Imperial Era (`currentEra === 'imperial_era'`) + Cataphract Super-Heavy Shock Cavalry (`p4_military`) + Caesaro-Papism Ecumenical Councils (`r5_gov_relation`).
+- **Cascaded Effects:**
+  - Auto-recommends *Porphyrogeniture ('Born in the Purple')* (`p2_succession`).
+  - Auto-recommends *Military Cleruchy / Timar Land Grants* (`e6_property_land`).
+  - Auto-recommends *Imperial Fiscal-Military Overstretch & Debasement* (`a6_ecology_collapse`).
+- **Historiography:** Late Roman/Byzantine and Sasanian imperial fortresses counteracted steppe migrations and caliphate armies by marrying iron-clad cataphract shock lancers with pressurized naphtha flamethrower monitors, funding frontier themes through hereditary military land grants while grappling with currency debasement and royal purple succession struggles.
+
+### 17. Achaemenid Persian Royal Road & Qanat Satrapy (`persian_satrapy_qanat_complex`)
+- **Triggers:** Qanats underground aquifers (`a4_hydraulic`) + Satrapy Provincial Administration (`p5_foreign_policy`) + Cosmic Dualism Zoroastrian religion (`r1_structure`).
+- **Cascaded Effects:**
+  - **Mandates** *Imperial Courier Relay Highways & Secret Inspectors ('King's Eyes and Ears')* (`p6_intelligence_bureaucracy`).
+  - Auto-recommends *Pluralistic Edicts of Toleration (Cyrus Cylinder)* (`r6_orthodoxy_heresy`).
+- **Historiography:** The Persian Achaemenid Empire paired subterranean desert qanat irrigation with royal courier relay stations (*chapar khaneh*) along the 1,600-mile Royal Road, allowing the King of Kings and his secret inspectors to govern 20 multilingual satrapies under a Zoroastrian doctrine of cosmic truth and pluralistic local religious toleration.
 
 ---
 
