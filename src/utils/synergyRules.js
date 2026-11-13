@@ -302,7 +302,8 @@ export function applyLogicalSynergies(
   allAnswers,
   logicGuardEnabled = true,
   currentEra = 'early_bronze',
-  currentScale = 'regional_kingdom'
+  currentScale = 'regional_kingdom',
+  complexityMode = 'normal'
 ) {
   let updatedAnswers = { ...allAnswers, [questionId]: selectedList };
   const autoSelectedMessages = [];
@@ -330,7 +331,8 @@ export function applyLogicalSynergies(
       updatedAnswers,
       logicGuardEnabled,
       currentEra,
-      currentScale
+      currentScale,
+      complexityMode
     );
 
     if (!isDisallowed) {
@@ -396,7 +398,8 @@ export function getSynergyRecommendations(
   allAnswers,
   logicGuardEnabled = true,
   currentEra = 'early_bronze',
-  currentScale = 'regional_kingdom'
+  currentScale = 'regional_kingdom',
+  complexityMode = 'normal'
 ) {
   const recommendations = new Map();
 
@@ -414,7 +417,8 @@ export function getSynergyRecommendations(
       allAnswers,
       logicGuardEnabled,
       currentEra,
-      currentScale
+      currentScale,
+      complexityMode
     );
     if (isDisallowed) return;
 

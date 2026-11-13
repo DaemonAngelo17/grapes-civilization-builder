@@ -24,6 +24,7 @@ export default function QuestionCard({
   logicGuardEnabled = true,
   currentEra = 'early_bronze',
   currentScale = 'regional_kingdom',
+  complexityMode = 'normal',
   onEnlargeImage,
   synergyRecommendations
 }) {
@@ -52,7 +53,8 @@ export default function QuestionCard({
       allAnswers, 
       logicGuardEnabled,
       currentEra,
-      currentScale
+      currentScale,
+      complexityMode
     );
     if (isDisallowed) {
       return; // Locked by historical logic
@@ -142,7 +144,8 @@ export default function QuestionCard({
             allAnswers,
             logicGuardEnabled,
             currentEra,
-            currentScale
+            currentScale,
+            complexityMode
           );
           const visual = getOptionVisual(option);
           const hasImage = visual && visual.url && !imageErrors[idx];

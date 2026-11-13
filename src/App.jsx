@@ -109,8 +109,8 @@ export default function App() {
   // Active synergy recommendations for UI badges & quick-add pills
   const synergyRecommendations = useMemo(() => {
     if (!autoSynergiesEnabled || !logicGuardEnabled) return new Map();
-    return getSynergyRecommendations(answers, logicGuardEnabled, currentEra, currentScale);
-  }, [answers, logicGuardEnabled, autoSynergiesEnabled, currentEra, currentScale]);
+    return getSynergyRecommendations(answers, logicGuardEnabled, currentEra, currentScale, complexityMode);
+  }, [answers, logicGuardEnabled, autoSynergiesEnabled, currentEra, currentScale, complexityMode]);
 
   // Handle question answer change with optional auto-select synergies
   const handleAnswerChange = (questionId, value) => {
@@ -123,7 +123,8 @@ export default function App() {
         answers,
         logicGuardEnabled,
         currentEra,
-        currentScale
+        currentScale,
+        complexityMode
       );
       setAnswers(newAnswers);
       if (autoSelected.length > 0) {
@@ -378,6 +379,7 @@ export default function App() {
                         logicGuardEnabled={logicGuardEnabled}
                         currentEra={currentEra}
                         currentScale={currentScale}
+                        complexityMode={complexityMode}
                         onEnlargeImage={(visual, opt) => setEnlargedImage({ visual, optionText: opt })}
                         synergyRecommendations={synergyRecommendations}
                       />

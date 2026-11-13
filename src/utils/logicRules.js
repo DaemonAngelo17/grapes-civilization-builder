@@ -8,7 +8,8 @@ export function checkOptionDisallowed(
   answers, 
   logicGuardEnabled = true,
   currentEra = 'early_bronze',
-  currentScale = 'regional_kingdom'
+  currentScale = 'regional_kingdom',
+  complexityMode = 'normal'
 ) {
   if (!logicGuardEnabled) {
     return { isDisallowed: false, reason: null };
@@ -36,10 +37,347 @@ export function checkOptionDisallowed(
   const optLower = optionText.toLowerCase();
 
   // =========================================================================
-  // 0. CHRONOLOGICAL ERA CONSTRAINTS (What did not exist in earlier eras)
+  // 0A. TIERED SELECTION CAPS (Basic vs Normal vs Complex Mode)
+  // =========================================================================
+  // In Basic mode (Grades 4-6): strict max of 2 selections per question across ALL questions
+  if (complexityMode === 'basic') {
+    const currentSelected = selectedList(questionId);
+    if (currentSelected.length >= 2 && !currentSelected.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: '🌱 Basic Mode Limit: In elementary mode, you may choose up to 2 core traits per question to focus on foundational historical choices!'
+      };
+    }
+  }
+
+  // In Normal and Complex modes:
+  // p1_gov_system: Max 2 selections (cannot simultaneously be democracy, autocracy, nomadic horde, etc.)
+  if (questionId === 'p1_gov_system') {
+    const currentSelected = selectedList('p1_gov_system');
+    if (currentSelected.length >= 2 && !currentSelected.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Sovereign Limit: A state can maintain at most 2 complementary systems of government (e.g. dual monarchy or military council). You cannot simultaneously be a democracy, absolute autocracy, and nomadic horde!'
+      };
+    }
+  }
+
+  // r1_structure: Max 2 selections
+  if (questionId === 'r1_structure') {
+    const currentSelected = selectedList('r1_structure');
+    if (currentSelected.length >= 2 && !currentSelected.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Theological Limit: A civilization can synthesize at most 2 divine theological frameworks (e.g. polytheism with ancestor veneration).'
+      };
+    }
+  }
+
+  // r5_gov_relation: Max 2 selections
+  if (questionId === 'r5_gov_relation') {
+    const currentSelected = selectedList('r5_gov_relation');
+    if (currentSelected.length >= 2 && !currentSelected.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Church-State Limit: You can select at most 2 doctrines for the relationship between religion and state power.'
+      };
+    }
+  }
+
+  // g7_settlement: Max 1 in city_state, Max 2 in regional_kingdom, Max 3 in continental_empire
+  if (questionId === 'g7_settlement') {
+    const currentSelected = selectedList('g7_settlement');
+    const maxSettlements = currentScale === 'city_state' ? 1 : currentScale === 'regional_kingdom' ? 2 : 3;
+    if (currentSelected.length >= maxSettlements && !currentSelected.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: `🔒 Settlement Scale Limit: A ${currentScale === 'city_state' ? 'City-State' : currentScale === 'regional_kingdom' ? 'Regional Kingdom' : 'Continental Empire'} supports up to ${maxSettlements} primary urban settlement morphologies.`
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0B. STRICT MACROECONOMIC & FISCAL-MILITARY LOCKOUTS (All Modes)
+  // =========================================================================
+
+  // 1. Continental Empire vs. Barter / Non-Standardized Economy
+  if (currentScale === 'continental_empire') {
+    if (optLower.includes('pure barter & credit tallies') || optLower.includes('wampum shell belts')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Macroeconomic Lock: A Grand Continental Empire of millions of people cannot fund provincial armies and bureaucracy using pure village barter—it requires standardized coinage, bullion, or state grain redistribution!"
+      };
+    }
+  }
+
+  // 2. Permanent Professional Standing Army vs. Pure Barter
+  if (hasText('p4_military', 'permanent professional standing army') || hasText('p4_military', 'cataphract super-heavy shock cavalry')) {
+    if (optLower.includes('pure barter & credit tallies')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Fiscal-Military Lock: Full-time professional soldiers and armored cataphracts require regular state pay in coins, bullion, or state grain rations—they cannot be maintained on pure barter!"
+      };
+    }
+  }
+  if (hasText('e3_currency', 'pure barter & credit tallies')) {
+    if (optLower.includes('permanent professional standing army') || optLower.includes('cataphract super-heavy shock cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Fiscal-Military Lock: Full-time professional soldiers and armored cataphracts require regular state pay in coins, bullion, or state grain rations—they cannot be maintained on pure barter!"
+      };
+    }
+  }
+
+  // 3. Egalitarian Palace-less Guild Council vs. Absolute / Theocratic Autocracy
+  const isEgalitarianCouncil = hasText('p1_gov_system', 'egalitarian civic council of merchant-artisan guilds');
+  if (isEgalitarianCouncil) {
+    if (
+      optLower.includes('centralized absolute monarchy') ||
+      optLower.includes('military junta / stratocracy') ||
+      optLower.includes('feudal bureaucracy') ||
+      optLower.includes('the god-king and royal dynasty') ||
+      optLower.includes('landowning warrior aristocracy') ||
+      optLower.includes('theocratic god-king worship') ||
+      optLower.includes('rock-cut cliffside temples and royal mausoleums') ||
+      optLower.includes('vast subterranean necropolises guarded by terracotta')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Institutional Contradiction: An egalitarian merchant-artisan council with no royal palaces (like Harappa/Mohenjo-Daro) directly contradicts absolute god-kings, royal dynasties, and gigantic imperial mausoleums!"
+      };
+    }
+  }
+  if (optLower.includes('egalitarian civic council of merchant-artisan guilds')) {
+    if (
+      hasText('p1_gov_system', 'centralized absolute monarchy') ||
+      hasText('p1_gov_system', 'military junta / stratocracy') ||
+      hasText('p1_gov_system', 'feudal bureaucracy') ||
+      hasText('s1_apex', 'the god-king and royal dynasty') ||
+      hasText('s1_apex', 'landowning warrior aristocracy') ||
+      hasText('r1_structure', 'theocratic god-king worship') ||
+      hasText('a3_monuments', 'rock-cut cliffside temples and royal mausoleums') ||
+      hasText('r4_afterlife', 'vast subterranean necropolises guarded by terracotta')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Institutional Contradiction: An egalitarian merchant-artisan council with no royal palaces (like Harappa/Mohenjo-Daro) directly contradicts absolute god-kings, royal dynasties, and gigantic imperial mausoleums!"
+      };
+    }
+  }
+
+  // 4. Nomadic Steppe Confederacy vs. Sedentary Mega-Infrastructure
+  const isNomadicSteppe = hasText('p1_gov_system', 'nomadic steppe imperial confederacy') || hasText('g7_settlement', 'mobile seasonal encampments / ordu');
+  if (isNomadicSteppe) {
+    if (
+      optLower.includes('gravity-fed stone aqueducts, subterranean sewers') ||
+      optLower.includes('planned grid-layout cities with standardized baked-brick') ||
+      optLower.includes('artificial enclosed naval harbors (cothons)') ||
+      optLower.includes('grand colonnaded temples with marble statues') ||
+      optLower.includes('chinampas ("floating gardens"') ||
+      optLower.includes('basin irrigation, dikes, and shadufs') ||
+      optLower.includes('hyper-dense walled megacity core') ||
+      optLower.includes('planned orthogonal grid-cities')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Nomadic Mobility Lock: Mobile horse-riding steppe confederacies live in portable felt yurts (gers) following seasonal pastures—they do not construct stationary stone aqueducts, indoor plumbing grid-cities, or naval drydocks!"
+      };
+    }
+  }
+  if (optLower.includes('nomadic steppe imperial confederacy') || optLower.includes('mobile seasonal encampments / ordu')) {
+    if (
+      hasText('a3_monuments', 'gravity-fed stone aqueducts, subterranean sewers') ||
+      hasText('a3_monuments', 'planned grid-layout cities with standardized baked-brick') ||
+      hasText('a3_monuments', 'artificial enclosed naval harbors (cothons)') ||
+      hasText('a3_monuments', 'grand colonnaded temples with marble statues') ||
+      hasText('a4_hydraulic', 'chinampas') ||
+      hasText('a4_hydraulic', 'basin irrigation, dikes, and shadufs') ||
+      hasText('g7_settlement', 'hyper-dense walled megacity core') ||
+      hasText('g7_settlement', 'planned orthogonal grid-cities')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Nomadic Mobility Lock: Mobile horse-riding steppe confederacies live in portable felt yurts (gers) following seasonal pastures—they do not construct stationary stone aqueducts, indoor plumbing grid-cities, or naval drydocks!"
+      };
+    }
+  }
+
+  // 5. Tsetse Fly Trypanosomiasis Belt vs. Horses & Cattle
+  const hasTsetseShortage = hasText('g5_shortages', 'tsetse fly trypanosomiasis belt');
+  if (hasTsetseShortage) {
+    if (
+      optLower.includes('horses and camels') ||
+      optLower.includes('oxen and water buffalo') ||
+      optLower.includes('vast herds of sanga & zebu cattle') ||
+      optLower.includes('donkeys and mules') ||
+      optLower.includes('elite chariot corps') ||
+      optLower.includes('horse archer light cavalry') ||
+      optLower.includes('cataphract super-heavy shock cavalry') ||
+      optLower.includes('combined-arms macedonian pike & companion cavalry')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ecological Disease Lock: The tropical tsetse fly transmits sleeping sickness (trypanosomiasis), which is fatal to horses, oxen, and cattle!"
+      };
+    }
+  }
+  if (optLower.includes('tsetse fly trypanosomiasis belt')) {
+    if (
+      hasText('e2_animals', 'horses and camels') ||
+      hasText('e2_animals', 'oxen and water buffalo') ||
+      hasText('e2_animals', 'cattle') ||
+      hasText('e2_animals', 'donkeys and mules') ||
+      hasText('p4_military', 'chariot') ||
+      hasText('p4_military', 'cavalry') ||
+      hasText('p4_military', 'cataphract')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ecological Disease Lock: The tropical tsetse fly transmits sleeping sickness (trypanosomiasis), which is fatal to horses, oxen, and cattle!"
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0C. COMPLEX-MODE SPECIFIC CROSS-CATEGORY CONTRADICTIONS (G7 - A6)
+  // =========================================================================
+
+  // 1. Hyper-Dense Megacity (G7) vs. Scale, Pastoral Grazing & Low-Density Living
+  if (optLower.includes('hyper-dense walled megacity core')) {
+    if (currentScale === 'city_state') {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Demographic Carrying Capacity Lock: A megacity of 500,000+ people cannot exist inside a small local city-state or on nomadic grazing alone, and cannot claim low-density dispersed living!"
+      };
+    }
+    const crops = selectedList('e1_crops');
+    if (crops.length === 1 && crops[0].toLowerCase().includes('pastoral transhumance & herd grazing')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Demographic Carrying Capacity Lock: A megacity of 500,000+ people cannot exist inside a small local city-state or on nomadic grazing alone, and cannot claim low-density dispersed living!"
+      };
+    }
+    if (hasText('s6_demographics_health', 'low-density dispersed settlement')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Demographic Carrying Capacity Lock: A megacity of 500,000+ people cannot exist inside a small local city-state or on nomadic grazing alone, and cannot claim low-density dispersed living!"
+      };
+    }
+  }
+  if (optLower.includes('low-density dispersed settlement & clean running meltwater')) {
+    if (hasText('g7_settlement', 'hyper-dense walled megacity core')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Demographic Carrying Capacity Lock: A megacity of 500,000+ people cannot exist inside a small local city-state or on nomadic grazing alone, and cannot claim low-density dispersed living!"
+      };
+    }
+  }
+
+  // 2. Latifundia Slave Estates (E6) vs. Free Labor / Yeomanry
+  if (hasText('e6_property_land', 'latifundia / aristocratic slave estates')) {
+    if (optLower.includes('paid free laborers only (no chattel slavery') || optLower.includes('equal-field state allotment system')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Agrarian Property Lock: Latifundia are massive private estates worked by chained chattel slaves, which directly contradicts a society with 'Paid Free Laborers Only' or state-equalized peasant plots!"
+      };
+    }
+  }
+  if (optLower.includes('latifundia / aristocratic slave estates')) {
+    if (hasText('s5_unfree_labor', 'paid free laborers only') || hasText('e6_property_land', 'equal-field state allotment system')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Agrarian Property Lock: Latifundia are massive private estates worked by chained chattel slaves, which directly contradicts a society with 'Paid Free Laborers Only' or state-equalized peasant plots!"
+      };
+    }
+  }
+
+  // 3. Book Burning & Suppression (R6) vs. Philosophical Pluralism (R6)
+  if (hasText('r6_orthodoxy_heresy', 'book burning & suppression of rival schools')) {
+    if (optLower.includes('philosophical academy pluralism (hundreds of schools / agora') || optLower.includes('pluralistic edicts of toleration')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Contradiction: A state that burns rival philosophical books and executes dissenting scholars cannot simultaneously practice open Agora philosophical pluralism!"
+      };
+    }
+  }
+  if (optLower.includes('book burning & suppression of rival schools')) {
+    if (hasText('r6_orthodoxy_heresy', 'philosophical academy pluralism') || hasText('r6_orthodoxy_heresy', 'pluralistic edicts of toleration')) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ideological Contradiction: A state that burns rival philosophical books and executes dissenting scholars cannot simultaneously practice open Agora philosophical pluralism!"
+      };
+    }
+  }
+
+  // 4. Sustainable Regenerative Agro-Ecology (A6) vs. Catastrophic Over-Exploitation
+  if (hasText('a6_ecology_collapse', 'sustainable regenerative agro-ecology')) {
+    if (
+      optLower.includes('widespread deforestation & hillside soil erosion') ||
+      optLower.includes('irreversible alluvial soil salinization') ||
+      optLower.includes('island ecological exhaustion & palm deforestation')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ecological Contradiction: You cannot practice strict regenerative forest and soil conservation while simultaneously clear-cutting your hillsides and salinizing your water table!"
+      };
+    }
+  }
+  if (optLower.includes('sustainable regenerative agro-ecology')) {
+    if (
+      hasText('a6_ecology_collapse', 'widespread deforestation & hillside soil erosion') ||
+      hasText('a6_ecology_collapse', 'irreversible alluvial soil salinization') ||
+      hasText('a6_ecology_collapse', 'island ecological exhaustion')
+    ) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ecological Contradiction: You cannot practice strict regenerative forest and soil conservation while simultaneously clear-cutting your hillsides and salinizing your water table!"
+      };
+    }
+  }
+
+  // =========================================================================
+  // 0D. CHRONOLOGICAL ERA CONSTRAINTS (What did not exist in earlier eras)
   // =========================================================================
   const isBronzeAge = currentEra === 'early_bronze' || currentEra === 'late_bronze';
   const isPreClassical = isBronzeAge || currentEra === 'early_iron';
+
+  // Cataphract Super-Heavy Shock Cavalry (Only in Classical & Imperial)
+  if (isPreClassical) {
+    if (optLower.includes('cataphract super-heavy shock cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked: Full-body iron scale/lamellar armor for both warhorse and rider (Cataphracts) was developed by Parthians, Sarmatians, and Sasanians in the Classical and Imperial eras!'
+      };
+    }
+    if (optLower.includes('combined-arms macedonian pike & companion cavalry')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked: Philip II and Alexander the Great pioneered the sarissa pike phalanx + heavy companion cavalry doctrine in the 4th century BCE (Classical Antiquity)!'
+      };
+    }
+    if (optLower.includes('inverted siphons, pressurized lead/ceramic pipelines')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked: High-pressure lead and ceramic inverted siphons crossing deep valleys were Hellenistic and Roman engineering breakthroughs!'
+      };
+    }
+    if (optLower.includes('clay/leather promissory notes & state flying-cash')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked: Credit promissory bills require advanced banking and state currency reserves from the Classical/Imperial eras!'
+      };
+    }
+  }
+
+  // Incendiary Naphtha / Greek Fire Siphons (Imperial Era Only)
+  if (currentEra !== 'imperial_era') {
+    if (optLower.includes('incendiary naphtha / greek fire siphons')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Era-Locked: Pressurized incendiary petroleum siphons belong to the late Imperial era!'
+      };
+    }
+  }
 
   // Iron metallurgy (invented ~1200 BCE)
   if (isBronzeAge) {

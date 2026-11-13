@@ -163,53 +163,56 @@ Certain technologies, political structures, and economic mechanisms were physica
 | Feature / Innovation | Earliest Valid Historical Era | Chronological Cutoff | Justification Enforced in Code |
 |---|---|---|---|
 | **High-grade iron ore mining & smelting** | `early_iron` | ~1200 BCE | Bronze Age civilizations only possessed copper and tin metallurgy. |
+| **Phoenician phonetic alphabet** | `early_iron` | ~1100 BCE | Pre-Iron Age writing was logographic (Hieroglyphs) or syllabic (Cuneiform). |
 | **Disciplined crossbow phalanxes** | `classical_antiquity` | ~500 BCE | Mechanical bronze triggers were invented in Warring States China. |
 | **Standardized stamped coins** | `classical_antiquity` | ~600 BCE | Stamped electrum/silver coins emerged in Lydia and Ionia. |
 | **Direct citizen assembly democracy** | `classical_antiquity` | ~508 BCE | Direct universal male suffrage was pioneered in Classical Athens. |
-| **Phoenician phonetic alphabet** | `early_iron` | ~1100 BCE | Pre-Iron Age writing was logographic (Hieroglyphs) or syllabic (Cuneiform). |
+| **Cataphract Super-Heavy Shock Cavalry** | `classical_antiquity` | ~300 BCE | Full-body iron scale/lamellar armor for horse and rider emerged in Classical/Imperial eras. |
+| **Macedonian Pike & Companion Cavalry Phalanx** | `classical_antiquity` | ~350 BCE | Philip II and Alexander pioneered the 18-ft sarissa and companion cavalry doctrine. |
+| **Inverted Siphons & Pressurized Pipelines** | `classical_antiquity` | ~300 BCE | High-pressure lead/ceramic inverted siphons crossing deep valleys were Hellenistic/Roman feats. |
+| **Clay/Leather Promissory Notes & Flying-Cash** | `classical_antiquity` | ~200 BCE | Credit promissory bills require advanced banking and state currency reserves. |
 | **Pozzolanic underwater concrete** | `imperial_era` | ~150 BCE | Roman volcanic ash hydraulic concrete developed in the late Republic. |
 | **Magnetic compass orientation** | `imperial_era` | ~200 BCE | Han Dynasty lodestone spoon compasses were unknown to Bronze Age builders. |
+| **Incendiary Naphtha / Greek Fire Siphons** | `imperial_era` | ~670 CE | Pressurized incendiary petroleum naval flamethrowers belong exclusively to the late Imperial era. |
 
-### 3.2 Spatial Civilization Scale Constraints
+### 3.2 Tiered Selection Caps by Scale & Complexity Mode
+To prevent students from checking every box indiscriminately, the logic engine enforces strict tiered selection limits:
+- **Basic Mode (`basic` - Grades 4–6):** Strict max of **2 selections per question** across all 12 core questions. Younger students focus on foundational, decisive choices.
+- **Normal & Complex Modes (`normal` / `complex`):**
+  - `p1_gov_system` (System of Government): Max **2 selections** (a state cannot simultaneously be a direct democracy, absolute god-king monarchy, and nomadic steppe horde).
+  - `r1_structure` (Structure of the Divine): Max **2 selections** (theological limit for pantheon synthesis).
+  - `r5_gov_relation` (Religion & Government): Max **2 selections** (church-state doctrinal limit).
+  - `g7_settlement` (Settlement Morphology): Max **1** in `city_state`, Max **2** in `regional_kingdom`, Max **3** in `continental_empire`.
+  - `g2_terrain` (Terrain): Max **1** in `city_state`, Max **2** in `regional_kingdom`, Unbounded in `continental_empire`.
+  - `g1_freshwater` (Freshwater): Max **1** in `city_state`, Max **2** in `regional_kingdom`, Unbounded in `continental_empire`.
+  - `g3_barriers` (Natural Barriers): Max **1** in `city_state`, Max **2** in `regional_kingdom`, Unbounded in `continental_empire`.
+
+### 3.3 Spatial Civilization Scale Constraints
 Governed by `CIVILIZATION_SCALES` in `src/data/grapesData.js`:
-
-```javascript
-// Constraints in logicRules.js
-if (currentScale === 'city_state') {
-  // Max 1 terrain
-  if (questionId === 'g2_terrain' && selectedList('g2_terrain').length >= 1) {
-    return {
-      isDisallowed: true,
-      reason: '🔒 Scale Limit (City-State): An independent city-state occupies ONE local terrain zone.'
-    };
-  }
-  // Max 1 freshwater source
-  if (questionId === 'g1_freshwater' && selectedList('g1_freshwater').length >= 1) {
-    return {
-      isDisallowed: true,
-      reason: '🔒 Scale Limit (City-State): A single city-state relies on ONE primary freshwater source.'
-    };
-  }
-}
-```
-
 - **Prohibition on Great Walls for City-States:** City-states cannot construct thousands of miles of frontier ramparts (`a3_monuments`).
 - **Prohibition on Direct Assembly Democracy for Empires:** Continental empires with millions of subjects spanning continents cannot govern via direct physical citizen assembly in a single town square (`p1_gov_system`).
+- **Continental Empire vs. Barter / Wampum:** A grand continental empire of millions of subjects cannot administer provincial armies and tax collection on pure village barter or wampum shells (`e3_currency`); it requires standardized currency or state grain redistribution.
 
-### 3.3 Geographic Scale Limits on Natural Defensive Barriers (`g3_barriers`)
-Added in commit `5db50f0`:
-- **City-State (`city_state`):** Maximum **1 natural defensive barrier**. A local city-state is bounded by a single local barrier (e.g. either surrounding mountains, or desert scrub, or coastal cliffs—not all simultaneously).
-- **Regional Kingdom (`regional_kingdom`):** Maximum **2 natural defensive barriers**.
-- **Grand Continental Empire (`continental_empire`):** Unbounded barriers permitted.
+### 3.4 Strict Macroeconomic & Fiscal-Military Lockouts
+- **Standing Professional Army vs. Pure Barter:** Full-time paid standing armies or armored cataphracts (`p4_military`) require regular state pay in coins, bullion, or grain rations—they cannot be maintained on pure village barter (`e3_currency`).
+- **Egalitarian Guild Council vs. Autocracy / God-Kings:** Selecting the egalitarian merchant-artisan guild council (`p1_gov_system`) locks absolute monarchies, military juntas, feudal bureaucracies, god-king dynasties (`s1_apex`), god-king worship (`r1_structure`), and imperial mausoleums / terracotta necropolises (`a3_monuments`, `r4_afterlife`).
+- **Nomadic Steppe Imperial Confederacy vs. Sedentary Mega-Infrastructure:** Mobile yurt-dwelling nomadic pastoralists (`p1_gov_system`, `g7_settlement`) cannot construct stationary gravity-fed stone aqueducts, indoor-plumbing grid cities, artificial naval drydocks (cothons), chinampas, or basin irrigation.
+- **Tsetse Fly Trypanosomiasis Belt vs. Draft Animals & Cavalry:** The tropical tsetse fly transmits sleeping sickness fatal to equines and bovines (`g5_shortages`), locking horses, camels, oxen, zebu cattle, donkeys (`e2_animals`), and all cavalry/chariot doctrines (`p4_military`).
 
-### 3.4 Island & Ocean Biome Exclusives
+### 3.5 Complex-Mode Specific Cross-Category Contradictions (G7–A6)
+- **Hyper-Dense Megacity Core (`g7_settlement`):** Cannot exist in a small local `city_state`, cannot be sustained solely on nomadic pastoral grazing (`e1_crops`), and contradicts low-density dispersed settlement (`s6_demographics_health`).
+- **Latifundia Aristocratic Slave Estates (`e6_property_land`):** Directly contradicts "Paid Free Laborers Only (no chattel slavery)" (`s5_unfree_labor`) and the Equal-Field (Juntian) state allotment system.
+- **Book Burning & Scholarly Suppression (`r6_orthodoxy_heresy`):** State execution of dissenting scholars and scroll burning locks philosophical Agora debate pluralism and Ashokan edicts of toleration.
+- **Sustainable Regenerative Agro-Ecology (`a6_ecology_collapse`):** Strict multi-century terrace composting and sacred grove bylaws lock widespread hillside deforestation, irreversible alluvial soil salinization, and island ecological exhaustion.
+
+### 3.6 Island & Ocean Biome Exclusives
 When an oceanic island or coral ring atoll (`g2_terrain`) is selected:
 - Prohibits continental floodplains (`g1_freshwater`: Nile/Tigris river systems).
 - Prohibits wide-open steppe grassland and continental desert barriers.
 - Prohibits land-bound chariot corps and heavy cavalry divisions.
 - Prohibits continental horse archery confederations.
 
-### 3.5 Deep Terrain, Water, and Resource Contradictions
+### 3.7 Deep Terrain, Water, and Resource Contradictions
 - **Hyper-Arid Deserts vs. Wet Rice Agriculture:** Wet-paddy rice cultivation (`e1_crops`) requires deep standing water; prohibited in hyper-arid deserts lacking alluvial rivers or qanats.
 - **Naval Supremacy vs. Landlocked Mountain/Steppe:** Trireme war fleets (`p4_military`) require direct ocean or sea access; prohibited if territory is purely landlocked continental steppe or high-altitude mountains.
 - **Naval Supremacy vs. Timber Shortage:** Cannot field supreme trireme combat fleets without timber (`g5_shortages`), unless subsidized by foreign concession treaties.
