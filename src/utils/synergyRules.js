@@ -23,7 +23,10 @@ export const LOGICAL_SYNERGIES = {
     { targetQ: "a4_hydraulic", option: "Stepwells and Massive Sunken Reservoirs (Vavs / Baolis / Kunds carved deep into bedrock to access deep aquifers and cool communal gathering)", type: "mandatory" }
   ],
   "Desert flash-flood wadis managed through dry-river canyon dams and terraced retention basins (like Nabataea / Petra)": [
-    { targetQ: "a4_hydraulic", option: "Check-dams and rock terracing designed to trap flash-flood desert runoff and fertile silt", type: "mandatory" }
+    { targetQ: "a4_hydraulic", option: "Check-dams and rock terracing designed to trap flash-flood desert runoff and fertile silt", type: "mandatory" },
+    { targetQ: "g3_barriers", option: "Towering vertical sandstone cliffs and slot canyon gorges with hidden bottleneck canyon entrances (the Siq of Petra)", type: "recommended" },
+    { targetQ: "a3_monuments", option: "Rock-cut cliffside temples and royal mausoleums carved directly into towering sandstone canyons", type: "recommended" },
+    { targetQ: "g7_settlement", option: "Oasis Ksar & Canyon Cliff-Cavern Settlements (defensible mud-brick fortresses or rock-cut canyon dwellings clustered around desert springs, like Petra or Mesa Verde)", type: "recommended" }
   ],
   "Braided loess river basin prone to massive silt accumulation and devastating course shifts (like the Yellow River / Huang He)": [
     { targetQ: "g6_disasters", option: "Rapid silting of canal choke points and violent shifting of navigable river channels", type: "recommended" },
@@ -327,6 +330,47 @@ export const LOGICAL_SYNERGIES = {
   "Inverted Siphons, Pressurized Lead/Ceramic Pipelines, and Multiple-Arch Masonry Dams (crossing deep valleys under hydrostatic pressure)": [
     { targetQ: "a3_monuments", option: "Gravity-fed stone aqueducts, subterranean sewers, and public bathhouses", type: "mandatory" },
     { targetQ: "a5_science", option: "Concrete that can set underwater (for building massive harbors and domes)", type: "recommended" }
+  ],
+  // 25. Sub-Arctic Boreal Taiga & Baltic Amber
+  "Sub-arctic boreal taiga and amber-rich Baltic coastline intersected by seasonal frozen rivers": [
+    { targetQ: "g4_resources", option: "Baltic amber, bog iron deposits, and dense sub-arctic fur pelts", type: "mandatory" },
+    { targetQ: "e1_crops", option: "Rye, Oats, and Hemp (cold-hardy northern grains and fiber crops suited to short frost-prone summers)", type: "mandatory" },
+    { targetQ: "e2_animals", option: "Reindeer and Cold-Weather Steppe Ponies (adapted for sub-arctic tundra and deep winter snow mobility)", type: "recommended" },
+    { targetQ: "e5_trade", option: "Amber & Fur Boreal River Portage Routes (linking northern forests to Mediterranean and Black Sea markets)", type: "recommended" }
+  ],
+  // 26. Endorheic Inland Basin & Silk Caravans
+  "Endorheic inland basin with terminal salt lakes and snow-fed piedmont alluvial fans (like the Tarim Basin / Sogdiana)": [
+    { targetQ: "a4_hydraulic", option: "Qanats (underground channels that carry mountain groundwater across hot deserts without evaporating)", type: "mandatory" },
+    { targetQ: "e5_trade", option: "Overland Silk/Incense Caravan Routes (long-distance relay trade across deserts and mountains)", type: "recommended" }
+  ],
+  // 27. Fossil Groundwater Artesian Springs & Desert Date Palms
+  "Fossil groundwater artesian springs and deep desert depression oases (like the Siwa/Kharga Oases or Garamantes Foggaras)": [
+    { targetQ: "a4_hydraulic", option: "Qanats (underground channels that carry mountain groundwater across hot deserts without evaporating)", type: "mandatory" },
+    { targetQ: "e1_crops", option: "Date Palms and Figs (drought-resistant sweet staples producing timber, fibers, and wine in desert oases)", type: "mandatory" }
+  ],
+  // 28. Fertile Volcanic Caldera Valleys & Obsidian
+  "Fertile volcanic caldera valleys with nutrient-rich soils and crater lakes (like the Valley of Mexico)": [
+    { targetQ: "g1_freshwater", option: "Tropical crater caldera lakes and seasonal interconnected marshland lagoons (like Lake Texcoco and the Valley of Oaxaca)", type: "mandatory" },
+    { targetQ: "g4_resources", option: "Obsidian (volcanic glass for razor-sharp blades and surgical tools)", type: "recommended" }
+  ],
+  // 29. Alluvial Placer Gold Dust & Frankincense Resins
+  "Alluvial placer gold dust, ivory, and aromatic frankincense/myrrh resin groves (like Punt / Southern Arabia / Kush)": [
+    { targetQ: "r3_rituals", option: "Daily food, wine, and incense offerings placed in front of temple statues", type: "recommended" },
+    { targetQ: "e5_trade", option: "Monsoon Indian Ocean Coastal & Open-Sea Dhow Trade (navigating biannual monsoon winds between Africa, Arabia, and India)", type: "recommended" }
+  ],
+  // 30. Cinnabar & Porcelain Clay (Metallurgical Poisoning)
+  "Cinnabar (mercury sulfide), kaolin porcelain clay, and lacquer-tree sap": [
+    { targetQ: "s6_demographics_health", option: "Endemic Lead/Mercury Metallurgical & Cosmetic Poisoning (elite and artisan life expectancy lowered by silver-smelting fumes, lead pipes, or cinnabar elixirs)", type: "recommended" }
+  ],
+  // 31. Armed Sovereign Chartered Merchant Karums & Bullion Currency
+  "Armed Sovereign Chartered Merchant Karums (autonomous foreign merchant colonies operating extraterritorial courts inside host kingdoms, like Assyrian Kanesh)": [
+    { targetQ: "a1_writing", option: "Cuneiform (wedge-shaped marks pressed into wet clay with a reed stylus)", type: "recommended" },
+    { targetQ: "e3_currency", option: "Weighed Metal Bullion (chopping silver rings or copper ingots and weighing them on scales for every purchase)", type: "mandatory" }
+  ],
+  // 32. Mamluk / Janissary Elite Slave-Soldiers
+  "Mamluk / Janissary Elite Slave-Soldiers (foreign youths acquired as unfree dependents and trained as an elite, privileged military caste)": [
+    { targetQ: "p4_military", option: "Permanent Professional Standing Army (full-time paid soldiers who train year-round)", type: "mandatory" },
+    { targetQ: "a6_ecology_collapse", option: "Praetorian / Warlord Provincial Fragmentation (empowering frontier generals and satraps with private armies leads to endless civil war and imperial breakup)", type: "recommended" }
   ]
 };
 
@@ -707,6 +751,38 @@ export const COMPOUND_SYNERGIES = [
       {
         targetQ: "a6_ecology_collapse",
         option: "Widespread Deforestation & Hillside Soil Erosion (clear-cutting forests for lime plaster kilns, charcoal smelting, and trireme fleets strips topsoil into rivers)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "nabataea_petra_canyon_complex",
+    title: "Nabataean Incense & Canyon Hydraulic State",
+    condition: (answers) => {
+      const g1 = answers.g1_freshwater || [];
+      const g1List = Array.isArray(g1) ? g1 : [g1];
+      const hasWadis = g1List.some(w => w.toLowerCase().includes('desert flash-flood wadis'));
+
+      const e5 = answers.e5_trade || [];
+      const e5List = Array.isArray(e5) ? e5 : [e5];
+      const hasCaravan = e5List.some(t => t.toLowerCase().includes('overland silk/incense caravan routes'));
+
+      return hasWadis && hasCaravan;
+    },
+    targets: [
+      {
+        targetQ: "e4_taxation",
+        option: "Transit Tolls and Mountain Pass / Bridge Fees (extracting silver and goods from foreign caravans traversing strategic choke points)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "a3_monuments",
+        option: "Rock-cut cliffside temples and royal mausoleums carved directly into towering sandstone canyons",
+        type: "recommended"
+      },
+      {
+        targetQ: "g7_settlement",
+        option: "Oasis Ksar & Canyon Cliff-Cavern Settlements (defensible mud-brick fortresses or rock-cut canyon dwellings clustered around desert springs, like Petra or Mesa Verde)",
         type: "recommended"
       }
     ]

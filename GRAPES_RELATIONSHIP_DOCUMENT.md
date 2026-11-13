@@ -1,6 +1,6 @@
-# G.R.A.P.E.S. Civilization Builder: Master Relationship & Interdependency Document (v4.0)
+# G.R.A.P.E.S. Civilization Builder: Master Relationship & Interdependency Document (v4.1)
 
-**Document Version:** 4.0.0  
+**Document Version:** 4.1.0  
 **Target Architecture:** Multi-Variable Historical Logic Guard, Intelligent Synergy Engine & Grade-Level Complexity System  
 **Repository Location:** `grapes-civilization-builder`  
 **Live Production URL:** [https://grapes-civilization-builder.vercel.app](https://grapes-civilization-builder.vercel.app)
@@ -109,6 +109,34 @@ graph TD
    - **Settlement Morphology Limit:** Max 3 selections (`g7_settlement`).
    - **Hard Prohibitions:** Cannot govern millions of subjects across continents via "Direct Participatory Democracy" (`p1_gov_system`). Cannot finance provincial administrative legions using "Pure Barter & Credit Tallies" or "Wampum Shell Belts" (`e3_currency`).
 
+### 3.1.1 Tiered Selection Caps & Total Deprivation Guard
+
+To prevent students from indiscriminately checking every shortage, disaster, or structural vector, strict mathematically calibrated selection caps are enforced:
+
+- **Resource Shortages (`g5_shortages`):**
+  - `basic` mode: Max **1** shortage.
+  - `normal` mode: Max **2** shortages in `city_state` / `regional_kingdom`, Max **1** shortage in `continental_empire`.
+  - `complex` mode: Max **3** in `city_state`, Max **2** in `regional_kingdom`, Max **1** in `continental_empire`.
+  - **Total Deprivation Guard:** A civilization cannot simultaneously select all 3 foundational construction shortages: *"Lack of tall timber..."*, *"Lack of hard stone or metal ores..."*, and *"Lack of domestic clay deposits..."*. A society must possess wood, stone, OR clay to build shelter and storage vessels.
+- **Environmental Disasters (`g6_disasters`):**
+  - `basic` mode: Max **1** disaster.
+  - `normal` & `complex` modes: Max **2** in `city_state`, Max **3** in `regional_kingdom` and `continental_empire`.
+- **Anthropogenic Collapse Vectors (`a6_ecology_collapse`):**
+  - Max **2** primary collapse vectors across all modes and scales.
+- **Constitutional & Institutional Inquiry Caps (`normal` & `complex` modes):**
+  - `e3_currency` (Medium of Exchange): Max **2** standards.
+  - `p1_gov_system` (System of Government): Max **2** systems.
+  - `p2_succession` (Transfer of Power): Max **2** mechanisms.
+  - `p3_law_system` (Justice System): Max **2** philosophies.
+  - `p5_foreign_policy` (Foreign Policy): Max **2** postures.
+  - `s1_apex` (Ruling Apex Class): Max **2** classes.
+  - `s3_mobility` (Social Mobility): Max **2** avenues.
+  - `s4_gender` (Gender Legal Status): Max **1** framework (Max **2** in `continental_empire`).
+  - `r1_structure` (Structure of Divine): Max **2** frameworks.
+  - `r2_demeanor` (Cosmic Disposition): Max **2** dispositions.
+  - `r4_afterlife` (Eschatology & Funerary): Max **2** doctrines.
+  - `r5_gov_relation` (Religion & Government): Max **2** doctrines.
+
 ---
 
 ### 3.2 Chronological Era Locks (Historical Horizon Cutoffs)
@@ -200,6 +228,56 @@ Innovations cannot be selected prior to their genuine historical emergence:
 
 ---
 
+### 3.5 Climatic & Meteorological Mutual Exclusivities (G1/G2 vs. G6)
+
+1. **Monsoon/Tropical/Desert vs. Sub-Zero Blizzards (Dzud):**
+   - Tropical rainforests, arid deserts, river deltas, and monsoon basins strictly lock *Severe winter blizzards and permafrost frosts (dzud)* (`g6_disasters`) and vice versa.
+   - *Reason:* Sub-zero permafrost blizzards cannot occur in equatorial rainforests or hyperthermic deserts.
+2. **Monsoons, Typhoons & Tsunamis vs. Landlocked Biomes:**
+   - *Monsoons, typhoons, or coastal tsunamis* (`g6_disasters`) cannot occur in landlocked high-altitude steppes, inland endorheic basins, or hyper-arid deserts.
+3. **El Niño (ENSO) Ocean Deluge vs. Non-Pacific / Landlocked Biomes:**
+   - *Sudden El Niño (ENSO) ocean temperature spikes* (`g6_disasters`) specifically impacts Pacific arid littoral coastlines (like Peru) and is prohibited in interior loess plateaus, endorheic basins, or sub-arctic taiga forests.
+4. **Surface River Floods vs. Subterranean Water Regimes:**
+   - *Catastrophic unannounced river floods* and *river course shifts* (`g6_disasters`) require large surface rivers; they cannot occur where freshwater is solely subterranean cenotes, artesian oasis springs, or coastal fog.
+5. **Encroaching Desert Sand Dunes vs. Wet/Jungle/Taiga Biomes:**
+   - *Encroaching desert sand dunes* (`g6_disasters`) cannot plague water-saturated tropical rainforests, wetland deltas, or sub-arctic taiga bogs.
+
+---
+
+### 3.6 Topographical & Border Geometry Mutual Exclusivities
+
+1. **Inland Terrains vs. Maritime Infrastructure & Navies:**
+   - A landlocked interior civilization with no coastline cannot deploy *Naval Supremacy (trireme fleets)* (`p4_military`), build *Artificial Enclosed Naval Harbors (Cothons)* (`a3_monuments`), establish *Maritime Merchant Thalassocracies* (`p1_gov_system`), or carve coastal *Megalithic Moai Statues* (`a3_monuments`).
+2. **Open Ocean Isolation vs. Continental Terrains:**
+   - *Uncharted offshore open ocean expanses* (`g3_barriers`) belongs exclusively to oceanic island archipelagos—not continental river plains or interior plateaus.
+3. **No Surface Rivers vs. Riverine Infrastructure:**
+   - Subterranean and spring regimes cannot construct *River Cataracts* (`g3_barriers`), *Riverine Barge Networks* (`e5_trade`), *River-Confluence Earthwork Mound Centers* (`g7_settlement`), or *Basin Irrigation Dikes* (`a4_hydraulic`).
+4. **Flat Alluvial Plains vs. Mountain & Canyon Infrastructure:**
+   - Flat alluvial floodplains and coral atolls cannot carve *Rock-Cut Cliffside Temples* (`a3_monuments`), construct *Cyclopean Hill Citadels* (`a3_monuments`), defend *Sandstone Slot Canyon Chokepoints (Siq)* (`g3_barriers`), or erect *Terraced Mountain Ridge-Citadels* (`g7_settlement`).
+5. **Mangrove Swamps vs. Arid & Highland Terrains:**
+   - *Impenetrable mangrove swamp flats* (`g3_barriers`) cannot border high-altitude alpine plateaus, hyper-arid desert basins, or frozen sub-arctic taiga.
+
+---
+
+### 3.7 Biological, Agricultural & Ecological Contradictions
+
+1. **Sub-Arctic Boreal Taiga vs. Frost-Sensitive Crops & Animals:**
+   - Sub-arctic taiga excludes frost-sensitive tropical crops (paddy rice, maize, sorghum, date palms, taro) and warm-climate beasts (camels, elephants, water buffalo).
+2. **Cryophilic Fauna vs. Tropical/Desert Biomes:**
+   - *Reindeer and Cold-Weather Steppe Ponies* (`e2_animals`) suffer fatal heat exhaustion in tropical rainforests, coral atolls, or hyperthermic deserts.
+   - *Sturdy Steppe Ponies & Bactrian Camels* (`e2_animals`) cannot navigate dense equatorial rainforest jungles or oceanic coral atolls.
+3. **Collapse Vector Prerequisites (`a6_ecology_collapse`):**
+   - *Island Ecological Exhaustion* requires an oceanic island or archipelago ecosystem.
+   - *Steppe Overgrazing & Desertification* requires large domesticated grazing herds or pastoral transhumance.
+   - *Irreversible Alluvial Soil Salinization* requires intensive canal, basin, or subterranean irrigation networks.
+   - *Slave-Revolt & Latifundia Hollowing* requires extensive chattel slavery, debt serfdom, or state-owned helot castes.
+4. **Metallurgical Poisoning Prerequisite:**
+   - *Endemic Lead/Mercury Poisoning* (`s6_demographics_health`) requires advanced metal smelting, pipes, and cinnabar, and is impossible in societies with critical metal shortages or non-metallurgical coral atolls.
+
+---
+
+---
+
 ## 4. Single-Trigger Pair Synergy Network (`LOGICAL_SYNERGIES`)
 
 The master synergy registry maps **74 pairwise historical dependencies**. When a foundational choice is selected, it triggers either a `mandatory` auto-link or a `recommended` glowing badge.
@@ -282,10 +360,20 @@ The master synergy registry maps **74 pairwise historical dependencies**. When a
 | 72 | **Military Cleruchy Grants** (`e6`)| `p4_military` | Permanent Professional Standing Army | `mandatory` | Conquered land given to veterans for military service. |
 | 73 | **Military Cleruchy Grants** (`e6`)| `s3_mobility` | Military Valor Nobility Grants | `recommended` | Battlefield bravery rewarded with landed estates. |
 | 74 | **Imperial Post Highway Spies** (`p6`)| `p5_foreign` | Satrapy Provincial Administration | `mandatory` | King's Eyes and Ears spy on distant satraps. |
+| 75 | **Sub-Arctic Boreal Taiga** (`g2`) | `g4_resources` | Baltic amber, bog iron, dense furs | `mandatory` | Northern conifer forests yield resin and furs. |
+| 76 | **Sub-Arctic Boreal Taiga** (`g2`) | `e1_crops` | Rye, Oats, and Cold-Hardy Hemp | `mandatory` | Short frost-prone northern growing seasons. |
+| 77 | **Endorheic Inland Basin** (`g2`) | `a4_hydraulic` | Qanats / Subterranean Foggara | `mandatory` | Snow-fed piedmont aquifers channeled beneath sand. |
+| 78 | **Fossil Artesian Springs** (`g1`) | `e1_crops` | Date Palms and Oasis Figs | `mandatory` | Deep depression springs sustain oasis date groves. |
+| 79 | **Desert Flash-Flood Wadis** (`g1`) | `a3_monuments` | Rock-Cut Cliffside Temples (Petra) | `recommended` | Canyon sandstone walls carved into mausoleums. |
+| 80 | **Fertile Caldera Valleys** (`g2`) | `g1_freshwater`| Crater caldera lakes & lagoons | `mandatory` | Volcanic calderas trap rainfall in alpine lakes. |
+| 81 | **Alluvial Gold & Frankincense** (`g4`)| `r3_rituals` | Daily food, wine, and incense offerings| `recommended` | Exotic resins burned in temple sanctuary censers. |
+| 82 | **Cinnabar & Porcelain Clay** (`g4`)| `s6_health` | Endemic Lead/Mercury Poisoning | `recommended` | Toxic mercury sulfide fumes and alchemical elixirs. |
+| 83 | **Chartered Merchant Karums** (`e5`)| `e3_currency` | Weighed Metal Bullion & Silver Rings | `mandatory` | Extraterritorial merchant colonies trade in silver weight. |
+| 84 | **Mamluk / Janissary Soldiers** (`s5`)| `p4_military` | Permanent Professional Standing Army | `mandatory` | Enslaved captive youths trained as standing corps. |
 
 ---
 
-## 5. The 12 Multi-Trigger Compound Cascades
+## 5. The 13 Multi-Trigger Compound Cascades
 
 Compound synergies trigger when **multiple foundational variables coincide**, modeling complex historical civilizational paradigms:
 
@@ -399,6 +487,14 @@ flowchart TD
   - Auto-recommends *Widespread Deforestation & Hillside Soil Erosion* (`a6_ecology_collapse`).
 - **Historiography:** Smelting a single kilogram of iron or bronze required hundreds of kilograms of charcoal wood; combined with lime plaster kilns and war fleet shipyards, ancient Mediterranean states systematically stripped hillside cedar and oak forests, washing topsoil into harbors and choking river deltas.
 
+### 13. Nabataean Incense & Canyon Hydraulic State (`nabataea_petra_canyon_complex`)
+- **Triggers:** Desert flash-flood wadis managed through dry-river canyon dams (`g1_freshwater`) + Overland silk/incense caravan routes (`e5_trade`).
+- **Cascaded Effects:**
+  - **Mandates** *Transit Tolls and Mountain Pass / Bridge Fees* (`e4_taxation`).
+  - Auto-recommends *Rock-cut cliffside temples and royal mausoleums* (`a3_monuments`).
+  - Auto-recommends *Oasis Ksar & Canyon Cliff-Cavern Settlements* (`g7_settlement`).
+- **Historiography:** The Nabataean Kingdom at Petra transformed hyper-arid sandstone canyons into an opulent merchant oasis. By constructing terraced check-dams and hidden cisterns to capture winter flash floods, they monopolized the trans-desert frankincense caravan routes, financing monumentally carved rock-cut cliffside facades (*Al-Khazneh*) via customs transit tolls.
+
 ---
 
 ## 6. Grade-Level Complexity Tier Topology
@@ -448,3 +544,4 @@ The relationship engine directly feeds into three automated synthesis tools in t
 ---
 
 *Authored by the Google Antigravity Engineering Team for the G.R.A.P.E.S. Ancient Civilization Builder v4.0.*
+
