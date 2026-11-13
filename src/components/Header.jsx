@@ -137,11 +137,11 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#2e7d32] to-[#388e3c] text-white shadow-sm ring-1 ring-[#1b5e20]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 4–6: 12 Core Questions, 6 foundational options each, guided auto-synergies"
+            title="Grades 4–6: 13 Core Questions, foundational options, guided auto-synergies"
           >
             <span>🌱</span>
             <span>Basic (Grades 4–6)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">12 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">13 Qs</span>
           </button>
 
           <button
@@ -152,11 +152,11 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#935923] to-[#7f4a18] text-white shadow-sm ring-1 ring-[#5a3310]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 7–8: 31 Standard Questions, 300 Options, Standard Logic Guard"
+            title="Grades 7–8: 32 Standard Questions, Standard Logic Guard"
           >
             <span>🏛️</span>
             <span>Normal (Grades 7–8)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">31 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">32 Qs</span>
           </button>
 
           <button
@@ -167,19 +167,19 @@ export default function Header({
                 ? 'bg-gradient-to-r from-[#4a2e7a] to-[#5e3a9b] text-white shadow-sm ring-1 ring-[#321c56]'
                 : 'text-[#564332] hover:text-[#1e140d] hover:bg-[#ebdcc4]'
             }`}
-            title="Grades 9–12 / AP: 37 Exhaustive Questions, 390 Options, Fiscal, Demographic & Ecological Locks"
+            title="Grades 9–12 / AP: 38 Exhaustive Questions, Fiscal, Demographic & Ecological Locks"
           >
             <span>🎓</span>
             <span>Complex (Grades 9–12 / AP)</span>
-            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">37 Qs</span>
+            <span className="text-[10px] opacity-85 px-1.5 py-0.2 rounded bg-black/20 font-mono">38 Qs</span>
           </button>
         </div>
 
         {/* Live Tagline */}
         <div className="text-[11px] text-[#6d5543] font-medium italic text-center lg:text-right shrink-0">
-          {complexityMode === 'basic' && '🌱 12 Core Questions | Guided Auto-Synergies | Foundational Locks'}
-          {complexityMode === 'normal' && '🏛️ 31 Standard Questions | 300 Options | Standard Logic Guard'}
-          {complexityMode === 'complex' && '🎓 37 Exhaustive Questions | 390 Options | Hardcore Fiscal & Ecological Locks'}
+          {complexityMode === 'basic' && '🌱 13 Core Questions | Guided Auto-Synergies | Foundational Locks'}
+          {complexityMode === 'normal' && '🏛️ 32 Standard Questions | Standard Logic Guard'}
+          {complexityMode === 'complex' && '🎓 38 Exhaustive Questions | Hardcore Fiscal, Demographic & Ecological Locks'}
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 // Automatic Teacher Stress-Test Generator for G.R.A.P.E.S. Oral Defense
 // Analyzes cross-category friction points and creates rigorous, challenging defense questions.
 
-export function generateTeacherStressTest(answers, customNotes = {}) {
+export function generateTeacherStressTest(answers, customNotes = {}, currentEra = 'early_bronze', currentScale = 'regional_kingdom') {
   const selected = (id) => answers[id] || '';
   const selectedList = (id) => (Array.isArray(answers[id]) ? answers[id] : answers[id] ? [answers[id]] : []);
   const hasText = (id, str) => {
@@ -150,6 +150,62 @@ export function generateTeacherStressTest(answers, customNotes = {}) {
   }
 
   // Fallback questions to guarantee at least 5 rich questions if few conditionals were met
+
+  // =========================================================================
+  // GEOPOLITICAL NEIGHBORHOOD & CROSS-BORDER STRESS TESTS (v5.0)
+  // =========================================================================
+
+  // 1. The Buffer-State Rebellion Trap
+  if (hasText('p7_neighbor_relations', 'hegemonic core & tributary buffer states') &&
+      hasText('p5_foreign_policy', 'tributary vassals')) {
+    potentialQuestions.push({
+      id: 'buffer_state_trap',
+      categoryPair: 'Geopolitics (P) & Neighbor Relations (P7)',
+      question: "Your empire relies on tributary buffer kingdoms along your borders to absorb foreign invasions and pay annual gold/grain tribute. However, your richest client king has just secretly allied with your greatest rival across the frontier and stopped paying tribute. If you march your main army out to crush him, your opposite border is left undefended; if you let him go, every other vassal will revolt. How does your administration neutralize this buffer-state betrayal?",
+      trigger: 'Hegemonic Core & Tributary Buffer States (P7) + Tributary Vassals (P5)',
+      profAngle: 'Testing imperial overstretch, asymmetric frontier deterrence, and the delicate equilibrium of client-state management.',
+      recommendedDefense: [
+        'Deploy targeted covert special forces or royal assassins to eliminate the rogue client king and install a loyal sibling or rival claimant on his throne without mobilizing the grand imperial army.',
+        'Offer preferential trade concessions and marital alliances to neighboring secondary vassals to form a punitive coalition against the rebel king, using local regional forces to encircle him.',
+        'Use diplomatic subversion to convince the external rival that the client king is an untrustworthy double agent, breaking their alliance from within.'
+      ]
+    });
+  }
+
+  // 2. The Thalassocratic Host-Empire Embargo
+  if (currentScale === 'thalassocracy_network' ||
+      hasText('p7_neighbor_relations', 'extraterritorial merchant enclaves')) {
+    potentialQuestions.push({
+      id: 'thalassocracy_embargo',
+      categoryPair: 'Economy (E) & Maritime Geopolitics (P7)',
+      question: "Your maritime network is rich in silver and ships, but your population is small and depends on giant neighboring land empires for grain access and harbor treaties. A new warlord has just seized power in your biggest trading partner's capital, seized your merchant warehouses, and banned your ships from their ports. How does a small coastal network force a continental giant to reopen trade without losing a land war?",
+      trigger: 'Thalassocracy Network Scale or Extraterritorial Merchant Enclaves (P7)',
+      profAngle: 'Testing asymmetric naval leverage, commercial blockade economics, and how small merchant republics survive landlocked imperial aggression.',
+      recommendedDefense: [
+        'Institute an immediate naval blockade along their maritime grain trade corridors and salt transports, suffocating their coastal tax revenues and domestic luxury markets until the warlord faces merchant revolts.',
+        "Divert commercial shipping to the warlord's domestic rivals or rebellious border provinces, providing them with funding, weapons, and prestige goods to destabilize the central regime.",
+        'Offer a lucrative renegotiated tariff treaty combined with exclusive access to foreign strategic metals to make reopening trade far more profitable for the warlord than war.'
+      ]
+    });
+  }
+
+  // 3. The Soft-Power Boomerang
+  if (hasText('p7_neighbor_relations', 'soft-power cultural & script radiation') ||
+      hasText('p7_neighbor_relations', 'universal missionary & legal proselytization')) {
+    potentialQuestions.push({
+      id: 'soft_power_boomerang',
+      categoryPair: 'Culture & Religion (A/R) vs. Frontier Security (P7)',
+      question: "For centuries, your civilization exported its writing script, metallurgical secrets, military tactics, and administrative laws to 'civilize' your semi-nomadic neighbors. Now, a neighboring king has used YOUR iron weapons, YOUR written bureaucracy, and YOUR siege tactics to unite the frontier tribes into a rival empire—and he claims the gods have chosen him to rule your capital! How do you defend against a neighbor who has mastered your own technologies?",
+      trigger: 'Soft-Power Cultural Radiation (P7) or Universal Missionary Proselytization (P7)',
+      profAngle: 'Testing cultural hegemony boomerang effects, intellectual property leakage in the ancient world, and dynastic legitimacy crises.',
+      recommendedDefense: [
+        'Leverage deep religious authority and doctrinal councils to brand the foreign ruler a heretical pretender, issuing encyclicals that deny his divine right to hold the imperial throne.',
+        'Exploit bureaucratic and clan factions within the united frontier confederacy by sponsoring traditionalist anti-assimilation chiefs against the king who adopted foreign manners.',
+        'Rely on your deeper demographic depth, superior fortified inner cities, and complex supply lines which a newly civilized frontier kingdom cannot yet sustain over a prolonged campaign.'
+      ]
+    });
+  }
+
   const defaultFallbackPool = [
     {
       id: 'fallback_agro_collapse',

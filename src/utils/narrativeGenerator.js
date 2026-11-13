@@ -1,7 +1,7 @@
 // Rich Encyclopedia-Style Historical Narrative Essay Generator
 // Synthesizes all 6 G.R.A.P.E.S. categories into a cohesive academic treatise, woven with Historical Era and Civilization Scale.
 
-import { HISTORICAL_ERAS, CIVILIZATION_SCALES } from '../data/grapesData';
+import { HISTORICAL_ERAS, CIVILIZATION_SCALES } from '../data/grapesData.js';
 
 export function generateNarrativeEssay(
   civilizationName, 
@@ -76,9 +76,10 @@ Reflecting the cutting-edge innovations of the ${eraObj.name}, the intellectual 
   const lawSystem = formatList(getVal('p3_law_system', ['a codified canon of municipal justice']));
   const military = formatList(getVal('p4_military', ['organized territorial defense forces']));
   const foreignPolicy = formatList(getVal('p5_foreign_policy', ['strategic tributary arrangements']));
+  const neighborRelations = formatList(getVal('p7_neighbor_relations', ['measured frontier diplomacy']));
 
-  const polParagraph = `IV. STATECRAFT, JURISPRUDENCE & MILITARY DOCTRINE:
-Operating across the geopolitical dimensions of a ${scaleObj.name.toLowerCase()}, sovereign governance in ${name} was institutionalized through ${govSystem.toLowerCase()}, consolidating legislative, judicial, and executive authority within recognized constitutional bodies. Dynastic continuity and administrative stability were governed by ${succession.toLowerCase()}, minimizing the destabilizing perils of interregnum succession disputes. Social order and civil behavior were maintained by ${lawSystem.toLowerCase()}, which provided clear judicial expectations and curbed private blood feuds through institutional state sanctions. To protect borders and enforce geopolitical interests, the high command fielded a martial apparatus relying upon ${military.toLowerCase()}, deployed with tactical discipline to neutralize regional rivals and subdue rebellious frontier garrisons. In diplomatic and territorial relations, hegemony over neighboring territories was maintained through ${foreignPolicy.toLowerCase()}, a strategy calibrated to balance fiscal extraction against the risk of provincial revolt.`;
+  const polParagraph = `IV. STATECRAFT, JURISPRUDENCE & GEOPOLITICAL NEIGHBORHOOD:
+Operating across the geopolitical dimensions of a ${scaleObj.name.toLowerCase()}, sovereign governance in ${name} was institutionalized through ${govSystem.toLowerCase()}, consolidating legislative, judicial, and executive authority within recognized constitutional bodies. Dynastic continuity and administrative stability were governed by ${succession.toLowerCase()}, minimizing the destabilizing perils of interregnum succession disputes. Social order and civil behavior were maintained by ${lawSystem.toLowerCase()}, which provided clear judicial expectations and curbed private blood feuds through institutional state sanctions. To protect borders and project force across its territorial footprint, the high command fielded a martial apparatus relying upon ${military.toLowerCase()}, deployed with tactical discipline to neutralize regional rivals and secure trade corridors. In external diplomacy, territorial relations were steered through ${foreignPolicy.toLowerCase()}, while cross-border interactions and frontier buffer zones were fundamentally calibrated around ${neighborRelations.toLowerCase()}, managing external pressures and diplomatic prestige in an interconnected ancient neighborhood.`;
 
   // --- PARAGRAPH 5: ECONOMY (E) ---
   const crops = formatList(getVal('e1_crops', ['staple cereal grains']));

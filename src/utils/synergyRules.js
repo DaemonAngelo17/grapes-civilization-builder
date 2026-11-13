@@ -431,6 +431,48 @@ export const LOGICAL_SYNERGIES = {
   "Incendiary Naphtha / Greek Fire Siphons and Fortified Riverine Monitor Fleets": [
     { targetQ: "g4_resources", option: "Natural bitumen and surface asphalt seeps (for caulking boats, water-sealing bricks, and embalming)", type: "mandatory" },
     { targetQ: "a5_science", option: "Distillation of essential oils, chemical mordants, and medicinal antiseptic extracts", type: "mandatory" }
+  ],
+
+  // --- GEOPOLITICAL NEIGHBORHOOD & CROSS-BORDER IMPACT SYNERGIES (P7) ---
+  "Peer-Polity Rivalry & Shifting Alliances (dozens of equal neighboring city-states competing in seasonal border wars, athletic games, and defensive leagues, like Classical Greece or Sumer)": [
+    { targetQ: "p1_gov_system", option: "Decentralized City-States (dozens of independent cities with the same culture that constantly war with each other)", type: "mandatory" },
+    { targetQ: "r3_rituals", option: "Ecstatic festivals, theatrical drama, and athletic games held in honor of patron deities", type: "recommended" }
+  ],
+  "Hegemonic Core & Tributary Buffer States (turning weaker bordering kingdoms into puppet shield-states that absorb barbarian attacks and pay annual tribute, like Rome or Han China)": [
+    { targetQ: "p5_foreign_policy", option: "Tributary Vassals (local kings keep their thrones and religions as long as they pay annual gold/grain tribute)", type: "mandatory" },
+    { targetQ: "e4_taxation", option: "Tribute from Conquered Provinces (citizens pay zero taxes because conquered neighbors fund the empire)", type: "recommended" }
+  ],
+  "Soft-Power Cultural & Script Radiation (neighboring nations voluntarily copy your writing system, architecture, religion, and court dress because of your prestige, like Tang China or Egypt)": [
+    { targetQ: "p5_foreign_policy", option: "Cultural Integration & Citizenship (conquered elites are granted citizenship, roads, and trade benefits)", type: "recommended" },
+    { targetQ: "s2_middle", option: "Scribes and Record-Keepers (highly respected because fewer than 2% of people can read/write)", type: "recommended" }
+  ],
+  "Asymmetric 'Steppe vs. Sown' Extortion & Heqin Treaties (using mobile cavalry raids to force rich agricultural neighbors to pay annual silk, grain, and royal marriage bribes, like the Xiongnu)": [
+    { targetQ: "p4_military", option: "Horse Archer Light Cavalry (highly mobile skirmishers employing the feigned retreat and Parthian shot)", type: "mandatory" },
+    { targetQ: "p5_foreign_policy", option: "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)", type: "mandatory" }
+  ],
+  "Neutral Sacred Sanctuary & Oracle Arbitrator (neighbors refuse to invade your small territory because you host the shared holy oracle, pan-regional festival games, or neutral temple bank, like Delphi)": [
+    { targetQ: "p1_gov_system", option: "Confederated Tribal League / Amphictyony (council of autonomous clans or regional delegates united around a shared religious sanctuary)", type: "mandatory" },
+    { targetQ: "r3_rituals", option: "Pilgrimages to sacred mountain peaks, oracle grottos, or ancestral burial sanctuaries", type: "mandatory" }
+  ],
+  "Symmetric 'Brotherhood of Great Kings' Diplomacy (3 to 5 equal regional powers maintaining peace through royal intermarriage, gift-exchange, and non-aggression treaties, like the Late Bronze Age Amarna Club)": [
+    { targetQ: "p5_foreign_policy", option: "Strategic Royal Marriage Alliances & Client Royal Hostages (exchanging princesses and raising conquered kings' sons in the imperial palace)", type: "mandatory" },
+    { targetQ: "p6_intelligence_bureaucracy", option: "Diplomatic Gift-Exchange & Cuneiform Archive Brotherhood (Amarna-style royal correspondence in diplomatic lingua franca accompanied by gold and chariot gifts)", type: "recommended" }
+  ],
+  "Captive-Taking 'Flower Wars' (Xochiyaoyotl — intentionally leaving neighboring pockets unconquered as a permanent military training ground and source of ritual war captives, like the Aztecs)": [
+    { targetQ: "r3_rituals", option: "Bloodletting or human sacrifice (captives or volunteers offered to keep the sun moving/rain falling)", type: "mandatory" },
+    { targetQ: "s5_unfree_labor", option: "Ritual War Captives (captives reserved exclusively for temple construction, ritual ballgames, and seasonal blood sacrifices)", type: "mandatory" }
+  ],
+  "Extraterritorial Merchant Enclaves & Thalassocratic Middlemen (avoiding land wars with giant empires by operating indispensable trading ports and merchant quarters inside their borders, like Phoenicia or Kilwa)": [
+    { targetQ: "e5_trade", option: "Armed Sovereign Chartered Merchant Karums (autonomous foreign merchant colonies operating extraterritorial courts inside host kingdoms, like Assyrian Kanesh)", type: "recommended" },
+    { targetQ: "p5_foreign_policy", option: "Establishment of Armed Commercial Enclaves & Frontier Garrison Colonies (planting veteran soldier-colonists to guard borders and extract raw materials)", type: "mandatory" }
+  ],
+  "Megalithic Stone Circles, Dolmens, and Astronomical Passage Tombs (massive unmortared standing stones aligned with solstices, like Göbekli Tepe or Stonehenge)": [
+    { targetQ: "g4_resources", option: "Quarried limestone, granite, or marble (for permanent monuments)", type: "mandatory" },
+    { targetQ: "r3_rituals", option: "Astrological tracking of stars and planets to predict the gods' moods", type: "recommended" }
+  ],
+  "Woodblock Printing, Paper-Making Mills, and Mechanical Water-Powered Escapement Clocks (Tang/Song dynasty breakthroughs)": [
+    { targetQ: "p2_succession", option: "Meritocratic Civil Service Exams (officials are chosen by passing brutal written tests on law and philosophy)", type: "recommended" },
+    { targetQ: "p7_neighbor_relations", option: "Soft-Power Cultural & Script Radiation (neighboring nations voluntarily copy your writing system, architecture, religion, and court dress because of your prestige, like Tang China or Egypt)", type: "recommended" }
   ]
 };
 
@@ -971,6 +1013,55 @@ export const COMPOUND_SYNERGIES = [
       {
         targetQ: "r6_orthodoxy_heresy",
         option: "Pluralistic Edicts of Toleration (Cyrus Cylinder / Ashoka's Rock Edicts — state funds diverse local temples and protects minority sects to ensure loyalty)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "steppe_sown_frontier_complex",
+    title: "Steppe-Sown Frontier Wall & Heqin Dynamic",
+    condition: (answers, currentEra, currentScale) => {
+      if (currentScale !== 'continental_empire') return false;
+      const monuments = answers.a3_monuments || [];
+      const trade = answers.e5_trade || [];
+      const mList = Array.isArray(monuments) ? monuments : [monuments];
+      const tList = Array.isArray(trade) ? trade : [trade];
+      const hasWall = mList.some(m => m.toLowerCase().includes('thousands of miles of frontier defensive walls'));
+      const hasSilkRoad = tList.some(t => t.toLowerCase().includes('overland silk/incense caravan routes'));
+      return hasWall && hasSilkRoad;
+    },
+    targets: [
+      {
+        targetQ: "p7_neighbor_relations",
+        option: "Hegemonic Core & Tributary Buffer States (turning weaker bordering kingdoms into puppet shield-states that absorb barbarian attacks and pay annual tribute, like Rome or Han China)",
+        type: "recommended"
+      },
+      {
+        targetQ: "e4_taxation",
+        option: "State Monopolies (the government owns all salt, iron, and mines; citizens must buy from the state)",
+        type: "recommended"
+      }
+    ]
+  },
+  {
+    id: "neolithic_megalith_complex",
+    title: "Neolithic Megalithic Sanctuary Chiefdom",
+    condition: (answers, currentEra, currentScale) => {
+      if (currentEra !== 'neolithic_chalcolithic') return false;
+      const monuments = answers.a3_monuments || [];
+      const mList = Array.isArray(monuments) ? monuments : [monuments];
+      const hasMegalith = mList.some(m => m.toLowerCase().includes('megalithic stone circles, dolmens, and astronomical passage tombs'));
+      return hasMegalith;
+    },
+    targets: [
+      {
+        targetQ: "a5_science",
+        option: "Cold-Hammered Native Copper, Polished Jade/Flint Axes, and Precision Obsidian Microblades (Chalcolithic toolmaking before bronze smelting)",
+        type: "mandatory"
+      },
+      {
+        targetQ: "p7_neighbor_relations",
+        option: "Neutral Sacred Sanctuary & Oracle Arbitrator (neighbors refuse to invade your small territory because you host the shared holy oracle, pan-regional festival games, or neutral temple bank, like Delphi)",
         type: "recommended"
       }
     ]

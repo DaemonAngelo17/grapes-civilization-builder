@@ -507,10 +507,125 @@ export function checkOptionDisallowed(
   }
 
   // =========================================================================
-  // 0D. CHRONOLOGICAL ERA CONSTRAINTS (What did not exist in earlier eras)
+  // 0D. CHRONOLOGICAL ERA CONSTRAINTS (What did not exist in earlier eras)  // =========================================================================
+  // CHRONOLOGICAL ERA LOCKOUT MATRIX (8 Eras)
   // =========================================================================
-  const isBronzeAge = currentEra === 'early_bronze' || currentEra === 'late_bronze';
+  const isNeolithic = currentEra === 'neolithic_chalcolithic';
+  const isBronzeAge = isNeolithic || currentEra === 'early_bronze' || currentEra === 'late_bronze';
   const isPreClassical = isBronzeAge || currentEra === 'early_iron';
+  const isPostClassical = currentEra === 'early_medieval' || currentEra === 'high_medieval';
+
+  // -------------------------------------------------------------------------
+  // 1. NEOLITHIC & CHALCOLITHIC ERA LOCKS (Pre-3500 BCE)
+  // -------------------------------------------------------------------------
+  if (isNeolithic) {
+    // Imperial Bureaucracy / Government System Lock
+    if (questionId === 'p1_gov_system' && (
+      optLower.includes('feudal bureaucracy') ||
+      optLower.includes('satrapy provincial administration') ||
+      optLower.includes('nomadic steppe imperial confederacy') ||
+      optLower.includes('bureaucratic state empire') ||
+      optLower.includes('centralized absolute monarchy') ||
+      optLower.includes('aristocratic oligarchy / republic')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic Era Lock: Pre-3500 BCE societies were organized around clan elders, shaman-priests, or autonomous chiefdoms—massive imperial bureaucracies and absolute monarchies did not yet exist!'
+      };
+    }
+
+    // Metallurgy Lock
+    if (questionId === 'g4_resources' && (
+      optLower.includes('copper and tin deposits (for smelting bronze') ||
+      optLower.includes('high-grade iron ore')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic/Chalcolithic Era Lock (Pre-3500 BCE): Bronze alloying and iron smelting had not been invented yet! Select Cold-Hammered Native Copper, Obsidian, or Stone tools.'
+      };
+    }
+    if (questionId === 'a5_science' && optLower.includes('advanced metallurgy (smelting bronze alloys, cast iron, or quench-hardened steel)')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic/Chalcolithic Era Lock (Pre-3500 BCE): Bronze alloying and iron smelting had not been invented yet! Select Cold-Hammered Native Copper, Obsidian, or Stone tools.'
+      };
+    }
+
+    // Script Lock
+    if (questionId === 'a1_writing') {
+      const allowedNeolithicScripts = [
+        'undeciphered glyph seals stamped into steatite and terracotta',
+        'quipu / knotted cords',
+        'marshallese stick charts, wampum memory belts, and oral songlines'
+      ];
+      const isAllowed = allowedNeolithicScripts.some(s => optLower.includes(s));
+      if (!isAllowed) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Pre-Literate Era Lock (Pre-3500 BCE): Full writing systems were not invented until ~3400–3200 BCE in Sumer and Egypt! Neolithic societies used clay tokens, stamp seals, or oral traditions.'
+        };
+      }
+    }
+
+    // Horse / Chariot / Cavalry Lock
+    if (questionId === 'e2_animals' && optLower.includes('horses and camels')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic Era Lock: Horses were not domesticated for riding or war chariots until after 2000 BCE!'
+      };
+    }
+    if (questionId === 'p4_military' && (
+      optLower.includes('chariot') ||
+      optLower.includes('cavalry') ||
+      optLower.includes('phalanx') ||
+      optLower.includes('trireme') ||
+      optLower.includes('stirrup-stabilized')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic Era Lock: Horses were not domesticated for riding or war chariots until after 2000 BCE!'
+      };
+    }
+
+    // Currency Lock
+    if (questionId === 'e3_currency' && (
+      optLower.includes('standardized stamped coins') ||
+      optLower.includes('weighed metal bullion') ||
+      optLower.includes('cast bronze tool money') ||
+      optLower.includes('promissory notes') ||
+      optLower.includes('state-printed paper banknotes') ||
+      optLower.includes('iron spit rods') ||
+      optLower.includes('bolts of woven silk')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Neolithic/Chalcolithic Currency Lock: Standardized coins, cast bronze tool money, promissory paper notes, and weighed bullion hacksilber did not exist in the Neolithic era—economies operated on barter, grain tallies, or gift exchange.'
+      };
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. POST-CLASSICAL / EARLY & HIGH MEDIEVAL ERA LOCKS
+  // -------------------------------------------------------------------------
+  if (currentEra !== 'early_medieval' && currentEra !== 'high_medieval') {
+    if (optLower.includes('woodblock printing, paper-making mills') ||
+        optLower.includes('stirrup-stabilized heavy lances')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Chronological Era Lock: Iron stirrups and woodblock paper printing emerged in the Post-Classical / Early Medieval era (after 500 CE)!'
+      };
+    }
+  }
+
+  if (currentEra !== 'high_medieval') {
+    if (optLower.includes('early gunpowder siege bombs') ||
+        optLower.includes('state-printed paper banknotes')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Chronological Era Lock: Gunpowder weapons and state-printed paper banknotes were invented in Song/Yuan China after 1000 CE!'
+      };
+    }
+  }
 
   // Cataphract Super-Heavy Shock Cavalry (Only in Classical & Imperial)
   if (isPreClassical) {
@@ -541,7 +656,7 @@ export function checkOptionDisallowed(
   }
 
   // Incendiary Naphtha / Greek Fire Siphons (Imperial Era Only)
-  if (currentEra !== 'imperial_era') {
+  if (currentEra !== 'imperial_era' && !isPostClassical) {
     if (optLower.includes('incendiary naphtha / greek fire siphons')) {
       return {
         isDisallowed: true,
@@ -583,7 +698,7 @@ export function checkOptionDisallowed(
   }
 
   // Roman Underwater Concrete (invented ~200 BCE)
-  if (currentEra !== 'imperial_era') {
+  if (currentEra !== 'imperial_era' && !isPostClassical) {
     if (optLower.includes('concrete that can set underwater')) {
       return {
         isDisallowed: true,
@@ -671,7 +786,7 @@ export function checkOptionDisallowed(
   }
 
   // Deep Salt Drilling Derricks (~100 BCE Han Dynasty)
-  if (currentEra !== 'imperial_era') {
+  if (currentEra !== 'imperial_era' && !isPostClassical) {
     if (optLower.includes('deep underground salt-drilling derricks')) {
       return {
         isDisallowed: true,
@@ -712,8 +827,119 @@ export function checkOptionDisallowed(
   }
 
   // =========================================================================
-  // 0.5. CIVILIZATION SCALE CONSTRAINTS (City-State vs Kingdom vs Empire)
+  // 0.5. CIVILIZATION SCALE CONSTRAINTS (6 Scales)
   // =========================================================================
+
+  // --- 1. MICRO-POLITY (Tiny: 1,000–10,000 people) ---
+  if (currentScale === 'micro_polity') {
+    if (questionId === 'g2_terrain') {
+      const currentTerrains = selectedList('g2_terrain');
+      if (currentTerrains.length >= 1 && !currentTerrains.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): An autonomous chiefdom or sanctuary village is confined to 1 local terrain zone.'
+        };
+      }
+    }
+    if (questionId === 'g1_freshwater') {
+      const currentWaters = selectedList('g1_freshwater');
+      if (currentWaters.length >= 1 && !currentWaters.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): A micro-polity is situated on 1 primary freshwater source.'
+        };
+      }
+    }
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 1 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): A micro-polity is enclosed by at most 1 natural defensive barrier.'
+        };
+      }
+    }
+    if (questionId === 'e1_crops') {
+      const currentCrops = selectedList('e1_crops');
+      if (currentCrops.length >= 2 && !currentCrops.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): A micro-polity agricultural zone cultivates up to 2 staple crops.'
+        };
+      }
+    }
+    if (questionId === 'e2_animals') {
+      const currentAnimals = selectedList('e2_animals');
+      if (currentAnimals.length >= 2 && !currentAnimals.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): A micro-polity pasture supports up to 2 domesticated animal types.'
+        };
+      }
+    }
+    if (questionId === 'a3_monuments') {
+      if (optLower.includes('thousands of miles of frontier defensive walls')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Lock (Micro-Polity): A tiny micro-polity cannot build thousands of miles of Great Walls!'
+        };
+      }
+      const currentMons = selectedList('a3_monuments');
+      if (currentMons.length >= 1 && !currentMons.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Micro-Polity): A tiny micro-polity has the civic budget and workforce to erect at most 1 monumental structure.'
+        };
+      }
+    }
+    if (questionId === 'g7_settlement' && optLower.includes('hyper-dense walled megacity core')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale Limit (Micro-Polity): A tiny population of 1,000–10,000 people cannot support a megacity core!'
+      };
+    }
+    if (questionId === 'p6_intelligence_bureaucracy' && optLower.includes('imperial courier relay highways')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale Limit (Micro-Polity): A tiny micro-polity does not span hundreds of miles of provinces requiring imperial horse relay stations!'
+      };
+    }
+    if (questionId === 'p4_military' && optLower.includes('permanent professional standing army')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale Limit (Micro-Polity): A tiny population of 1,000–10,000 people lacks the tax base and surplus food to support full-time professional standing soldiers—defense relies on citizen militias, warrior clans, or sanctuary neutrality.'
+      };
+    }
+    if (questionId === 'p7_neighbor_relations' && (
+      optLower.includes('hegemonic core & tributary buffer states') ||
+      optLower.includes("symmetric 'brotherhood of great kings'") ||
+      optLower.includes("asymmetric 'steppe vs. sown' extortion") ||
+      optLower.includes('predatory slave-raiding & resource hinterland extraction')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale vs. Neighbor Lock: A tiny village chiefdom of 5,000 people lacks the demographic mass to subjugate neighboring empires into buffer states, run imperial satrapies, or deport foreign nations!'
+      };
+    }
+    if (questionId === 'p5_foreign_policy' && (
+      optLower.includes('mass deportation & assimilation') ||
+      optLower.includes('satrapy provincial administration') ||
+      optLower.includes('total enslavement & extraction')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale vs. Neighbor Lock: A tiny village chiefdom of 5,000 people lacks the demographic mass to subjugate neighboring empires into buffer states, run imperial satrapies, or deport foreign nations!'
+      };
+    }
+    if (questionId === 'p1_gov_system' && (optLower.includes('feudal bureaucracy') || optLower.includes('satrapy') || optLower.includes('nomadic steppe imperial confederacy'))) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Land Size Lock: A single micro-polity has no far-off foreign provinces to appoint imperial governors or satraps over!'
+      };
+    }
+  }
+
+  // --- 2. CITY-STATE ---
   if (currentScale === 'city_state') {
     // City-States are confined to 1 local geographic terrain
     if (questionId === 'g2_terrain') {
@@ -748,13 +974,13 @@ export function checkOptionDisallowed(
       }
     }
 
-    // City-States can encompass at most 2 natural defensive barriers
+    // City-States can encompass at most 1 natural defensive barrier
     if (questionId === 'g3_barriers') {
       const currentBarriers = selectedList('g3_barriers');
-      if (currentBarriers.length >= 2 && !currentBarriers.includes(optionText)) {
+      if (currentBarriers.length >= 1 && !currentBarriers.includes(optionText)) {
         return {
           isDisallowed: true,
-          reason: '🔒 Land Size Limit (City-State): A single city-state territory is too small to be enclosed by more than 2 distinct natural defensive barriers! Upgrade to Regional Kingdom or Continental Empire to span across multiple frontier borders.'
+          reason: '🔒 Land Size Limit (City-State): A single city-state territory is confined to 1 primary natural defensive barrier! Upgrade to Regional Kingdom or Continental Empire to span across multiple frontier borders.'
         };
       }
     }
@@ -963,7 +1189,159 @@ export function checkOptionDisallowed(
     }
   }
 
+  // --- 3. THALASSOCRACY NETWORK (Dispersed: ~50,000–500,000 people) ---
+  if (currentScale === 'thalassocracy_network') {
+    const coastalTerrains = [
+      'rocky peninsula with jagged coastlines',
+      'vast river delta marshlands',
+      'coastal fog oasis',
+      'volcanic oceanic high islands',
+      'sub-arctic boreal taiga and amber-rich baltic coastline'
+    ];
+    if (questionId === 'g2_terrain') {
+      const currentTerrains = selectedList('g2_terrain');
+      if (currentTerrains.length >= 2 && !currentTerrains.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Thalassocracy): A maritime network spans up to 2 coastal or island terrain bases. Upgrade to Continental Empire to control more territories.'
+        };
+      }
+      const isThisCoastal = coastalTerrains.some(t => optLower.includes(t));
+      const hasCoastal = currentTerrains.some(t => coastalTerrains.some(ct => t.toLowerCase().includes(ct)));
+      if (currentTerrains.length >= 1 && !hasCoastal && !isThisCoastal) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Thalassocracy Lock: A coastal maritime trade network exists by connecting foreign sea ports—it cannot be landlocked or ban foreign trade!'
+        };
+      }
+    }
+    if (questionId === 'g1_freshwater') {
+      const currentWaters = selectedList('g1_freshwater');
+      if (currentWaters.length >= 2 && !currentWaters.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Thalassocracy): A maritime network connects up to 2 freshwater harbor sources.'
+        };
+      }
+    }
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 2 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Thalassocracy): A maritime network spans up to 2 natural barrier zones.'
+        };
+      }
+    }
+    if (questionId === 'a3_monuments') {
+      if (optLower.includes('thousands of miles of frontier defensive walls')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Lock: Thousands of miles of frontier walls require a Grand Continental Empire!'
+        };
+      }
+      const currentMons = selectedList('a3_monuments');
+      if (currentMons.length >= 3 && !currentMons.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Thalassocracy): A maritime network can fund up to 3 monumental architectural projects.'
+        };
+      }
+    }
+    if (questionId === 'e5_trade' && optLower.includes('self-sufficient command economy (foreign trade is banned')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Thalassocracy Lock: A coastal maritime trade network exists by connecting foreign sea ports—it cannot be landlocked or ban foreign trade!'
+      };
+    }
+    if (questionId === 'p7_neighbor_relations' && (
+      optLower.includes('splendid geographic isolation & non-intervention') ||
+      optLower.includes("asymmetric 'steppe vs. sown' extortion")
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Thalassocracy Lock: A coastal maritime trade network exists by connecting foreign sea ports—it cannot be landlocked or ban foreign trade!'
+      };
+    }
+  }
+
+  // --- 5. NOMADIC PASTORAL CONFEDERACY (Mobile: ~100,000–2,000,000 people) ---
+  if (currentScale === 'nomadic_confederacy') {
+    if (questionId === 'g2_terrain') {
+      const currentTerrains = selectedList('g2_terrain');
+      if (currentTerrains.length >= 3 && !currentTerrains.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Nomadic Confederacy): A mobile nomadic confederacy traverses up to 3 grassland, desert, or mountain steppe biomes.'
+        };
+      }
+    }
+    if (questionId === 'g1_freshwater') {
+      const currentWaters = selectedList('g1_freshwater');
+      if (currentWaters.length >= 2 && !currentWaters.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Nomadic Confederacy): A nomadic confederacy integrates up to 2 freshwater sources.'
+        };
+      }
+    }
+    if (questionId === 'g3_barriers') {
+      const currentBarriers = selectedList('g3_barriers');
+      if (currentBarriers.length >= 2 && !currentBarriers.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Nomadic Confederacy): A nomadic confederacy encompasses up to 2 natural frontier barriers.'
+        };
+      }
+    }
+    if (questionId === 'a3_monuments') {
+      if (optLower.includes('thousands of miles of frontier defensive walls') ||
+          optLower.includes('gravity-fed stone aqueducts') ||
+          optLower.includes('planned grid-layout cities') ||
+          optLower.includes('artificial enclosed naval harbors (cothons)')) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Nomadic Scale Lock: A mobile pastoral confederacy requires grazing herds and mobile encampments rather than stationary naval harbors or plumbing grid-cities!'
+        };
+      }
+      const currentMons = selectedList('a3_monuments');
+      if (currentMons.length >= 2 && !currentMons.includes(optionText)) {
+        return {
+          isDisallowed: true,
+          reason: '🔒 Land Size Limit (Nomadic Confederacy): A nomadic confederacy erects up to 2 monumental marvels.'
+        };
+      }
+    }
+    if (questionId === 'g7_settlement' && (
+      optLower.includes('hyper-dense walled megacity core') ||
+      optLower.includes('orthogonal hippodamian grid-city') ||
+      optLower.includes('littoral port emporia')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Nomadic Scale Lock: A mobile pastoral confederacy requires grazing herds and mobile encampments rather than stationary naval harbors or plumbing grid-cities!'
+      };
+    }
+    if (questionId === 'e2_animals' && optLower.includes('none — human porters')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Nomadic Scale Lock: A mobile pastoral confederacy requires grazing herds and mobile encampments rather than stationary naval harbors or plumbing grid-cities!'
+      };
+    }
+  }
+
+  // --- 6. CONTINENTAL SUPER-EMPIRE ---
   if (currentScale === 'continental_empire') {
+    // Continental Empires vs P7 Neighbor locks
+    if (questionId === 'p7_neighbor_relations' && (
+      optLower.includes('peer-polity rivalry & shifting alliances') ||
+      optLower.includes('neutral sacred sanctuary & oracle arbitrator')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Scale vs. Neighbor Lock: A colossal continental empire of 20 million people is not a small neutral sanctuary village or a local city-state fighting equal sister-cities!'
+      };
+    }
     // Continental Empires CANNOT run Direct Democracy (people can't walk 3,000 miles to a town square vote)
     if (questionId === 'p1_gov_system' && optLower.includes('direct democracy (all free adult male citizens vote directly')) {
       return {
@@ -4233,7 +4611,7 @@ export function checkOptionDisallowed(
   // --- A5: SCIENCE ---
   if (questionId === 'a5_science') {
     if (optLower.includes('concrete that can set underwater')) {
-      if (currentEra !== 'imperial_era') {
+      if (currentEra !== 'imperial_era' && !isPostClassical) {
         return {
           isDisallowed: true,
           reason: '🔒 Era-Locked: Volcanic pozzolanic underwater concrete was invented by Roman engineers (~200 BCE). It did not exist in earlier eras!'
@@ -4952,5 +5330,91 @@ export function checkOptionDisallowed(
     }
   }
 
-  return { isDisallowed: false, reason: null };
+  // =========================================================================
+  // GEOPOLITICAL NEIGHBORHOOD (P7) CONTRADICTION MATRIX
+  // =========================================================================
+  if (questionId === 'p7_neighbor_relations') {
+    const currentNeighbors = selectedList('p7_neighbor_relations');
+    const maxNeighbors = currentScale === 'continental_empire' ? 3 : 2;
+    if (currentNeighbors.length >= maxNeighbors && !currentNeighbors.includes(optionText)) {
+      return {
+        isDisallowed: true,
+        reason: `🔒 Geopolitical Limit: A civilization can maintain up to ${maxNeighbors} primary geopolitical neighbor doctrines simultaneously.`
+      };
+    }
+  }
+
+  // 1. "Neutral Sacred Sanctuary & Oracle Arbitrator" vs Aggressive Militarism
+  if (questionId === 'p7_neighbor_relations' && optLower.includes('neutral sacred sanctuary & oracle arbitrator')) {
+    if (hasText('p4_military', 'psychological terror') ||
+        hasText('p5_foreign_policy', 'total enslavement & extraction') ||
+        hasText('p5_foreign_policy', 'mass deportation & assimilation')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Diplomatic Contradiction: Neighboring states will not respect you as a peaceful, neutral sacred sanctuary if your army practices psychological terror and enslaves bordering cities!'
+      };
+    }
+  }
+  if (hasText('p7_neighbor_relations', 'neutral sacred sanctuary & oracle arbitrator')) {
+    if (questionId === 'p4_military' && optLower.includes('psychological terror')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Diplomatic Contradiction: Neighboring states will not respect you as a peaceful, neutral sacred sanctuary if your army practices psychological terror and enslaves bordering cities!'
+      };
+    }
+    if (questionId === 'p5_foreign_policy' && (
+      optLower.includes('total enslavement & extraction') ||
+      optLower.includes('mass deportation & assimilation')
+    )) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Diplomatic Contradiction: Neighboring states will not respect you as a peaceful, neutral sacred sanctuary if your army practices psychological terror and enslaves bordering cities!'
+      };
+    }
+  }
+
+  // 2. "Asymmetric 'Steppe vs. Sown' Extortion & Heqin Treaties" vs Non-Cavalry Societies
+  if (questionId === 'p7_neighbor_relations' && optLower.includes("asymmetric 'steppe vs. sown' extortion")) {
+    const mils = selectedList('p4_military');
+    const hasCavalry = mils.some(m => {
+      const ml = m.toLowerCase();
+      return ml.includes('horse archer light cavalry') ||
+             ml.includes('cataphract super-heavy shock cavalry') ||
+             ml.includes('stirrup-stabilized heavy lances') ||
+             ml.includes('elite chariot corps');
+    });
+    if (mils.length > 0 && !hasCavalry) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Military Prerequisite Lock: Extorting settled empires via 'Steppe vs. Sown' border raids requires high-mobility horse archers or cavalry!"
+      };
+    }
+  }
+
+  // 3. "Captive-Taking 'Flower Wars' (Xochiyaoyotl)" vs Non-Sacrificial / Free Labor Societies
+  if (questionId === 'p7_neighbor_relations' && optLower.includes("captive-taking 'flower wars'")) {
+    const hasSacrifice = hasText('r3_rituals', 'bloodletting or human sacrifice') ||
+                         hasText('s5_unfree_labor', 'ritual war captives');
+    const hasRituals = selectedList('r3_rituals').length > 0;
+    const hasLabor = selectedList('s5_unfree_labor').length > 0;
+    if ((hasRituals || hasLabor) && !hasSacrifice) {
+      return {
+        isDisallowed: true,
+        reason: "🔒 Ritual Prerequisite Lock: 'Flower Wars' (Xochiyaoyotl) were fought specifically to capture live warriors for temple blood sacrifice!"
+      };
+    }
+  }
+
+  // 4. "Splendid Geographic Isolation & Non-Intervention" vs Open Plains
+  if (questionId === 'p7_neighbor_relations' && optLower.includes('splendid geographic isolation & non-intervention')) {
+    if (hasText('g3_barriers', 'none — completely open flat plains') &&
+        !hasText('a3_monuments', 'thousands of miles of frontier defensive walls')) {
+      return {
+        isDisallowed: true,
+        reason: '🔒 Geopolitical Exposure Lock: You cannot practice peaceful geographic isolation on wide-open, unprotected flat plains without natural barriers or a Great Wall—your neighbors will simply march right in!'
+      };
+    }
+  }
+
+    return { isDisallowed: false, reason: null };
 }

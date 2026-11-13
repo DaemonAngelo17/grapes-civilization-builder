@@ -3,6 +3,18 @@
 
 export const HISTORICAL_ERAS = [
   {
+    id: 'neolithic_chalcolithic',
+    name: 'Neolithic & Chalcolithic Dawn (c. 8000 – 3500 BCE)',
+    period: 'First Farming Villages, Megaliths & Native Copper (e.g., Çatalhöyük, Jericho, Göbekli Tepe, Ubaid)',
+    description: 'The birth of agriculture and settled villages. Tools are polished stone, obsidian, and cold-hammered native copper. There are no written scripts, no bronze or iron, no wheeled chariots, and no giant empires—society is organized around clan elders, shaman-priests, and communal granaries.',
+    ironAvailable: false,
+    coinsAvailable: false,
+    alphabetAvailable: false,
+    concreteAvailable: false,
+    democracyAvailable: false,
+    compassAvailable: false
+  },
+  {
     id: 'early_bronze',
     name: 'Early Bronze Age (c. 3500 – 2000 BCE)',
     period: 'Dawn of Writing & First Cities (e.g. Sumer & Old Kingdom Egypt)',
@@ -61,36 +73,108 @@ export const HISTORICAL_ERAS = [
     concreteAvailable: true,
     democracyAvailable: true,
     compassAvailable: true
+  },
+  {
+    id: 'early_medieval',
+    name: 'Post-Classical & Golden Age Networks (c. 500 – 1000 CE)',
+    period: 'Silk Road Zenith, Woodblock Printing & Maritime Caliphates (e.g., Tang China, Abbasid Caliphate, Byzantium, Classic/Terminal Maya)',
+    description: 'Cosmopolitan empires and maritime trade networks connect the Old World. Iron stirrups revolutionize heavy cavalry, woodblock printing and paper transform bureaucracy, and missionary religions spread scripts and law codes across neighboring kingdoms.',
+    ironAvailable: true,
+    coinsAvailable: true,
+    alphabetAvailable: true,
+    concreteAvailable: true,
+    democracyAvailable: false,
+    compassAvailable: true
+  },
+  {
+    id: 'high_medieval',
+    name: 'High Imperial & Trans-Hemispheric Era (c. 1000 – 1500 CE)',
+    period: 'Gunpowder, Paper Money & Mega-Empires (e.g., Song/Ming China, Mongol Empire, Mali Empire, Inca & Aztec Empires, Great Zimbabwe)',
+    description: 'The peak of pre-modern state power. Paper banknotes, magnetic compasses, early gunpowder siege weapons, and massive oceanic treasure fleets emerge alongside hemispheric trade networks and colossal road systems.',
+    ironAvailable: true,
+    coinsAvailable: true,
+    alphabetAvailable: true,
+    concreteAvailable: true,
+    democracyAvailable: false,
+    compassAvailable: true
   }
 ];
 
 export const CIVILIZATION_SCALES = [
   {
-    id: 'city_state',
-    name: 'Independent City-State (Local: ~10,000–50,000 citizens)',
-    description: 'A single fortified city with surrounding farm fields (like early Ur, Athens, Sparta, or Tikal). Confined to ONE local geographic terrain and one water source. Citizens can assemble directly in person.',
+    id: 'micro_polity',
+    name: 'Autonomous Chiefdom or Sanctuary Village (Tiny: ~1,000–10,000 people)',
+    description: 'A single oasis, coral atoll, mountain valley, or fortified neolithic tell-mound (like Çatalhöyük, Rapa Nui, or an oasis ksar). Strictly 1 terrain, 1 water source, 1 barrier. Cannot field professional standing armies or conquer foreign empires; survives by isolation, trade, or sacred sanctuary status.',
     maxTerrains: 1,
     maxWaters: 1,
+    maxBarriers: 1,
+    maxCrops: 2,
+    maxAnimals: 2,
+    maxMonuments: 1,
     canBuildGreatWall: false,
     canRunDirectDemocracy: true,
     canRunMegaBureaucracy: false
   },
   {
-    id: 'regional_kingdom',
-    name: 'Regional Kingdom or League (Medium: ~100,000–1,000,000 people)',
-    description: 'A unified river valley, peninsula, or federation of allied cities (like Old Kingdom Egypt, the Delian League, or Shang China). Can span up to 2 neighboring terrain zones.',
+    id: 'city_state',
+    name: 'Independent City-State / Polis (Local: ~10,000–100,000 citizens)',
+    description: 'A single fortified city with surrounding farm fields (like early Ur, Athens, Sparta, or Tikal). Confined to ONE local geographic terrain, one water source, and one barrier. Citizens can assemble directly in person.',
+    maxTerrains: 1,
+    maxWaters: 1,
+    maxBarriers: 1,
+    maxCrops: 2,
+    maxAnimals: 2,
+    maxMonuments: 2,
+    canBuildGreatWall: false,
+    canRunDirectDemocracy: true,
+    canRunMegaBureaucracy: false
+  },
+  {
+    id: 'thalassocracy_network',
+    name: 'Coastal / Archipelagic Maritime Network (Dispersed: ~50,000–500,000 people)',
+    description: 'A chain of fortified port cities, island colonies, and coastal trading posts connected by sea lanes rather than inland territory (like Phoenicia, the Swahili Coast, or Venice). Requires coastal/island terrain and maritime trade; avoids deep inland conquest in favor of commercial enclaves.',
     maxTerrains: 2,
     maxWaters: 2,
+    maxBarriers: 2,
+    maxMonuments: 3,
+    canBuildGreatWall: false,
+    canRunDirectDemocracy: false,
+    canRunMegaBureaucracy: false
+  },
+  {
+    id: 'regional_kingdom',
+    name: 'Regional Kingdom or Federation (Medium: ~250,000–3,000,000 people)',
+    description: 'A unified realm spanning multiple river valleys, coastlines, or agricultural provinces (like Old Kingdom Egypt, Shang China, or Minoan Crete). Requires royal governors and paved regional roads.',
+    maxTerrains: 2,
+    maxWaters: 2,
+    maxBarriers: 2,
+    maxMonuments: 4,
+    maxCrops: 4,
+    maxAnimals: 4,
     canBuildGreatWall: false,
     canRunDirectDemocracy: false,
     canRunMegaBureaucracy: true
   },
   {
+    id: 'nomadic_confederacy',
+    name: 'Trans-Biome Nomadic Pastoral Confederacy (Mobile: ~100,000–2,000,000 people)',
+    description: 'A vast, low-density mobile empire of horse or camel clans spanning thousands of miles of steppe, desert, or tundra (like the Xiongnu, Scythians, or Mongols). Lacks stationary stone sewers or dense farm grids, but projects terrifying cavalry power against settled neighbors.',
+    maxTerrains: 3,
+    maxWaters: 2,
+    maxBarriers: 2,
+    maxMonuments: 2,
+    canBuildGreatWall: false,
+    canRunDirectDemocracy: false,
+    canRunMegaBureaucracy: false
+  },
+  {
     id: 'continental_empire',
-    name: 'Grand Continental Empire (Mega: Millions of subjects across biomes)',
-    description: 'A colossal multi-ethnic superstate spanning multiple climates, mountain ranges, and seas (like the Roman Empire, Persian Empire, Han China, or Inca Empire). Requires provincial governors and royal roads.',
+    name: 'Grand Continental Super-Empire (Mega: 5,000,000–60,000,000+ subjects)',
+    description: 'A sprawling trans-continental superpower governing dozens of conquered ethnic nations across multiple diverse biomes (like the Achaemenid Persian Empire, Roman Empire, or Han Dynasty). Requires massive imperial bureaucracy, standing legions, and imperial highways.',
     maxTerrains: 99,
     maxWaters: 99,
+    maxBarriers: 99,
+    maxMonuments: 99,
     canBuildGreatWall: true,
     canRunDirectDemocracy: false,
     canRunMegaBureaucracy: true
@@ -233,6 +317,7 @@ export const BASIC_CORE_QUESTION_IDS = [
   'e5_trade',
   'p1_gov_system',
   'p4_military',
+  'p7_neighbor_relations',
   's1_apex',
   's3_mobility',
   'r1_structure',
@@ -501,7 +586,8 @@ export const GRAPES_QUESTIONS = {
         "Wampum Shell Belts, Hammered Copper Plates, and Ceremonial Gift Redistribution (Potlatch / Calumet diplomacy)",
         "Cattle & Livestock Wealth Standard (fines, taxes, royal tribute, and marriage alliances paid in live heads of cattle)",
         { text: "Clay/Leather Promissory Notes & State Flying-Cash Bills (early credit instruments and proto-paper deposit certificates)", minComplexity: 'complex' },
-        { text: "Iron Spit Rods (Obols), Copper Cross Ingots (Katanga), and Manilla Bronze Bracelets", minComplexity: 'complex' }
+        { text: "Iron Spit Rods (Obols), Copper Cross Ingots (Katanga), and Manilla Bronze Bracelets", minComplexity: 'complex' },
+        { text: "State-Printed Paper Banknotes (Jiaozi / Chao) backed by imperial silver and silk reserves", minComplexity: 'complex' }
       ]
     },
     {
@@ -643,7 +729,8 @@ export const GRAPES_QUESTIONS = {
         "Outrigger War Canoes & Amphibious Shock Warriors (fast double-hulled vessels carrying warriors armed with shark-tooth clubs and hardwood spears)",
         { text: "Cataphract Super-Heavy Shock Cavalry (both rider and warhorse encased in full scale or lamellar iron armor charging with two-handed kontos lances)", minComplexity: 'complex' },
         { text: "Combined-Arms Macedonian Pike & Companion Cavalry Hammer-and-Anvil Doctrine", minComplexity: 'complex' },
-        { text: "Incendiary Naphtha / Greek Fire Siphons and Fortified Riverine Monitor Fleets", minComplexity: 'complex' }
+        { text: "Incendiary Naphtha / Greek Fire Siphons and Fortified Riverine Monitor Fleets", minComplexity: 'complex' },
+        "Stirrup-Stabilized Heavy Lances & Mounted Crossbow/Archery Corps (medieval shock and skirmish cavalry enabled by iron stirrups)"
       ]
     },
     {
@@ -686,6 +773,30 @@ export const GRAPES_QUESTIONS = {
         { text: "Cryptographic Scytale Ciphers & Secret Military Police (Krypteia — covert youth squads surveilling subject serf populations and eliminating rebel leaders)", minComplexity: 'complex' },
         { text: "Decentralized Kinship Heralds & Oral Treaty Belts (clans coordinate war and peace via sacred wampum belts, calumet pipes, or bardic envoys)", minComplexity: 'complex' },
         { text: "Maritime Merchant Consul & Harbor Espionage Network (commercial guild agents in foreign ports reporting naval movements and grain market shifts)", minComplexity: 'complex' }
+      ]
+    },
+    {
+      id: "p7_neighbor_relations",
+      number: "P7",
+      title: "P7. Geopolitical Neighborhood & How Your Size Affects Neighbors (How do you interact with bordering societies?)",
+      type: 'checkbox',
+      category: "P",
+      minComplexity: undefined,
+      guidance: "No civilization exists in a vacuum! Your territorial size and military power determine whether you bully your neighbors, trade peacefully, act as a sacred neutral sanctuary, or hide behind natural barriers.",
+      grade7Tip: "Giant empires like Rome and Han China turned smaller neighbors into 'buffer states' or forced them to copy their culture. Meanwhile, smaller kingdoms like Phoenicia survived by paying tribute and becoming indispensable sea traders for everyone!",
+      options: [
+        "Peer-Polity Rivalry & Shifting Alliances (dozens of equal neighboring city-states competing in seasonal border wars, athletic games, and defensive leagues, like Classical Greece or Sumer)",
+        "Hegemonic Core & Tributary Buffer States (turning weaker bordering kingdoms into puppet shield-states that absorb barbarian attacks and pay annual tribute, like Rome or Han China)",
+        "Soft-Power Cultural & Script Radiation (neighboring nations voluntarily copy your writing system, architecture, religion, and court dress because of your prestige, like Tang China or Egypt)",
+        "Asymmetric 'Steppe vs. Sown' Extortion & Heqin Treaties (using mobile cavalry raids to force rich agricultural neighbors to pay annual silk, grain, and royal marriage bribes, like the Xiongnu)",
+        "Neutral Sacred Sanctuary & Oracle Arbitrator (neighbors refuse to invade your small territory because you host the shared holy oracle, pan-regional festival games, or neutral temple bank, like Delphi)",
+        "Symmetric 'Brotherhood of Great Kings' Diplomacy (3 to 5 equal regional powers maintaining peace through royal intermarriage, gift-exchange, and non-aggression treaties, like the Late Bronze Age Amarna Club)",
+        "Captive-Taking 'Flower Wars' (Xochiyaoyotl — intentionally leaving neighboring pockets unconquered as a permanent military training ground and source of ritual war captives, like the Aztecs)",
+        "Extraterritorial Merchant Enclaves & Thalassocratic Middlemen (avoiding land wars with giant empires by operating indispensable trading ports and merchant quarters inside their borders, like Phoenicia or Kilwa)",
+        "Predatory Slave-Raiding & Resource Hinterland Extraction (treating stateless forest, mountain, or savanna neighbors as an open hunting ground for timber, metals, and chattel captives)",
+        "Splendid Geographic Isolation & Non-Intervention (relying on impassable oceans, deserts, or mountain walls to ignore foreign wars completely, trading only at a single regulated border port)",
+        { text: "Domino-Effect Demographic & Ecological Displacement (your rapid population growth, herd expansion, or soil exhaustion pushes frontier tribes into cascading invasions of neighboring lands)", minComplexity: 'complex' },
+        { text: "Universal Missionary & Legal Proselytization (actively sending state-backed monks, scholars, and envoys across borders to convert neighboring rulers to your religious orthodoxy and legal code)", minComplexity: 'complex' }
       ]
     }
   ],
@@ -1038,7 +1149,8 @@ export const GRAPES_QUESTIONS = {
         "Artificial Enclosed Naval Harbors (Cothons) with covered drydocks and slipways for 200+ warships (like Carthage)",
         "Massive Earthwork Effigy Mounds and Platform Citadels (engineered earthen pyramid mounds towering over river confluences, like Cahokia)",
         "Mortarless Granite Enclosures (Dzimbahwe) & Towering Carved Stelae Obelisks (like Great Zimbabwe and Aksum)",
-        "Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean"
+        "Megalithic Volcanic Tuff Statues (Moai) & Open-Air Stone Temple Platforms (Marae / Heiau) facing the ocean",
+        "Megalithic Stone Circles, Dolmens, and Astronomical Passage Tombs (massive unmortared standing stones aligned with solstices, like Göbekli Tepe or Stonehenge)"
       ]
     },
     {
@@ -1063,7 +1175,10 @@ export const GRAPES_QUESTIONS = {
         "Mechanical Triggered Crossbows and Standardized Interchangeable Bronze Parts (Warring States / Qin China)",
         "Advanced Antikythera-Style Geared Astronomical Calculators (bronze differential gear trains tracking planetary orbits and eclipse cycles)",
         "Deep Underground Salt-Drilling Derricks using bamboo percussion drills and natural gas pipelines (Han Dynasty)",
-        "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation"
+        "Double-Hulled Outrigger Catamaran Engineering, Crab-Claw Sails, and Wave-Piloting Swell Navigation",
+        "Cold-Hammered Native Copper, Polished Jade/Flint Axes, and Precision Obsidian Microblades (Chalcolithic toolmaking before bronze smelting)",
+        { text: "Woodblock Printing, Paper-Making Mills, and Mechanical Water-Powered Escapement Clocks (Tang/Song dynasty breakthroughs)", minComplexity: 'complex' },
+        { text: "Early Gunpowder Siege Bombs, Fire-Lances, and Counterweight Trebuchets (High Medieval siege engineering)", minComplexity: 'complex' }
       ]
     },
     {
@@ -1098,10 +1213,11 @@ export function getFilteredQuestions(complexityMode = 'normal') {
     for (const q of qList) {
       if (complexityMode === 'basic') {
         if (!BASIC_CORE_QUESTION_IDS.includes(q.id)) continue;
-        // Limit each core question to its first 6 foundational options (normalized to strings)
+        const maxSlice = q.id === 'p7_neighbor_relations' ? 5 : 6;
+        // Limit each core question to its foundational options (normalized to strings)
         const opts = q.options
           .filter(opt => typeof opt === 'string' || opt.minComplexity !== 'complex')
-          .slice(0, 6)
+          .slice(0, maxSlice)
           .map(opt => (typeof opt === 'string' ? opt : opt.text));
         filteredList.push({
           ...q,
@@ -1109,7 +1225,7 @@ export function getFilteredQuestions(complexityMode = 'normal') {
         });
       } else if (complexityMode === 'normal') {
         if (q.minComplexity === 'complex') continue;
-        // Standard 31 questions and 300 options (exclude complex options)
+        // Standard questions (exclude complex options)
         const opts = q.options
           .filter(opt => typeof opt === 'string' || opt.minComplexity !== 'complex')
           .map(opt => (typeof opt === 'string' ? opt : opt.text));
@@ -1118,7 +1234,7 @@ export function getFilteredQuestions(complexityMode = 'normal') {
           options: opts
         });
       } else {
-        // Complex mode: all 37 questions and 390 options
+        // Complex mode: all questions and options
         const opts = q.options.map(opt => (typeof opt === 'string' ? opt : opt.text));
         filteredList.push({
           ...q,

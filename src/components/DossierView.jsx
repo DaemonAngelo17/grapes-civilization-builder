@@ -52,7 +52,7 @@ export default function DossierView({
     currentScale
   );
   const factSheetData = generateFactSheetData(answers, customNotes, currentQuestions);
-  const stressTestQuestions = generateTeacherStressTest(answers, customNotes);
+  const stressTestQuestions = generateTeacherStressTest(answers, customNotes, currentEra, currentScale);
 
   const handleCopyEssay = () => {
     const text = narrativeParagraphs.join('\n\n');
@@ -66,7 +66,7 @@ export default function DossierView({
     if (inspiration) md += `*Real-World Inspiration: ${inspiration}*\n`;
     md += `*Historical Era: ${eraObj.name} (${eraObj.period})*\n`;
     md += `*Civilization Scale: ${scaleObj.name}*\n`;
-    md += `*Complexity Tier: ${complexityMode === 'basic' ? 'Basic (Grades 4–6: 12 Core Questions)' : complexityMode === 'complex' ? 'Complex (Grades 9–12 / AP: 37 Exhaustive Questions)' : 'Normal (Grades 7–8: 31 Questions)'}*\n\n`;
+    md += `*Complexity Tier: ${complexityMode === 'basic' ? 'Basic (Grades 4–6: 13 Core Questions)' : complexityMode === 'complex' ? 'Complex (Grades 9–12 / AP: 38 Exhaustive Questions)' : 'Normal (Grades 7–8: 32 Questions)'}*\n\n`;
 
     md += `## PART I: ENCYCLOPEDIA NARRATIVE ESSAY\n\n`;
     md += narrativeParagraphs.join('\n\n');
@@ -366,7 +366,7 @@ export default function DossierView({
                 <div>
                   <span className="text-[#8c531b] font-bold block uppercase text-[10px] tracking-wider">Complexity Tier</span>
                   <span className="font-semibold text-[#241a15]">
-                    {complexityMode === 'basic' ? '🌱 Basic (12 Qs)' : complexityMode === 'complex' ? '🎓 Complex (37 Qs)' : '🏛️ Normal (31 Qs)'}
+                    {complexityMode === 'basic' ? '🌱 Basic (13 Qs)' : complexityMode === 'complex' ? '🎓 Complex (38 Qs)' : '🏛️ Normal (32 Qs)'}
                   </span>
                 </div>
                 <div>
